@@ -1,0 +1,13 @@
+{
+    "app_version": "0.3.1.post30.dev0",
+    "timestamp": "2025-09-23T17:38:30.963916",
+    "provider": "local",
+    "suite_id": null,
+    "device": "ibm_fez",
+    "job_type": "Mirror Circuits",
+    "results": {
+        "success_probability": 0.45680000000000004,
+        "polarization": 0.45666735042735046,
+        "binary_success": true
+    }
+}
