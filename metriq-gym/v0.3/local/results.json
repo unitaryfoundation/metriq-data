@@ -1,6 +1,28 @@
 [
   {
     "app_version": "0.3.1.post30.dev0",
+    "timestamp": "2025-09-23T17:37:22.988194",
+    "provider": "local",
+    "suite_id": null,
+    "device": "ibm_fez",
+    "job_type": "Mirror Circuits",
+    "results": {
+      "success_probability": 0.6775999999999999,
+      "polarization": 0.6775212698412697,
+      "binary_success": true
+    },
+    "params": {
+      "benchmark_name": "Mirror Circuits",
+      "num_circuits": 5,
+      "num_layers": 32,
+      "shots": 1000,
+      "two_qubit_gate_name": "CNOT",
+      "two_qubit_gate_prob": 0.5,
+      "width": 12
+    }
+  },
+  {
+    "app_version": "0.3.1.post30.dev0",
     "timestamp": "2025-09-23T17:38:30.963916",
     "provider": "local",
     "suite_id": null,
