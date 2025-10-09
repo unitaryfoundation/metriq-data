@@ -197,9 +197,11 @@ def upsert_platform(registry: Dict[PlatformKey, Dict[str, Any]], row: Dict[str, 
     else:
         hist["runs"] = int(hist.get("runs", 0)) + 1
         # Update metahistory first/last seen
-        if parse_timestamp(hist["first_seen"]) and parse_timestamp(hist["first_seen"]) > ts:
+        first_seen_dt = parse_timestamp(hist["first_seen"])
+        if first_seen_dt and first_seen_dt > ts:
             hist["first_seen"] = ts_iso
-        if parse_timestamp(hist["last_seen"]) and parse_timestamp(hist["last_seen"]) < ts:
+        last_seen_dt = parse_timestamp(hist["last_seen"])
+        if last_seen_dt and last_seen_dt < ts:
             hist["last_seen"] = ts_iso
 
 
