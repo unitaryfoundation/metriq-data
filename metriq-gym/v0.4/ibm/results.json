@@ -1,0 +1,27 @@
+[
+  {
+    "app_version": "0.4.1a1.dev12+g2efab0db5.d20251009",
+    "timestamp": "2025-10-09T12:50:43.039401",
+    "provider": "ibm",
+    "suite_id": null,
+    "device": "ibm_fez",
+    "job_type": "WIT",
+    "results": {
+      "expectation_value": 0.375732421875
+    },
+    "platform": {
+      "provider": "ibm",
+      "device": "ibm_fez",
+      "device_metadata": {
+        "num_qubits": 156,
+        "simulator": false,
+        "version": "1.3.22"
+      }
+    },
+    "params": {
+      "benchmark_name": "WIT",
+      "num_qubits": 7,
+      "shots": 8192
+    }
+  }
+]
