@@ -1,0 +1,32 @@
+[
+  {
+    "app_version": "0.4.2.dev13+g7f3e89234.d20251017",
+    "timestamp": "2025-10-19T18:03:21.613568",
+    "suite_id": null,
+    "job_type": "WIT",
+    "results": {
+      "values": {
+        "expectation_value": 0.37646484375
+      },
+      "uncertainties": {
+        "expectation_value": 0.0053530057949991924
+      },
+      "directions": {
+        "expectation_value": "higher"
+      }
+    },
+    "platform": {
+      "device": "origin_wukong",
+      "device_metadata": {
+        "num_qubits": 102,
+        "simulator": false
+      },
+      "provider": "origin"
+    },
+    "params": {
+      "benchmark_name": "WIT",
+      "num_qubits": 7,
+      "shots": 8192
+    }
+  }
+]
