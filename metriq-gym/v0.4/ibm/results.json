@@ -1,5 +1,37 @@
 [
   {
+    "app_version": "0.4.2.dev7+g3343a86ca",
+    "timestamp": "2025-10-19T14:06:47.295695",
+    "suite_id": null,
+    "job_type": "BSEQ",
+    "results": {
+      "values": {
+        "largest_connected_size": 152.0,
+        "fraction_connected": 0.9743589743589743
+      },
+      "uncertainties": {
+        "largest_connected_size": null,
+        "fraction_connected": null
+      },
+      "directions": {
+        "fraction_connected": "higher"
+      }
+    },
+    "platform": {
+      "device": "ibm_pittsburgh",
+      "device_metadata": {
+        "num_qubits": 156,
+        "simulator": false,
+        "version": "1.0.15"
+      },
+      "provider": "ibm"
+    },
+    "params": {
+      "benchmark_name": "BSEQ",
+      "shots": 1000
+    }
+  },
+  {
     "app_version": "0.4.1a1.dev12+g2efab0db5.d20251009",
     "timestamp": "2025-10-09T12:50:43.039401",
     "provider": "ibm",
