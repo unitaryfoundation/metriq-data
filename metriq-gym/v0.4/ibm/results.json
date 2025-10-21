@@ -14,7 +14,8 @@
         "fraction_connected": null
       },
       "directions": {
-        "fraction_connected": "higher"
+        "largest_connected_size": "higher",
+        "fraction_connected": "higher",
       }
     },
     "platform": {
