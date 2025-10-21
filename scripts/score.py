@@ -1,9 +1,7 @@
-from __future__ import annotations
-
 import json
 import os
 import sys
-from typing import Any, Optional
+from typing import Any
 
 from etl import derive_benchmark_name
 
@@ -108,7 +106,7 @@ def compute_and_attach_metriq_scores(
             if base is None:
                 continue
             direction = str(dir_map.get(metric, "higher")).lower()
-            score: Optional[float] = None
+            score: float | None = None
             try:
                 if direction == "lower":
                     if v > 0:
