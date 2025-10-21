@@ -120,5 +120,19 @@ def compute_and_attach_metriq_scores(
                 score = None
             if score is not None and (score == score) and score not in (float("inf"), float("-inf")):
                 scores[metric] = score
-        if scores:
-            r["metriq_score"] = scores
+        if not scores:
+            continue
+
+        # If the benchmark reports a single metric and we computed exactly one score,
+        # expose a single scalar `metriq_score` instead of a per-metric mapping.
+        # This avoids nesting metric names as keys of `metriq_score` for single-metric benchmarks
+        # (e.g., WIT).
+        if len(scores) == 1 and len(results) == 1:
+            # Extract the only score value
+            r["metriq_score"] = next(iter(scores.values()))
+        else:
+            # For multi-metric benchmarks we currently do not publish a scalar until
+            # a composite scoring spec is defined. Leave `metriq_score` unset.
+            # (We keep the per-metric scores internal in case a downstream composite
+            # is added later.)
+            pass
