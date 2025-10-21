@@ -1,11 +1,9 @@
-from __future__ import annotations
-
 import glob
 import json
 import os
 import sys
 from datetime import datetime, timezone
-from typing import Any, Optional
+from typing import Any
 
 
 # ---------------------------- Utilities ----------------------------
@@ -15,7 +13,7 @@ def iso_utc_now() -> str:
     return dt.isoformat().replace("+00:00", "Z")
 
 
-def parse_timestamp(ts: str) -> Optional[datetime]:
+def parse_timestamp(ts: str) -> datetime | None:
     if not isinstance(ts, str):
         return None
     s = ts.strip()
@@ -98,7 +96,7 @@ def flatten_row(row: dict[str, Any]) -> dict[str, Any]:
     return out
 
 
-def get_provider_device(row: dict[str, Any]) -> tuple[Optional[str], Optional[str]]:
+def get_provider_device(row: dict[str, Any]) -> tuple[str | None, str | None]:
     provider = row.get("provider")
     device = row.get("device")
     if not provider or not device:

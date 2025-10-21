@@ -9,10 +9,7 @@ and writes outputs to:
   - dist/platforms/<provider>/<device>.json
 """
 
-from __future__ import annotations
-
 import os
-from typing import Optional
 
 from etl import (
     iso_utc_now,
@@ -29,7 +26,7 @@ from score import (
 )
 
 
-def main(argv: Optional[list[str]] = None) -> int:
+def main(argv: list[str] | None = None) -> int:
     root = os.path.abspath(os.path.join(os.path.dirname(__file__), os.pardir))
     dist_path = os.path.join(root, "dist")
     ensure_dir(dist_path)
