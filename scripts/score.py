@@ -3,12 +3,12 @@ from __future__ import annotations
 import json
 import os
 import sys
-from typing import Any, Dict, List, Optional, Tuple
+from typing import Any, Optional
 
 from etl import derive_benchmark_name
 
 
-def load_baselines_config(root: str) -> Dict[str, Any]:
+def load_baselines_config(root: str) -> dict[str, Any]:
     """Load baseline configuration from scripts/baselines.json if present.
 
     Expected shape:
@@ -33,13 +33,13 @@ def load_baselines_config(root: str) -> Dict[str, Any]:
 
 
 def compute_baseline_averages_by_series(
-    flat_rows: List[Dict[str, Any]],
-    row_series: Dict[int, str],
-    baselines_cfg: Dict[str, Any],
-) -> tuple[Dict[str, Dict[Tuple[str, str], float]], List[str]]:
+    flat_rows: list[dict[str, Any]],
+    row_series: dict[int, str],
+    baselines_cfg: dict[str, Any],
+) -> tuple[dict[str, dict[tuple[str, str], float]], list[str]]:
     series_list = sorted(set(row_series.values()))
-    baseline_avg_by_series: Dict[str, Dict[Tuple[str, str], float]] = {}
-    summary: List[str] = []
+    baseline_avg_by_series: dict[str, dict[tuple[str, str], float]] = {}
+    summary: list[str] = []
 
     for series in series_list:
         series_cfg = (baselines_cfg.get("series", {}) or {}).get(series, {}) if isinstance(baselines_cfg, dict) else {}
@@ -56,7 +56,7 @@ def compute_baseline_averages_by_series(
             if r.get("provider") == base_provider and r.get("device") == base_device and row_series.get(id(r)) == series
         ]
 
-        baseline_values: Dict[Tuple[str, str], List[float]] = {}
+        baseline_values: dict[tuple[str, str], list[float]] = {}
         for r in selected:
             results = r.get("results") if isinstance(r.get("results"), dict) else {}
             bench = derive_benchmark_name(r)
@@ -69,7 +69,7 @@ def compute_baseline_averages_by_series(
                     continue
                 baseline_values.setdefault((bench, metric), []).append(num)
 
-        baseline_avg: Dict[Tuple[str, str], float] = {}
+        baseline_avg: dict[tuple[str, str], float] = {}
         for key, vals in baseline_values.items():
             if not vals:
                 continue
@@ -84,9 +84,9 @@ def compute_baseline_averages_by_series(
 
 
 def compute_and_attach_metriq_scores(
-    flat_rows: List[Dict[str, Any]],
-    row_series: Dict[int, str],
-    baseline_avg_by_series: Dict[str, Dict[Tuple[str, str], float]],
+    flat_rows: list[dict[str, Any]],
+    row_series: dict[int, str],
+    baseline_avg_by_series: dict[str, dict[tuple[str, str], float]],
 ) -> None:
     for r in flat_rows:
         results = r.get("results") if isinstance(r.get("results"), dict) else {}
@@ -96,7 +96,7 @@ def compute_and_attach_metriq_scores(
         dir_map = r.get("directions") if isinstance(r.get("directions"), dict) else {}
         series = row_series.get(id(r))
         baseline_avg = baseline_avg_by_series.get(series or "", {})
-        scores: Dict[str, float] = {}
+        scores: dict[str, float] = {}
         for metric, val in results.items():
             try:
                 v = float(val)

@@ -5,7 +5,7 @@ import json
 import os
 import sys
 from datetime import datetime, timezone
-from typing import Any, Dict, List, Optional, Tuple
+from typing import Any, Optional
 
 
 # ---------------------------- Utilities ----------------------------
@@ -40,10 +40,10 @@ def canonical_json(obj: Any) -> str:
     return json.dumps(obj, sort_keys=True, separators=(",", ":"), ensure_ascii=False)
 
 
-def find_result_files(root: str) -> List[str]:
+def find_result_files(root: str) -> list[str]:
     pattern = os.path.join(root, "*/v*/**/results.json")
     seen = set()
-    files: List[str] = []
+    files: list[str] = []
     for p in glob.glob(pattern, recursive=True):
         if os.path.isfile(p):
             ap = os.path.abspath(p)
@@ -62,8 +62,8 @@ def path_version_segment(path: str) -> str:
     return "unknown"
 
 
-def flatten_row(row: Dict[str, Any]) -> Dict[str, Any]:
-    out: Dict[str, Any] = {}
+def flatten_row(row: dict[str, Any]) -> dict[str, Any]:
+    out: dict[str, Any] = {}
     for k in ("app_version", "timestamp", "provider", "suite_id", "device", "job_type", "results", "params"):
         if k in row:
             out[k] = row[k]
@@ -98,7 +98,7 @@ def flatten_row(row: Dict[str, Any]) -> Dict[str, Any]:
     return out
 
 
-def get_provider_device(row: Dict[str, Any]) -> Tuple[Optional[str], Optional[str]]:
+def get_provider_device(row: dict[str, Any]) -> tuple[Optional[str], Optional[str]]:
     provider = row.get("provider")
     device = row.get("device")
     if not provider or not device:
@@ -111,10 +111,10 @@ def get_provider_device(row: Dict[str, Any]) -> Tuple[Optional[str], Optional[st
 
 # ---------------------------- Platform Registry ----------------------------
 
-PlatformKey = Tuple[str, str]
+PlatformKey = tuple[str, str]
 
 
-def upsert_platform(registry: Dict[PlatformKey, Dict[str, Any]], row: Dict[str, Any], src_file: str, version: str) -> None:
+def upsert_platform(registry: dict[PlatformKey, dict[str, Any]], row: dict[str, Any], src_file: str, version: str) -> None:
     provider, device = get_provider_device(row)
     if not provider or not device:
         return
@@ -175,8 +175,8 @@ def upsert_platform(registry: Dict[PlatformKey, Dict[str, Any]], row: Dict[str, 
             hist["last_seen"] = ts_iso
 
 
-def _current_metadata_entry(entry: Dict[str, Any]) -> Dict[str, Any]:
-    m_hist: Dict[str, Dict[str, Any]] = entry.get("metadata_history", {})
+def _current_metadata_entry(entry: dict[str, Any]) -> dict[str, Any]:
+    m_hist: dict[str, dict[str, Any]] = entry.get("metadata_history", {})
     if not m_hist:
         return {"device_metadata": None, "as_of": entry.get("last_seen")}
     platform_last = parse_timestamp(entry.get("last_seen", ""))
@@ -194,10 +194,10 @@ def _current_metadata_entry(entry: Dict[str, Any]) -> Dict[str, Any]:
     return {"device_metadata": best_item.get("device_metadata"), "as_of": best_item.get("last_seen")}
 
 
-def write_platform_outputs(registry: Dict[PlatformKey, Dict[str, Any]], dist_path: str, generated_at: str) -> Tuple[int, str]:
+def write_platform_outputs(registry: dict[PlatformKey, dict[str, Any]], dist_path: str, generated_at: str) -> tuple[int, str]:
     platforms_dir = os.path.join(dist_path, "platforms")
     ensure_dir(platforms_dir)
-    index_platforms: List[Dict[str, Any]] = []
+    index_platforms: list[dict[str, Any]] = []
 
     for (provider, device) in sorted(registry.keys(), key=lambda k: (k[0], k[1])):
         entry = registry[(provider, device)]
@@ -242,7 +242,7 @@ def write_platform_outputs(registry: Dict[PlatformKey, Dict[str, Any]], dist_pat
     return len(index_platforms), platforms_dir
 
 
-def derive_benchmark_name(r: Dict[str, Any]) -> str:
+def derive_benchmark_name(r: dict[str, Any]) -> str:
     params = r.get("params") or {}
     if isinstance(params, dict) and isinstance(params.get("benchmark_name"), str):
         return params.get("benchmark_name")
@@ -251,12 +251,12 @@ def derive_benchmark_name(r: Dict[str, Any]) -> str:
     return "unknown"
 
 
-def collect_flat_rows_and_registry(root: str, files: List[str]) -> tuple[
-    List[Dict[str, Any]], Dict[int, str], Dict[PlatformKey, Dict[str, Any]]
+def collect_flat_rows_and_registry(root: str, files: list[str]) -> tuple[
+    list[dict[str, Any]], dict[int, str], dict[PlatformKey, dict[str, Any]]
 ]:
-    registry: Dict[PlatformKey, Dict[str, Any]] = {}
-    flat_rows: List[Dict[str, Any]] = []
-    row_series: Dict[int, str] = {}
+    registry: dict[PlatformKey, dict[str, Any]] = {}
+    flat_rows: list[dict[str, Any]] = []
+    row_series: dict[int, str] = {}
 
     for src in files:
         version = path_version_segment(src)
@@ -283,7 +283,7 @@ def collect_flat_rows_and_registry(root: str, files: List[str]) -> tuple[
     return flat_rows, row_series, registry
 
 
-def write_benchmark_latest(dist_path: str, rows: List[Dict[str, Any]]) -> str:
+def write_benchmark_latest(dist_path: str, rows: list[dict[str, Any]]) -> str:
     latest_file = os.path.join(dist_path, "benchmark.latest.json")
     with open(latest_file, "w", encoding="utf-8") as f:
         f.write(json.dumps(rows, ensure_ascii=False, indent=2))
