@@ -1,0 +1,31 @@
+[
+  {
+    "app_version": "0.4.2.dev7+g3343a86ca",
+    "timestamp": "2025-10-19T15:39:39.590379",
+    "suite_id": null,
+    "job_type": "BSEQ",
+    "results": {
+      "values": {
+        "largest_connected_size": 54.0
+      },
+      "uncertainties": {
+        "largest_connected_size": null
+      },
+      "directions": {
+        "largest_connected_size": "higher"
+      }
+    },
+    "platform": {
+      "device": "iqm_emerald",
+      "device_metadata": {
+        "num_qubits": 54,
+        "simulator": false
+      },
+      "provider": "aws"
+    },
+    "params": {
+      "benchmark_name": "BSEQ",
+      "shots": 1000
+    }
+  }
+]
