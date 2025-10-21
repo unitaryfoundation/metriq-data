@@ -1,3 +1,6 @@
 # Ignore generated outputs
 dist/
 
+__pycache__/
+*.py[cod]
+*.pyo
