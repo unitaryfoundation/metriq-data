@@ -1,5 +1,35 @@
 [
   {
+    "app_version": "0.4.2.dev12+g1310c034e.d20251021",
+    "timestamp": "2025-10-22T10:45:42.863427",
+    "suite_id": null,
+    "job_type": "WIT",
+    "results": {
+      "values": {
+        "expectation_value": 0.66455078125
+      },
+      "uncertainties": {
+        "expectation_value": 0.005216539581356515
+      },
+      "directions": {
+        "expectation_value": "higher"
+      }
+    },
+    "platform": {
+      "device": "iqm_emerald",
+      "device_metadata": {
+        "num_qubits": 54,
+        "simulator": false
+      },
+      "provider": "aws"
+    },
+    "params": {
+      "benchmark_name": "WIT",
+      "num_qubits": 7,
+      "shots": 8192
+    }
+  },
+  {
     "app_version": "0.4.2.dev7+g3343a86ca",
     "timestamp": "2025-10-19T15:41:02.749589",
     "suite_id": null,
