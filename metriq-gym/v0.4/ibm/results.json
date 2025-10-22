@@ -1,12 +1,12 @@
 [
   {
     "app_version": "0.4.2.dev7+g3343a86ca",
-    "timestamp": "2025-10-19T14:10:44.448119",
+    "timestamp": "2025-10-19T14:10:17.439739",
     "suite_id": null,
     "job_type": "BSEQ",
     "results": {
       "values": {
-        "largest_connected_size": 120.0
+        "largest_connected_size": 113.0
       },
       "uncertainties": {
         "largest_connected_size": null
@@ -16,11 +16,11 @@
       }
     },
     "platform": {
-      "device": "ibm_brisbane",
+      "device": "ibm_torino",
       "device_metadata": {
-        "num_qubits": 127,
+        "num_qubits": 133,
         "simulator": false,
-        "version": "1.1.216"
+        "version": "1.0.98"
       },
       "provider": "ibm"
     },
@@ -87,6 +87,37 @@
     "params": {
       "benchmark_name": "QML Kernel",
       "num_qubits": 20,
+      "shots": 1000
+    }
+  },
+  {
+    "app_version": "0.3.1.post36.dev0",
+    "timestamp": "2025-10-20T14:42:26.145220",
+    "suite_id": null,
+    "job_type": "QML Kernel",
+    "results": {
+      "values": {
+        "accuracy_score": 0.669
+      },
+      "uncertainties": {
+        "accuracy_score": 0.014880826589944525
+      },
+      "directions": {
+        "accuracy_score": "higher"
+      }
+    },
+    "platform": {
+      "device": "ibm_torino",
+      "device_metadata": {
+        "num_qubits": 133,
+        "simulator": false,
+        "version": "1.0.100"
+      },
+      "provider": "ibm"
+    },
+    "params": {
+      "benchmark_name": "QML Kernel",
+      "num_qubits": 10,
       "shots": 1000
     }
   },
