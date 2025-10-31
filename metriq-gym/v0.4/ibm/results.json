@@ -7,7 +7,7 @@
     "results": {
       "values": {
         "success_probability": 0.0039,
-        "polarization": -6.274509803921748e-06,
+        "polarization": 0.0,
         "binary_success": 0.0
       },
       "uncertainties": {
