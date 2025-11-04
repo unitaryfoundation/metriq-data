@@ -1,5 +1,44 @@
 [
   {
+    "app_version": "0.4.2.dev17+gd000fa179",
+    "timestamp": "2025-11-04T17:37:27.832493",
+    "suite_id": null,
+    "job_type": "Mirror Circuits",
+    "results": {
+      "values": {
+        "success_probability": 0.6116,
+        "polarization": 0.6115940733958953,
+        "binary_success": 1.0
+      },
+      "uncertainties": {
+        "success_probability": 0.004873863354670502,
+        "polarization": 0.0048739377250581525,
+        "binary_success": null
+      },
+      "directions": {
+        "success_probability": "higher",
+        "polarization": "higher"
+      }
+    },
+    "platform": {
+      "device": "iqm_garnet",
+      "device_metadata": {
+        "num_qubits": 20,
+        "simulator": false
+      },
+      "provider": "aws"
+    },
+    "params": {
+      "benchmark_name": "Mirror Circuits",
+      "num_circuits": 10,
+      "num_layers": 32,
+      "shots": 1000,
+      "two_qubit_gate_name": "CNOT",
+      "two_qubit_gate_prob": 0.5,
+      "width": 16
+    }
+  },
+  {
     "app_version": "0.4.2.dev12+g1310c034e.d20251021",
     "timestamp": "2025-10-22T10:45:42.863427",
     "suite_id": null,
