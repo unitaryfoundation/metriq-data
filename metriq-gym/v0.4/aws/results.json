@@ -1,5 +1,44 @@
 [
   {
+    "app_version": "0.4.2.dev17+gd000fa179",
+    "timestamp": "2025-11-05T14:25:47.656144",
+    "suite_id": null,
+    "job_type": "Mirror Circuits",
+    "results": {
+      "values": {
+        "success_probability": 0.1857,
+        "polarization": 0.18569999981040602,
+        "binary_success": 0.0
+      },
+      "uncertainties": {
+        "success_probability": 0.003888643851010272,
+        "polarization": 0.0038886438519156676,
+        "binary_success": null
+      },
+      "directions": {
+        "success_probability": "higher",
+        "polarization": "higher"
+      }
+    },
+    "platform": {
+      "device": "rigetti_ankaa-3",
+      "device_metadata": {
+        "num_qubits": 82,
+        "simulator": false
+      },
+      "provider": "aws"
+    },
+    "params": {
+      "benchmark_name": "Mirror Circuits",
+      "num_circuits": 10,
+      "num_layers": 8,
+      "shots": 1000,
+      "two_qubit_gate_name": "CNOT",
+      "two_qubit_gate_prob": 0.5,
+      "width": 32
+    }
+  },
+  {
     "app_version": "0.4.2.dev12+g1310c034e.d20251021",
     "timestamp": "2025-10-22T10:45:42.863427",
     "suite_id": null,
