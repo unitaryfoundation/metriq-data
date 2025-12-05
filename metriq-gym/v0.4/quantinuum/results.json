@@ -1,0 +1,30 @@
+[
+  {
+    "app_version": "0.4.3.dev12+g1b4196a92",
+    "timestamp": "2025-12-04T07:20:31.261700",
+    "suite_id": null,
+    "job_type": "WIT",
+    "results": {
+      "values": {
+        "expectation_value": 0.9835205078125
+      },
+      "uncertainties": {
+        "expectation_value": 0.001406593643981733
+      },
+      "score": 0.9835205078125
+    },
+    "platform": {
+      "device": "H2-2",
+      "device_metadata": {
+        "simulator": false,
+        "version": "0.54.0"
+      },
+      "provider": "quantinuum"
+    },
+    "params": {
+      "benchmark_name": "WIT",
+      "num_qubits": 6,
+      "shots": 8192
+    }
+  }
+]
