@@ -1,5 +1,44 @@
 [
   {
+    "app_version": "0.4.3.dev17+gfd76d072a.d20251209",
+    "timestamp": "2025-12-09T22:57:09.625100",
+    "suite_id": null,
+    "job_type": "Linear Ramp QAOA",
+    "results": {
+      "values": {
+        "random_approx_ratio": 0.5002693333333332
+      },
+      "uncertainties": {
+        "random_approx_ratio": null
+      },
+      "score": 0.4830399999999999
+    },
+    "platform": {
+      "device": "72",
+      "device_metadata": {
+        "num_qubits": 72,
+        "simulator": false
+      },
+      "provider": "origin"
+    },
+    "params": {
+      "benchmark_name": "Linear Ramp QAOA",
+      "confidence_level": 0.999,
+      "delta_beta": 0.7,
+      "delta_gamma": 0.8,
+      "graph_type": "1D",
+      "num_qubits": 8,
+      "num_random_trials": 25,
+      "qaoa_layers": [
+        3,
+        5
+      ],
+      "seed": 123,
+      "shots": 1000,
+      "trials": 5
+    }
+  },
+  {
     "app_version": "0.4.3.dev26+g10f90001d.d20251118",
     "timestamp": "2025-11-18T21:30:52.915885",
     "suite_id": null,
