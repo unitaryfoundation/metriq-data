@@ -2,7 +2,7 @@
 
 [![Unitary Foundation](https://img.shields.io/badge/Supported%20By-Unitary%20Foundation-FFFF00.svg)](https://unitary.foundation)
 
-This repository stores benchmark results and datasets collected with [metriq-gym](https://github.com/unitaryfoundation/metriq-gym).  
+This repository stores benchmark results and datasets collected with [metriq-gym](https://github.com/unitaryfoundation/metriq-gym).
 The data here is consumed by [metriq-web](https://github.com/unitaryfoundation/metriq-web) for presentation and analysis.
 
 Part of the [Metriq](https://metriq.info) project.
@@ -32,3 +32,7 @@ Edit `scripts/baselines.json` to set the baseline per minor series (e.g. `v0.4`)
 ```
 
 For now, all rows from the baseline device within a series are averaged to compute the baseline.
+
+## Acknowledgements
+
+Some of these results used resources of the Oak Ridge Leadership Computing Facility, which is a DOE Office of Science User Facility supported under Contract DE-AC05-00OR22725.
