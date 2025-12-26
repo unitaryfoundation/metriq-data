@@ -1,0 +1,33 @@
+[
+  {
+    "app_version": "0.5.1a1.dev2+g2d93ff207",
+    "timestamp": "2025-12-16T16:28:23.448652",
+    "suite_id": null,
+    "job_type": "WIT",
+    "results": {
+      "expectation_value": {
+        "value": 0.897216796875,
+        "uncertainty": 0.00335517208526243
+      },
+      "score": {
+        "value": 0.897216796875,
+        "uncertainty": 0.00335517208526243
+      }
+    },
+    "runtime_seconds": 6.294724,
+    "platform": {
+      "device": "ibm_boston",
+      "device_metadata": {
+        "num_qubits": 156,
+        "simulator": false,
+        "version": "1.0.4"
+      },
+      "provider": "ibm"
+    },
+    "params": {
+      "benchmark_name": "WIT",
+      "num_qubits": 7,
+      "shots": 8192
+    }
+  }
+]
