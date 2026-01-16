@@ -3,46 +3,238 @@ import os
 import sys
 from typing import Any
 
-from etl import derive_benchmark_name
+from etl import canonical_json, derive_benchmark_name, parse_timestamp
+
+def _coerce_float(val: Any) -> float | None:
+    try:
+        out = float(val)
+    except Exception:
+        return None
+    if not (out == out):
+        return None
+    return out
+
+
+def _parse_weight(val: Any) -> float:
+    """Parse a weight which may be numeric or a string fraction like '1/7'."""
+    if isinstance(val, bool) or val is None:
+        raise ValueError(f"Invalid weight: {val!r}")
+    if isinstance(val, (int, float)):
+        out = float(val)
+    elif isinstance(val, str):
+        s = val.strip()
+        if "/" in s:
+            num_s, den_s = (part.strip() for part in s.split("/", 1))
+            num = float(num_s)
+            den = float(den_s)
+            if den == 0:
+                raise ValueError(f"Invalid weight (division by zero): {val!r}")
+            out = num / den
+        else:
+            out = float(s)
+    else:
+        raise ValueError(f"Invalid weight type: {type(val).__name__}")
+    if not (out == out) or out in (float("inf"), float("-inf")):
+        raise ValueError(f"Invalid weight value: {val!r}")
+    return out
+
+
+def _parse_series_label(label: str | None) -> tuple[int, ...] | None:
+    if not isinstance(label, str) or not label.startswith("v"):
+        return None
+    rest = label[1:]
+    if not rest:
+        return None
+    parts = rest.split(".")
+    out: list[int] = []
+    for p in parts:
+        if not p.isdigit():
+            return None
+        out.append(int(p))
+    return tuple(out)
+
+
+def _fallback_baseline_average(
+    series_label: str | None,
+    bench: str,
+    metric: str,
+    selector_fp: str,
+    baseline_avg_by_series: dict[str, dict[tuple[str, str, str], float]],
+) -> float | None:
+    """Fallback to the latest earlier series that has a baseline for (bench, metric, selector)."""
+    cur = _parse_series_label(series_label)
+    if cur is None:
+        return None
+    best_ver: tuple[int, ...] | None = None
+    best_val: float | None = None
+    for s, avg_map in baseline_avg_by_series.items():
+        ver = _parse_series_label(s)
+        if ver is None or ver >= cur:
+            continue
+        val = avg_map.get((bench, metric, selector_fp))
+        if val is None:
+            continue
+        if best_ver is None or ver > best_ver:
+            best_ver = ver
+            best_val = val
+    return best_val
+
+
+def apply_custom_metric_derivations(rows: list[dict[str, Any]]) -> None:
+    """Mutate rows in-place to add derived metrics where we define how to aggregate components.
+
+    For benchmarks that report multiple raw components, we can define a scalar metric here
+    so downstream metriq-score calculation is well-defined.
+    """
+    for row in rows:
+        bench = derive_benchmark_name(row)
+        if bench == "BSEQ":
+            _apply_bseq_metric(row)
+
+
+def _apply_bseq_metric(row: dict[str, Any]) -> None:
+    """Legacy hook for BSEQ derived metrics.
+
+    BSEQ scoring is now configured via scripts/scoring.json using baseline-normalized
+    component metrics (e.g., largest_connected_size and fraction_connected). We keep
+    this function to avoid breaking the derivation pipeline, but do not emit a raw
+    `bseq_score` value here (since it depends on baseline normalization).
+    """
+    return
+
+
+def _derived_from_components(comp: dict[str, Any]) -> list[dict[str, Any]]:
+    items = comp.get("derived_from")
+    if not isinstance(items, list):
+        return []
+    return [x for x in items if isinstance(x, dict)]
+
+
+def _compute_derived_normalized_score(
+    row: dict[str, Any],
+    series_label: str | None,
+    selector_fp: str,
+    comp: dict[str, Any],
+    baseline_avg_by_series: dict[str, dict[tuple[str, str, str], float]],
+) -> float | None:
+    parts = _derived_from_components(comp)
+    if not parts:
+        return None
+    numerator = 0.0
+    denom = 0.0
+    for part in parts:
+        metric = part.get("metric")
+        if not isinstance(metric, str) or not metric:
+            continue
+        try:
+            weight = _parse_weight(part.get("weight", 0.0))
+        except Exception:
+            continue
+        if weight < 0:
+            continue
+        denom += weight
+        v = _get_normalized_metric_value(
+            row, metric, series_label, selector_fp, baseline_avg_by_series
+        )
+        numerator += weight * (v if v is not None else 0.0)
+    if denom <= 0:
+        return None
+    return numerator / denom
+
+
+def _component_matches_benchmark(comp: dict[str, Any], bench: str) -> bool:
+    bench_field = comp.get("benchmark")
+    if isinstance(bench_field, str) and bench_field == bench:
+        return True
+    if isinstance(bench_field, list) and any(isinstance(b, str) and b == bench for b in bench_field):
+        return True
+    aliases = comp.get("aliases")
+    if isinstance(aliases, list) and any(isinstance(a, str) and a == bench for a in aliases):
+        return True
+    return False
+
+
+def _selector_fingerprint(selector: dict[str, Any] | None) -> str:
+    if not selector:
+        return "null"
+    return canonical_json(selector)
+
+
+def _components_for_series(scoring_cfg: dict[str, Any], series_label: str | None) -> list[dict[str, Any]]:
+    if not isinstance(scoring_cfg, dict):
+        return []
+    default_block = scoring_cfg.get("default") if isinstance(scoring_cfg.get("default"), dict) else {}
+    series_map = scoring_cfg.get("series") if isinstance(scoring_cfg.get("series"), dict) else {}
+    series_block = series_map.get(series_label) if isinstance(series_map, dict) else None
+    composite = series_block.get("composite") if isinstance(series_block, dict) else None
+    if not isinstance(composite, dict):
+        composite = default_block.get("composite") if isinstance(default_block, dict) else None
+    components = composite.get("components") if isinstance(composite, dict) else None
+    if not isinstance(components, list):
+        return []
+    return [c for c in components if isinstance(c, dict)]
+
+
+def _matching_components_for_row(
+    scoring_cfg: dict[str, Any],
+    series_label: str | None,
+    row: dict[str, Any],
+) -> list[dict[str, Any]]:
+    bench = derive_benchmark_name(row)
+    out: list[dict[str, Any]] = []
+    for comp in _components_for_series(scoring_cfg, series_label):
+        if not _component_matches_benchmark(comp, bench):
+            continue
+        selector = comp.get("selector") if isinstance(comp.get("selector"), dict) else None
+        if not _row_param_matches(selector, row):
+            continue
+        metric = comp.get("metric")
+        if not isinstance(metric, str):
+            continue
+        out.append(comp)
+    return out
 
 
 def load_baselines_config(root: str) -> dict[str, Any]:
-    """Load baseline configuration from scripts/baselines.json if present.
+    """Load baseline configuration from scripts/scoring.json.
 
-    Expected shape:
+    Expected shape (top-level):
       {
         "series": {
           "v0.4": { "provider": "ibm", "device": "ibm_torino" }
         },
-        "default": { "provider": "ibm", "device": "ibm_torino" }
+        "default": { "provider": "ibm", "device": "ibm_torino" },
+        "composites": { ... }  # optional, ignored here
       }
     """
-    cfg_path = os.path.join(root, "scripts", "baselines.json")
+    scoring_path = os.path.join(root, "scripts", "scoring.json")
     try:
-        with open(cfg_path, "r", encoding="utf-8") as f:
+        with open(scoring_path, "r", encoding="utf-8") as f:
             data = json.load(f)
             if isinstance(data, dict):
                 return data
     except FileNotFoundError:
+        print("Error: scripts/scoring.json not found", file=sys.stderr)
         return {}
     except Exception as e:
-        print(f"Warning: failed to load baselines config: {e}", file=sys.stderr)
-    return {}
+        print(f"Warning: failed to load scoring config: {e}", file=sys.stderr)
+        return {}
 
 
 def compute_baseline_averages_by_series(
     flat_rows: list[dict[str, Any]],
     row_series: dict[int, str],
     baselines_cfg: dict[str, Any],
-) -> tuple[dict[str, dict[tuple[str, str], float]], list[str]]:
+) -> tuple[dict[str, dict[tuple[str, str, str], float]], list[str]]:
     series_list = sorted(set(row_series.values()))
-    baseline_avg_by_series: dict[str, dict[tuple[str, str], float]] = {}
+    baseline_avg_by_series: dict[str, dict[tuple[str, str, str], float]] = {}
     summary: list[str] = []
 
     for series in series_list:
-        series_cfg = (baselines_cfg.get("series", {}) or {}).get(series, {}) if isinstance(baselines_cfg, dict) else {}
-        base_provider = series_cfg.get("provider") or (baselines_cfg.get("default", {}) or {}).get("provider")
-        base_device = series_cfg.get("device") or (baselines_cfg.get("default", {}) or {}).get("device")
+        series_block = (baselines_cfg.get("series", {}) or {}).get(series, {}) if isinstance(baselines_cfg, dict) else {}
+        baseline_obj = series_block.get("baseline") or (baselines_cfg.get("default", {}) or {}).get("baseline", {})
+        base_provider = (baseline_obj or {}).get("provider")
+        base_device = (baseline_obj or {}).get("device")
 
         if not base_provider or not base_device:
             baseline_avg_by_series[series] = {}
@@ -54,20 +246,43 @@ def compute_baseline_averages_by_series(
             if r.get("provider") == base_provider and r.get("device") == base_device and row_series.get(id(r)) == series
         ]
 
-        baseline_values: dict[tuple[str, str], list[float]] = {}
-        for r in selected:
-            results = r.get("results") if isinstance(r.get("results"), dict) else {}
-            bench = derive_benchmark_name(r)
-            for metric, val in results.items():
-                try:
-                    num = float(val)
-                except Exception:
-                    continue
-                if not (num == num):  # NaN
-                    continue
-                baseline_values.setdefault((bench, metric), []).append(num)
+        # Compute baseline averages only for metrics referenced by scoring.json components,
+        # and only within the same selector subset of params.
+        baseline_values: dict[tuple[str, str, str], list[float]] = {}
+        components = _components_for_series(baselines_cfg, series)
+        for comp in components:
+            bench_field = comp.get("benchmark")
+            metric = comp.get("metric")
+            if not isinstance(metric, str):
+                continue
+            selector = comp.get("selector") if isinstance(comp.get("selector"), dict) else None
+            selector_fp = _selector_fingerprint(selector)
 
-        baseline_avg: dict[tuple[str, str], float] = {}
+            for r in selected:
+                bench = derive_benchmark_name(r)
+                if not _component_matches_benchmark(comp, bench):
+                    continue
+                if not _row_param_matches(selector, r):
+                    continue
+                results = r.get("results") if isinstance(r.get("results"), dict) else {}
+                candidate_metrics = [metric]
+                for part in _derived_from_components(comp):
+                    part_metric = part.get("metric")
+                    if isinstance(part_metric, str) and part_metric:
+                        candidate_metrics.append(part_metric)
+
+                for m in candidate_metrics:
+                    if m not in results:
+                        continue
+                    try:
+                        num = float(results.get(m))
+                    except Exception:
+                        continue
+                    if not (num == num):  # NaN
+                        continue
+                    baseline_values.setdefault((bench, m, selector_fp), []).append(num)
+
+        baseline_avg: dict[tuple[str, str, str], float] = {}
         for key, vals in baseline_values.items():
             if not vals:
                 continue
@@ -84,7 +299,8 @@ def compute_baseline_averages_by_series(
 def compute_and_attach_metriq_scores(
     flat_rows: list[dict[str, Any]],
     row_series: dict[int, str],
-    baseline_avg_by_series: dict[str, dict[tuple[str, str], float]],
+    baseline_avg_by_series: dict[str, dict[tuple[str, str, str], float]],
+    scoring_cfg: dict[str, Any],
 ) -> None:
     for r in flat_rows:
         results = r.get("results") if isinstance(r.get("results"), dict) else {}
@@ -95,42 +311,340 @@ def compute_and_attach_metriq_scores(
         series = row_series.get(id(r))
         baseline_avg = baseline_avg_by_series.get(series or "", {})
         scores: dict[str, float] = {}
-        for metric, val in results.items():
-            try:
-                v = float(val)
-            except Exception:
+
+        matching_components = _matching_components_for_row(scoring_cfg, series, r)
+        if not matching_components:
+            continue
+        # For a given row, only compute normalized scores for metrics explicitly configured
+        # by matching components (benchmark + selector).
+        metric_to_comp: dict[str, dict[str, Any]] = {}
+        for comp in matching_components:
+            metric = comp.get("metric")
+            if not isinstance(metric, str) or not metric:
                 continue
-            if not (v == v):  # NaN
-                continue
-            base = baseline_avg.get((bench, metric))
-            if base is None:
-                continue
-            direction = str(dir_map.get(metric, "higher")).lower()
-            score: float | None = None
-            try:
-                if direction == "lower":
-                    if v > 0:
-                        score = (base / v) * 100.0
-                else:
-                    if base > 0:
-                        score = (v / base) * 100.0
-            except Exception:
-                score = None
+            metric_to_comp[metric] = comp
+        target_metrics = list(metric_to_comp.keys())
+
+        for metric in target_metrics:
+            comp = metric_to_comp.get(metric, {})
+            selector = comp.get("selector") if isinstance(comp.get("selector"), dict) else None
+            selector_fp = _selector_fingerprint(selector)
+
+            if metric in results:
+                val = results.get(metric)
+                try:
+                    v = float(val)
+                except Exception:
+                    continue
+                if not (v == v):  # NaN
+                    continue
+                base = baseline_avg.get((bench, metric, selector_fp))
+                if base is None:
+                    base = _fallback_baseline_average(
+                        series, bench, metric, selector_fp, baseline_avg_by_series
+                    )
+                if base is None:
+                    continue
+                direction = str(dir_map.get(metric, "higher")).lower()
+                score: float | None = None
+                try:
+                    if direction == "lower":
+                        if v > 0:
+                            score = (base / v) * 100.0
+                    else:
+                        if base > 0:
+                            score = (v / base) * 100.0
+                except Exception:
+                    score = None
+            else:
+                score = _compute_derived_normalized_score(
+                    r,
+                    series,
+                    selector_fp,
+                    comp,
+                    baseline_avg_by_series,
+                )
             if score is not None and (score == score) and score not in (float("inf"), float("-inf")):
                 scores[metric] = score
         if not scores:
             continue
 
-        # If the benchmark reports a single metric and we computed exactly one score,
-        # expose a single scalar `metriq_score` instead of a per-metric mapping.
-        # This avoids nesting metric names as keys of `metriq_score` for single-metric benchmarks
-        # (e.g., WIT).
-        if len(scores) == 1 and len(results) == 1:
-            # Extract the only score value
+        # Attach per-metric normalized scores for downstream composite aggregation.
+        # This preserves all computed normalized metrics even for multi-metric benchmarks.
+        r["normalized_scores"] = scores
+
+        # Choose a scalar metriq_score when possible:
+        #  - If exactly one configured metric applies to this row, expose it as metriq_score
+        if len(scores) == 1:
             r["metriq_score"] = next(iter(scores.values()))
-        else:
-            # For multi-metric benchmarks we currently do not publish a scalar until
-            # a composite scoring spec is defined. Leave `metriq_score` unset.
-            # (We keep the per-metric scores internal in case a downstream composite
-            # is added later.)
+
+
+def load_scoring_config(root: str) -> dict[str, Any]:
+    """Load scoring configuration (baselines + composite) from scripts/scoring.json.
+
+    Expected shape:
+      {
+        "series": {
+          "vX.Y": {
+            "baseline": { "provider": str, "device": str },
+            "composite": { "components": [ ... ] }
+          },
+          ...
+        },
+        "default": {
+          "baseline": { "provider": str, "device": str },
+          "composite": { "components": [ ... ] }
+        }
+      }
+    """
+    scoring_path = os.path.join(root, "scripts", "scoring.json")
+    try:
+        with open(scoring_path, "r", encoding="utf-8") as f:
+            data = json.load(f)
+            if isinstance(data, dict):
+                return data
+    except FileNotFoundError:
+        print("Error: scripts/scoring.json not found", file=sys.stderr)
+    except Exception as e:
+        print(f"Warning: failed to load scoring.json: {e}", file=sys.stderr)
+    return {}
+
+
+def _validate_components_list(components: list[dict[str, Any]], ctx: str) -> None:
+    for i, comp in enumerate(components):
+        if not isinstance(comp, dict):
+            raise ValueError(f"Invalid component at index {i} in {ctx}: expected object")
+        w = comp.get("weight")
+        try:
+            w = _parse_weight(w)
+        except Exception:
+            raise ValueError(f"Invalid weight for component {i} in {ctx}: {w}")
+        if w < 0:
+            raise ValueError(f"Negative weight for component {i} in {ctx}: {w}")
+
+
+def validate_scoring_config(scoring_cfg: dict[str, Any]) -> None:
+    """Ensure each series' composite components weights sum to 1.0.
+
+    Validates both default.composite.components and series.<v>.composite.components
+    (when present). Raises ValueError on any violation.
+    """
+    if not isinstance(scoring_cfg, dict):
+        raise ValueError("Invalid scoring config: expected object")
+
+    default = scoring_cfg.get("default")
+    if isinstance(default, dict):
+        comp = default.get("composite")
+        if isinstance(comp, dict) and isinstance(comp.get("components"), list):
+            _validate_components_list(comp["components"], ctx="default.composite")
+
+    series_map = scoring_cfg.get("series")
+    if isinstance(series_map, dict):
+        for label, block in series_map.items():
+            if not isinstance(block, dict):
+                continue
+            comp = block.get("composite")
+            if isinstance(comp, dict) and isinstance(comp.get("components"), list):
+                _validate_components_list(comp["components"], ctx=f"series.{label}.composite")
+
+
+def _row_param_matches(selector: dict[str, Any] | None, row: dict[str, Any]) -> bool:
+    if not selector:
+        return True
+    params = row.get("params") if isinstance(row.get("params"), dict) else {}
+    for k, v in selector.items():
+        if params.get(k) != v:
+            return False
+    return True
+
+
+def _get_normalized_metric_value(
+    row: dict[str, Any],
+    metric: str,
+    series_label: str | None,
+    selector_fp: str,
+    baseline_avg_by_series: dict[str, dict[tuple[str, str, str], float]],
+) -> float | None:
+    # Prefer precomputed normalized scores
+    norm = row.get("normalized_scores")
+    if isinstance(norm, dict) and metric in norm and norm[metric] is not None:
+        try:
+            return float(norm[metric])
+        except Exception:
             pass
+
+    # Fallback: compute ad-hoc from row's raw result using baseline averages
+    results = row.get("results") if isinstance(row.get("results"), dict) else {}
+    if metric not in results:
+        return None
+    try:
+        v = float(results[metric])
+    except Exception:
+        return None
+    if not (v == v):  # NaN
+        return None
+    bench = derive_benchmark_name(row)
+    baseline_avg = baseline_avg_by_series.get(series_label or "", {})
+    base = baseline_avg.get((bench, metric, selector_fp))
+    if base is None:
+        base = _fallback_baseline_average(series_label, bench, metric, selector_fp, baseline_avg_by_series)
+    if base is None:
+        return None
+    dir_map = row.get("directions") if isinstance(row.get("directions"), dict) else {}
+    direction = str(dir_map.get(metric, "higher")).lower()
+    try:
+        if direction == "lower":
+            if v > 0:
+                return (base / v) * 100.0
+        else:
+            if base > 0:
+                return (v / base) * 100.0
+    except Exception:
+        return None
+    return None
+
+
+def compute_device_composite_scores(
+    flat_rows: list[dict[str, Any]],
+    row_series: dict[int, str],
+    baseline_avg_by_series: dict[str, dict[tuple[str, str], float]],
+    scoring_cfg: dict[str, Any],
+) -> list[dict[str, Any]]:
+    """Compute per-(provider, device) composite Metriq Score using series-scoped configs.
+
+    For each device, choose its latest series (by most recent timestamp among its rows),
+    then compute the composite using the series-specific components (fallback to default).
+
+    Returns a list of records:
+      { provider, device, metriq_score, components: { ... }, series }
+    """
+
+    # group rows by (provider, device)
+    grouped: dict[tuple[str, str], list[dict[str, Any]]] = {}
+    for r in flat_rows:
+        provider = r.get("provider")
+        device = r.get("device")
+        if not provider or not device:
+            continue
+        grouped.setdefault((provider, device), []).append(r)
+
+    out: list[dict[str, Any]] = []
+    series_cfg_map = scoring_cfg.get("series", {}) if isinstance(scoring_cfg, dict) else {}
+    default_composite = ((scoring_cfg.get("default", {}) or {}).get("composite", {})
+                         if isinstance(scoring_cfg, dict) else {})
+    for (provider, device), rows in grouped.items():
+        # pick device's latest series by timestamp
+        latest_ts = None
+        picked_series = None
+        for r in rows:
+            ts = parse_timestamp(r.get("timestamp", ""))
+            if ts is None:
+                continue
+            s = row_series.get(id(r))
+            if picked_series is None or latest_ts is None or ts > latest_ts:
+                latest_ts = ts
+                picked_series = s
+
+        series_block = (series_cfg_map.get(picked_series, {}) if isinstance(series_cfg_map, dict) else {})
+        composite_cfg = series_block.get("composite") or default_composite
+        components_cfg = composite_cfg.get("components") if isinstance(composite_cfg, dict) else None
+        if not isinstance(components_cfg, list) or not components_cfg:
+            # No components configured; skip this device
+            continue
+        breakdown: dict[str, dict[str, Any]] = {}
+        numerator = 0.0
+        sum_w_defined = 0.0
+
+        for comp in components_cfg:
+            if not isinstance(comp, dict):
+                continue
+            bench_field = comp.get("benchmark")
+            # Allow a single name or a list of names, plus optional aliases
+            allowed_names: set[str] = set()
+            if isinstance(bench_field, str):
+                allowed_names.add(bench_field)
+            elif isinstance(bench_field, list):
+                for b in bench_field:
+                    if isinstance(b, str):
+                        allowed_names.add(b)
+            aliases = comp.get("aliases")
+            if isinstance(aliases, list):
+                for a in aliases:
+                    if isinstance(a, str):
+                        allowed_names.add(a)
+            metric = comp.get("metric")
+            weight = _parse_weight(comp.get("weight", 0.0))
+            selector = comp.get("selector") if isinstance(comp.get("selector"), dict) else None
+            # Prefer the primary benchmark name for label when available
+            primary_bench = bench_field if isinstance(bench_field, str) else (bench_field[0] if isinstance(bench_field, list) and bench_field else None)
+            label = comp.get("label") or (f"{primary_bench}:{metric}" if primary_bench and metric else "component")
+            # Always include every component's weight in the denominator; if a
+            # component is missing for this device, treat its normalized value as 0.
+            sum_w_defined += weight
+
+            # filter rows by benchmark, selector, and chosen series
+            matches: list[dict[str, Any]] = []
+            for r in rows:
+                # Match benchmark by any allowed name (if provided)
+                if allowed_names and derive_benchmark_name(r) not in allowed_names:
+                    continue
+                if not _row_param_matches(selector, r):
+                    continue
+                if row_series.get(id(r)) != picked_series:
+                    continue
+                # must have metric value (either normalized_scores or results)
+                series_label = row_series.get(id(r))
+                selector_fp = _selector_fingerprint(selector)
+                val = _get_normalized_metric_value(r, metric, series_label, selector_fp, baseline_avg_by_series)
+                if val is None:
+                    continue
+                r_copy = dict(r)
+                r_copy["_normalized_val"] = float(val)
+                matches.append(r_copy)
+
+            # pick latest by timestamp
+            picked = None
+            picked_ts = None
+            for cand in matches:
+                ts = parse_timestamp(cand.get("timestamp", ""))
+                if ts is None:
+                    continue
+                if picked is None or (picked_ts is None or ts > picked_ts):
+                    picked = cand
+                    picked_ts = ts
+
+            if picked is not None:
+                val = picked.get("_normalized_val")
+                numerator += weight * float(val)
+                breakdown[label] = {
+                    "metric": metric,
+                    "weight": weight,
+                    "normalized": float(val),
+                    "timestamp": picked.get("timestamp"),
+                }
+            else:
+                breakdown[label] = {
+                    "metric": metric,
+                    "weight": weight,
+                    "normalized": 0.0,
+                    "timestamp": None,
+                }
+
+        # Denominator is the sum of all defined weights; missing components
+        # contribute 0 to the numerator but still count in the denominator.
+        if sum_w_defined > 0.0:
+            metriq_score = float(numerator / sum_w_defined)
+        else:
+            metriq_score = None
+
+        out.append(
+            {
+                "provider": provider,
+                "device": device,
+                "metriq_score": metriq_score,
+                "components": breakdown,
+                "series": picked_series,
+            }
+        )
+
+    return out

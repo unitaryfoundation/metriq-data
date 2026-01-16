@@ -7,9 +7,10 @@ The data here is consumed by [metriq-web](https://github.com/unitaryfoundation/m
 
 Part of the [Metriq](https://metriq.info) project.
 
-## Aggregation and Baselines
+## Aggregation and Scoring
 
 - Run `python scripts/aggregate.py` to generate aggregated results.
+- These scripts use modern Python syntax; use Python `>=3.10` (recommended: `python3.13`).
 
 ### Metriq-score
 `metriq-score` is computed per metric relative to a baseline device, honoring directionality:
@@ -18,16 +19,34 @@ Part of the [Metriq](https://metriq.info) project.
 
 Example: Say X is the device baseline for series `v0.4`. Then for a metric where higher is better (e.g. "fidelity"), we assign a _metriq-score_ of `100` to the value that X scored on that metric. If the raw value of that benchmark on X was `0.5`, and another device Y reports `0.9`, then the metriq-score of Y is `0.9 / 0.5 * 100 = 180`.
 
-### Configure baselines
+### Configure scoring (baselines and composite)
 
-Edit `scripts/baselines.json` to set the baseline per minor series (e.g. `v0.4`). Example:
+Edit `scripts/scoring.json`, which centralizes both baseline selection and composite scoring.
+
+Example `scripts/scoring.json`:
 
 ```
 {
   "series": {
-    "v0.4": { "provider": "origin", "device": "origin_wukong" }
+    "v0.4": {
+      "baseline": { "provider": "origin", "device": "origin_wukong" },
+      "composite": {
+        "components": [
+          { "benchmark": "BSEQ", "metric": "fraction_connected", "weight": 0.5 },
+          { "benchmark": "QML Kernel", "metric": "accuracy_score", "selector": { "num_qubits": 10 }, "weight": 0.5 }
+        ]
+      }
+    }
   },
-  "default": { "provider": "ibm", "device": "ibm_torino" }
+  "default": {
+    "baseline": { "provider": "ibm", "device": "ibm_torino" },
+    "composite": {
+      "components": [
+        { "benchmark": "BSEQ", "metric": "fraction_connected", "weight": 0.5 },
+        { "benchmark": "QML Kernel", "metric": "accuracy_score", "selector": { "num_qubits": 10 }, "weight": 0.5 }
+      ]
+    }
+  }
 }
 ```
 
