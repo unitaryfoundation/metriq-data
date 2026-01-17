@@ -507,8 +507,7 @@ def _row_param_matches(selector: dict[str, Any] | None, row: dict[str, Any]) -> 
     for k, v in selector.items():
         if params.get(k) != v:
             return False
-    baseline_avg_by_series: dict[str, dict[tuple[str, str, str], float]],
-
+    return True
 
 def _get_normalized_metric_value(
     row: dict[str, Any],
@@ -559,7 +558,7 @@ def _get_normalized_metric_value(
 def compute_device_composite_scores(
     flat_rows: list[dict[str, Any]],
     row_series: dict[int, str],
-    baseline_avg_by_series: dict[str, dict[tuple[str, str], float]],
+    baseline_avg_by_series: dict[str, dict[tuple[str, str, str], float]],
     scoring_cfg: dict[str, Any],
 ) -> list[dict[str, Any]]:
     """Compute per-(provider, device) composite Metriq Score using series-scoped configs.
