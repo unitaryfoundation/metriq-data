@@ -110,6 +110,47 @@ def _derived_from_components(comp: dict[str, Any]) -> list[dict[str, Any]]:
     return [x for x in items if isinstance(x, dict)]
 
 
+def _flatten_components(components: list[dict[str, Any]]) -> list[dict[str, Any]]:
+    """Flatten grouped composite components.
+
+    Supports two shapes:
+      - Leaf component: {benchmark, metric, weight, ...}
+      - Group component: {label, weight, components: [leaf, ...]}
+
+    Returns leaf component dicts augmented with:
+      - _group_label, _group_weight, _sub_weight, _effective_weight
+    """
+    flat: list[dict[str, Any]] = []
+    for comp in components:
+        if not isinstance(comp, dict):
+            continue
+        group_children = comp.get("components")
+        if isinstance(group_children, list):
+            group_label = comp.get("label") or comp.get("benchmark") or "group"
+            group_weight = _parse_weight(comp.get("weight", 0.0))
+            for child in group_children:
+                if not isinstance(child, dict):
+                    continue
+                sub_weight = _parse_weight(child.get("weight", 0.0))
+                merged = dict(child)
+                merged["_group_label"] = group_label
+                merged["_group_weight"] = group_weight
+                merged["_sub_weight"] = sub_weight
+                merged["_effective_weight"] = group_weight * sub_weight
+                flat.append(merged)
+            continue
+
+        sub_weight = _parse_weight(comp.get("weight", 0.0))
+        merged = dict(comp)
+        merged["_group_label"] = None
+        merged["_group_weight"] = 1.0
+        merged["_sub_weight"] = sub_weight
+        merged["_effective_weight"] = sub_weight
+        flat.append(merged)
+
+    return flat
+
+
 def _compute_derived_normalized_score(
     row: dict[str, Any],
     series_label: str | None,
@@ -172,7 +213,7 @@ def _components_for_series(scoring_cfg: dict[str, Any], series_label: str | None
     components = composite.get("components") if isinstance(composite, dict) else None
     if not isinstance(components, list):
         return []
-    return [c for c in components if isinstance(c, dict)]
+    return _flatten_components([c for c in components if isinstance(c, dict)])
 
 
 def _matching_components_for_row(
@@ -411,16 +452,27 @@ def load_scoring_config(root: str) -> dict[str, Any]:
 
 
 def _validate_components_list(components: list[dict[str, Any]], ctx: str) -> None:
+    total = 0.0
     for i, comp in enumerate(components):
         if not isinstance(comp, dict):
             raise ValueError(f"Invalid component at index {i} in {ctx}: expected object")
-        w = comp.get("weight")
+        children = comp.get("components")
+        w_raw = comp.get("weight")
         try:
-            w = _parse_weight(w)
+            w = _parse_weight(w_raw)
         except Exception:
-            raise ValueError(f"Invalid weight for component {i} in {ctx}: {w}")
+            raise ValueError(f"Invalid weight for component {i} in {ctx}: {w_raw}")
         if w < 0:
-            raise ValueError(f"Negative weight for component {i} in {ctx}: {w}")
+            raise ValueError(f"Negative weight for component {i} in {ctx}: {w_raw}")
+
+        if isinstance(children, list):
+            _validate_components_list(children, ctx=f"{ctx}.components[{i}]")
+        total += w
+
+    if components:
+        # Weight lists are expected to represent convex combinations.
+        if abs(total - 1.0) > 1e-9:
+            raise ValueError(f"Component weights must sum to 1.0 in {ctx}: got {total}")
 
 
 def validate_scoring_config(scoring_cfg: dict[str, Any]) -> None:
@@ -551,11 +603,12 @@ def compute_device_composite_scores(
         if not isinstance(components_cfg, list) or not components_cfg:
             # No components configured; skip this device
             continue
+        components_flat = _flatten_components([c for c in components_cfg if isinstance(c, dict)])
         breakdown: dict[str, dict[str, Any]] = {}
         numerator = 0.0
         sum_w_defined = 0.0
 
-        for comp in components_cfg:
+        for comp in components_flat:
             if not isinstance(comp, dict):
                 continue
             bench_field = comp.get("benchmark")
@@ -573,7 +626,10 @@ def compute_device_composite_scores(
                     if isinstance(a, str):
                         allowed_names.add(a)
             metric = comp.get("metric")
-            weight = _parse_weight(comp.get("weight", 0.0))
+            group_label = comp.get("_group_label")
+            group_weight = float(comp.get("_group_weight", 1.0))
+            sub_weight = float(comp.get("_sub_weight", 0.0))
+            weight = float(comp.get("_effective_weight", _parse_weight(comp.get("weight", 0.0))))
             selector = comp.get("selector") if isinstance(comp.get("selector"), dict) else None
             # Prefer the primary benchmark name for label when available
             primary_bench = bench_field if isinstance(bench_field, str) else (bench_field[0] if isinstance(bench_field, list) and bench_field else None)
@@ -619,6 +675,9 @@ def compute_device_composite_scores(
                 breakdown[label] = {
                     "metric": metric,
                     "weight": weight,
+                    "group": group_label,
+                    "group_weight": group_weight,
+                    "sub_weight": sub_weight,
                     "normalized": float(val),
                     "timestamp": picked.get("timestamp"),
                 }
@@ -626,6 +685,9 @@ def compute_device_composite_scores(
                 breakdown[label] = {
                     "metric": metric,
                     "weight": weight,
+                    "group": group_label,
+                    "group_weight": group_weight,
+                    "sub_weight": sub_weight,
                     "normalized": 0.0,
                     "timestamp": None,
                 }

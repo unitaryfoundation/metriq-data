@@ -32,8 +32,20 @@ Example `scripts/scoring.json`:
       "baseline": { "provider": "origin", "device": "origin_wukong" },
       "composite": {
         "components": [
-          { "benchmark": "BSEQ", "metric": "fraction_connected", "weight": 0.5 },
-          { "benchmark": "QML Kernel", "metric": "accuracy_score", "selector": { "num_qubits": 10 }, "weight": 0.5 }
+          {
+            "label": "BSEQ",
+            "weight": "1/2",
+            "components": [
+              { "benchmark": "BSEQ", "metric": "fraction_connected", "weight": "1/1" }
+            ]
+          },
+          {
+            "label": "QML Kernel",
+            "weight": "1/2",
+            "components": [
+              { "benchmark": "QML Kernel", "metric": "accuracy_score", "selector": { "num_qubits": 10 }, "weight": "1/1" }
+            ]
+          }
         ]
       }
     }
@@ -42,8 +54,20 @@ Example `scripts/scoring.json`:
     "baseline": { "provider": "ibm", "device": "ibm_torino" },
     "composite": {
       "components": [
-        { "benchmark": "BSEQ", "metric": "fraction_connected", "weight": 0.5 },
-        { "benchmark": "QML Kernel", "metric": "accuracy_score", "selector": { "num_qubits": 10 }, "weight": 0.5 }
+        {
+          "label": "BSEQ",
+          "weight": "1/2",
+          "components": [
+            { "benchmark": "BSEQ", "metric": "fraction_connected", "weight": "1/1" }
+          ]
+        },
+        {
+          "label": "QML Kernel",
+          "weight": "1/2",
+          "components": [
+            { "benchmark": "QML Kernel", "metric": "accuracy_score", "selector": { "num_qubits": 10 }, "weight": "1/1" }
+          ]
+        }
       ]
     }
   }
