@@ -507,7 +507,7 @@ def _row_param_matches(selector: dict[str, Any] | None, row: dict[str, Any]) -> 
     for k, v in selector.items():
         if params.get(k) != v:
             return False
-    return True
+    baseline_avg_by_series: dict[str, dict[tuple[str, str, str], float]],
 
 
 def _get_normalized_metric_value(
@@ -632,8 +632,17 @@ def compute_device_composite_scores(
             weight = float(comp.get("_effective_weight", _parse_weight(comp.get("weight", 0.0))))
             selector = comp.get("selector") if isinstance(comp.get("selector"), dict) else None
             # Prefer the primary benchmark name for label when available
-            primary_bench = bench_field if isinstance(bench_field, str) else (bench_field[0] if isinstance(bench_field, list) and bench_field else None)
-            label = comp.get("label") or (f"{primary_bench}:{metric}" if primary_bench and metric else "component")
+            primary_bench: str | None = None
+            if isinstance(bench_field, str):
+                primary_bench = bench_field
+            elif isinstance(bench_field, list) and bench_field:
+                first = bench_field[0]
+                if isinstance(first, str):
+                    primary_bench = first
+
+            label = comp.get("label")
+            if not label:
+                label = f"{primary_bench}:{metric}" if primary_bench and metric else "component"
             # Always include every component's weight in the denominator; if a
             # component is missing for this device, treat its normalized value as 0.
             sum_w_defined += weight

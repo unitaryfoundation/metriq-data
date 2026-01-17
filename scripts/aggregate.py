@@ -12,6 +12,8 @@ and writes outputs to:
 
 import os
 
+import json
+
 from etl import (
     iso_utc_now,
     ensure_dir,
@@ -73,8 +75,6 @@ def main(argv: list[str] | None = None) -> int:
         s_rows = [r for r in flat_rows if row_series.get(id(r)) == s]
         s_latest = os.path.join(s_dir, "benchmark.latest.json")
         with open(s_latest, "w", encoding="utf-8") as f:
-            import json
-
             f.write(json.dumps(s_rows, ensure_ascii=False, indent=2))
             f.write("\n")
 
@@ -97,7 +97,7 @@ def main(argv: list[str] | None = None) -> int:
     wrote = [os.path.relpath(latest_file, root), f"{os.path.relpath(platforms_dir, root)}/"]
     for s in series_labels:
         wrote.append(f"dist/{s}/benchmark.latest.json")
-    print("Wrote: " + ", ".join(wrote))
+    print(f"Wrote: {', '.join(wrote)}")
     return 0
 
 

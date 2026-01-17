@@ -47,10 +47,6 @@ def _is_version_segment(seg: str) -> bool:
     return all(ch.isdigit() or ch == "." for ch in rest)
 
 
-def _should_skip_dir(dirname: str) -> bool:
-    return dirname in {".git", ".venv", ".mypy_cache", "__pycache__", "dist", "scripts"}
-
-
 def open_json_file(path: str) -> Any:
     if path.endswith(".json.gz"):
         with gzip.open(path, "rt", encoding="utf-8") as f:
@@ -59,34 +55,39 @@ def open_json_file(path: str) -> Any:
         return json.load(f)
 
 
-def find_result_files(root: str) -> list[str]:
-    """
-    Discover uploaded result payloads.
+def find_result_files(root: str, *, source_dirs: list[str] | None = None) -> list[str]:
+    """Discover uploaded result payloads under known source folders.
 
-    Historical layout (<= v0.4): `*/v*/<provider>/results.json`
-    Newer layout (>= v0.5): often individual run payloads under deeper paths, e.g.
-      `*/v*/<provider>/<device>/<timestamp>_<...>.json`
-    Both formats are JSON arrays of row objects. Gzipped JSON (`.json.gz`) is also supported.
+    For now we only ingest from `metriq-gym/` (relative to repo root). In the future,
+    additional sources can be added by passing `source_dirs`.
+
+    Layouts supported:
+      - Historical (<= v0.4): `metriq-gym/v*/<provider>/results.json`
+      - Newer (>= v0.5): deeper per-run payloads, e.g.
+          `metriq-gym/v*/<provider>/<device>/<timestamp>_<...>.json`
+      - Gzipped JSON arrays via `.json.gz`
     """
+    if source_dirs is None:
+        source_dirs = ["metriq-gym"]
     files: list[str] = []
     seen: set[str] = set()
 
-    for dirpath, dirnames, filenames in os.walk(root):
-        dirnames[:] = [d for d in dirnames if not _should_skip_dir(d)]
-
-        rel_parts = os.path.relpath(dirpath, root).split(os.sep)
-        if not any(_is_version_segment(p) for p in rel_parts):
+    for source in source_dirs:
+        base = os.path.join(root, source)
+        if not os.path.isdir(base):
             continue
+        for dirpath, dirnames, filenames in os.walk(base):
+            rel_parts = os.path.relpath(dirpath, base).split(os.sep)
+            if not any(_is_version_segment(p) for p in rel_parts):
+                continue
 
-        for name in filenames:
-            if not (name.endswith(".json") or name.endswith(".json.gz")):
-                continue
-            if name == "scoring.json":
-                continue
-            p = os.path.abspath(os.path.join(dirpath, name))
-            if p not in seen and os.path.isfile(p):
-                seen.add(p)
-                files.append(p)
+            for name in filenames:
+                if not (name.endswith(".json") or name.endswith(".json.gz")):
+                    continue
+                p = os.path.abspath(os.path.join(dirpath, name))
+                if p not in seen and os.path.isfile(p):
+                    seen.add(p)
+                    files.append(p)
 
     files.sort()
     return files
