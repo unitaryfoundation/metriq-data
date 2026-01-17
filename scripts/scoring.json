@@ -1,0 +1,404 @@
+{
+  "series": {
+    "v0.4": {
+      "baseline": {
+        "provider": "ibm",
+        "device": "ibm_torino"
+      },
+      "composite": {
+        "components": [
+          {
+            "label": "BSEQ",
+            "weight": "1/7",
+            "components": [
+              {
+                "benchmark": "BSEQ",
+                "metric": "bseq_score",
+                "derived_from": [
+                  { "metric": "largest_connected_size", "weight": "7/8" },
+                  { "metric": "fraction_connected", "weight": "1/8" }
+                ],
+                "weight": "1/1"
+              }
+            ]
+          },
+          {
+            "label": "QML Kernel",
+            "weight": "1/7",
+            "components": [
+              {
+                "benchmark": "QML Kernel",
+                "metric": "accuracy_score",
+                "selector": { "num_qubits": 10 },
+                "label": "QMLK-10:accuracy_score",
+                "weight": "1/4"
+              },
+              {
+                "benchmark": "QML Kernel",
+                "metric": "accuracy_score",
+                "selector": { "num_qubits": 20 },
+                "label": "QMLK-20:accuracy_score",
+                "weight": "1/4"
+              },
+              {
+                "benchmark": "QML Kernel",
+                "metric": "accuracy_score",
+                "selector": { "num_qubits": 30 },
+                "label": "QMLK-30:accuracy_score",
+                "weight": "1/4"
+              },
+              {
+                "benchmark": "QML Kernel",
+                "metric": "accuracy_score",
+                "selector": { "num_qubits": 50 },
+                "label": "QMLK-50:accuracy_score",
+                "weight": "1/4"
+              }
+            ]
+          },
+          {
+            "label": "Mirror Circuits",
+            "weight": "1/7",
+            "components": [
+              {
+                "benchmark": "Mirror Circuits",
+                "metric": "score",
+                "selector": { "width": 8, "num_layers": 64 },
+                "label": "Mirror Circuits (w=8,d=64):score",
+                "weight": "1/6"
+              },
+              {
+                "benchmark": "Mirror Circuits",
+                "metric": "score",
+                "selector": { "width": 16, "num_layers": 32 },
+                "label": "Mirror Circuits (w=16,d=32):score",
+                "weight": "1/6"
+              },
+              {
+                "benchmark": "Mirror Circuits",
+                "metric": "score",
+                "selector": { "width": 24, "num_layers": 16 },
+                "label": "Mirror Circuits (w=24,d=16):score",
+                "weight": "1/6"
+              },
+              {
+                "benchmark": "Mirror Circuits",
+                "metric": "score",
+                "selector": { "width": 32, "num_layers": 8 },
+                "label": "Mirror Circuits (w=32,d=8):score",
+                "weight": "1/6"
+              },
+              {
+                "benchmark": "Mirror Circuits",
+                "metric": "score",
+                "selector": { "width": 64, "num_layers": 4 },
+                "label": "Mirror Circuits (w=64,d=4):score",
+                "weight": "1/6"
+              },
+              {
+                "benchmark": "Mirror Circuits",
+                "metric": "score",
+                "selector": { "width": 128, "num_layers": 2 },
+                "label": "Mirror Circuits (w=128,d=2):score",
+                "weight": "1/6"
+              }
+            ]
+          },
+          {
+            "label": "WIT",
+            "weight": "1/7",
+            "components": [
+              {
+                "benchmark": "WIT",
+                "metric": "expectation_value",
+                "selector": { "num_qubits": 7 },
+                "label": "WIT (7q):expectation_value",
+                "weight": "1/1"
+              }
+            ]
+          },
+          {
+            "label": "Quantum Fourier Transform",
+            "weight": "1/7",
+            "components": [
+              {
+                "benchmark": "Quantum Fourier Transform",
+                "metric": "score",
+                "label": "Quantum Fourier Transform:score",
+                "weight": "1/1"
+              }
+            ]
+          },
+          {
+            "label": "Linear Ramp QAOA",
+            "weight": "1/7",
+            "components": [
+              {
+                "benchmark": "Linear Ramp QAOA",
+                "metric": "score",
+                "selector": { "num_qubits": 10 },
+                "label": "Linear Ramp QAOA (10q):score",
+                "weight": "1/4"
+              },
+              {
+                "benchmark": "Linear Ramp QAOA",
+                "metric": "score",
+                "selector": { "num_qubits": 20 },
+                "label": "Linear Ramp QAOA (20q):score",
+                "weight": "1/4"
+              },
+              {
+                "benchmark": "Linear Ramp QAOA",
+                "metric": "score",
+                "selector": { "num_qubits": 50 },
+                "label": "Linear Ramp QAOA (50q):score",
+                "weight": "1/4"
+              },
+              {
+                "benchmark": "Linear Ramp QAOA",
+                "metric": "score",
+                "selector": { "num_qubits": 100 },
+                "label": "Linear Ramp QAOA (100q):score",
+                "weight": "1/4"
+              }
+            ]
+          },
+          {
+            "label": "EPLG",
+            "weight": "1/7",
+            "components": [
+              {
+                "benchmark": "EPLG",
+                "metric": "score",
+                "selector": { "num_qubits": 10 },
+                "label": "EPLG-10:score",
+                "weight": "1/4"
+              },
+              {
+                "benchmark": "EPLG",
+                "metric": "score",
+                "selector": { "num_qubits": 20 },
+                "label": "EPLG-20:score",
+                "weight": "1/4"
+              },
+              {
+                "benchmark": "EPLG",
+                "metric": "score",
+                "selector": { "num_qubits": 50 },
+                "label": "EPLG-50:score",
+                "weight": "1/4"
+              },
+              {
+                "benchmark": "EPLG",
+                "metric": "score",
+                "selector": { "num_qubits": 100 },
+                "label": "EPLG-100:score",
+                "weight": "1/4"
+              }
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "default": {
+    "baseline": {
+      "provider": "ibm",
+      "device": "ibm_torino"
+    },
+    "composite": {
+      "components": [
+        {
+          "label": "BSEQ",
+          "weight": "1/7",
+          "components": [
+            {
+              "benchmark": "BSEQ",
+              "metric": "bseq_score",
+              "derived_from": [
+                { "metric": "largest_connected_size", "weight": "7/8" },
+                { "metric": "fraction_connected", "weight": "1/8" }
+              ],
+              "weight": "1/1"
+            }
+          ]
+        },
+        {
+          "label": "QML Kernel",
+          "weight": "1/7",
+          "components": [
+            {
+              "benchmark": "QML Kernel",
+              "metric": "accuracy_score",
+              "selector": { "num_qubits": 10 },
+              "label": "QMLK-10:accuracy_score",
+              "weight": "1/4"
+            },
+            {
+              "benchmark": "QML Kernel",
+              "metric": "accuracy_score",
+              "selector": { "num_qubits": 20 },
+              "label": "QMLK-20:accuracy_score",
+              "weight": "1/4"
+            },
+            {
+              "benchmark": "QML Kernel",
+              "metric": "accuracy_score",
+              "selector": { "num_qubits": 30 },
+              "label": "QMLK-30:accuracy_score",
+              "weight": "1/4"
+            },
+            {
+              "benchmark": "QML Kernel",
+              "metric": "accuracy_score",
+              "selector": { "num_qubits": 50 },
+              "label": "QMLK-50:accuracy_score",
+              "weight": "1/4"
+            }
+          ]
+        },
+        {
+          "label": "Mirror Circuits",
+          "weight": "1/7",
+          "components": [
+            {
+              "benchmark": "Mirror Circuits",
+              "metric": "score",
+              "selector": { "width": 8, "num_layers": 64 },
+              "label": "Mirror Circuits (w=8,d=64):score",
+              "weight": "1/6"
+            },
+            {
+              "benchmark": "Mirror Circuits",
+              "metric": "score",
+              "selector": { "width": 16, "num_layers": 32 },
+              "label": "Mirror Circuits (w=16,d=32):score",
+              "weight": "1/6"
+            },
+            {
+              "benchmark": "Mirror Circuits",
+              "metric": "score",
+              "selector": { "width": 24, "num_layers": 16 },
+              "label": "Mirror Circuits (w=24,d=16):score",
+              "weight": "1/6"
+            },
+            {
+              "benchmark": "Mirror Circuits",
+              "metric": "score",
+              "selector": { "width": 32, "num_layers": 8 },
+              "label": "Mirror Circuits (w=32,d=8):score",
+              "weight": "1/6"
+            },
+            {
+              "benchmark": "Mirror Circuits",
+              "metric": "score",
+              "selector": { "width": 64, "num_layers": 4 },
+              "label": "Mirror Circuits (w=64,d=4):score",
+              "weight": "1/6"
+            },
+            {
+              "benchmark": "Mirror Circuits",
+              "metric": "score",
+              "selector": { "width": 128, "num_layers": 2 },
+              "label": "Mirror Circuits (w=128,d=2):score",
+              "weight": "1/6"
+            }
+          ]
+        },
+        {
+          "label": "WIT",
+          "weight": "1/7",
+          "components": [
+            {
+              "benchmark": "WIT",
+              "metric": "expectation_value",
+              "selector": { "num_qubits": 7 },
+              "label": "WIT (7q):expectation_value",
+              "weight": "1/1"
+            }
+          ]
+        },
+        {
+          "label": "Quantum Fourier Transform",
+          "weight": "1/7",
+          "components": [
+            {
+              "benchmark": "Quantum Fourier Transform",
+              "metric": "score",
+              "label": "Quantum Fourier Transform:score",
+              "weight": "1/1"
+            }
+          ]
+        },
+        {
+          "label": "Linear Ramp QAOA",
+          "weight": "1/7",
+          "components": [
+            {
+              "benchmark": "Linear Ramp QAOA",
+              "metric": "score",
+              "selector": { "num_qubits": 10 },
+              "label": "Linear Ramp QAOA (10q):score",
+              "weight": "1/4"
+            },
+            {
+              "benchmark": "Linear Ramp QAOA",
+              "metric": "score",
+              "selector": { "num_qubits": 20 },
+              "label": "Linear Ramp QAOA (20q):score",
+              "weight": "1/4"
+            },
+            {
+              "benchmark": "Linear Ramp QAOA",
+              "metric": "score",
+              "selector": { "num_qubits": 50 },
+              "label": "Linear Ramp QAOA (50q):score",
+              "weight": "1/4"
+            },
+            {
+              "benchmark": "Linear Ramp QAOA",
+              "metric": "score",
+              "selector": { "num_qubits": 100 },
+              "label": "Linear Ramp QAOA (100q):score",
+              "weight": "1/4"
+            }
+          ]
+        },
+        {
+          "label": "EPLG",
+          "weight": "1/7",
+          "components": [
+            {
+              "benchmark": "EPLG",
+              "metric": "score",
+              "selector": { "num_qubits": 10 },
+              "label": "EPLG-10:score",
+              "weight": "1/4"
+            },
+            {
+              "benchmark": "EPLG",
+              "metric": "score",
+              "selector": { "num_qubits": 20 },
+              "label": "EPLG-20:score",
+              "weight": "1/4"
+            },
+            {
+              "benchmark": "EPLG",
+              "metric": "score",
+              "selector": { "num_qubits": 50 },
+              "label": "EPLG-50:score",
+              "weight": "1/4"
+            },
+            {
+              "benchmark": "EPLG",
+              "metric": "score",
+              "selector": { "num_qubits": 100 },
+              "label": "EPLG-100:score",
+              "weight": "1/4"
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

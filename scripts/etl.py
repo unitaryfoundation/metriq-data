@@ -1,4 +1,4 @@
-import glob
+import gzip
 import json
 import os
 import sys
@@ -38,24 +38,65 @@ def canonical_json(obj: Any) -> str:
     return json.dumps(obj, sort_keys=True, separators=(",", ":"), ensure_ascii=False)
 
 
-def find_result_files(root: str) -> list[str]:
-    pattern = os.path.join(root, "*/v*/**/results.json")
-    seen = set()
+def _is_version_segment(seg: str) -> bool:
+    if not seg.startswith("v"):
+        return False
+    rest = seg[1:]
+    if not rest:
+        return False
+    return all(ch.isdigit() or ch == "." for ch in rest)
+
+
+def open_json_file(path: str) -> Any:
+    if path.endswith(".json.gz"):
+        with gzip.open(path, "rt", encoding="utf-8") as f:
+            return json.load(f)
+    with open(path, "r", encoding="utf-8") as f:
+        return json.load(f)
+
+
+def find_result_files(root: str, *, source_dirs: list[str] | None = None) -> list[str]:
+    """Discover uploaded result payloads under known source folders.
+
+    For now we only ingest from `metriq-gym/` (relative to repo root). In the future,
+    additional sources can be added by passing `source_dirs`.
+
+    Layouts supported:
+      - Historical (<= v0.4): `metriq-gym/v*/<provider>/results.json`
+      - Newer (>= v0.5): deeper per-run payloads, e.g.
+          `metriq-gym/v*/<provider>/<device>/<timestamp>_<...>.json`
+      - Gzipped JSON arrays via `.json.gz`
+    """
+    if source_dirs is None:
+        source_dirs = ["metriq-gym"]
     files: list[str] = []
-    for p in glob.glob(pattern, recursive=True):
-        if os.path.isfile(p):
-            ap = os.path.abspath(p)
-            if ap not in seen:
-                seen.add(ap)
-                files.append(ap)
+    seen: set[str] = set()
+
+    for source in source_dirs:
+        base = os.path.join(root, source)
+        if not os.path.isdir(base):
+            continue
+        for dirpath, dirnames, filenames in os.walk(base):
+            rel_parts = os.path.relpath(dirpath, base).split(os.sep)
+            if not any(_is_version_segment(p) for p in rel_parts):
+                continue
+
+            for name in filenames:
+                if not (name.endswith(".json") or name.endswith(".json.gz")):
+                    continue
+                p = os.path.abspath(os.path.join(dirpath, name))
+                if p not in seen and os.path.isfile(p):
+                    seen.add(p)
+                    files.append(p)
+
     files.sort()
     return files
 
 
-def path_version_segment(path: str) -> str:
-    rel = os.path.relpath(path, os.getcwd())
+def path_version_segment(path: str, root: str) -> str:
+    rel = os.path.relpath(path, root)
     for seg in rel.split(os.sep):
-        if seg.startswith("v"):
+        if _is_version_segment(seg):
             return seg
     return "unknown"
 
@@ -81,6 +122,25 @@ def flatten_row(row: dict[str, Any]) -> dict[str, Any]:
 
     r = out.get("results") if "results" in out else row.get("results")
     if isinstance(r, dict):
+        # Newer schema variant (sometimes mixed with scalar flags like `binary_success`):
+        #   {"metric": {"value": x, "uncertainty": u}, "binary_success": true, ...}
+        if any(isinstance(v, dict) and "value" in v for v in r.values()):
+            values: dict[str, Any] = {}
+            uncertainties: dict[str, Any] = {}
+            for metric, payload in r.items():
+                if not isinstance(metric, str):
+                    continue
+                if isinstance(payload, dict) and "value" in payload:
+                    values[metric] = payload.get("value")
+                    if "uncertainty" in payload:
+                        uncertainties[metric] = payload.get("uncertainty")
+                else:
+                    values[metric] = payload
+            out["results"] = values
+            if uncertainties:
+                out["errors"] = uncertainties
+            return out
+
         values = r.get("values") if isinstance(r.get("values"), dict) else None
         uncertainties = r.get("uncertainties") if isinstance(r.get("uncertainties"), dict) else None
         directions = r.get("directions") if isinstance(r.get("directions"), dict) else None
@@ -192,10 +252,28 @@ def _current_metadata_entry(entry: dict[str, Any]) -> dict[str, Any]:
     return {"device_metadata": best_item.get("device_metadata"), "as_of": best_item.get("last_seen")}
 
 
-def write_platform_outputs(registry: dict[PlatformKey, dict[str, Any]], dist_path: str, generated_at: str) -> tuple[int, str]:
+def write_platform_outputs(
+    registry: dict[PlatformKey, dict[str, Any]],
+    dist_path: str,
+    generated_at: str,
+    composite_records: list[dict[str, Any]] | None = None,
+) -> tuple[int, str]:
     platforms_dir = os.path.join(dist_path, "platforms")
     ensure_dir(platforms_dir)
     index_platforms: list[dict[str, Any]] = []
+
+    # Optional mapping from (provider, device) -> composite score record
+    composite_map: dict[PlatformKey, dict[str, Any]] = {}
+    if composite_records:
+        for rec in composite_records:
+            if not isinstance(rec, dict):
+                continue
+            prov = rec.get("provider")
+            dev = rec.get("device")
+            if not prov or not dev:
+                continue
+            key: PlatformKey = (str(prov), str(dev))
+            composite_map[key] = rec
 
     for (provider, device) in sorted(registry.keys(), key=lambda k: (k[0], k[1])):
         entry = registry[(provider, device)]
@@ -217,6 +295,14 @@ def write_platform_outputs(registry: dict[PlatformKey, dict[str, Any]], dist_pat
             "current": current,
             "history": history_list,
         }
+
+        comp_rec = composite_map.get((provider, device))
+        if comp_rec is not None:
+            platform_payload["metriq_score"] = {
+                "value": comp_rec.get("metriq_score"),
+                "series": comp_rec.get("series"),
+                "components": comp_rec.get("components"),
+            }
 
         with open(platform_file, "w", encoding="utf-8") as f:
             f.write(json.dumps(platform_payload, ensure_ascii=False, indent=2))
@@ -257,10 +343,9 @@ def collect_flat_rows_and_registry(root: str, files: list[str]) -> tuple[
     row_series: dict[int, str] = {}
 
     for src in files:
-        version = path_version_segment(src)
+        version = path_version_segment(src, root)
         try:
-            with open(src, "r", encoding="utf-8") as f:
-                data = json.load(f)
+            data = open_json_file(src)
         except Exception as e:
             print(f"Warning: failed to load {src}: {e}", file=sys.stderr)
             continue

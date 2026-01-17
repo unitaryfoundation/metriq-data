@@ -1,9 +1,0 @@
-{
-  "series": {
-    "v0.4": { "provider": "ibm", "device": "ibm_torino" }
-  },
-  "default": {
-    "provider": "ibm",
-    "device": "ibm_torino"
-  }
-}
