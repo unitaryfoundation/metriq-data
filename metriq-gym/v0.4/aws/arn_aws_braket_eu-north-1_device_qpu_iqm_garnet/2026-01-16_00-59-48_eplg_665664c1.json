@@ -1,0 +1,71 @@
+[
+  {
+    "app_version": "0.4.3.dev15+g4dda83274",
+    "timestamp": "2026-01-16T00:59:48.054516",
+    "suite_id": null,
+    "job_type": "EPLG",
+    "results": {
+      "chain_lengths": [
+        4,
+        6,
+        8,
+        10,
+        12,
+        14,
+        16,
+        18
+      ],
+      "chain_eplgs": [
+        2.5764690947394087e-07,
+        2.2627329310243027e-06,
+        0.0010482437960804836,
+        0.008225240196389483,
+        0.01114425431968713,
+        0.009832298760717006,
+        0.009464609458063156,
+        0.009183035985798726
+      ],
+      "eplg_10": 0.008225240196389483,
+      "eplg_20": 0.009183035985798726,
+      "eplg_50": 0.009183035985798726,
+      "eplg_100": 0.009183035985798726,
+      "score": {
+        "value": 0.008943587038446416,
+        "uncertainty": null
+      }
+    },
+    "runtime_seconds": 810.7540000000001,
+    "platform": {
+      "device": "iqm_garnet",
+      "device_metadata": {
+        "num_qubits": 20,
+        "simulator": false
+      },
+      "provider": "aws"
+    },
+    "params": {
+      "benchmark_name": "EPLG",
+      "decompose_clifford_ops": false,
+      "lengths": [
+        2,
+        4,
+        8,
+        16,
+        50,
+        100,
+        200,
+        300
+      ],
+      "num_qubits_in_chain": 18,
+      "num_samples": 5,
+      "one_qubit_basis_gates": [
+        "rz",
+        "rx",
+        "x"
+      ],
+      "seed": 12345,
+      "shots": 500,
+      "two_qubit_gate": "cz"
+    }
+  }
+]
