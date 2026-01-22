@@ -1,0 +1,40 @@
+[
+  {
+    "app_version": "0.5.1a1.dev16+gafc9607b8.d20260116",
+    "timestamp": "2026-01-16T09:08:51.506161",
+    "suite_id": null,
+    "job_type": "Mirror Circuits",
+    "results": {
+      "success_probability": {
+        "value": 0.0078,
+        "uncertainty": 0.0012441189653726848
+      },
+      "polarization": {
+        "value": 0.003909019607843137,
+        "uncertainty": 0.001248997863276107
+      },
+      "binary_success": false,
+      "score": {
+        "value": 0.003909019607843137,
+        "uncertainty": 0.001248997863276107
+      }
+    },
+    "platform": {
+      "device": "WK_C102-2",
+      "device_metadata": {
+        "num_qubits": 102,
+        "simulator": false
+      },
+      "provider": "origin"
+    },
+    "params": {
+      "benchmark_name": "Mirror Circuits",
+      "num_circuits": 5,
+      "num_layers": 64,
+      "shots": 1000,
+      "two_qubit_gate_name": "CNOT",
+      "two_qubit_gate_prob": 0.5,
+      "width": 8
+    }
+  }
+]
