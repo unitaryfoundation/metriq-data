@@ -1,0 +1,28 @@
+[
+  {
+    "app_version": "0.5.1a1.dev6+gea73bf450",
+    "timestamp": "2026-01-07T09:55:41.096477",
+    "suite_id": null,
+    "job_type": "BSEQ",
+    "results": {
+      "largest_connected_size": 1,
+      "fraction_connected": 0.01098901098901099,
+      "score": {
+        "value": 1.0,
+        "uncertainty": null
+      }
+    },
+    "platform": {
+      "device": "WK_C102-2",
+      "device_metadata": {
+        "num_qubits": 102,
+        "simulator": false
+      },
+      "provider": "origin"
+    },
+    "params": {
+      "benchmark_name": "BSEQ",
+      "shots": 1000
+    }
+  }
+]
