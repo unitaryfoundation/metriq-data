@@ -1,0 +1,32 @@
+[
+  {
+    "app_version": "0.4.1a1.dev16+g3c7e1971b.d20251109",
+    "timestamp": "2025-11-11T16:36:33.644022",
+    "suite_id": null,
+    "job_type": "QML Kernel",
+    "results": {
+      "accuracy_score": {
+        "value": 0.501,
+        "uncertainty": 0.015811356678033673
+      },
+      "score": {
+        "value": 0.501,
+        "uncertainty": 0.015811356678033673
+      }
+    },
+    "platform": {
+      "device": "ibm_torino",
+      "device_metadata": {
+        "num_qubits": 133,
+        "simulator": false,
+        "version": "1.0.103"
+      },
+      "provider": "ibm"
+    },
+    "params": {
+      "benchmark_name": "QML Kernel",
+      "num_qubits": 18,
+      "shots": 1000
+    }
+  }
+]
