@@ -1,0 +1,42 @@
+[
+  {
+    "app_version": "0.4.3.dev15+g4dda83274",
+    "timestamp": "2025-12-16T11:57:16.115345",
+    "suite_id": null,
+    "job_type": "Mirror Circuits",
+    "results": {
+      "success_probability": {
+        "value": 0.4969,
+        "uncertainty": 0.004999903899076461
+      },
+      "polarization": {
+        "value": 0.49492705882352944,
+        "uncertainty": 0.005019511365347349
+      },
+      "binary_success": true,
+      "score": {
+        "value": 0.49492705882352944,
+        "uncertainty": 0.005019511365347349
+      }
+    },
+    "runtime_seconds": 3.769052,
+    "platform": {
+      "device": "ibm_marrakesh",
+      "device_metadata": {
+        "num_qubits": 156,
+        "simulator": false,
+        "version": "1.0.18"
+      },
+      "provider": "ibm"
+    },
+    "params": {
+      "benchmark_name": "Mirror Circuits",
+      "num_circuits": 10,
+      "num_layers": 64,
+      "shots": 1000,
+      "two_qubit_gate_name": "CNOT",
+      "two_qubit_gate_prob": 0.5,
+      "width": 8
+    }
+  }
+]
