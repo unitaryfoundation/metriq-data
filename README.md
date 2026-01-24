@@ -9,8 +9,21 @@ Part of the [Metriq](https://metriq.info) project.
 
 ## Aggregation and Scoring
 
-- Run `python scripts/aggregate.py` to generate aggregated results.
+- Run `python3 scripts/aggregate.py` (or `python3.13 scripts/aggregate.py`) to generate aggregated results.
 - These scripts use modern Python syntax; use Python `>=3.10` (recommended: `python3.13`).
+
+### Preview `dist/` locally (GitHub Pages)
+
+GitHub Pages publishes the contents of `dist/`. To preview what will be served at
+`https://unitaryfoundation.github.io/metriq-data/`:
+
+```bash
+python scripts/aggregate.py
+cp pages/index.html dist/index.html
+python -m http.server --directory dist 8000
+```
+
+Then open `http://localhost:8000/`.
 
 ### Metriq-score
 `metriq-score` is computed per metric relative to a baseline device, honoring directionality:
