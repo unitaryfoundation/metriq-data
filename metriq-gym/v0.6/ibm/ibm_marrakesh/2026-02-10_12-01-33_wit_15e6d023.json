@@ -1,0 +1,33 @@
+[
+  {
+    "app_version": "0.6.2.dev13+gd0c1487e5.d20260210",
+    "timestamp": "2026-02-10T12:01:33.103097",
+    "suite_id": null,
+    "job_type": "WIT",
+    "results": {
+      "expectation_value": {
+        "value": 0.758056640625,
+        "uncertainty": 0.004731651060307721
+      },
+      "score": {
+        "value": 0.758056640625,
+        "uncertainty": 0.004731651060307721
+      }
+    },
+    "runtime_seconds": 3.274848,
+    "platform": {
+      "device": "ibm_marrakesh",
+      "device_metadata": {
+        "num_qubits": 156,
+        "simulator": false,
+        "version": "1.0.20"
+      },
+      "provider": "ibm"
+    },
+    "params": {
+      "benchmark_name": "WIT",
+      "num_qubits": 7,
+      "shots": 8192
+    }
+  }
+]
