@@ -555,6 +555,33 @@ def _get_normalized_metric_value(
     return None
 
 
+def _get_raw_metric_value(row: dict[str, Any], metric: str) -> float | None:
+    """Return the raw metric value from row.results when present and finite."""
+    results = row.get("results") if isinstance(row.get("results"), dict) else {}
+    if metric not in results:
+        return None
+    return _coerce_float(results.get(metric))
+
+
+def _pick_latest_metric_row(
+    candidates: list[dict[str, Any]],
+    value_key: str,
+) -> tuple[dict[str, Any] | None, Any]:
+    """Pick the latest timestamped row containing value_key."""
+    picked = None
+    picked_ts = None
+    for cand in candidates:
+        if value_key not in cand:
+            continue
+        ts = parse_timestamp(cand.get("timestamp", ""))
+        if ts is None:
+            continue
+        if picked is None or picked_ts is None or ts > picked_ts:
+            picked = cand
+            picked_ts = ts
+    return picked, picked_ts
+
+
 def compute_device_composite_scores(
     flat_rows: list[dict[str, Any]],
     row_series: dict[int, str],
@@ -568,6 +595,8 @@ def compute_device_composite_scores(
 
     Returns a list of records:
       { provider, device, metriq_score, components: { ... }, series }
+    where each component includes explicit availability fields for both
+    normalized and raw values.
     """
 
     # group rows by (provider, device)
@@ -643,10 +672,11 @@ def compute_device_composite_scores(
             if not label:
                 label = f"{primary_bench}:{metric}" if primary_bench and metric else "component"
             # Always include every component's weight in the denominator; if a
-            # component is missing for this device, treat its normalized value as 0.
+            # component is missing for this device, its normalized contribution is 0.
             sum_w_defined += weight
 
-            # filter rows by benchmark, selector, and chosen series
+            # Filter rows by benchmark, selector, and chosen series.
+            # Keep candidates if either normalized or raw value is available.
             matches: list[dict[str, Any]] = []
             for r in rows:
                 # Match benchmark by any allowed name (if provided)
@@ -656,49 +686,56 @@ def compute_device_composite_scores(
                     continue
                 if row_series.get(id(r)) != picked_series:
                     continue
-                # must have metric value (either normalized_scores or results)
                 series_label = row_series.get(id(r))
                 selector_fp = _selector_fingerprint(selector)
-                val = _get_normalized_metric_value(r, metric, series_label, selector_fp, baseline_avg_by_series)
-                if val is None:
+                normalized_val = _get_normalized_metric_value(
+                    r, metric, series_label, selector_fp, baseline_avg_by_series
+                )
+                raw_val = _get_raw_metric_value(r, metric)
+                if normalized_val is None and raw_val is None:
                     continue
                 r_copy = dict(r)
-                r_copy["_normalized_val"] = float(val)
+                if normalized_val is not None:
+                    r_copy["_normalized_val"] = float(normalized_val)
+                if raw_val is not None:
+                    r_copy["_raw_val"] = float(raw_val)
                 matches.append(r_copy)
 
-            # pick latest by timestamp
-            picked = None
-            picked_ts = None
-            for cand in matches:
-                ts = parse_timestamp(cand.get("timestamp", ""))
-                if ts is None:
-                    continue
-                if picked is None or (picked_ts is None or ts > picked_ts):
-                    picked = cand
-                    picked_ts = ts
+            picked_norm, _ = _pick_latest_metric_row(matches, "_normalized_val")
+            picked_raw, _ = _pick_latest_metric_row(matches, "_raw_val")
 
-            if picked is not None:
-                val = picked.get("_normalized_val")
-                numerator += weight * float(val)
-                breakdown[label] = {
-                    "metric": metric,
-                    "weight": weight,
-                    "group": group_label,
-                    "group_weight": group_weight,
-                    "sub_weight": sub_weight,
-                    "normalized": float(val),
-                    "timestamp": picked.get("timestamp"),
-                }
-            else:
-                breakdown[label] = {
-                    "metric": metric,
-                    "weight": weight,
-                    "group": group_label,
-                    "group_weight": group_weight,
-                    "sub_weight": sub_weight,
-                    "normalized": 0.0,
-                    "timestamp": None,
-                }
+            normalized_value = (
+                float(picked_norm.get("_normalized_val"))
+                if picked_norm is not None and picked_norm.get("_normalized_val") is not None
+                else None
+            )
+            raw_value = (
+                float(picked_raw.get("_raw_val"))
+                if picked_raw is not None and picked_raw.get("_raw_val") is not None
+                else None
+            )
+            normalized_ts = picked_norm.get("timestamp") if picked_norm is not None else None
+            raw_ts = picked_raw.get("timestamp") if picked_raw is not None else None
+
+            if normalized_value is not None:
+                numerator += weight * normalized_value
+
+            breakdown[label] = {
+                "metric": metric,
+                "weight": weight,
+                "group": group_label,
+                "group_weight": group_weight,
+                "sub_weight": sub_weight,
+                # Backward-compatible key for normalized timestamp.
+                "timestamp": normalized_ts,
+                # Explicit availability fields for UI rendering.
+                "normalized": normalized_value,
+                "normalized_available": normalized_value is not None,
+                "normalized_timestamp": normalized_ts,
+                "raw": raw_value,
+                "raw_available": raw_value is not None,
+                "raw_timestamp": raw_ts,
+            }
 
         # Denominator is the sum of all defined weights; missing components
         # contribute 0 to the numerator but still count in the denominator.

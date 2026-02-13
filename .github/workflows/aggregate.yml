@@ -3,8 +3,9 @@ name: Aggregate metriq-data (PR)
 on:
   pull_request:
     paths:
-      - '*/v*/**/results.json'
-      - 'scripts/aggregate.py'
+      - '*/v*/**/*.json'
+      - '*/v*/**/*.json.gz'
+      - 'scripts/**'
       - 'pages/**'
   workflow_dispatch:
 
