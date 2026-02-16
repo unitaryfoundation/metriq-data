@@ -1,0 +1,8 @@
+Benchmark,Device,Avg Score,Runs
+QML Kernel,ibm_kingston,0.6925,2
+QML Kernel,ibm_pittsburgh,0.6715,2
+QML Kernel,ibm_marrakesh,0.66,2
+QML Kernel,ibm_torino,0.5615,2
+QML Kernel,ibm_fez,0.4995,2
+QML Kernel,ibm_brisbane,0.4225,2
+WIT,ibm_fez,0.683349609375,2
