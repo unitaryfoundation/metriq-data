@@ -1,0 +1,49 @@
+[
+  {
+    "app_version": "0.4.3.dev14+g7995eb9b6.d20251120",
+    "timestamp": "2025-11-26T17:36:24.168223",
+    "suite_id": null,
+    "job_type": "Linear Ramp QAOA",
+    "results": {
+      "approx_ratio": [
+        0.8414933333333335
+      ],
+      "random_approx_ratio": 0.49990133333333336,
+      "confidence_pass": [
+        true
+      ],
+      "effective_approx_ratio": [
+        0.6830492116222402
+      ],
+      "score": {
+        "value": 0.6830492116222402,
+        "uncertainty": null
+      }
+    },
+    "runtime_seconds": 3.522677,
+    "platform": {
+      "device": "ibm_boston",
+      "device_metadata": {
+        "num_qubits": 156,
+        "simulator": false,
+        "version": "1.0.4"
+      },
+      "provider": "ibm"
+    },
+    "params": {
+      "benchmark_name": "Linear Ramp QAOA",
+      "confidence_level": 0.999,
+      "delta_beta": 0.3,
+      "delta_gamma": 0.6,
+      "graph_type": "1D",
+      "num_qubits": 10,
+      "num_random_trials": 25,
+      "qaoa_layers": [
+        10
+      ],
+      "seed": 123,
+      "shots": 1000,
+      "trials": 10
+    }
+  }
+]
