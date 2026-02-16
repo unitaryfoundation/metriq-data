@@ -1,8 +1,16 @@
 Benchmark,Device,Avg Score,Runs
+BSEQ,ibm_boston,156.0,1
+BSEQ,ibm_fez,,0
+BSEQ,ibm_kingston,,0
+BSEQ,ibm_marrakesh,,0
+BSEQ,ibm_pittsburgh,,0
+BSEQ,ibm_torino,,0
 QML Kernel,ibm_kingston,0.6925,2
 QML Kernel,ibm_pittsburgh,0.6715,2
 QML Kernel,ibm_marrakesh,0.66,2
 QML Kernel,ibm_torino,0.5615,2
 QML Kernel,ibm_fez,0.4995,2
 QML Kernel,ibm_brisbane,0.4225,2
+WIT,ibm_torino,0.772705078125,1
 WIT,ibm_fez,0.683349609375,2
+WIT,ibm_brisbane,0.49853515625,1
