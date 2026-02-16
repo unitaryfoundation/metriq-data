@@ -1,3 +1,4 @@
+from datetime import datetime
 import json
 import os
 import sys
@@ -556,7 +557,7 @@ def _get_normalized_metric_value(
 
 
 def _get_raw_metric_value(row: dict[str, Any], metric: str) -> float | None:
-    """Return the raw metric value from row.results when present and finite."""
+    """Return the raw metric value from row.results when present, else None."""
     results = row.get("results") if isinstance(row.get("results"), dict) else {}
     if metric not in results:
         return None
@@ -566,7 +567,7 @@ def _get_raw_metric_value(row: dict[str, Any], metric: str) -> float | None:
 def _pick_latest_metric_row(
     candidates: list[dict[str, Any]],
     value_key: str,
-) -> tuple[dict[str, Any] | None, Any]:
+) -> tuple[dict[str, Any] | None, datetime | None]:
     """Pick the latest timestamped row containing value_key."""
     picked = None
     picked_ts = None
