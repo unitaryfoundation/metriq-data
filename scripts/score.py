@@ -55,6 +55,14 @@ def _parse_series_label(label: str | None) -> tuple[int, ...] | None:
     return tuple(out)
 
 
+def _series_major(series_label: str | None) -> int | None:
+    """Return semantic major version from a series label like v0.6.1 -> 0."""
+    parsed = _parse_series_label(series_label)
+    if not parsed:
+        return None
+    return parsed[0]
+
+
 def _fallback_baseline_average(
     series_label: str | None,
     bench: str,
@@ -215,6 +223,36 @@ def _components_for_series(scoring_cfg: dict[str, Any], series_label: str | None
     if not isinstance(components, list):
         return []
     return _flatten_components([c for c in components if isinstance(c, dict)])
+
+
+def _baseline_provider_device_for_series(
+    scoring_cfg: dict[str, Any],
+    series_label: str | None,
+) -> tuple[str | None, str | None]:
+    if not isinstance(scoring_cfg, dict):
+        return None, None
+    default_block = scoring_cfg.get("default") if isinstance(scoring_cfg.get("default"), dict) else {}
+    series_map = scoring_cfg.get("series") if isinstance(scoring_cfg.get("series"), dict) else {}
+    series_block = series_map.get(series_label) if isinstance(series_map, dict) else None
+    baseline = series_block.get("baseline") if isinstance(series_block, dict) else None
+    if not isinstance(baseline, dict):
+        baseline = default_block.get("baseline") if isinstance(default_block, dict) else None
+    if not isinstance(baseline, dict):
+        return None, None
+    provider = baseline.get("provider") if isinstance(baseline.get("provider"), str) else None
+    device = baseline.get("device") if isinstance(baseline.get("device"), str) else None
+    return provider, device
+
+
+def _is_baseline_row_for_series(
+    scoring_cfg: dict[str, Any],
+    series_label: str | None,
+    row: dict[str, Any],
+) -> bool:
+    base_provider, base_device = _baseline_provider_device_for_series(scoring_cfg, series_label)
+    if not base_provider or not base_device:
+        return False
+    return row.get("provider") == base_provider and row.get("device") == base_device
 
 
 def _matching_components_for_row(
@@ -593,6 +631,8 @@ def compute_device_composite_scores(
 
     For each device, choose its latest series (by most recent timestamp among its rows),
     then compute the composite using the series-specific components (fallback to default).
+    When selecting rows for each component, include all rows in the same semantic major
+    version as the picked series (e.g., if picked series is v0.6.1, include v0.4/v0.5/v0.6.1).
 
     Returns a list of records:
       { provider, device, metriq_score, components: { ... }, series }
@@ -626,6 +666,7 @@ def compute_device_composite_scores(
                 latest_ts = ts
                 picked_series = s
 
+        picked_major = _series_major(picked_series)
         series_block = (series_cfg_map.get(picked_series, {}) if isinstance(series_cfg_map, dict) else {})
         composite_cfg = series_block.get("composite") or default_composite
         components_cfg = composite_cfg.get("components") if isinstance(composite_cfg, dict) else None
@@ -676,7 +717,7 @@ def compute_device_composite_scores(
             # component is missing for this device, its normalized contribution is 0.
             sum_w_defined += weight
 
-            # Filter rows by benchmark, selector, and chosen series.
+            # Filter rows by benchmark, selector, and major-version group.
             # Keep candidates if either normalized or raw value is available.
             matches: list[dict[str, Any]] = []
             for r in rows:
@@ -685,13 +726,19 @@ def compute_device_composite_scores(
                     continue
                 if not _row_param_matches(selector, r):
                     continue
-                if row_series.get(id(r)) != picked_series:
-                    continue
                 series_label = row_series.get(id(r))
+                if picked_major is not None:
+                    if _series_major(series_label) != picked_major:
+                        continue
+                elif series_label != picked_series:
+                    continue
                 selector_fp = _selector_fingerprint(selector)
                 normalized_val = _get_normalized_metric_value(
                     r, metric, series_label, selector_fp, baseline_avg_by_series
                 )
+                if normalized_val is not None and _is_baseline_row_for_series(scoring_cfg, series_label, r):
+                    # Keep baseline components anchored at 100 in platform composites.
+                    normalized_val = 100.0
                 raw_val = _get_raw_metric_value(r, metric)
                 if normalized_val is None and raw_val is None:
                     continue
