@@ -1,0 +1,8 @@
+device,performance_metric,runtime_seconds,num_qubits,efficiency
+ibm_boston,156.0,5.8383,156,26.7199
+ibm_brisbane,0.4478,,127,
+ibm_fez,0.5914,,156,
+ibm_kingston,0.6925,,156,
+ibm_marrakesh,0.66,,156,
+ibm_pittsburgh,0.6715,,156,
+ibm_torino,0.6319,,133,
