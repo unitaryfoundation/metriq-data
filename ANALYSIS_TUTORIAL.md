@@ -162,4 +162,4 @@ This tutorial follows the same license as the metriq-data repository.
 
 ---
 
-**Happy Analyzing! 🎉**
+**Happy Analyzing!**
