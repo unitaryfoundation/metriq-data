@@ -1,0 +1,33 @@
+[
+  {
+    "app_version": "0.6.2.dev17+g265813ba4.d20260216",
+    "timestamp": "2026-02-17T12:41:06.023320",
+    "suite_id": null,
+    "job_type": "WIT",
+    "results": {
+      "expectation_value": {
+        "value": 0.9962158203125,
+        "uncertainty": 0.0006783715414081503
+      },
+      "score": {
+        "value": 0.9962158203125,
+        "uncertainty": 0.0006783715414081503
+      }
+    },
+    "runtime_seconds": 0.03015610802685842,
+    "platform": {
+      "device": "aer_simulator",
+      "device_metadata": {
+        "num_qubits": 30,
+        "simulator": true,
+        "version": "0.17.2"
+      },
+      "provider": "local"
+    },
+    "params": {
+      "benchmark_name": "WIT",
+      "num_qubits": 7,
+      "shots": 8192
+    }
+  }
+]
