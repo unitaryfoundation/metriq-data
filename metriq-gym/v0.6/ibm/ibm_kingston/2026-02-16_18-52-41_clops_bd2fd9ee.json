@@ -1,0 +1,37 @@
+[
+  {
+    "app_version": "0.6.2.dev24+g81b3561e6.d20260210",
+    "timestamp": "2026-02-16T18:52:41.663200",
+    "suite_id": null,
+    "job_type": "CLOPS",
+    "results": {
+      "clops_score": 143930.0177710393,
+      "steady_state_clops": null,
+      "score": {
+        "value": 143930.0177710393,
+        "uncertainty": null
+      }
+    },
+    "runtime_seconds": 6.947821,
+    "platform": {
+      "device": "ibm_kingston",
+      "device_metadata": {
+        "num_qubits": 156,
+        "simulator": false,
+        "version": "1.0.0"
+      },
+      "provider": "ibm"
+    },
+    "params": {
+      "benchmark_name": "CLOPS",
+      "mode": "instantiated",
+      "num_circuits": 100,
+      "num_layers": 100,
+      "num_qubits": 100,
+      "seed": 12345,
+      "shots": 100,
+      "two_qubit_gate": "cz",
+      "use_session": false
+    }
+  }
+]
