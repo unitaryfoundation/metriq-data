@@ -70,12 +70,18 @@ def _fallback_baseline_average(
     selector_fp: str,
     baseline_avg_by_series: dict[str, dict[tuple[str, str, str], float]],
 ) -> float | None:
-    """Fallback to the latest earlier series that has a baseline for (bench, metric, selector)."""
+    """Fallback to the nearest series that has a baseline for (bench, metric, selector).
+
+    Prefers the latest earlier series, but if none exists, uses the earliest later series.
+    This handles cases where baseline data exists in a newer series than the device data.
+    """
     cur = _parse_series_label(series_label)
     if cur is None:
         return None
-    best_ver: tuple[int, ...] | None = None
-    best_val: float | None = None
+
+    # First pass: find the latest earlier series with baseline data
+    best_earlier_ver: tuple[int, ...] | None = None
+    best_earlier_val: float | None = None
     for s, avg_map in baseline_avg_by_series.items():
         ver = _parse_series_label(s)
         if ver is None or ver >= cur:
@@ -83,10 +89,28 @@ def _fallback_baseline_average(
         val = avg_map.get((bench, metric, selector_fp))
         if val is None:
             continue
-        if best_ver is None or ver > best_ver:
-            best_ver = ver
-            best_val = val
-    return best_val
+        if best_earlier_ver is None or ver > best_earlier_ver:
+            best_earlier_ver = ver
+            best_earlier_val = val
+
+    if best_earlier_val is not None:
+        return best_earlier_val
+
+    # Second pass: find the earliest later series with baseline data
+    best_later_ver: tuple[int, ...] | None = None
+    best_later_val: float | None = None
+    for s, avg_map in baseline_avg_by_series.items():
+        ver = _parse_series_label(s)
+        if ver is None or ver <= cur:
+            continue
+        val = avg_map.get((bench, metric, selector_fp))
+        if val is None:
+            continue
+        if best_later_ver is None or ver < best_later_ver:
+            best_later_ver = ver
+            best_later_val = val
+
+    return best_later_val
 
 
 def apply_custom_metric_derivations(rows: list[dict[str, Any]]) -> None:
