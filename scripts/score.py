@@ -70,22 +70,34 @@ def _fallback_baseline_average(
     selector_fp: str,
     baseline_avg_by_series: dict[str, dict[tuple[str, str, str], float]],
 ) -> float | None:
-    """Fallback to the latest earlier series that has a baseline for (bench, metric, selector)."""
+    """Fallback to same-major latest baseline, then latest earlier series baseline."""
     cur = _parse_series_label(series_label)
     if cur is None:
         return None
+    cur_major = cur[0]
+    same_major_best_ver: tuple[int, ...] | None = None
+    same_major_best_val: float | None = None
     best_ver: tuple[int, ...] | None = None
     best_val: float | None = None
     for s, avg_map in baseline_avg_by_series.items():
         ver = _parse_series_label(s)
-        if ver is None or ver >= cur:
+        if ver is None:
             continue
         val = avg_map.get((bench, metric, selector_fp))
         if val is None:
             continue
+        if ver and ver[0] == cur_major:
+            if same_major_best_ver is None or ver > same_major_best_ver:
+                same_major_best_ver = ver
+                same_major_best_val = val
+            continue
+        if ver >= cur:
+            continue
         if best_ver is None or ver > best_ver:
             best_ver = ver
             best_val = val
+    if same_major_best_val is not None:
+        return same_major_best_val
     return best_val
 
 
@@ -310,28 +322,52 @@ def compute_baseline_averages_by_series(
     baseline_avg_by_series: dict[str, dict[tuple[str, str, str], float]] = {}
     summary: list[str] = []
 
+    # Build major->latest-series map from observed series labels.
+    major_to_latest_series: dict[int, str] = {}
+    major_to_latest_ver: dict[int, tuple[int, ...]] = {}
     for series in series_list:
-        series_block = (baselines_cfg.get("series", {}) or {}).get(series, {}) if isinstance(baselines_cfg, dict) else {}
+        ver = _parse_series_label(series)
+        if not ver:
+            continue
+        major = ver[0]
+        cur_best = major_to_latest_ver.get(major)
+        if cur_best is None or ver > cur_best:
+            major_to_latest_ver[major] = ver
+            major_to_latest_series[major] = series
+
+    # Compute one baseline map per major:
+    # latest baseline value per (benchmark, metric, selector), then reuse for every minor.
+    baseline_by_major: dict[int, dict[tuple[str, str, str], float]] = {}
+    baseline_choice_by_major: dict[int, tuple[str | None, str | None, str | None]] = {}
+    for major, ref_series in sorted(major_to_latest_series.items()):
+        series_block = (baselines_cfg.get("series", {}) or {}).get(ref_series, {}) if isinstance(baselines_cfg, dict) else {}
         baseline_obj = series_block.get("baseline") or (baselines_cfg.get("default", {}) or {}).get("baseline", {})
         base_provider = (baseline_obj or {}).get("provider")
         base_device = (baseline_obj or {}).get("device")
+        baseline_choice_by_major[major] = (base_provider, base_device, ref_series)
 
         if not base_provider or not base_device:
-            baseline_avg_by_series[series] = {}
-            summary.append(f"{series}: (no baseline configured)")
+            baseline_by_major[major] = {}
             continue
 
         selected = [
             r for r in flat_rows
-            if r.get("provider") == base_provider and r.get("device") == base_device and row_series.get(id(r)) == series
+            if r.get("provider") == base_provider
+            and r.get("device") == base_device
+            and _series_major(row_series.get(id(r))) == major
         ]
 
-        # Compute baseline averages only for metrics referenced by scoring.json components,
-        # and only within the same selector subset of params.
-        baseline_values: dict[tuple[str, str, str], list[float]] = {}
-        components = _components_for_series(baselines_cfg, series)
+        # Keep the latest timestamped baseline row per (benchmark, metric, selector).
+        # Collect component definitions from all observed minors in this major so
+        # baseline coverage is major-wide even if minor configs differ.
+        latest_baseline: dict[tuple[str, str, str], tuple[datetime | None, float]] = {}
+        major_series_labels = [s for s in series_list if _series_major(s) == major]
+        components: list[dict[str, Any]] = []
+        for s in major_series_labels:
+            components.extend(_components_for_series(baselines_cfg, s))
+        if not components:
+            components = _components_for_series(baselines_cfg, ref_series)
         for comp in components:
-            bench_field = comp.get("benchmark")
             metric = comp.get("metric")
             if not isinstance(metric, str):
                 continue
@@ -351,6 +387,7 @@ def compute_baseline_averages_by_series(
                     if isinstance(part_metric, str) and part_metric:
                         candidate_metrics.append(part_metric)
 
+                ts = parse_timestamp(r.get("timestamp", ""))
                 for m in candidate_metrics:
                     if m not in results:
                         continue
@@ -360,18 +397,84 @@ def compute_baseline_averages_by_series(
                         continue
                     if not (num == num):  # NaN
                         continue
-                    baseline_values.setdefault((bench, m, selector_fp), []).append(num)
+                    key = (bench, m, selector_fp)
+                    prev = latest_baseline.get(key)
+                    if prev is None:
+                        latest_baseline[key] = (ts, num)
+                        continue
+                    prev_ts, _prev_num = prev
+                    if prev_ts is None and ts is not None:
+                        latest_baseline[key] = (ts, num)
+                    elif prev_ts is not None and ts is not None and ts > prev_ts:
+                        latest_baseline[key] = (ts, num)
 
-        baseline_avg: dict[tuple[str, str, str], float] = {}
-        for key, vals in baseline_values.items():
-            if not vals:
+        baseline_by_major[major] = {key: val for key, (_ts, val) in latest_baseline.items()}
+
+    for series in series_list:
+        major = _series_major(series)
+        if major is not None and major in baseline_by_major:
+            baseline_avg_by_series[series] = baseline_by_major[major]
+            base_provider, base_device, ref_series = baseline_choice_by_major.get(major, (None, None, None))
+            if base_provider and base_device:
+                summary.append(
+                    f"{series}: {base_provider}/{base_device} (major {major}, ref {ref_series}, latest-per-key)"
+                )
+            else:
+                summary.append(f"{series}: (no baseline configured for major {major})")
+            continue
+
+        # Unknown/non-version series fallback to legacy per-series lookup.
+        series_block = (baselines_cfg.get("series", {}) or {}).get(series, {}) if isinstance(baselines_cfg, dict) else {}
+        baseline_obj = series_block.get("baseline") or (baselines_cfg.get("default", {}) or {}).get("baseline", {})
+        base_provider = (baseline_obj or {}).get("provider")
+        base_device = (baseline_obj or {}).get("device")
+        if not base_provider or not base_device:
+            baseline_avg_by_series[series] = {}
+            summary.append(f"{series}: (no baseline configured)")
+            continue
+        selected = [
+            r for r in flat_rows
+            if r.get("provider") == base_provider and r.get("device") == base_device and row_series.get(id(r)) == series
+        ]
+        latest_baseline: dict[tuple[str, str, str], tuple[datetime | None, float]] = {}
+        components = _components_for_series(baselines_cfg, series)
+        for comp in components:
+            metric = comp.get("metric")
+            if not isinstance(metric, str):
                 continue
-            try:
-                baseline_avg[key] = sum(vals) / len(vals)
-            except Exception:
-                pass
-        baseline_avg_by_series[series] = baseline_avg
-        summary.append(f"{series}: {base_provider}/{base_device}")
+            selector = comp.get("selector") if isinstance(comp.get("selector"), dict) else None
+            selector_fp = _selector_fingerprint(selector)
+            for r in selected:
+                bench = derive_benchmark_name(r)
+                if not _component_matches_benchmark(comp, bench):
+                    continue
+                if not _row_param_matches(selector, r):
+                    continue
+                results = r.get("results") if isinstance(r.get("results"), dict) else {}
+                candidate_metrics = [metric]
+                for part in _derived_from_components(comp):
+                    part_metric = part.get("metric")
+                    if isinstance(part_metric, str) and part_metric:
+                        candidate_metrics.append(part_metric)
+                ts = parse_timestamp(r.get("timestamp", ""))
+                for m in candidate_metrics:
+                    if m not in results:
+                        continue
+                    num = _coerce_float(results.get(m))
+                    if num is None:
+                        continue
+                    key = (bench, m, selector_fp)
+                    prev = latest_baseline.get(key)
+                    if prev is None:
+                        latest_baseline[key] = (ts, num)
+                        continue
+                    prev_ts, _prev_num = prev
+                    if prev_ts is None and ts is not None:
+                        latest_baseline[key] = (ts, num)
+                    elif prev_ts is not None and ts is not None and ts > prev_ts:
+                        latest_baseline[key] = (ts, num)
+        baseline_avg_by_series[series] = {key: val for key, (_ts, val) in latest_baseline.items()}
+        summary.append(f"{series}: {base_provider}/{base_device} (latest-per-key)")
 
     return baseline_avg_by_series, summary
 

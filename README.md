@@ -87,7 +87,8 @@ Example `scripts/scoring.json`:
 }
 ```
 
-For now, all rows from the baseline device within a series are averaged to compute the baseline.
+Baselines are computed per major series (e.g., all `v0.x.y` share one baseline reference),
+using the latest available baseline row per `(benchmark, metric, selector)` key.
 
 ## Acknowledgements
 
