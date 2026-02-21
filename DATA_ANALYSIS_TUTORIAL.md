@@ -100,31 +100,6 @@ for provider, info in sorted(providers.items()):
         print(f"  Devices: {', '.join(sorted(info['devices']))}")
     print()
 ```
-
-**Output:**
-
-```
-Available Providers and Devices:
-
-IBM:
-  Aggregated data: Yes
-  Devices: ibm_boston, ibm_fez, ibm_kingston, ibm_marrakesh, ibm_pittsburgh, ibm_torino
-
-AWS:
-  Aggregated data: Yes
-  Devices: arn_aws_braket_eu-north-1_device_qpu_iqm_garnet
-
-LOCAL:
-  Aggregated data: Yes
-
-ORIGIN:
-  Aggregated data: Yes
-  Devices: 72
-
-QUANTINUUM:
-  Aggregated data: Yes
-```
-
 ## Load Device Benchmark Data
 
 Now let's load the aggregated results from a provider. The aggregated `results.json` files contain benchmark results across all devices for that provider:
@@ -193,15 +168,6 @@ ibm_df = load_aggregated_results('ibm')
 print(f"Loaded {len(ibm_df)} benchmark results from IBM devices")
 print(f"\nDevices: {sorted(ibm_df['device'].unique())}")
 print(f"Benchmark types: {sorted(ibm_df['job_type'].unique())}")
-```
-
-**Output:**
-
-```
-Loaded 234 benchmark results from IBM devices
-
-Devices: ['ibm_boston', 'ibm_fez', 'ibm_kingston', 'ibm_marrakesh', 'ibm_pittsburgh', 'ibm_torino']
-Benchmark types: ['BSEQ', 'Linear Ramp QAOA', 'Mirror Circuits', 'QML Kernel']
 ```
 
 ### Data Quality Check
