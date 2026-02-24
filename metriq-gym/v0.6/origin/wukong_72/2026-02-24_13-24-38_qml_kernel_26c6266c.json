@@ -1,0 +1,31 @@
+[
+  {
+    "app_version": "0.6.2.dev20+g245253d47",
+    "timestamp": "2026-02-24T13:24:38.517663",
+    "suite_id": null,
+    "job_type": "QML Kernel",
+    "results": {
+      "accuracy_score": {
+        "value": 0.036,
+        "uncertainty": 0.005891010100144117
+      },
+      "score": {
+        "value": 0.036,
+        "uncertainty": 0.005891010100144117
+      }
+    },
+    "platform": {
+      "device": "wukong_72",
+      "device_metadata": {
+        "num_qubits": 72,
+        "simulator": false
+      },
+      "provider": "origin"
+    },
+    "params": {
+      "benchmark_name": "QML Kernel",
+      "num_qubits": 10,
+      "shots": 1000
+    }
+  }
+]
