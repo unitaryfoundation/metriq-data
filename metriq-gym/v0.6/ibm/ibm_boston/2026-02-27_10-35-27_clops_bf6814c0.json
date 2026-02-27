@@ -1,0 +1,37 @@
+[
+  {
+    "app_version": "0.6.2.dev18+gd77e9b115.d20260219",
+    "timestamp": "2026-02-27T10:35:27.055793",
+    "suite_id": null,
+    "job_type": "CLOPS",
+    "results": {
+      "clops_score": 301949.32444877643,
+      "steady_state_clops": null,
+      "score": {
+        "value": 301949.32444877643,
+        "uncertainty": null
+      }
+    },
+    "runtime_seconds": 3.311814,
+    "platform": {
+      "device": "ibm_boston",
+      "device_metadata": {
+        "num_qubits": 156,
+        "simulator": false,
+        "version": "1.0.4"
+      },
+      "provider": "ibm"
+    },
+    "params": {
+      "benchmark_name": "CLOPS",
+      "mode": "instantiated",
+      "num_circuits": 100,
+      "num_layers": 100,
+      "num_qubits": 100,
+      "seed": 12345,
+      "shots": 100,
+      "two_qubit_gate": "cz",
+      "use_session": true
+    }
+  }
+]
