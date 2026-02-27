@@ -1,0 +1,37 @@
+[
+  {
+    "app_version": "0.6.2.dev18+gd77e9b115.d20260219",
+    "timestamp": "2026-02-27T10:39:26.440238",
+    "suite_id": null,
+    "job_type": "CLOPS",
+    "results": {
+      "clops_score": 270205.42096923763,
+      "steady_state_clops": null,
+      "score": {
+        "value": 270205.42096923763,
+        "uncertainty": null
+      }
+    },
+    "runtime_seconds": 3.700888,
+    "platform": {
+      "device": "ibm_marrakesh",
+      "device_metadata": {
+        "num_qubits": 156,
+        "simulator": false,
+        "version": "1.0.21"
+      },
+      "provider": "ibm"
+    },
+    "params": {
+      "benchmark_name": "CLOPS",
+      "mode": "instantiated",
+      "num_circuits": 100,
+      "num_layers": 100,
+      "num_qubits": 100,
+      "seed": 12345,
+      "shots": 100,
+      "two_qubit_gate": "cz",
+      "use_session": true
+    }
+  }
+]
