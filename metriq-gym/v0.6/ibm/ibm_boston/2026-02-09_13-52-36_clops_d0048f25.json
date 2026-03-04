@@ -30,7 +30,8 @@
       "num_qubits": 100,
       "seed": 12345,
       "shots": 100,
-      "two_qubit_gate": "cz"
+      "two_qubit_gate": "cz",
+      "use_session": true
     }
   }
 ]
