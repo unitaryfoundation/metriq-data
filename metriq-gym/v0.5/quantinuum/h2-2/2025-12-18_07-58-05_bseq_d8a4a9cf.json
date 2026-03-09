@@ -15,6 +15,7 @@
     "platform": {
       "device": "H2-2",
       "device_metadata": {
+        "num_qubits": 56,
         "simulator": false,
         "version": "0.54.0"
       },
