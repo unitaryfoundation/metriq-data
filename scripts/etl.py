@@ -101,6 +101,29 @@ def path_version_segment(path: str, root: str) -> str:
     return "unknown"
 
 
+def _inject_default_metric_directions(out: dict[str, Any], row: dict[str, Any]) -> None:
+    """Inject known metric directions when source payload omits them."""
+    params = row.get("params") if isinstance(row.get("params"), dict) else {}
+    bench = params.get("benchmark_name") if isinstance(params.get("benchmark_name"), str) else None
+    if bench is None and isinstance(row.get("job_type"), str):
+        bench = row.get("job_type")
+
+    if bench != "EPLG":
+        return
+
+    results = out.get("results") if isinstance(out.get("results"), dict) else None
+    if results is None:
+        return
+
+    existing = out.get("directions") if isinstance(out.get("directions"), dict) else {}
+    directions = dict(existing)
+    for metric in ("score", "eplg_10", "eplg_20", "eplg_50", "eplg_100"):
+        if metric in results and metric not in directions:
+            directions[metric] = "lower"
+    if directions:
+        out["directions"] = directions
+
+
 def flatten_row(row: dict[str, Any]) -> dict[str, Any]:
     out: dict[str, Any] = {}
     for k in ("app_version", "timestamp", "provider", "suite_id", "device", "job_type", "results", "params"):
@@ -139,6 +162,7 @@ def flatten_row(row: dict[str, Any]) -> dict[str, Any]:
             out["results"] = values
             if uncertainties:
                 out["errors"] = uncertainties
+            _inject_default_metric_directions(out, row)
             return out
 
         values = r.get("values") if isinstance(r.get("values"), dict) else None
@@ -153,6 +177,7 @@ def flatten_row(row: dict[str, Any]) -> dict[str, Any]:
         else:
             out["results"] = r
 
+    _inject_default_metric_directions(out, row)
     return out
 
 
@@ -350,8 +375,11 @@ def collect_flat_rows_and_registry(root: str, files: list[str]) -> tuple[
             print(f"Warning: failed to load {src}: {e}", file=sys.stderr)
             continue
 
-        if not isinstance(data, list):
-            print(f"Warning: skipping {src} (not a list)", file=sys.stderr)
+        if isinstance(data, dict):
+            # Accept singleton result payloads by normalizing to a one-item list.
+            data = [data]
+        elif not isinstance(data, list):
+            print(f"Warning: skipping {src} (not a list/object)", file=sys.stderr)
             continue
 
         for row in data:
