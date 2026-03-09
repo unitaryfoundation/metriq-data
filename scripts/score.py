@@ -550,10 +550,29 @@ def compute_and_attach_metriq_scores(
         # This preserves all computed normalized metrics even for multi-metric benchmarks.
         r["normalized_scores"] = scores
 
-        # Choose a scalar metriq_score when possible:
-        #  - If exactly one configured metric applies to this row, expose it as metriq_score
+        # Expose a scalar metriq_score:
+        #  - single-metric rows map directly
+        #  - multi-metric rows use weighted average by component effective weights
         if len(scores) == 1:
             r["metriq_score"] = next(iter(scores.values()))
+        else:
+            weighted_sum = 0.0
+            weight_total = 0.0
+            for metric, metric_score in scores.items():
+                comp = metric_to_comp.get(metric, {})
+                w_raw = comp.get("_effective_weight", comp.get("weight", 0.0))
+                try:
+                    weight = float(w_raw)
+                except Exception:
+                    weight = 0.0
+                if not (weight == weight) or weight in (float("inf"), float("-inf")) or weight < 0:
+                    weight = 0.0
+                if weight == 0.0:
+                    continue
+                weighted_sum += weight * metric_score
+                weight_total += weight
+            if weight_total > 0.0:
+                r["metriq_score"] = weighted_sum / weight_total
 
 
 def load_scoring_config(root: str) -> dict[str, Any]:

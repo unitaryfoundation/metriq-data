@@ -169,31 +169,40 @@
             "components": [
               {
                 "benchmark": "EPLG",
-                "metric": "score",
-                "selector": { "num_qubits": 10 },
+                "metric": "eplg_10",
                 "label": "EPLG-10:score",
                 "weight": "1/4"
               },
               {
                 "benchmark": "EPLG",
-                "metric": "score",
-                "selector": { "num_qubits": 20 },
+                "metric": "eplg_20",
                 "label": "EPLG-20:score",
                 "weight": "1/4"
               },
               {
                 "benchmark": "EPLG",
-                "metric": "score",
-                "selector": { "num_qubits": 50 },
+                "metric": "eplg_50",
                 "label": "EPLG-50:score",
                 "weight": "1/4"
               },
               {
                 "benchmark": "EPLG",
-                "metric": "score",
-                "selector": { "num_qubits": 100 },
+                "metric": "eplg_100",
                 "label": "EPLG-100:score",
                 "weight": "1/4"
+              }
+            ]
+          },
+          {
+            "label": "CLOPS",
+            "weight": "0/1",
+            "components": [
+              {
+                "benchmark": "CLOPS",
+                "metric": "score",
+                "selector": { "mode": "twirled", "use_session": true },
+                "label": "CLOPS (twirled, session=true):score",
+                "weight": "1/1"
               }
             ]
           }
@@ -210,7 +219,7 @@
       "components": [
         {
           "label": "BSEQ",
-          "weight": "1/7",
+          "weight": "1/8",
           "components": [
             {
               "benchmark": "BSEQ",
@@ -225,7 +234,7 @@
         },
         {
           "label": "QML Kernel",
-          "weight": "1/7",
+          "weight": "1/8",
           "components": [
             {
               "benchmark": "QML Kernel",
@@ -259,7 +268,7 @@
         },
         {
           "label": "Mirror Circuits",
-          "weight": "1/7",
+          "weight": "1/8",
           "components": [
             {
               "benchmark": "Mirror Circuits",
@@ -307,7 +316,7 @@
         },
         {
           "label": "WIT",
-          "weight": "1/7",
+          "weight": "1/8",
           "components": [
             {
               "benchmark": "WIT",
@@ -320,7 +329,7 @@
         },
         {
           "label": "Quantum Fourier Transform",
-          "weight": "1/7",
+          "weight": "1/8",
           "components": [
             {
               "benchmark": "Quantum Fourier Transform",
@@ -332,7 +341,7 @@
         },
         {
           "label": "Linear Ramp QAOA",
-          "weight": "1/7",
+          "weight": "1/8",
           "components": [
             {
               "benchmark": "Linear Ramp QAOA",
@@ -366,35 +375,44 @@
         },
         {
           "label": "EPLG",
-          "weight": "1/7",
+          "weight": "1/8",
           "components": [
             {
               "benchmark": "EPLG",
-              "metric": "score",
-              "selector": { "num_qubits": 10 },
+              "metric": "eplg_10",
               "label": "EPLG-10:score",
               "weight": "1/4"
             },
             {
               "benchmark": "EPLG",
-              "metric": "score",
-              "selector": { "num_qubits": 20 },
+              "metric": "eplg_20",
               "label": "EPLG-20:score",
               "weight": "1/4"
             },
             {
               "benchmark": "EPLG",
-              "metric": "score",
-              "selector": { "num_qubits": 50 },
+              "metric": "eplg_50",
               "label": "EPLG-50:score",
               "weight": "1/4"
             },
             {
               "benchmark": "EPLG",
-              "metric": "score",
-              "selector": { "num_qubits": 100 },
+              "metric": "eplg_100",
               "label": "EPLG-100:score",
               "weight": "1/4"
+            }
+          ]
+        },
+        {
+          "label": "CLOPS",
+          "weight": "1/8",
+          "components": [
+            {
+              "benchmark": "CLOPS",
+              "metric": "score",
+              "selector": { "mode": "twirled", "use_session": true },
+              "label": "CLOPS (twirled, session=true):score",
+              "weight": "1/1"
             }
           ]
         }
