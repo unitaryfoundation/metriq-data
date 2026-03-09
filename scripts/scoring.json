@@ -380,25 +380,25 @@
             {
               "benchmark": "EPLG",
               "metric": "eplg_10",
-              "label": "EPLG-10:score",
+              "label": "EPLG-10",
               "weight": "1/4"
             },
             {
               "benchmark": "EPLG",
               "metric": "eplg_20",
-              "label": "EPLG-20:score",
+              "label": "EPLG-20",
               "weight": "1/4"
             },
             {
               "benchmark": "EPLG",
               "metric": "eplg_50",
-              "label": "EPLG-50:score",
+              "label": "EPLG-50",
               "weight": "1/4"
             },
             {
               "benchmark": "EPLG",
               "metric": "eplg_100",
-              "label": "EPLG-100:score",
+              "label": "EPLG-100",
               "weight": "1/4"
             }
           ]
