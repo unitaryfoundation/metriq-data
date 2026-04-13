@@ -42,7 +42,7 @@ Example `scripts/scoring.json`:
 {
   "series": {
     "v0.4": {
-      "baseline": { "provider": "origin", "device": "origin_wukong" },
+      "baseline": { "provider": "origin", "device": "wukong_102" },
       "composite": {
         "components": [
           {

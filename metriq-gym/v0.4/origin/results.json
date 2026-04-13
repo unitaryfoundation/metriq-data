@@ -19,7 +19,7 @@
       }
     },
     "platform": {
-      "device": "72",
+      "device": "wukong_72",
       "device_metadata": {
         "num_qubits": 72,
         "simulator": false
@@ -46,7 +46,7 @@
       "score": 0.026
     },
     "platform": {
-      "device": "72",
+      "device": "wukong_72",
       "device_metadata": {
         "num_qubits": 72,
         "simulator": false
@@ -76,7 +76,7 @@
       }
     },
     "platform": {
-      "device": "origin_wukong",
+      "device": "wukong_102",
       "device_metadata": {
         "num_qubits": 102,
         "simulator": false
