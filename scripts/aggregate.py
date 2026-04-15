@@ -19,6 +19,7 @@ from etl import (
     ensure_dir,
     find_result_files,
     collect_flat_rows_and_registry,
+    load_platform_catalog,
     write_platform_outputs,
     write_benchmark_latest,
 )
@@ -42,6 +43,7 @@ def main(argv: list[str] | None = None) -> int:
     files = find_result_files(root)
     total_files = len(files)
     flat_rows, row_series, registry = collect_flat_rows_and_registry(root, files)
+    platform_catalog = load_platform_catalog(root)
     apply_custom_metric_derivations(flat_rows)
 
     # Scoring configured only via scripts/scoring.json
@@ -85,6 +87,7 @@ def main(argv: list[str] | None = None) -> int:
         dist_path,
         generated_at,
         composite_records,
+        platform_catalog,
     )
 
     print(

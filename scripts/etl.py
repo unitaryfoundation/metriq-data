@@ -192,6 +192,84 @@ def get_provider_device(row: dict[str, Any]) -> tuple[str | None, str | None]:
     return provider, device
 
 
+def _normalize_platform_lifecycle(lifecycle: Any) -> dict[str, str] | None:
+    if not isinstance(lifecycle, dict):
+        return None
+
+    normalized: dict[str, str] = {}
+    status = lifecycle.get("status")
+    effective_at = lifecycle.get("effective_at")
+    source_url = lifecycle.get("source_url")
+    source_label = lifecycle.get("source_label")
+
+    if isinstance(status, str) and status.strip():
+        normalized["status"] = status.strip()
+    if isinstance(effective_at, str) and effective_at.strip():
+        normalized["effective_at"] = effective_at.strip()
+    if isinstance(source_url, str) and source_url.strip():
+        normalized["source_url"] = source_url.strip()
+    if isinstance(source_label, str) and source_label.strip():
+        normalized["source_label"] = source_label.strip()
+
+    return normalized or None
+
+
+def load_platform_catalog(root: str) -> dict[tuple[str, str], dict[str, Any]]:
+    """Load curated platform metadata from scripts/platform_catalog.json.
+
+    The catalog is keyed by a canonical (provider, device) entry and may optionally
+    provide same-provider aliases that should inherit the same curated metadata.
+    """
+    catalog_path = os.path.join(root, "scripts", "platform_catalog.json")
+    try:
+        with open(catalog_path, "r", encoding="utf-8") as f:
+            data = json.load(f)
+    except FileNotFoundError:
+        return {}
+    except Exception as exc:
+        print(f"Warning: failed to load platform catalog: {exc}", file=sys.stderr)
+        return {}
+
+    raw_platforms = data.get("platforms") if isinstance(data, dict) else None
+    if not isinstance(raw_platforms, list):
+        return {}
+
+    resolved: dict[tuple[str, str], dict[str, Any]] = {}
+    for entry in raw_platforms:
+        if not isinstance(entry, dict):
+            continue
+        provider = entry.get("provider")
+        device = entry.get("device")
+        if not isinstance(provider, str) or not provider.strip():
+            continue
+        if not isinstance(device, str) or not device.strip():
+            continue
+
+        lifecycle = _normalize_platform_lifecycle(entry.get("lifecycle"))
+
+        names = [device.strip()]
+        aliases = entry.get("aliases")
+        if isinstance(aliases, list):
+            for alias in aliases:
+                if isinstance(alias, str) and alias.strip():
+                    names.append(alias.strip())
+
+        payload: dict[str, Any] = {}
+        if lifecycle is not None:
+            payload["lifecycle"] = lifecycle
+        for name in dict.fromkeys(names):
+            key = (provider.strip(), name)
+            existing = resolved.get(key)
+            if existing is not None and existing != payload:
+                print(
+                    f"Warning: duplicate platform catalog entry for {provider}/{name}; using last entry",
+                    file=sys.stderr,
+                )
+            resolved[key] = payload
+
+    return resolved
+
+
 # ---------------------------- Platform Registry ----------------------------
 
 PlatformKey = tuple[str, str]
@@ -282,10 +360,12 @@ def write_platform_outputs(
     dist_path: str,
     generated_at: str,
     composite_records: list[dict[str, Any]] | None = None,
+    platform_catalog: dict[PlatformKey, dict[str, Any]] | None = None,
 ) -> tuple[int, str]:
     platforms_dir = os.path.join(dist_path, "platforms")
     ensure_dir(platforms_dir)
     index_platforms: list[dict[str, Any]] = []
+    platform_catalog = platform_catalog or {}
 
     # Optional mapping from (provider, device) -> composite score record
     composite_map: dict[PlatformKey, dict[str, Any]] = {}
@@ -320,6 +400,7 @@ def write_platform_outputs(
             "current": current,
             "history": history_list,
         }
+        platform_payload.update(platform_catalog.get((provider, device), {}))
 
         comp_rec = composite_map.get((provider, device))
         if comp_rec is not None:
@@ -340,6 +421,7 @@ def write_platform_outputs(
             "last_seen": entry.get("last_seen"),
             "runs": entry.get("runs", 0),
             "metadata_variants": len(entry.get("metadata_history", {})),
+            **platform_catalog.get((provider, device), {}),
         })
 
     index_payload = {"generated_at": generated_at, "platforms": index_platforms}
