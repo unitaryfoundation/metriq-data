@@ -246,8 +246,6 @@ def load_platform_catalog(root: str) -> dict[tuple[str, str], dict[str, Any]]:
             continue
 
         lifecycle = _normalize_platform_lifecycle(entry.get("lifecycle"))
-        if lifecycle is None:
-            continue
 
         names = [device.strip()]
         aliases = entry.get("aliases")
@@ -256,7 +254,9 @@ def load_platform_catalog(root: str) -> dict[tuple[str, str], dict[str, Any]]:
                 if isinstance(alias, str) and alias.strip():
                     names.append(alias.strip())
 
-        payload = {"lifecycle": lifecycle}
+        payload: dict[str, Any] = {}
+        if lifecycle is not None:
+            payload["lifecycle"] = lifecycle
         for name in dict.fromkeys(names):
             key = (provider.strip(), name)
             existing = resolved.get(key)

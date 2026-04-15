@@ -114,8 +114,8 @@ extra status on the website.
 Notes:
 
 - `device` is the canonical device identifier for that provider.
-- `aliases` are optional same-provider aliases that should inherit the same catalog entry.
-- `lifecycle` is currently passed through into generated platform JSON for `metriq-web`.
+- `aliases` (optional) lists same-provider aliases that should inherit the same curated catalog entry.
+- `lifecycle` (optional) describes curated platform status metadata, such as whether a device is retired and when that status took effect. It is currently the only curated field passed through into generated platform JSON for `metriq-web`.
 
 After editing the catalog, rerun `python3 scripts/aggregate.py`. The generated
 `dist/platforms/index.json` and `dist/platforms/<provider>/<device>.json` outputs will include
