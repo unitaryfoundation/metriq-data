@@ -90,6 +90,37 @@ Example `scripts/scoring.json`:
 Baselines are computed per major series (e.g., all `v0.x.y` share one baseline reference),
 using the latest available baseline row per `(benchmark, metric, selector)` key.
 
+### Curated platform catalog
+
+Edit `scripts/platform_catalog.json` to add curated metadata for platforms that should carry
+extra status on the website.
+
+```json
+{
+  "platforms": [
+    {
+      "provider": "ibm",
+      "device": "ibm_brisbane",
+      "aliases": ["brisbane"],
+      "lifecycle": {
+        "status": "retired",
+        "effective_at": "2025-11-03"
+      }
+    }
+  ]
+}
+```
+
+Notes:
+
+- `device` is the canonical device identifier for that provider.
+- `aliases` are optional same-provider aliases that should inherit the same catalog entry.
+- `lifecycle` is currently passed through into generated platform JSON for `metriq-web`.
+
+After editing the catalog, rerun `python3 scripts/aggregate.py`. The generated
+`dist/platforms/index.json` and `dist/platforms/<provider>/<device>.json` outputs will include
+the curated `lifecycle` block for matching platforms.
+
 ## Acknowledgements
 
 Some of these results used resources of the Oak Ridge Leadership Computing Facility, which is a DOE Office of Science User Facility supported under Contract DE-AC05-00OR22725.
