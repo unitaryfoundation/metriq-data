@@ -1,0 +1,206 @@
+[
+  {
+    "app_version": "0.7.1.dev7+g3ed0f67db",
+    "timestamp": "2026-04-16T18:30:51.253084",
+    "suite_id": "c529c29f-e985-4802-a5d7-4f9e32e445f1",
+    "job_type": "Linear Ramp QAOA",
+    "results": {
+      "approx_ratio": [
+        0.8308566666666671
+      ],
+      "random_approx_ratio": 0.49990133333333336,
+      "confidence_pass": [
+        true
+      ],
+      "effective_approx_ratio": [
+        0.6617800753984555
+      ],
+      "score": {
+        "value": 0.6617800753984555,
+        "uncertainty": null
+      }
+    },
+    "runtime_seconds": 40.931445,
+    "suite": {
+      "id": "c529c29f-e985-4802-a5d7-4f9e32e445f1",
+      "name": "lr_qaoa_1d_scale_suite"
+    },
+    "platform": {
+      "device": "ibm_miami",
+      "device_metadata": {
+        "num_qubits": 120,
+        "simulator": false,
+        "version": "1.0.3"
+      },
+      "provider": "ibm"
+    },
+    "params": {
+      "benchmark_name": "Linear Ramp QAOA",
+      "confidence_level": 0.999,
+      "delta_beta": 0.3,
+      "delta_gamma": 0.6,
+      "graph_type": "1D",
+      "num_qubits": 10,
+      "num_random_trials": 25,
+      "qaoa_layers": [
+        10
+      ],
+      "seed": 123,
+      "shots": 1000,
+      "trials": 10
+    }
+  },
+  {
+    "app_version": "0.7.1.dev7+g3ed0f67db",
+    "timestamp": "2026-04-16T18:30:55.748440",
+    "suite_id": "c529c29f-e985-4802-a5d7-4f9e32e445f1",
+    "job_type": "Linear Ramp QAOA",
+    "results": {
+      "approx_ratio": [
+        0.8031927536231885
+      ],
+      "random_approx_ratio": 0.5007686956521739,
+      "confidence_pass": [
+        true
+      ],
+      "effective_approx_ratio": [
+        0.6057794359792565
+      ],
+      "score": {
+        "value": 0.6057794359792565,
+        "uncertainty": null
+      }
+    },
+    "runtime_seconds": 40.867431,
+    "suite": {
+      "id": "c529c29f-e985-4802-a5d7-4f9e32e445f1",
+      "name": "lr_qaoa_1d_scale_suite"
+    },
+    "platform": {
+      "device": "ibm_miami",
+      "device_metadata": {
+        "num_qubits": 120,
+        "simulator": false,
+        "version": "1.0.3"
+      },
+      "provider": "ibm"
+    },
+    "params": {
+      "benchmark_name": "Linear Ramp QAOA",
+      "confidence_level": 0.999,
+      "delta_beta": 0.3,
+      "delta_gamma": 0.6,
+      "graph_type": "1D",
+      "num_qubits": 20,
+      "num_random_trials": 25,
+      "qaoa_layers": [
+        10
+      ],
+      "seed": 123,
+      "shots": 1000,
+      "trials": 10
+    }
+  },
+  {
+    "app_version": "0.7.1.dev7+g3ed0f67db",
+    "timestamp": "2026-04-16T18:31:01.482779",
+    "suite_id": "c529c29f-e985-4802-a5d7-4f9e32e445f1",
+    "job_type": "Linear Ramp QAOA",
+    "results": {
+      "approx_ratio": [
+        0.7775414364640885
+      ],
+      "random_approx_ratio": 0.5139772375690609,
+      "confidence_pass": [
+        true
+      ],
+      "effective_approx_ratio": [
+        0.542287767710218
+      ],
+      "score": {
+        "value": 0.542287767710218,
+        "uncertainty": null
+      }
+    },
+    "runtime_seconds": 40.926261,
+    "suite": {
+      "id": "c529c29f-e985-4802-a5d7-4f9e32e445f1",
+      "name": "lr_qaoa_1d_scale_suite"
+    },
+    "platform": {
+      "device": "ibm_miami",
+      "device_metadata": {
+        "num_qubits": 120,
+        "simulator": false,
+        "version": "1.0.3"
+      },
+      "provider": "ibm"
+    },
+    "params": {
+      "benchmark_name": "Linear Ramp QAOA",
+      "confidence_level": 0.999,
+      "delta_beta": 0.3,
+      "delta_gamma": 0.6,
+      "graph_type": "1D",
+      "num_qubits": 50,
+      "num_random_trials": 25,
+      "qaoa_layers": [
+        10
+      ],
+      "seed": 123,
+      "shots": 1000,
+      "trials": 10
+    }
+  },
+  {
+    "app_version": "0.7.1.dev7+g3ed0f67db",
+    "timestamp": "2026-04-16T18:31:09.122430",
+    "suite_id": "c529c29f-e985-4802-a5d7-4f9e32e445f1",
+    "job_type": "Linear Ramp QAOA",
+    "results": {
+      "approx_ratio": [
+        0.7167907142857142
+      ],
+      "random_approx_ratio": 0.5119786666666667,
+      "confidence_pass": [
+        true
+      ],
+      "effective_approx_ratio": [
+        0.41967847229160915
+      ],
+      "score": {
+        "value": 0.41967847229160915,
+        "uncertainty": null
+      }
+    },
+    "runtime_seconds": 40.950363,
+    "suite": {
+      "id": "c529c29f-e985-4802-a5d7-4f9e32e445f1",
+      "name": "lr_qaoa_1d_scale_suite"
+    },
+    "platform": {
+      "device": "ibm_miami",
+      "device_metadata": {
+        "num_qubits": 120,
+        "simulator": false,
+        "version": "1.0.3"
+      },
+      "provider": "ibm"
+    },
+    "params": {
+      "benchmark_name": "Linear Ramp QAOA",
+      "confidence_level": 0.999,
+      "delta_beta": 0.3,
+      "delta_gamma": 0.6,
+      "graph_type": "1D",
+      "num_qubits": 100,
+      "num_random_trials": 25,
+      "qaoa_layers": [
+        10
+      ],
+      "seed": 123,
+      "shots": 1000,
+      "trials": 10
+    }
+  }
+]
