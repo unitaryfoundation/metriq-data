@@ -1,0 +1,42 @@
+[
+  {
+    "app_version": "0.7.0",
+    "timestamp": "2026-06-11T17:26:43.943747",
+    "suite_id": null,
+    "job_type": "Mirror Circuits",
+    "results": {
+      "success_probability": {
+        "value": 1.0,
+        "uncertainty": 0.0
+      },
+      "polarization": {
+        "value": 1.0,
+        "uncertainty": 0.0
+      },
+      "binary_success": true,
+      "score": {
+        "value": 1.0,
+        "uncertainty": 0.0
+      }
+    },
+    "platform": {
+      "device": "catalyst_q_v3_1",
+      "device_metadata": {
+        "num_qubits": 2000,
+        "simulator": true,
+        "version": "3.1.0-turbo"
+      },
+      "provider": "catalystq"
+    },
+    "params": {
+      "benchmark_name": "Mirror Circuits",
+      "num_circuits": 5,
+      "num_layers": 8,
+      "seed": 7,
+      "shots": 1000,
+      "two_qubit_gate_name": "CNOT",
+      "two_qubit_gate_prob": 0.3,
+      "width": 16
+    }
+  }
+]
