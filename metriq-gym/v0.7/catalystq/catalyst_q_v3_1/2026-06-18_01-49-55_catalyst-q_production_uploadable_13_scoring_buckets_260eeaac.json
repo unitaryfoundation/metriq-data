@@ -1,0 +1,486 @@
+[
+  {
+    "app_version": "0.7.0",
+    "timestamp": "2026-06-18T01:49:55.394135",
+    "suite_id": "9ff8df3d-6c16-4415-9565-0f07520a1a14",
+    "job_type": "WIT",
+    "results": {
+      "expectation_value": {
+        "value": 0.9954833984375,
+        "uncertainty": 0.0007408459810776522
+      },
+      "score": {
+        "value": 0.9954833984375,
+        "uncertainty": 0.0007408459810776522
+      }
+    },
+    "suite": {
+      "id": "9ff8df3d-6c16-4415-9565-0f07520a1a14",
+      "name": "Catalyst-Q production uploadable 13 scoring buckets"
+    },
+    "platform": {
+      "device": "catalyst_q_v3_1",
+      "device_metadata": {
+        "num_qubits": 2000,
+        "simulator": true,
+        "version": "3.1.0-turbo"
+      },
+      "provider": "catalystq"
+    },
+    "params": {
+      "benchmark_name": "WIT",
+      "num_qubits": 7,
+      "shots": 8192
+    }
+  },
+  {
+    "app_version": "0.7.0",
+    "timestamp": "2026-06-18T01:49:55.575860",
+    "suite_id": "9ff8df3d-6c16-4415-9565-0f07520a1a14",
+    "job_type": "QML Kernel",
+    "results": {
+      "accuracy_score": {
+        "value": 1.0,
+        "uncertainty": 0.0
+      },
+      "score": {
+        "value": 1.0,
+        "uncertainty": 0.0
+      }
+    },
+    "suite": {
+      "id": "9ff8df3d-6c16-4415-9565-0f07520a1a14",
+      "name": "Catalyst-Q production uploadable 13 scoring buckets"
+    },
+    "platform": {
+      "device": "catalyst_q_v3_1",
+      "device_metadata": {
+        "num_qubits": 2000,
+        "simulator": true,
+        "version": "3.1.0-turbo"
+      },
+      "provider": "catalystq"
+    },
+    "params": {
+      "benchmark_name": "QML Kernel",
+      "num_qubits": 10,
+      "shots": 1000
+    }
+  },
+  {
+    "app_version": "0.7.0",
+    "timestamp": "2026-06-18T01:49:55.772475",
+    "suite_id": "9ff8df3d-6c16-4415-9565-0f07520a1a14",
+    "job_type": "QML Kernel",
+    "results": {
+      "accuracy_score": {
+        "value": 1.0,
+        "uncertainty": 0.0
+      },
+      "score": {
+        "value": 1.0,
+        "uncertainty": 0.0
+      }
+    },
+    "suite": {
+      "id": "9ff8df3d-6c16-4415-9565-0f07520a1a14",
+      "name": "Catalyst-Q production uploadable 13 scoring buckets"
+    },
+    "platform": {
+      "device": "catalyst_q_v3_1",
+      "device_metadata": {
+        "num_qubits": 2000,
+        "simulator": true,
+        "version": "3.1.0-turbo"
+      },
+      "provider": "catalystq"
+    },
+    "params": {
+      "benchmark_name": "QML Kernel",
+      "num_qubits": 20,
+      "shots": 1000
+    }
+  },
+  {
+    "app_version": "0.7.0",
+    "timestamp": "2026-06-18T01:49:55.988502",
+    "suite_id": "9ff8df3d-6c16-4415-9565-0f07520a1a14",
+    "job_type": "QML Kernel",
+    "results": {
+      "accuracy_score": {
+        "value": 1.0,
+        "uncertainty": 0.0
+      },
+      "score": {
+        "value": 1.0,
+        "uncertainty": 0.0
+      }
+    },
+    "suite": {
+      "id": "9ff8df3d-6c16-4415-9565-0f07520a1a14",
+      "name": "Catalyst-Q production uploadable 13 scoring buckets"
+    },
+    "platform": {
+      "device": "catalyst_q_v3_1",
+      "device_metadata": {
+        "num_qubits": 2000,
+        "simulator": true,
+        "version": "3.1.0-turbo"
+      },
+      "provider": "catalystq"
+    },
+    "params": {
+      "benchmark_name": "QML Kernel",
+      "num_qubits": 30,
+      "shots": 1000
+    }
+  },
+  {
+    "app_version": "0.7.0",
+    "timestamp": "2026-06-18T01:49:56.201255",
+    "suite_id": "9ff8df3d-6c16-4415-9565-0f07520a1a14",
+    "job_type": "QML Kernel",
+    "results": {
+      "accuracy_score": {
+        "value": 1.0,
+        "uncertainty": 0.0
+      },
+      "score": {
+        "value": 1.0,
+        "uncertainty": 0.0
+      }
+    },
+    "suite": {
+      "id": "9ff8df3d-6c16-4415-9565-0f07520a1a14",
+      "name": "Catalyst-Q production uploadable 13 scoring buckets"
+    },
+    "platform": {
+      "device": "catalyst_q_v3_1",
+      "device_metadata": {
+        "num_qubits": 2000,
+        "simulator": true,
+        "version": "3.1.0-turbo"
+      },
+      "provider": "catalystq"
+    },
+    "params": {
+      "benchmark_name": "QML Kernel",
+      "num_qubits": 50,
+      "shots": 1000
+    }
+  },
+  {
+    "app_version": "0.7.0",
+    "timestamp": "2026-06-18T01:49:59.312790",
+    "suite_id": "9ff8df3d-6c16-4415-9565-0f07520a1a14",
+    "job_type": "Mirror Circuits",
+    "results": {
+      "success_probability": {
+        "value": 1.0,
+        "uncertainty": 0.0
+      },
+      "polarization": {
+        "value": 1.0,
+        "uncertainty": 0.0
+      },
+      "binary_success": true,
+      "score": {
+        "value": 1.0,
+        "uncertainty": 0.0
+      }
+    },
+    "suite": {
+      "id": "9ff8df3d-6c16-4415-9565-0f07520a1a14",
+      "name": "Catalyst-Q production uploadable 13 scoring buckets"
+    },
+    "platform": {
+      "device": "catalyst_q_v3_1",
+      "device_metadata": {
+        "num_qubits": 2000,
+        "simulator": true,
+        "version": "3.1.0-turbo"
+      },
+      "provider": "catalystq"
+    },
+    "params": {
+      "benchmark_name": "Mirror Circuits",
+      "num_circuits": 10,
+      "num_layers": 64,
+      "seed": 12345,
+      "shots": 1000,
+      "two_qubit_gate_name": "CNOT",
+      "two_qubit_gate_prob": 0.5,
+      "width": 8
+    }
+  },
+  {
+    "app_version": "0.7.0",
+    "timestamp": "2026-06-18T01:50:02.553218",
+    "suite_id": "9ff8df3d-6c16-4415-9565-0f07520a1a14",
+    "job_type": "Mirror Circuits",
+    "results": {
+      "success_probability": {
+        "value": 1.0,
+        "uncertainty": 0.0
+      },
+      "polarization": {
+        "value": 1.0,
+        "uncertainty": 0.0
+      },
+      "binary_success": true,
+      "score": {
+        "value": 1.0,
+        "uncertainty": 0.0
+      }
+    },
+    "suite": {
+      "id": "9ff8df3d-6c16-4415-9565-0f07520a1a14",
+      "name": "Catalyst-Q production uploadable 13 scoring buckets"
+    },
+    "platform": {
+      "device": "catalyst_q_v3_1",
+      "device_metadata": {
+        "num_qubits": 2000,
+        "simulator": true,
+        "version": "3.1.0-turbo"
+      },
+      "provider": "catalystq"
+    },
+    "params": {
+      "benchmark_name": "Mirror Circuits",
+      "num_circuits": 10,
+      "num_layers": 32,
+      "seed": 12345,
+      "shots": 1000,
+      "two_qubit_gate_name": "CNOT",
+      "two_qubit_gate_prob": 0.5,
+      "width": 16
+    }
+  },
+  {
+    "app_version": "0.7.0",
+    "timestamp": "2026-06-18T01:50:08.431166",
+    "suite_id": "9ff8df3d-6c16-4415-9565-0f07520a1a14",
+    "job_type": "Mirror Circuits",
+    "results": {
+      "success_probability": {
+        "value": 1.0,
+        "uncertainty": 0.0
+      },
+      "polarization": {
+        "value": 1.0,
+        "uncertainty": 0.0
+      },
+      "binary_success": true,
+      "score": {
+        "value": 1.0,
+        "uncertainty": 0.0
+      }
+    },
+    "suite": {
+      "id": "9ff8df3d-6c16-4415-9565-0f07520a1a14",
+      "name": "Catalyst-Q production uploadable 13 scoring buckets"
+    },
+    "platform": {
+      "device": "catalyst_q_v3_1",
+      "device_metadata": {
+        "num_qubits": 2000,
+        "simulator": true,
+        "version": "3.1.0-turbo"
+      },
+      "provider": "catalystq"
+    },
+    "params": {
+      "benchmark_name": "Mirror Circuits",
+      "num_circuits": 10,
+      "num_layers": 16,
+      "seed": 12345,
+      "shots": 1000,
+      "two_qubit_gate_name": "CNOT",
+      "two_qubit_gate_prob": 0.5,
+      "width": 24
+    }
+  },
+  {
+    "app_version": "0.7.0",
+    "timestamp": "2026-06-18T01:50:11.314043",
+    "suite_id": "9ff8df3d-6c16-4415-9565-0f07520a1a14",
+    "job_type": "Mirror Circuits",
+    "results": {
+      "success_probability": {
+        "value": 1.0,
+        "uncertainty": 0.0
+      },
+      "polarization": {
+        "value": 1.0,
+        "uncertainty": 0.0
+      },
+      "binary_success": true,
+      "score": {
+        "value": 1.0,
+        "uncertainty": 0.0
+      }
+    },
+    "suite": {
+      "id": "9ff8df3d-6c16-4415-9565-0f07520a1a14",
+      "name": "Catalyst-Q production uploadable 13 scoring buckets"
+    },
+    "platform": {
+      "device": "catalyst_q_v3_1",
+      "device_metadata": {
+        "num_qubits": 2000,
+        "simulator": true,
+        "version": "3.1.0-turbo"
+      },
+      "provider": "catalystq"
+    },
+    "params": {
+      "benchmark_name": "Mirror Circuits",
+      "num_circuits": 10,
+      "num_layers": 8,
+      "seed": 12345,
+      "shots": 1000,
+      "two_qubit_gate_name": "CNOT",
+      "two_qubit_gate_prob": 0.5,
+      "width": 32
+    }
+  },
+  {
+    "app_version": "0.7.0",
+    "timestamp": "2026-06-18T01:50:14.240647",
+    "suite_id": "9ff8df3d-6c16-4415-9565-0f07520a1a14",
+    "job_type": "Mirror Circuits",
+    "results": {
+      "success_probability": {
+        "value": 1.0,
+        "uncertainty": 0.0
+      },
+      "polarization": {
+        "value": 1.0,
+        "uncertainty": 0.0
+      },
+      "binary_success": true,
+      "score": {
+        "value": 1.0,
+        "uncertainty": 0.0
+      }
+    },
+    "suite": {
+      "id": "9ff8df3d-6c16-4415-9565-0f07520a1a14",
+      "name": "Catalyst-Q production uploadable 13 scoring buckets"
+    },
+    "platform": {
+      "device": "catalyst_q_v3_1",
+      "device_metadata": {
+        "num_qubits": 2000,
+        "simulator": true,
+        "version": "3.1.0-turbo"
+      },
+      "provider": "catalystq"
+    },
+    "params": {
+      "benchmark_name": "Mirror Circuits",
+      "num_circuits": 10,
+      "num_layers": 4,
+      "seed": 12345,
+      "shots": 1000,
+      "two_qubit_gate_name": "CNOT",
+      "two_qubit_gate_prob": 0.5,
+      "width": 64
+    }
+  },
+  {
+    "app_version": "0.7.0",
+    "timestamp": "2026-06-18T01:50:17.350168",
+    "suite_id": "9ff8df3d-6c16-4415-9565-0f07520a1a14",
+    "job_type": "Mirror Circuits",
+    "results": {
+      "success_probability": {
+        "value": 1.0,
+        "uncertainty": 0.0
+      },
+      "polarization": {
+        "value": 1.0,
+        "uncertainty": 0.0
+      },
+      "binary_success": true,
+      "score": {
+        "value": 1.0,
+        "uncertainty": 0.0
+      }
+    },
+    "suite": {
+      "id": "9ff8df3d-6c16-4415-9565-0f07520a1a14",
+      "name": "Catalyst-Q production uploadable 13 scoring buckets"
+    },
+    "platform": {
+      "device": "catalyst_q_v3_1",
+      "device_metadata": {
+        "num_qubits": 2000,
+        "simulator": true,
+        "version": "3.1.0-turbo"
+      },
+      "provider": "catalystq"
+    },
+    "params": {
+      "benchmark_name": "Mirror Circuits",
+      "num_circuits": 10,
+      "num_layers": 2,
+      "seed": 12345,
+      "shots": 1000,
+      "two_qubit_gate_name": "CNOT",
+      "two_qubit_gate_prob": 0.5,
+      "width": 128
+    }
+  },
+  {
+    "app_version": "0.7.0",
+    "timestamp": "2026-06-18T01:50:27.896406",
+    "suite_id": "9ff8df3d-6c16-4415-9565-0f07520a1a14",
+    "job_type": "Linear Ramp QAOA",
+    "results": {
+      "approx_ratio": [
+        0.8880700000000001
+      ],
+      "random_approx_ratio": 0.49990133333333336,
+      "confidence_pass": [
+        true
+      ],
+      "effective_approx_ratio": [
+        0.7761841663245121
+      ],
+      "score": {
+        "value": 0.7761841663245121,
+        "uncertainty": null
+      }
+    },
+    "suite": {
+      "id": "9ff8df3d-6c16-4415-9565-0f07520a1a14",
+      "name": "Catalyst-Q production uploadable 13 scoring buckets"
+    },
+    "platform": {
+      "device": "catalyst_q_v3_1",
+      "device_metadata": {
+        "num_qubits": 2000,
+        "simulator": true,
+        "version": "3.1.0-turbo"
+      },
+      "provider": "catalystq"
+    },
+    "params": {
+      "benchmark_name": "Linear Ramp QAOA",
+      "confidence_level": 0.999,
+      "delta_beta": 0.3,
+      "delta_gamma": 0.6,
+      "graph_type": "1D",
+      "num_qubits": 10,
+      "num_random_trials": 25,
+      "qaoa_layers": [
+        10
+      ],
+      "seed": 123,
+      "shots": 1000,
+      "trials": 10
+    }
+  }
+]
