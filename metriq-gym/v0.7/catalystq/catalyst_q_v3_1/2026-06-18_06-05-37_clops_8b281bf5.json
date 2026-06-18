@@ -1,0 +1,37 @@
+[
+  {
+    "app_version": "0.7.0",
+    "timestamp": "2026-06-18T06:05:37.054368",
+    "suite_id": null,
+    "job_type": "CLOPS",
+    "results": {
+      "clops_score": 371943.63127627317,
+      "steady_state_clops": null,
+      "score": {
+        "value": 371943.63127627317,
+        "uncertainty": null
+      }
+    },
+    "runtime_seconds": 80.6573832090071,
+    "platform": {
+      "device": "catalyst_q_v3_1",
+      "device_metadata": {
+        "num_qubits": 2000,
+        "simulator": true,
+        "version": "3.1.0"
+      },
+      "provider": "catalystq"
+    },
+    "params": {
+      "benchmark_name": "CLOPS",
+      "mode": "instantiated",
+      "num_circuits": 100,
+      "num_layers": 100,
+      "num_qubits": 8,
+      "seed": 0,
+      "shots": 3000,
+      "two_qubit_gate": "cz",
+      "use_session": false
+    }
+  }
+]
