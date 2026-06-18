@@ -1,0 +1,599 @@
+[
+  {
+    "app_version": "0.7.0",
+    "timestamp": "2026-06-18T02:00:43.390912",
+    "suite_id": "67b0ef17-5a27-4ee2-91a0-917a8bdef5ae",
+    "job_type": "WIT",
+    "results": {
+      "expectation_value": {
+        "value": 0.9954833984375,
+        "uncertainty": 0.0007408459810776522
+      },
+      "score": {
+        "value": 0.9954833984375,
+        "uncertainty": 0.0007408459810776522
+      }
+    },
+    "suite": {
+      "id": "67b0ef17-5a27-4ee2-91a0-917a8bdef5ae",
+      "name": "Catalyst-Q production uploadable 13 scoring buckets"
+    },
+    "platform": {
+      "device": "catalyst_q_v3_1",
+      "device_metadata": {
+        "num_qubits": 256,
+        "simulator": true,
+        "version": "3.1.0-turbo"
+      },
+      "provider": "catalystq"
+    },
+    "params": {
+      "benchmark_name": "WIT",
+      "num_qubits": 7,
+      "shots": 8192
+    }
+  },
+  {
+    "app_version": "0.7.0",
+    "timestamp": "2026-06-18T02:00:43.556419",
+    "suite_id": "67b0ef17-5a27-4ee2-91a0-917a8bdef5ae",
+    "job_type": "QML Kernel",
+    "results": {
+      "accuracy_score": {
+        "value": 1.0,
+        "uncertainty": 0.0
+      },
+      "score": {
+        "value": 1.0,
+        "uncertainty": 0.0
+      }
+    },
+    "suite": {
+      "id": "67b0ef17-5a27-4ee2-91a0-917a8bdef5ae",
+      "name": "Catalyst-Q production uploadable 13 scoring buckets"
+    },
+    "platform": {
+      "device": "catalyst_q_v3_1",
+      "device_metadata": {
+        "num_qubits": 256,
+        "simulator": true,
+        "version": "3.1.0-turbo"
+      },
+      "provider": "catalystq"
+    },
+    "params": {
+      "benchmark_name": "QML Kernel",
+      "num_qubits": 10,
+      "shots": 1000
+    }
+  },
+  {
+    "app_version": "0.7.0",
+    "timestamp": "2026-06-18T02:00:43.791380",
+    "suite_id": "67b0ef17-5a27-4ee2-91a0-917a8bdef5ae",
+    "job_type": "QML Kernel",
+    "results": {
+      "accuracy_score": {
+        "value": 1.0,
+        "uncertainty": 0.0
+      },
+      "score": {
+        "value": 1.0,
+        "uncertainty": 0.0
+      }
+    },
+    "suite": {
+      "id": "67b0ef17-5a27-4ee2-91a0-917a8bdef5ae",
+      "name": "Catalyst-Q production uploadable 13 scoring buckets"
+    },
+    "platform": {
+      "device": "catalyst_q_v3_1",
+      "device_metadata": {
+        "num_qubits": 256,
+        "simulator": true,
+        "version": "3.1.0-turbo"
+      },
+      "provider": "catalystq"
+    },
+    "params": {
+      "benchmark_name": "QML Kernel",
+      "num_qubits": 20,
+      "shots": 1000
+    }
+  },
+  {
+    "app_version": "0.7.0",
+    "timestamp": "2026-06-18T02:00:45.380957",
+    "suite_id": "67b0ef17-5a27-4ee2-91a0-917a8bdef5ae",
+    "job_type": "QML Kernel",
+    "results": {
+      "accuracy_score": {
+        "value": 1.0,
+        "uncertainty": 0.0
+      },
+      "score": {
+        "value": 1.0,
+        "uncertainty": 0.0
+      }
+    },
+    "suite": {
+      "id": "67b0ef17-5a27-4ee2-91a0-917a8bdef5ae",
+      "name": "Catalyst-Q production uploadable 13 scoring buckets"
+    },
+    "platform": {
+      "device": "catalyst_q_v3_1",
+      "device_metadata": {
+        "num_qubits": 256,
+        "simulator": true,
+        "version": "3.1.0-turbo"
+      },
+      "provider": "catalystq"
+    },
+    "params": {
+      "benchmark_name": "QML Kernel",
+      "num_qubits": 30,
+      "shots": 1000
+    }
+  },
+  {
+    "app_version": "0.7.0",
+    "timestamp": "2026-06-18T02:00:45.621690",
+    "suite_id": "67b0ef17-5a27-4ee2-91a0-917a8bdef5ae",
+    "job_type": "QML Kernel",
+    "results": {
+      "accuracy_score": {
+        "value": 1.0,
+        "uncertainty": 0.0
+      },
+      "score": {
+        "value": 1.0,
+        "uncertainty": 0.0
+      }
+    },
+    "suite": {
+      "id": "67b0ef17-5a27-4ee2-91a0-917a8bdef5ae",
+      "name": "Catalyst-Q production uploadable 13 scoring buckets"
+    },
+    "platform": {
+      "device": "catalyst_q_v3_1",
+      "device_metadata": {
+        "num_qubits": 256,
+        "simulator": true,
+        "version": "3.1.0-turbo"
+      },
+      "provider": "catalystq"
+    },
+    "params": {
+      "benchmark_name": "QML Kernel",
+      "num_qubits": 50,
+      "shots": 1000
+    }
+  },
+  {
+    "app_version": "0.7.0",
+    "timestamp": "2026-06-18T02:00:54.374007",
+    "suite_id": "67b0ef17-5a27-4ee2-91a0-917a8bdef5ae",
+    "job_type": "Mirror Circuits",
+    "results": {
+      "success_probability": {
+        "value": 1.0,
+        "uncertainty": 0.0
+      },
+      "polarization": {
+        "value": 1.0,
+        "uncertainty": 0.0
+      },
+      "binary_success": true,
+      "score": {
+        "value": 1.0,
+        "uncertainty": 0.0
+      }
+    },
+    "suite": {
+      "id": "67b0ef17-5a27-4ee2-91a0-917a8bdef5ae",
+      "name": "Catalyst-Q production uploadable 13 scoring buckets"
+    },
+    "platform": {
+      "device": "catalyst_q_v3_1",
+      "device_metadata": {
+        "num_qubits": 256,
+        "simulator": true,
+        "version": "3.1.0-turbo"
+      },
+      "provider": "catalystq"
+    },
+    "params": {
+      "benchmark_name": "Mirror Circuits",
+      "num_circuits": 10,
+      "num_layers": 64,
+      "seed": 12345,
+      "shots": 1000,
+      "two_qubit_gate_name": "CNOT",
+      "two_qubit_gate_prob": 0.5,
+      "width": 8
+    }
+  },
+  {
+    "app_version": "0.7.0",
+    "timestamp": "2026-06-18T02:01:00.281009",
+    "suite_id": "67b0ef17-5a27-4ee2-91a0-917a8bdef5ae",
+    "job_type": "Mirror Circuits",
+    "results": {
+      "success_probability": {
+        "value": 1.0,
+        "uncertainty": 0.0
+      },
+      "polarization": {
+        "value": 1.0,
+        "uncertainty": 0.0
+      },
+      "binary_success": true,
+      "score": {
+        "value": 1.0,
+        "uncertainty": 0.0
+      }
+    },
+    "suite": {
+      "id": "67b0ef17-5a27-4ee2-91a0-917a8bdef5ae",
+      "name": "Catalyst-Q production uploadable 13 scoring buckets"
+    },
+    "platform": {
+      "device": "catalyst_q_v3_1",
+      "device_metadata": {
+        "num_qubits": 256,
+        "simulator": true,
+        "version": "3.1.0-turbo"
+      },
+      "provider": "catalystq"
+    },
+    "params": {
+      "benchmark_name": "Mirror Circuits",
+      "num_circuits": 10,
+      "num_layers": 32,
+      "seed": 12345,
+      "shots": 1000,
+      "two_qubit_gate_name": "CNOT",
+      "two_qubit_gate_prob": 0.5,
+      "width": 16
+    }
+  },
+  {
+    "app_version": "0.7.0",
+    "timestamp": "2026-06-18T02:01:04.055641",
+    "suite_id": "67b0ef17-5a27-4ee2-91a0-917a8bdef5ae",
+    "job_type": "Mirror Circuits",
+    "results": {
+      "success_probability": {
+        "value": 1.0,
+        "uncertainty": 0.0
+      },
+      "polarization": {
+        "value": 1.0,
+        "uncertainty": 0.0
+      },
+      "binary_success": true,
+      "score": {
+        "value": 1.0,
+        "uncertainty": 0.0
+      }
+    },
+    "suite": {
+      "id": "67b0ef17-5a27-4ee2-91a0-917a8bdef5ae",
+      "name": "Catalyst-Q production uploadable 13 scoring buckets"
+    },
+    "platform": {
+      "device": "catalyst_q_v3_1",
+      "device_metadata": {
+        "num_qubits": 256,
+        "simulator": true,
+        "version": "3.1.0-turbo"
+      },
+      "provider": "catalystq"
+    },
+    "params": {
+      "benchmark_name": "Mirror Circuits",
+      "num_circuits": 10,
+      "num_layers": 16,
+      "seed": 12345,
+      "shots": 1000,
+      "two_qubit_gate_name": "CNOT",
+      "two_qubit_gate_prob": 0.5,
+      "width": 24
+    }
+  },
+  {
+    "app_version": "0.7.0",
+    "timestamp": "2026-06-18T02:01:07.714994",
+    "suite_id": "67b0ef17-5a27-4ee2-91a0-917a8bdef5ae",
+    "job_type": "Mirror Circuits",
+    "results": {
+      "success_probability": {
+        "value": 1.0,
+        "uncertainty": 0.0
+      },
+      "polarization": {
+        "value": 1.0,
+        "uncertainty": 0.0
+      },
+      "binary_success": true,
+      "score": {
+        "value": 1.0,
+        "uncertainty": 0.0
+      }
+    },
+    "suite": {
+      "id": "67b0ef17-5a27-4ee2-91a0-917a8bdef5ae",
+      "name": "Catalyst-Q production uploadable 13 scoring buckets"
+    },
+    "platform": {
+      "device": "catalyst_q_v3_1",
+      "device_metadata": {
+        "num_qubits": 256,
+        "simulator": true,
+        "version": "3.1.0-turbo"
+      },
+      "provider": "catalystq"
+    },
+    "params": {
+      "benchmark_name": "Mirror Circuits",
+      "num_circuits": 10,
+      "num_layers": 8,
+      "seed": 12345,
+      "shots": 1000,
+      "two_qubit_gate_name": "CNOT",
+      "two_qubit_gate_prob": 0.5,
+      "width": 32
+    }
+  },
+  {
+    "app_version": "0.7.0",
+    "timestamp": "2026-06-18T02:01:12.849526",
+    "suite_id": "67b0ef17-5a27-4ee2-91a0-917a8bdef5ae",
+    "job_type": "Mirror Circuits",
+    "results": {
+      "success_probability": {
+        "value": 1.0,
+        "uncertainty": 0.0
+      },
+      "polarization": {
+        "value": 1.0,
+        "uncertainty": 0.0
+      },
+      "binary_success": true,
+      "score": {
+        "value": 1.0,
+        "uncertainty": 0.0
+      }
+    },
+    "suite": {
+      "id": "67b0ef17-5a27-4ee2-91a0-917a8bdef5ae",
+      "name": "Catalyst-Q production uploadable 13 scoring buckets"
+    },
+    "platform": {
+      "device": "catalyst_q_v3_1",
+      "device_metadata": {
+        "num_qubits": 256,
+        "simulator": true,
+        "version": "3.1.0-turbo"
+      },
+      "provider": "catalystq"
+    },
+    "params": {
+      "benchmark_name": "Mirror Circuits",
+      "num_circuits": 10,
+      "num_layers": 4,
+      "seed": 12345,
+      "shots": 1000,
+      "two_qubit_gate_name": "CNOT",
+      "two_qubit_gate_prob": 0.5,
+      "width": 64
+    }
+  },
+  {
+    "app_version": "0.7.0",
+    "timestamp": "2026-06-18T02:01:24.714989",
+    "suite_id": "67b0ef17-5a27-4ee2-91a0-917a8bdef5ae",
+    "job_type": "Linear Ramp QAOA",
+    "results": {
+      "approx_ratio": [
+        0.88676
+      ],
+      "random_approx_ratio": 0.49990133333333336,
+      "confidence_pass": [
+        true
+      ],
+      "effective_approx_ratio": [
+        0.7735646832358414
+      ],
+      "score": {
+        "value": 0.7735646832358414,
+        "uncertainty": null
+      }
+    },
+    "suite": {
+      "id": "67b0ef17-5a27-4ee2-91a0-917a8bdef5ae",
+      "name": "Catalyst-Q production uploadable 13 scoring buckets"
+    },
+    "platform": {
+      "device": "catalyst_q_v3_1",
+      "device_metadata": {
+        "num_qubits": 256,
+        "simulator": true,
+        "version": "3.1.0-turbo"
+      },
+      "provider": "catalystq"
+    },
+    "params": {
+      "benchmark_name": "Linear Ramp QAOA",
+      "confidence_level": 0.999,
+      "delta_beta": 0.3,
+      "delta_gamma": 0.6,
+      "graph_type": "1D",
+      "num_qubits": 10,
+      "num_random_trials": 25,
+      "qaoa_layers": [
+        10
+      ],
+      "seed": 123,
+      "shots": 1000,
+      "trials": 10
+    }
+  },
+  {
+    "app_version": "0.7.0",
+    "timestamp": "2026-06-18T02:15:13.911271",
+    "suite_id": "67b0ef17-5a27-4ee2-91a0-917a8bdef5ae",
+    "job_type": "EPLG",
+    "results": {
+      "chain_lengths": [
+        4,
+        6,
+        8,
+        10,
+        12,
+        14,
+        16,
+        18,
+        20,
+        22,
+        24,
+        26,
+        28,
+        30,
+        32,
+        34,
+        36,
+        38,
+        40,
+        42,
+        44,
+        46,
+        48,
+        50,
+        52,
+        54,
+        56,
+        58,
+        60,
+        62,
+        64,
+        66,
+        68,
+        70,
+        72,
+        74,
+        76,
+        78,
+        80,
+        82,
+        84,
+        86,
+        88,
+        90,
+        92,
+        94,
+        96,
+        98,
+        100
+      ],
+      "chain_eplgs": [
+        7.835188053917364e-11,
+        7.051670358748652e-11,
+        6.715872302720527e-11,
+        6.529321527892762e-11,
+        6.410605379869594e-11,
+        6.328415569356594e-11,
+        6.26815266357994e-11,
+        6.222056203597504e-11,
+        6.185674195080537e-11,
+        6.156219978237232e-11,
+        6.131883889537448e-11,
+        6.111444683654099e-11,
+        6.094036386627977e-11,
+        6.079026171335045e-11,
+        6.06594774410496e-11,
+        6.05445693580009e-11,
+        6.044287292894523e-11,
+        6.03520566855309e-11,
+        6.027067733782587e-11,
+        6.019718057359569e-11,
+        6.013045616981572e-11,
+        6.006972697036872e-11,
+        6.001421581913746e-11,
+        5.99631455600047e-11,
+        5.99160721037606e-11,
+        5.987266238349775e-11,
+        5.983236128770386e-11,
+        5.979483574947153e-11,
+        5.975986372419584e-11,
+        5.972722316727186e-11,
+        5.969669203409467e-11,
+        5.966793725775688e-11,
+        5.964095883825848e-11,
+        5.961553473099457e-11,
+        5.959155391366266e-11,
+        5.956890536396031e-11,
+        5.954736703728258e-11,
+        5.952704995593194e-11,
+        5.950773207530347e-11,
+        5.948941339539715e-11,
+        5.947187187160807e-11,
+        5.94552185262387e-11,
+        5.943934233698656e-11,
+        5.942413228154919e-11,
+        5.94095883599266e-11,
+        5.939571057211879e-11,
+        5.938249891812575e-11,
+        5.936973135334256e-11,
+        5.971356742406897e-11
+      ],
+      "eplg_10": 6.529321527892762e-11,
+      "eplg_20": 6.185674195080537e-11,
+      "eplg_50": 5.99631455600047e-11,
+      "eplg_100": 5.971356742406897e-11
+    },
+    "runtime_seconds": 781.0806839580036,
+    "suite": {
+      "id": "67b0ef17-5a27-4ee2-91a0-917a8bdef5ae",
+      "name": "Catalyst-Q production uploadable 13 scoring buckets"
+    },
+    "platform": {
+      "device": "catalyst_q_v3_1",
+      "device_metadata": {
+        "num_qubits": 256,
+        "simulator": true,
+        "version": "3.1.0-turbo"
+      },
+      "provider": "catalystq"
+    },
+    "params": {
+      "benchmark_name": "EPLG",
+      "constrain_rb_offset_b": true,
+      "decompose_clifford_ops": true,
+      "lengths": [
+        2,
+        4,
+        8,
+        16,
+        30,
+        50,
+        70,
+        100,
+        150,
+        200,
+        300,
+        500
+      ],
+      "num_qubits_in_chain": 100,
+      "num_samples": 10,
+      "one_qubit_basis_gates": [
+        "rz",
+        "rx",
+        "x"
+      ],
+      "seed": 12345,
+      "shots": 1000,
+      "two_qubit_gate": "cz"
+    }
+  }
+]
