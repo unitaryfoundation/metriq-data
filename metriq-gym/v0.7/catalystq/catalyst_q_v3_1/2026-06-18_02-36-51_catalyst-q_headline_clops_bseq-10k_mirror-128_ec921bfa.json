@@ -1,0 +1,77 @@
+[
+  {
+    "app_version": "0.7.0",
+    "timestamp": "2026-06-18T02:36:51.035153",
+    "suite_id": "5a66dddb-7415-4aba-9a28-3ac9956f54bc",
+    "job_type": "BSEQ",
+    "results": {
+      "largest_connected_size": 10000,
+      "fraction_connected": 1.0,
+      "score": {
+        "value": 10000.0,
+        "uncertainty": null
+      }
+    },
+    "suite": {
+      "id": "5a66dddb-7415-4aba-9a28-3ac9956f54bc",
+      "name": "Catalyst-Q headline (CLOPS + BSEQ-10k + mirror-128)"
+    },
+    "platform": {
+      "device": "catalyst_q_v3_1",
+      "device_metadata": {
+        "num_qubits": 10000,
+        "simulator": true,
+        "version": "3.1.0-turbo"
+      },
+      "provider": "catalystq"
+    },
+    "params": {
+      "benchmark_name": "BSEQ",
+      "shots": 1000
+    }
+  },
+  {
+    "app_version": "0.7.0",
+    "timestamp": "2026-06-18T02:36:56.268903",
+    "suite_id": "5a66dddb-7415-4aba-9a28-3ac9956f54bc",
+    "job_type": "Mirror Circuits",
+    "results": {
+      "success_probability": {
+        "value": 1.0,
+        "uncertainty": 0.0
+      },
+      "polarization": {
+        "value": 1.0,
+        "uncertainty": 0.0
+      },
+      "binary_success": true,
+      "score": {
+        "value": 1.0,
+        "uncertainty": 0.0
+      }
+    },
+    "suite": {
+      "id": "5a66dddb-7415-4aba-9a28-3ac9956f54bc",
+      "name": "Catalyst-Q headline (CLOPS + BSEQ-10k + mirror-128)"
+    },
+    "platform": {
+      "device": "catalyst_q_v3_1",
+      "device_metadata": {
+        "num_qubits": 10000,
+        "simulator": true,
+        "version": "3.1.0-turbo"
+      },
+      "provider": "catalystq"
+    },
+    "params": {
+      "benchmark_name": "Mirror Circuits",
+      "num_circuits": 10,
+      "num_layers": 2,
+      "seed": 12345,
+      "shots": 1000,
+      "two_qubit_gate_name": "CNOT",
+      "two_qubit_gate_prob": 0.5,
+      "width": 128
+    }
+  }
+]
