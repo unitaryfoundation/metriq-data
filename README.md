@@ -5,7 +5,57 @@
 This repository stores benchmark results and datasets collected with [metriq-gym](https://github.com/unitaryfoundation/metriq-gym).
 The data here is consumed by [metriq-web](https://github.com/unitaryfoundation/metriq-web) for presentation and analysis.
 
-Part of the [Metriq](https://metriq.info) project.
+Part of the [Metriq](https://github.com/unitaryfoundation/metriq) platform.
+
+## Dataset scope and upload policy
+
+`metriq-data` is a curated dataset of benchmark records from documented,
+reviewable, and reproducible execution targets. An execution target may be a
+physical quantum device or an approved simulator/reference backend.
+
+Results are eligible for inclusion only if they are generated through a
+supported execution path. A supported execution path means an integration in
+`metriq-gym` or another maintainer-approved tool. At present, `metriq-gym` is the
+only supported upload path.
+
+We currently accept results from:
+
+- public quantum hardware backends with an integration supported by `metriq-gym`;
+- documented laboratory or institutional quantum hardware, provided that the
+  results are reproducible by others with equivalent
+  access;
+- approved public simulators or reference backends, provided that they are
+  documented, versioned, backed by a reviewable implementation, and reproducible
+  by others (e.g. open source simulators with reputable implementations).
+
+We do not accept results from undocumented devices, private simulators,
+unpublished adapters, synthetic or fictional backends, ad hoc virtual backends,
+or unsupported execution paths.
+
+Passing schema validation is not sufficient for inclusion. The backend, execution
+path, and result must also be documented, reviewable, reproducible in principle,
+and within the current scope of the dataset.
+
+### Uploads from new devices
+
+If a device is not already supported, or is from an unsupported provider,
+please open an issue before submitting benchmark result files.
+The issue should describe:
+
+- the provider or access platform;
+- the device/backend name;
+- whether the target is physical hardware or a simulator;
+- how the target is accessed;
+- how the result can be reproduced, given appropriate access, credentials, and
+  credits;
+- the `metriq-gym` integration or other proposed supported execution path.
+
+It should also include a link to the device's documentation, if available.
+
+Please do not open data PRs for unsupported targets before the
+execution path has been discussed and accepted by the maintainers of this dataset.
+
+Maintainers may close issues or pull requests that fall outside this scope.
 
 ## Aggregation and Scoring
 
