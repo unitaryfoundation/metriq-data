@@ -39,7 +39,7 @@ and within the current scope of the dataset.
 ### Uploads from new devices
 
 If a device is not already supported, or is from an unsupported provider,
-please open an issue before submitting benchmark result files. 
+please open an issue before submitting benchmark result files.
 The issue should describe:
 
 - the provider or access platform;
@@ -50,7 +50,7 @@ The issue should describe:
   credits;
 - the `metriq-gym` integration or other proposed supported execution path.
 
-Please do not open data PRs for unsupported targets before the 
+Please do not open data PRs for unsupported targets before the
 execution path has been discussed and accepted by the maintainers of this dataset.
 
 Maintainers may close issues or pull requests that fall outside this scope.
