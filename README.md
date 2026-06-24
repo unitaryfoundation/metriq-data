@@ -50,6 +50,8 @@ The issue should describe:
   credits;
 - the `metriq-gym` integration or other proposed supported execution path.
 
+It should also include a link to the device's documentation, if available.
+
 Please do not open data PRs for unsupported targets before the
 execution path has been discussed and accepted by the maintainers of this dataset.
 
