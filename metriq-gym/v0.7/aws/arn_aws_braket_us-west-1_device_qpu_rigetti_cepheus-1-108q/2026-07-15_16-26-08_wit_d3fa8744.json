@@ -15,7 +15,7 @@
       }
     },
     "platform": {
-      "device": "arn:aws:braket:us-west-1::device/qpu/rigetti/Cepheus-1-108Q",
+      "device": "rigetti_cepheus-1-108q",
       "device_metadata": {
         "num_qubits": 107,
         "simulator": false
