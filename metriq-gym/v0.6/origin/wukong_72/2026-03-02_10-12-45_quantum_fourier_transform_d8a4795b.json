@@ -1,0 +1,36 @@
+[
+  {
+    "app_version": "0.6.2.dev20+g245253d47",
+    "timestamp": "2026-03-02T10:12:45.251530",
+    "suite_id": null,
+    "job_type": "Quantum Fourier Transform",
+    "results": {
+      "accuracy_score": {
+        "value": 0.0034000000000000002,
+        "uncertainty": 0.0031622776601683794
+      },
+      "score": {
+        "value": 0.0034000000000000002,
+        "uncertainty": 0.0031622776601683794
+      }
+    },
+    "platform": {
+      "device": "wukong_72",
+      "device_metadata": {
+        "num_qubits": 72,
+        "simulator": false
+      },
+      "provider": "origin"
+    },
+    "params": {
+      "benchmark_name": "Quantum Fourier Transform",
+      "max_circuits": 3,
+      "max_qubits": 20,
+      "method": 1,
+      "min_qubits": 4,
+      "shots": 1000,
+      "skip_qubits": 4,
+      "use_midcircuit_measurement": false
+    }
+  }
+]
