@@ -1,0 +1,152 @@
+[
+  {
+    "app_version": "2.dev8+g0ccc671f8",
+    "timestamp": "2026-07-10T15:14:15.584725",
+    "suite_id": "262f234b-5065-42cb-bfb6-714e7ea4e723",
+    "job_type": "Linear Ramp QAOA",
+    "results": {
+      "approx_ratio": [
+        0.6607666666666667
+      ],
+      "random_approx_ratio": 0.49990133333333336,
+      "confidence_pass": [
+        true
+      ],
+      "effective_approx_ratio": [
+        0.3216671910076412
+      ],
+      "score": {
+        "value": 0.3216671910076412,
+        "uncertainty": null
+      }
+    },
+    "suite": {
+      "id": "262f234b-5065-42cb-bfb6-714e7ea4e723",
+      "name": "lr_qaoa_1d_scale_suite"
+    },
+    "platform": {
+      "device": "ionq_forte-1",
+      "device_metadata": {
+        "num_qubits": 36,
+        "simulator": false
+      },
+      "provider": "aws"
+    },
+    "circuit_metadata": {
+      "input_two_qubit_gate_counts": [
+        90,
+        90,
+        90,
+        90,
+        90,
+        90,
+        90,
+        90,
+        90,
+        90
+      ],
+      "transpiled_two_qubit_gate_counts": [
+        90,
+        90,
+        90,
+        90,
+        90,
+        90,
+        90,
+        90,
+        90,
+        90
+      ]
+    },
+    "params": {
+      "benchmark_name": "Linear Ramp QAOA",
+      "confidence_level": 0.999,
+      "delta_beta": 0.3,
+      "delta_gamma": 0.6,
+      "graph_type": "1D",
+      "num_qubits": 10,
+      "num_random_trials": 25,
+      "qaoa_layers": [
+        10
+      ],
+      "seed": 123,
+      "shots": 1000,
+      "trials": 10
+    }
+  },
+  {
+    "app_version": "2.dev8+g0ccc671f8",
+    "timestamp": "2026-07-10T15:14:26.659089",
+    "suite_id": "262f234b-5065-42cb-bfb6-714e7ea4e723",
+    "job_type": "Linear Ramp QAOA",
+    "results": {
+      "approx_ratio": [
+        0.7189144927536236
+      ],
+      "random_approx_ratio": 0.5007686956521739,
+      "confidence_pass": [
+        true
+      ],
+      "effective_approx_ratio": [
+        0.436963377900402
+      ],
+      "score": {
+        "value": 0.436963377900402,
+        "uncertainty": null
+      }
+    },
+    "suite": {
+      "id": "262f234b-5065-42cb-bfb6-714e7ea4e723",
+      "name": "lr_qaoa_1d_scale_suite"
+    },
+    "platform": {
+      "device": "ionq_forte-1",
+      "device_metadata": {
+        "num_qubits": 36,
+        "simulator": false
+      },
+      "provider": "aws"
+    },
+    "circuit_metadata": {
+      "input_two_qubit_gate_counts": [
+        190,
+        190,
+        190,
+        190,
+        190,
+        190,
+        190,
+        190,
+        190,
+        190
+      ],
+      "transpiled_two_qubit_gate_counts": [
+        190,
+        190,
+        190,
+        190,
+        190,
+        190,
+        190,
+        190,
+        190,
+        190
+      ]
+    },
+    "params": {
+      "benchmark_name": "Linear Ramp QAOA",
+      "confidence_level": 0.999,
+      "delta_beta": 0.3,
+      "delta_gamma": 0.6,
+      "graph_type": "1D",
+      "num_qubits": 20,
+      "num_random_trials": 25,
+      "qaoa_layers": [
+        10
+      ],
+      "seed": 123,
+      "shots": 1000,
+      "trials": 10
+    }
+  }
+]
