@@ -6,7 +6,32 @@ from datetime import datetime, timezone
 from typing import Any
 
 
+AWS_PROVIDER = "aws"
+AWS_PROVIDER_ALIASES = frozenset({AWS_PROVIDER, "braket"})
+
+
 # ---------------------------- Utilities ----------------------------
+
+
+def canonical_provider_name(provider: str) -> str:
+    """Return the canonical provider identifier while accepting known aliases."""
+    stripped = provider.strip()
+    if stripped.lower() in AWS_PROVIDER_ALIASES:
+        return AWS_PROVIDER
+    return stripped
+
+
+def canonical_device_name(provider: str, device: str) -> str:
+    """Normalize provider-specific device identifiers used as dataset keys."""
+    stripped = device.strip()
+    if canonical_provider_name(provider) != AWS_PROVIDER:
+        return stripped
+
+    parts = [part for part in stripped.split("/") if part]
+    if len(parts) >= 2:
+        stripped = f"{parts[-2]}_{parts[-1]}"
+    return stripped.lower()
+
 
 def iso_utc_now() -> str:
     dt = datetime.now(timezone.utc)
@@ -143,6 +168,14 @@ def flatten_row(row: dict[str, Any]) -> dict[str, Any]:
     if device_metadata is not None:
         out["device_metadata"] = device_metadata
 
+    provider = out.get("provider")
+    device = out.get("device")
+    if isinstance(provider, str):
+        provider = canonical_provider_name(provider)
+        out["provider"] = provider
+        if isinstance(device, str):
+            out["device"] = canonical_device_name(provider, device)
+
     r = out.get("results") if "results" in out else row.get("results")
     if isinstance(r, dict):
         # Newer schema variant (sometimes mixed with scalar flags like `binary_success`):
@@ -189,7 +222,10 @@ def get_provider_device(row: dict[str, Any]) -> tuple[str | None, str | None]:
         if isinstance(platform, dict):
             provider = provider or platform.get("provider")
             device = device or platform.get("device")
-    return provider, device
+    if not isinstance(provider, str) or not isinstance(device, str):
+        return None, None
+    canonical_provider = canonical_provider_name(provider)
+    return canonical_provider, canonical_device_name(canonical_provider, device)
 
 
 def _normalize_platform_lifecycle(lifecycle: Any) -> dict[str, str] | None:
@@ -245,6 +281,8 @@ def load_platform_catalog(root: str) -> dict[tuple[str, str], dict[str, Any]]:
         if not isinstance(device, str) or not device.strip():
             continue
 
+        provider = canonical_provider_name(provider)
+        device = canonical_device_name(provider, device)
         lifecycle = _normalize_platform_lifecycle(entry.get("lifecycle"))
 
         names = [device.strip()]
@@ -252,13 +290,13 @@ def load_platform_catalog(root: str) -> dict[tuple[str, str], dict[str, Any]]:
         if isinstance(aliases, list):
             for alias in aliases:
                 if isinstance(alias, str) and alias.strip():
-                    names.append(alias.strip())
+                    names.append(canonical_device_name(provider, alias))
 
         payload: dict[str, Any] = {}
         if lifecycle is not None:
             payload["lifecycle"] = lifecycle
         for name in dict.fromkeys(names):
-            key = (provider.strip(), name)
+            key = (provider, name)
             existing = resolved.get(key)
             if existing is not None and existing != payload:
                 print(
@@ -377,7 +415,11 @@ def write_platform_outputs(
             dev = rec.get("device")
             if not prov or not dev:
                 continue
-            key: PlatformKey = (str(prov), str(dev))
+            canonical_provider = canonical_provider_name(str(prov))
+            key: PlatformKey = (
+                canonical_provider,
+                canonical_device_name(canonical_provider, str(dev)),
+            )
             composite_map[key] = rec
 
     for (provider, device) in sorted(registry.keys(), key=lambda k: (k[0], k[1])):

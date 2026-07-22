@@ -4,7 +4,14 @@ import os
 import sys
 from typing import Any
 
-from etl import canonical_json, derive_benchmark_name, parse_timestamp
+from etl import (
+    canonical_device_name,
+    canonical_json,
+    canonical_provider_name,
+    derive_benchmark_name,
+    parse_timestamp,
+)
+
 
 def _coerce_float(val: Any) -> float | None:
     try:
@@ -253,7 +260,10 @@ def _baseline_provider_device_for_series(
         return None, None
     provider = baseline.get("provider") if isinstance(baseline.get("provider"), str) else None
     device = baseline.get("device") if isinstance(baseline.get("device"), str) else None
-    return provider, device
+    if provider is None or device is None:
+        return provider, device
+    provider = canonical_provider_name(provider)
+    return provider, canonical_device_name(provider, device)
 
 
 def _is_baseline_row_for_series(
