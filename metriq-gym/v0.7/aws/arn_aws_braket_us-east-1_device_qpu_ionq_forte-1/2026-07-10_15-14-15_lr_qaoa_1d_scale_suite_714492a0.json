@@ -1,6 +1,6 @@
 [
   {
-    "app_version": "2.dev8+g0ccc671f8",
+    "app_version": "0.7.1",
     "timestamp": "2026-07-10T15:14:15.584725",
     "suite_id": "262f234b-5065-42cb-bfb6-714e7ea4e723",
     "job_type": "Linear Ramp QAOA",
@@ -75,7 +75,7 @@
     }
   },
   {
-    "app_version": "2.dev8+g0ccc671f8",
+    "app_version": "0.7.1",
     "timestamp": "2026-07-10T15:14:26.659089",
     "suite_id": "262f234b-5065-42cb-bfb6-714e7ea4e723",
     "job_type": "Linear Ramp QAOA",
