@@ -469,9 +469,10 @@ def write_platform_outputs(
 
     index_payload = {
         "generated_at": generated_at,
-        "baseline": baseline,
         "platforms": index_platforms,
     }
+    if baseline is not None:
+        index_payload["baseline"] = baseline
     index_file = os.path.join(platforms_dir, "index.json")
     with open(index_file, "w", encoding="utf-8") as f:
         f.write(json.dumps(index_payload, ensure_ascii=False, indent=2))
