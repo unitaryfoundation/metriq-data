@@ -30,6 +30,7 @@ from score import (
     compute_baseline_averages_by_series,
     compute_and_attach_metriq_scores,
     compute_device_composite_scores,
+    baseline_metadata_for_latest_series,
 )
 
 
@@ -70,6 +71,7 @@ def main(argv: list[str] | None = None) -> int:
     # Also write per-series outputs mirroring source dataset structure
     #  - dist/<series>/benchmark.latest.json
     series_labels = sorted(set(row_series.values()))
+    baseline_metadata = baseline_metadata_for_latest_series(scoring_cfg, series_labels)
     for s in series_labels:
         s_dir = os.path.join(dist_path, s)
         ensure_dir(s_dir)
@@ -88,6 +90,7 @@ def main(argv: list[str] | None = None) -> int:
         generated_at,
         composite_records,
         platform_catalog,
+        baseline=baseline_metadata,
     )
 
     print(

@@ -11,6 +11,16 @@
       }
     },
     {
+      "provider": "ibm",
+      "device": "ibm_torino",
+      "lifecycle": {
+        "status": "retired",
+        "effective_at": "2026-04-01",
+        "source_url": "https://quantum.cloud.ibm.com/announcements/product-updates/2026-04-01-torino-retirement",
+        "source_label": "IBM retirement announcement"
+      }
+    },
+    {
       "provider": "origin",
       "device": "wukong_72",
       "aliases": [

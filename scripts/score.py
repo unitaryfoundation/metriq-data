@@ -266,6 +266,33 @@ def _baseline_provider_device_for_series(
     return provider, canonical_device_name(provider, device)
 
 
+def baseline_metadata_for_latest_series(
+    scoring_cfg: dict[str, Any],
+    series_labels: list[str],
+) -> dict[str, str] | None:
+    """Return the canonical baseline configured for the latest observed series."""
+    latest_series: str | None = None
+    latest_version: tuple[int, ...] | None = None
+    for series in series_labels:
+        version = _parse_series_label(series)
+        if version is None:
+            continue
+        if latest_version is None or version > latest_version:
+            latest_series = series
+            latest_version = version
+
+    if latest_series is None:
+        return None
+    provider, device = _baseline_provider_device_for_series(scoring_cfg, latest_series)
+    if provider is None or device is None:
+        return None
+    return {
+        "provider": provider,
+        "device": device,
+        "series": latest_series,
+    }
+
+
 def _is_baseline_row_for_series(
     scoring_cfg: dict[str, Any],
     series_label: str | None,
