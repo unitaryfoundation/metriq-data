@@ -15,7 +15,7 @@
       }
     },
     "platform": {
-      "device": "WK_C102-2",
+      "device": "wukong_102",
       "device_metadata": {
         "num_qubits": 102,
         "simulator": false
