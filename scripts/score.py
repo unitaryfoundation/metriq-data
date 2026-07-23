@@ -912,6 +912,13 @@ def compute_device_composite_scores(
                 "raw_timestamp": raw_ts,
             }
 
+            # Surface a structural qubit requirement when the component selects a
+            # fixed qubit count. This lets the UI tell a benchmark a device cannot
+            # run (device qubits below the requirement) apart from one that is
+            # simply missing a submission.
+            if isinstance(selector, dict) and isinstance(selector.get("num_qubits"), int):
+                breakdown[label]["required_num_qubits"] = selector["num_qubits"]
+
         # Denominator is the sum of all defined weights; missing components
         # contribute 0 to the numerator but still count in the denominator.
         if sum_w_defined > 0.0:
