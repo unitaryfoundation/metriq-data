@@ -1,0 +1,39 @@
+[
+  {
+    "app_version": "0.7.2.dev4+g9820978.d20260723",
+    "timestamp": "2026-07-24T10:20:39.700963",
+    "suite_id": null,
+    "job_type": "QML Kernel",
+    "results": {
+      "accuracy_score": {
+        "value": 0.455,
+        "uncertainty": 0.015747221977225064
+      },
+      "score": {
+        "value": 0.455,
+        "uncertainty": 0.015747221977225064
+      }
+    },
+    "platform": {
+      "device": "arn:aws:braket:us-west-1::device/qpu/rigetti/Cepheus-1-108Q",
+      "device_metadata": {
+        "num_qubits": 107,
+        "simulator": false
+      },
+      "provider": "braket"
+    },
+    "circuit_metadata": {
+      "input_two_qubit_gate_counts": [
+        116
+      ],
+      "transpiled_two_qubit_gate_counts": [
+        116
+      ]
+    },
+    "params": {
+      "benchmark_name": "QML Kernel",
+      "num_qubits": 30,
+      "shots": 1000
+    }
+  }
+]
