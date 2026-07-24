@@ -334,8 +334,38 @@
             {
               "benchmark": "Quantum Fourier Transform",
               "metric": "score",
-              "label": "Quantum Fourier Transform:score",
-              "weight": "1/1"
+              "selector": {
+                "num_qubits": 10
+              },
+              "label": "QFT-10:score",
+              "weight": "1/4"
+            },
+            {
+              "benchmark": "Quantum Fourier Transform",
+              "metric": "score",
+              "selector": {
+                "num_qubits": 20
+              },
+              "label": "QFT-20:score",
+              "weight": "1/4"
+            },
+            {
+              "benchmark": "Quantum Fourier Transform",
+              "metric": "score",
+              "selector": {
+                "num_qubits": 30
+              },
+              "label": "QFT-30:score",
+              "weight": "1/4"
+            },
+            {
+              "benchmark": "Quantum Fourier Transform",
+              "metric": "score",
+              "selector": {
+                "num_qubits": 50
+              },
+              "label": "QFT-50:score",
+              "weight": "1/4"
             }
           ]
         },
