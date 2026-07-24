@@ -3,7 +3,7 @@
     "v0.4": {
       "baseline": {
         "provider": "ibm",
-        "device": "ibm_torino"
+        "device": "ibm_boston"
       },
       "composite": {
         "components": [
@@ -213,7 +213,7 @@
   "default": {
     "baseline": {
       "provider": "ibm",
-      "device": "ibm_torino"
+      "device": "ibm_boston"
     },
     "composite": {
       "components": [
