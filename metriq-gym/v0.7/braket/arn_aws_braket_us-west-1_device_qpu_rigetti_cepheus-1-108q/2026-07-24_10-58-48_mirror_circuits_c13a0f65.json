@@ -1,0 +1,66 @@
+[
+  {
+    "app_version": "0.7.2.dev4+g9820978.d20260723",
+    "timestamp": "2026-07-24T10:58:48.849962",
+    "suite_id": null,
+    "job_type": "Mirror Circuits",
+    "results": {
+      "success_probability": {
+        "value": 0.1487,
+        "uncertainty": 0.0035579250975814537
+      },
+      "polarization": {
+        "value": 0.14869994925856286,
+        "uncertainty": 0.003557925309650328
+      },
+      "binary_success": false,
+      "score": {
+        "value": 0.14869994925856286,
+        "uncertainty": 0.003557925309650328
+      }
+    },
+    "platform": {
+      "device": "arn:aws:braket:us-west-1::device/qpu/rigetti/Cepheus-1-108Q",
+      "device_metadata": {
+        "num_qubits": 107,
+        "simulator": false
+      },
+      "provider": "braket"
+    },
+    "circuit_metadata": {
+      "input_two_qubit_gate_counts": [
+        146,
+        172,
+        174,
+        160,
+        152,
+        182,
+        154,
+        126,
+        182,
+        160
+      ],
+      "transpiled_two_qubit_gate_counts": [
+        146,
+        172,
+        174,
+        160,
+        152,
+        182,
+        154,
+        126,
+        182,
+        160
+      ]
+    },
+    "params": {
+      "benchmark_name": "Mirror Circuits",
+      "num_circuits": 10,
+      "num_layers": 16,
+      "shots": 1000,
+      "two_qubit_gate_name": "CNOT",
+      "two_qubit_gate_prob": 0.5,
+      "width": 24
+    }
+  }
+]
