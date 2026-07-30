@@ -6,6 +6,7 @@ from pathlib import Path
 
 
 SCRIPTS_DIR = Path(__file__).resolve().parents[1] / "scripts"
+REPO_ROOT = SCRIPTS_DIR.parent
 sys.path.insert(0, str(SCRIPTS_DIR))
 
 from etl import (  # noqa: E402
@@ -87,6 +88,23 @@ class ProviderAliasTests(unittest.TestCase):
         self.assertEqual(
             _baseline_provider_device_for_series(config, "v0.7"),
             ("aws", "rigetti_cepheus-1-108q"),
+        )
+
+
+class PlatformCatalogTests(unittest.TestCase):
+    def test_ankaa_3_is_retired(self):
+        catalog = load_platform_catalog(str(REPO_ROOT))
+        platform_key = ("aws", "rigetti_ankaa-3")
+
+        self.assertIn(platform_key, catalog)
+        self.assertEqual(
+            catalog[platform_key]["lifecycle"],
+            {
+                "status": "retired",
+                "effective_at": "2026-04-17",
+                "source_url": "https://rigetti.statuspage.io/incidents/dbsh9sb7wt1k",
+                "source_label": "Rigetti retirement announcement",
+            },
         )
 
 
