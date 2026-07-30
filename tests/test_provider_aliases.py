@@ -94,16 +94,16 @@ class ProviderAliasTests(unittest.TestCase):
 class PlatformCatalogTests(unittest.TestCase):
     def test_ankaa_3_is_retired(self):
         catalog = load_platform_catalog(str(REPO_ROOT))
+        platform_key = ("aws", "rigetti_ankaa-3")
 
+        self.assertIn(platform_key, catalog)
         self.assertEqual(
-            catalog[("aws", "rigetti_ankaa-3")],
+            catalog[platform_key]["lifecycle"],
             {
-                "lifecycle": {
-                    "status": "retired",
-                    "effective_at": "2026-04-17",
-                    "source_url": "https://rigetti.statuspage.io/incidents/dbsh9sb7wt1k",
-                    "source_label": "Rigetti retirement announcement",
-                }
+                "status": "retired",
+                "effective_at": "2026-04-17",
+                "source_url": "https://rigetti.statuspage.io/incidents/dbsh9sb7wt1k",
+                "source_label": "Rigetti retirement announcement",
             },
         )
 
