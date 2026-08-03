@@ -399,6 +399,7 @@ def write_platform_outputs(
     generated_at: str,
     composite_records: list[dict[str, Any]] | None = None,
     platform_catalog: dict[PlatformKey, dict[str, Any]] | None = None,
+    baseline: dict[str, str] | None = None,
 ) -> tuple[int, str]:
     platforms_dir = os.path.join(dist_path, "platforms")
     ensure_dir(platforms_dir)
@@ -466,7 +467,12 @@ def write_platform_outputs(
             **platform_catalog.get((provider, device), {}),
         })
 
-    index_payload = {"generated_at": generated_at, "platforms": index_platforms}
+    index_payload = {
+        "generated_at": generated_at,
+        "platforms": index_platforms,
+    }
+    if baseline is not None:
+        index_payload["baseline"] = baseline
     index_file = os.path.join(platforms_dir, "index.json")
     with open(index_file, "w", encoding="utf-8") as f:
         f.write(json.dumps(index_payload, ensure_ascii=False, indent=2))

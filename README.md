@@ -139,6 +139,19 @@ Example `scripts/scoring.json`:
 
 Baselines are computed per major series (e.g., all `v0.x.y` share one baseline reference),
 using the latest available baseline row per `(benchmark, metric, selector)` key.
+The canonical baseline for the latest observed series is also published in
+`dist/platforms/index.json` so downstream clients can identify it without duplicating
+the scoring configuration:
+
+```json
+{
+  "baseline": {
+    "provider": "ibm",
+    "device": "ibm_torino",
+    "series": "v0.7"
+  }
+}
+```
 
 ### Curated platform catalog
 
