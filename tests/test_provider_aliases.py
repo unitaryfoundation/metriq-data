@@ -17,7 +17,10 @@ from etl import (  # noqa: E402
     upsert_platform,
     write_platform_outputs,
 )
-from score import _baseline_provider_device_for_series  # noqa: E402
+from score import (  # noqa: E402
+    _baseline_provider_device_for_series,
+    baseline_metadata_for_latest_series,
+)
 
 
 CEPHEUS_ARN = "arn:aws:braket:us-west-1::device/qpu/rigetti/Cepheus-1-108Q"
@@ -58,6 +61,10 @@ class ProviderAliasTests(unittest.TestCase):
             self.assertTrue(
                 (Path(tmp) / "platforms" / "aws" / "rigetti_cepheus-1-108q.json").is_file()
             )
+            index = json.loads(
+                (Path(tmp) / "platforms" / "index.json").read_text(encoding="utf-8")
+            )
+            self.assertNotIn("baseline", index)
 
     def test_catalog_and_scoring_config_accept_braket_alias(self):
         with tempfile.TemporaryDirectory() as tmp:
@@ -89,6 +96,37 @@ class ProviderAliasTests(unittest.TestCase):
             _baseline_provider_device_for_series(config, "v0.7"),
             ("aws", "rigetti_cepheus-1-108q"),
         )
+        self.assertEqual(
+            baseline_metadata_for_latest_series(config, ["v0.9", "v0.10", "unknown"]),
+            {
+                "provider": "aws",
+                "device": "rigetti_cepheus-1-108q",
+                "series": "v0.10",
+            },
+        )
+
+    def test_platform_index_publishes_baseline_metadata(self):
+        row = {
+            "timestamp": "2026-07-15T16:26:08",
+            "platform": {"provider": "ibm", "device": "ibm_torino"},
+            "results": {"score": {"value": 0.5}},
+        }
+        registry = {}
+        upsert_platform(registry, row, "result.json", "v0.7")
+        baseline = {"provider": "ibm", "device": "ibm_torino", "series": "v0.7"}
+
+        with tempfile.TemporaryDirectory() as tmp:
+            write_platform_outputs(
+                registry,
+                tmp,
+                "2026-07-16T00:00:00Z",
+                baseline=baseline,
+            )
+            index = json.loads(
+                (Path(tmp) / "platforms" / "index.json").read_text(encoding="utf-8")
+            )
+
+        self.assertEqual(index["baseline"], baseline)
 
 
 class PlatformCatalogTests(unittest.TestCase):
