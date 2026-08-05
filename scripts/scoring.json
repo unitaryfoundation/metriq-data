@@ -209,7 +209,7 @@
         ]
       }
     },
-    "v0.5": {
+    "v1.0.0": {
       "baseline": {
         "provider": "ibm",
         "device": "ibm_torino"
