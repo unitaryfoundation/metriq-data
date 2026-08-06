@@ -1,0 +1,39 @@
+[
+  {
+    "app_version": "0.6.2.dev15+g326cb359f",
+    "timestamp": "2026-02-09T14:31:20.823899",
+    "suite_id": null,
+    "job_type": "Quantum Fourier Transform",
+    "results": {
+      "accuracy_score": {
+        "value": 0.004,
+        "uncertainty": 0.002
+      },
+      "score": {
+        "value": 0.004,
+        "uncertainty": 0.002
+      }
+    },
+    "runtime_seconds": 1.941467,
+    "platform": {
+      "device": "ibm_pittsburgh",
+      "device_metadata": {
+        "num_qubits": 156,
+        "simulator": false,
+        "version": "1.0.15"
+      },
+      "provider": "ibm"
+    },
+    "params": {
+      "benchmark_name": "Quantum Fourier Transform",
+      "error_mitigation": [],
+      "max_circuits": 3,
+      "max_qubits": 12,
+      "method": 1,
+      "min_qubits": 12,
+      "shots": 1000,
+      "skip_qubits": 1,
+      "use_midcircuit_measurement": false
+    }
+  }
+]
