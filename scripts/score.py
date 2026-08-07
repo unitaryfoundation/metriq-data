@@ -4,7 +4,14 @@ import os
 import sys
 from typing import Any
 
-from etl import canonical_json, derive_benchmark_name, parse_timestamp
+from etl import (
+    canonical_device_name,
+    canonical_json,
+    canonical_provider_name,
+    derive_benchmark_name,
+    parse_timestamp,
+)
+
 
 def _coerce_float(val: Any) -> float | None:
     try:
@@ -253,7 +260,37 @@ def _baseline_provider_device_for_series(
         return None, None
     provider = baseline.get("provider") if isinstance(baseline.get("provider"), str) else None
     device = baseline.get("device") if isinstance(baseline.get("device"), str) else None
-    return provider, device
+    if provider is None or device is None:
+        return provider, device
+    provider = canonical_provider_name(provider)
+    return provider, canonical_device_name(provider, device)
+
+
+def baseline_metadata_for_latest_series(
+    scoring_cfg: dict[str, Any],
+    series_labels: list[str],
+) -> dict[str, str] | None:
+    """Return the canonical baseline configured for the latest observed series."""
+    latest_series: str | None = None
+    latest_version: tuple[int, ...] | None = None
+    for series in series_labels:
+        version = _parse_series_label(series)
+        if version is None:
+            continue
+        if latest_version is None or version > latest_version:
+            latest_series = series
+            latest_version = version
+
+    if latest_series is None:
+        return None
+    provider, device = _baseline_provider_device_for_series(scoring_cfg, latest_series)
+    if provider is None or device is None:
+        return None
+    return {
+        "provider": provider,
+        "device": device,
+        "series": latest_series,
+    }
 
 
 def _is_baseline_row_for_series(
@@ -901,6 +938,13 @@ def compute_device_composite_scores(
                 "raw_available": raw_value is not None,
                 "raw_timestamp": raw_ts,
             }
+
+            # Surface a structural qubit requirement when the component selects a
+            # fixed qubit count. This lets the UI tell a benchmark a device cannot
+            # run (device qubits below the requirement) apart from one that is
+            # simply missing a submission.
+            if isinstance(selector, dict) and isinstance(selector.get("num_qubits"), int):
+                breakdown[label]["required_num_qubits"] = selector["num_qubits"]
 
         # Denominator is the sum of all defined weights; missing components
         # contribute 0 to the numerator but still count in the denominator.

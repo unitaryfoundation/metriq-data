@@ -1,0 +1,73 @@
+[
+  {
+    "app_version": "0.7.2.dev4+g9820978.d20260723",
+    "timestamp": "2026-07-23T13:12:00.608456",
+    "suite_id": null,
+    "job_type": "Linear Ramp QAOA",
+    "results": {
+      "approx_ratio": [
+        0.49600333333333324
+      ],
+      "random_approx_ratio": 0.49990133333333336,
+      "confidence_pass": [
+        true
+      ],
+      "effective_approx_ratio": [
+        -0.00779446189285339
+      ],
+      "score": {
+        "value": -0.00779446189285339,
+        "uncertainty": null
+      }
+    },
+    "platform": {
+      "device": "arn:aws:braket:us-west-1::device/qpu/rigetti/Cepheus-1-108Q",
+      "device_metadata": {
+        "num_qubits": 107,
+        "simulator": false
+      },
+      "provider": "braket"
+    },
+    "circuit_metadata": {
+      "input_two_qubit_gate_counts": [
+        90,
+        90,
+        90,
+        90,
+        90,
+        90,
+        90,
+        90,
+        90,
+        90
+      ],
+      "transpiled_two_qubit_gate_counts": [
+        90,
+        90,
+        90,
+        90,
+        90,
+        90,
+        90,
+        90,
+        90,
+        90
+      ]
+    },
+    "params": {
+      "benchmark_name": "Linear Ramp QAOA",
+      "confidence_level": 0.999,
+      "delta_beta": 0.3,
+      "delta_gamma": 0.6,
+      "graph_type": "1D",
+      "num_qubits": 10,
+      "num_random_trials": 25,
+      "qaoa_layers": [
+        10
+      ],
+      "seed": 123,
+      "shots": 1000,
+      "trials": 10
+    }
+  }
+]

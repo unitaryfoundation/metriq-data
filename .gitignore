@@ -1,6 +1,9 @@
 # Ignore generated outputs
 dist/
 
+# macOS metadata
+.DS_Store
+
 __pycache__/
 *.py[cod]
 *.pyo
