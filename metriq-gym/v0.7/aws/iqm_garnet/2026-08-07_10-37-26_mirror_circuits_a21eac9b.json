@@ -1,0 +1,66 @@
+[
+  {
+    "app_version": "0.7.2.dev10+g5bc076b.d20260804",
+    "timestamp": "2026-08-07T10:37:26.760661",
+    "suite_id": null,
+    "job_type": "Mirror Circuits",
+    "results": {
+      "success_probability": {
+        "value": 0.0004,
+        "uncertainty": 0.0001999599959991998
+      },
+      "polarization": {
+        "value": 0.00038474708171206225,
+        "uncertainty": 0.0001999630471931572
+      },
+      "binary_success": false,
+      "score": {
+        "value": 0.00038474708171206225,
+        "uncertainty": 0.0001999630471931572
+      }
+    },
+    "platform": {
+      "device": "iqm_garnet",
+      "device_metadata": {
+        "num_qubits": 20,
+        "simulator": false
+      },
+      "provider": "aws"
+    },
+    "circuit_metadata": {
+      "input_two_qubit_gate_counts": [
+        222,
+        208,
+        204,
+        224,
+        212,
+        216,
+        228,
+        194,
+        210,
+        202
+      ],
+      "transpiled_two_qubit_gate_counts": [
+        222,
+        208,
+        204,
+        224,
+        212,
+        216,
+        228,
+        194,
+        210,
+        202
+      ]
+    },
+    "params": {
+      "benchmark_name": "Mirror Circuits",
+      "num_circuits": 10,
+      "num_layers": 32,
+      "shots": 1000,
+      "two_qubit_gate_name": "CNOT",
+      "two_qubit_gate_prob": 0.5,
+      "width": 16
+    }
+  }
+]
