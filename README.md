@@ -57,6 +57,47 @@ execution path has been discussed and accepted by the maintainers of this datase
 
 Maintainers may close issues or pull requests that fall outside this scope.
 
+## Record outcomes
+
+Every uploaded record describes one benchmark attempt on one device. In addition
+to completed runs with `results`, a record may declare a non-completed `outcome`:
+
+```json
+{
+  "app_version": "0.7.2",
+  "timestamp": "2026-08-07T12:00:00",
+  "job_type": "Linear Ramp QAOA",
+  "params": { "benchmark_name": "Linear Ramp QAOA", "num_qubits": 100, "...": "..." },
+  "platform": { "provider": "aws", "device": "arn:aws:braket:us-west-1::device/qpu/rigetti/Cepheus-1-108Q" },
+  "outcome": "unsupported",
+  "outcome_detail": {
+    "reason": "Compiler rejects 100-qubit LR-QAOA circuits on this device",
+    "error_message": "<verbatim provider/compiler error>",
+    "source": "dispatch"
+  },
+  "results": null
+}
+```
+
+- `outcome` is one of `completed`, `error`, `unsupported`, `not_applicable`.
+  A record without the field is a completed run — all records predating the
+  field are.
+- `error` means the attempt failed (possibly transiently); `unsupported` means
+  the device structurally cannot run this benchmark instance (e.g. a compiler
+  restriction) — a human classification, ideally promoted from a captured
+  error; `not_applicable` means the benchmark does not apply to the device
+  category. Machines should only ever record `error`; the other two are
+  asserted by the submitter and reviewed like any data PR.
+- `params` must be populated exactly as for a completed run — they identify
+  which benchmark instance the claim is about.
+- A completed record always supersedes outcome records for the same instance;
+  among outcome records, the latest wins. Outcomes are point-in-time claims:
+  if a device or compiler later supports the run, uploading the successful
+  result retires the claim with no cleanup needed.
+- Scoring is unchanged: non-completed records contribute no value, and
+  component weights stay in the Metriq Score denominator either way. Outcomes
+  affect how coverage is displayed, not how scores are computed.
+
 ## Aggregation and Scoring
 
 - Run `python3 scripts/aggregate.py` (or `python3.13 scripts/aggregate.py`) to generate aggregated results.

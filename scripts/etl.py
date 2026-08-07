@@ -149,11 +149,43 @@ def _inject_default_metric_directions(out: dict[str, Any], row: dict[str, Any]) 
         out["directions"] = directions
 
 
+# Run outcomes a record may declare. A record without an outcome field is a
+# completed run (every record predating the field is one), so "completed" is
+# implied rather than stamped. Non-completed outcomes carry no results; they
+# are first-class evidence that an attempt errored or that a device cannot run
+# the benchmark instance, and a later completed record supersedes them.
+RECORD_OUTCOMES = frozenset({"completed", "error", "unsupported", "not_applicable"})
+
+
+def _normalize_outcome(row: dict[str, Any]) -> tuple[str | None, dict[str, str] | None]:
+    raw = row.get("outcome")
+    if not isinstance(raw, str):
+        return None, None
+    outcome = raw.strip().lower()
+    if outcome not in RECORD_OUTCOMES or outcome == "completed":
+        return None, None
+
+    detail_raw = row.get("outcome_detail")
+    detail: dict[str, str] = {}
+    if isinstance(detail_raw, dict):
+        for key in ("reason", "error_message", "source", "source_url"):
+            value = detail_raw.get(key)
+            if isinstance(value, str) and value.strip():
+                detail[key] = value.strip()
+    return outcome, detail or None
+
+
 def flatten_row(row: dict[str, Any]) -> dict[str, Any]:
     out: dict[str, Any] = {}
     for k in ("app_version", "timestamp", "provider", "suite_id", "device", "job_type", "results", "params"):
         if k in row:
             out[k] = row[k]
+
+    outcome, outcome_detail = _normalize_outcome(row)
+    if outcome is not None:
+        out["outcome"] = outcome
+        if outcome_detail is not None:
+            out["outcome_detail"] = outcome_detail
 
     platform = row.get("platform")
     device_metadata = None
