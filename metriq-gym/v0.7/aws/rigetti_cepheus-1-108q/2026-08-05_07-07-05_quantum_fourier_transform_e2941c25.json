@@ -1,0 +1,50 @@
+[
+  {
+    "app_version": "0.7.2.dev10+g5bc076b",
+    "timestamp": "2026-08-05T07:07:05.578566",
+    "suite_id": "70b86718-c3e9-49f9-adb3-2db2068422d8",
+    "job_type": "Quantum Fourier Transform",
+    "results": {
+      "accuracy_score": {
+        "value": 0.05000000000000001,
+        "uncertainty": 0.011
+      },
+      "score": {
+        "value": 0.05000000000000001,
+        "uncertainty": 0.011
+      }
+    },
+    "suite": {
+      "id": "70b86718-c3e9-49f9-adb3-2db2068422d8",
+      "name": "metriq_score_1_0"
+    },
+    "platform": {
+      "device": "rigetti_cepheus-1-108q",
+      "device_metadata": {
+        "num_qubits": 107,
+        "simulator": false
+      },
+      "provider": "aws"
+    },
+    "circuit_metadata": {
+      "input_two_qubit_gate_counts": [
+        12,
+        12,
+        12
+      ],
+      "transpiled_two_qubit_gate_counts": [
+        12,
+        12,
+        12
+      ]
+    },
+    "params": {
+      "benchmark_name": "Quantum Fourier Transform",
+      "max_circuits": 3,
+      "method": 1,
+      "num_qubits": 4,
+      "shots": 1000,
+      "use_midcircuit_measurement": false
+    }
+  }
+]
