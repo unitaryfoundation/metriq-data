@@ -209,7 +209,7 @@
         ]
       }
     },
-    "v1.0.0": {
+    "v1.0": {
       "baseline": {
         "provider": "ibm",
         "device": "ibm_torino"
@@ -375,6 +375,7 @@
           {
             "label": "EPLG",
             "weight": "0.1494",
+            "aggregation": "harmonic",
             "components": [
               {
                 "benchmark": "EPLG",
@@ -585,6 +586,7 @@
         {
           "label": "EPLG",
           "weight": "0.1494",
+          "aggregation": "harmonic",
           "components": [
             {
               "benchmark": "EPLG",
