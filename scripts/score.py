@@ -939,12 +939,21 @@ def compute_device_composite_scores(
                 "raw_timestamp": raw_ts,
             }
 
-            # Surface a structural qubit requirement when the component selects a
-            # fixed qubit count. This lets the UI tell a benchmark a device cannot
-            # run (device qubits below the requirement) apart from one that is
-            # simply missing a submission.
-            if isinstance(selector, dict) and isinstance(selector.get("num_qubits"), int):
-                breakdown[label]["required_num_qubits"] = selector["num_qubits"]
+            # Surface a structural qubit requirement so the UI can tell a
+            # benchmark a device cannot run (device qubits below the
+            # requirement) apart from one that is simply missing a submission.
+            # Priority: an explicit required_num_qubits on the component config
+            # (for components whose size lives in the metric name, like
+            # EPLG-100), then a num_qubits selector, then a width selector
+            # (Mirror Circuits, where width is the qubit count).
+            required = comp.get("required_num_qubits")
+            if not isinstance(required, int) and isinstance(selector, dict):
+                for key in ("num_qubits", "width"):
+                    if isinstance(selector.get(key), int):
+                        required = selector[key]
+                        break
+            if isinstance(required, int):
+                breakdown[label]["required_num_qubits"] = required
 
         # Denominator is the sum of all defined weights; missing components
         # contribute 0 to the numerator but still count in the denominator.
