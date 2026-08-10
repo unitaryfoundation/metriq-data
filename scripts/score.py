@@ -47,6 +47,26 @@ def _parse_weight(val: Any) -> float:
     return out
 
 
+def _weighted_harmonic_mean(pairs: list[tuple[float, float]]) -> float | None:
+    """Weighted harmonic mean of (weight, value) pairs.
+
+    Returns 0.0 if any weighted value is <= 0 (the harmonic mean's limit as a
+    component approaches zero), and None if no positively weighted values exist.
+    """
+    total_w = 0.0
+    inv_sum = 0.0
+    for w, v in pairs:
+        if w <= 0:
+            continue
+        if v <= 0:
+            return 0.0
+        total_w += w
+        inv_sum += w / v
+    if total_w <= 0 or inv_sum <= 0:
+        return None
+    return total_w / inv_sum
+
+
 def _parse_series_label(label: str | None) -> tuple[int, ...] | None:
     if not isinstance(label, str) or not label.startswith("v"):
         return None
@@ -146,7 +166,7 @@ def _flatten_components(components: list[dict[str, Any]]) -> list[dict[str, Any]
       - Group component: {label, weight, components: [leaf, ...]}
 
     Returns leaf component dicts augmented with:
-      - _group_label, _group_weight, _sub_weight, _effective_weight
+      - _group_label, _group_weight, _sub_weight, _effective_weight, _group_aggregation
     """
     flat: list[dict[str, Any]] = []
     for comp in components:
@@ -156,6 +176,7 @@ def _flatten_components(components: list[dict[str, Any]]) -> list[dict[str, Any]
         if isinstance(group_children, list):
             group_label = comp.get("label") or comp.get("benchmark") or "group"
             group_weight = _parse_weight(comp.get("weight", 0.0))
+            group_aggregation = str(comp.get("aggregation", "arithmetic")).lower()
             for child in group_children:
                 if not isinstance(child, dict):
                     continue
@@ -165,6 +186,7 @@ def _flatten_components(components: list[dict[str, Any]]) -> list[dict[str, Any]
                 merged["_group_weight"] = group_weight
                 merged["_sub_weight"] = sub_weight
                 merged["_effective_weight"] = group_weight * sub_weight
+                merged["_group_aggregation"] = group_aggregation
                 flat.append(merged)
             continue
 
@@ -174,6 +196,7 @@ def _flatten_components(components: list[dict[str, Any]]) -> list[dict[str, Any]
         merged["_group_weight"] = 1.0
         merged["_sub_weight"] = sub_weight
         merged["_effective_weight"] = sub_weight
+        merged["_group_aggregation"] = "arithmetic"
         flat.append(merged)
 
     return flat
@@ -589,14 +612,18 @@ def compute_and_attach_metriq_scores(
 
         # Expose a scalar metriq_score:
         #  - single-metric rows map directly
-        #  - multi-metric rows use weighted average by component effective weights
+        #  - multi-metric rows use a weighted mean by component effective weights,
+        #    arithmetic by default or harmonic when the components' group is
+        #    configured with "aggregation": "harmonic" (e.g. EPLG)
         if len(scores) == 1:
             r["metriq_score"] = next(iter(scores.values()))
         else:
-            weighted_sum = 0.0
-            weight_total = 0.0
+            pairs: list[tuple[float, float]] = []
+            harmonic = False
             for metric, metric_score in scores.items():
                 comp = metric_to_comp.get(metric, {})
+                if comp.get("_group_aggregation") == "harmonic":
+                    harmonic = True
                 w_raw = comp.get("_effective_weight", comp.get("weight", 0.0))
                 try:
                     weight = float(w_raw)
@@ -606,10 +633,16 @@ def compute_and_attach_metriq_scores(
                     weight = 0.0
                 if weight == 0.0:
                     continue
-                weighted_sum += weight * metric_score
-                weight_total += weight
-            if weight_total > 0.0:
-                r["metriq_score"] = weighted_sum / weight_total
+                pairs.append((weight, metric_score))
+            if harmonic:
+                hm = _weighted_harmonic_mean(pairs)
+                if hm is not None:
+                    r["metriq_score"] = hm
+            else:
+                weighted_sum = sum(w * s for w, s in pairs)
+                weight_total = sum(w for w, _s in pairs)
+                if weight_total > 0.0:
+                    r["metriq_score"] = weighted_sum / weight_total
 
 
 def load_scoring_config(root: str) -> dict[str, Any]:
@@ -656,6 +689,18 @@ def _validate_components_list(components: list[dict[str, Any]], ctx: str) -> Non
             raise ValueError(f"Invalid weight for component {i} in {ctx}: {w_raw}")
         if w < 0:
             raise ValueError(f"Negative weight for component {i} in {ctx}: {w_raw}")
+
+        agg = comp.get("aggregation")
+        if agg is not None:
+            if not isinstance(agg, str) or agg.lower() not in ("arithmetic", "harmonic"):
+                raise ValueError(
+                    f"Invalid aggregation for component {i} in {ctx}: {agg!r} "
+                    "(expected 'arithmetic' or 'harmonic')"
+                )
+            if not isinstance(children, list):
+                raise ValueError(
+                    f"'aggregation' is only valid on group components (index {i} in {ctx})"
+                )
 
         if isinstance(children, list):
             _validate_components_list(children, ctx=f"{ctx}.components[{i}]")
@@ -831,6 +876,9 @@ def compute_device_composite_scores(
         breakdown: dict[str, dict[str, Any]] = {}
         numerator = 0.0
         sum_w_defined = 0.0
+        # Group label -> {"group_weight": float, "items": [(sub_weight, normalized_value | None)]}
+        # for groups aggregated with a harmonic mean instead of the default arithmetic sum.
+        harmonic_groups: dict[str, dict[str, Any]] = {}
 
         for comp in components_flat:
             if not isinstance(comp, dict):
@@ -919,7 +967,13 @@ def compute_device_composite_scores(
             normalized_ts = picked_norm.get("timestamp") if picked_norm is not None else None
             raw_ts = picked_raw.get("timestamp") if picked_raw is not None else None
 
-            if normalized_value is not None:
+            aggregation = comp.get("_group_aggregation", "arithmetic")
+            if aggregation == "harmonic" and group_label is not None:
+                group = harmonic_groups.setdefault(
+                    group_label, {"group_weight": group_weight, "items": []}
+                )
+                group["items"].append((sub_weight, normalized_value))
+            elif normalized_value is not None:
                 numerator += weight * normalized_value
 
             breakdown[label] = {
@@ -928,6 +982,7 @@ def compute_device_composite_scores(
                 "group": group_label,
                 "group_weight": group_weight,
                 "sub_weight": sub_weight,
+                "aggregation": aggregation,
                 # Backward-compatible key for normalized timestamp.
                 "timestamp": normalized_ts,
                 # Explicit availability fields for UI rendering.
@@ -945,6 +1000,22 @@ def compute_device_composite_scores(
             # simply missing a submission.
             if isinstance(selector, dict) and isinstance(selector.get("num_qubits"), int):
                 breakdown[label]["required_num_qubits"] = selector["num_qubits"]
+
+        # Fold harmonic groups into the numerator: the group's score is the
+        # weighted harmonic mean of its available components, scaled by the
+        # share of sub-weight that is present so missing components still
+        # contribute 0 (mirroring the arithmetic path).
+        for group in harmonic_groups.values():
+            items = [(w, v) for w, v in group["items"] if w > 0]
+            total_sub = sum(w for w, _v in items)
+            present = [(w, v) for w, v in items if v is not None]
+            present_sub = sum(w for w, _v in present)
+            if total_sub <= 0 or not present:
+                continue
+            hm = _weighted_harmonic_mean(present)
+            if hm is None:
+                continue
+            numerator += float(group["group_weight"]) * hm * (present_sub / total_sub)
 
         # Denominator is the sum of all defined weights; missing components
         # contribute 0 to the numerator but still count in the denominator.
