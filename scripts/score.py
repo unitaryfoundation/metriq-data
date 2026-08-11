@@ -792,6 +792,66 @@ def _get_normalized_metric_value(
     return None
 
 
+def _get_baseline_metric_value(
+    row: dict[str, Any],
+    metric: str,
+    series_label: str | None,
+    selector_fp: str,
+    baseline_avg_by_series: dict[str, dict[tuple[str, str, str], float]],
+) -> float | None:
+    """Return the baseline device's raw value for the same (benchmark, metric, selector).
+
+    This is the denominator that _get_normalized_metric_value would use. It is
+    exposed separately so composite scoring can aggregate raw values across
+    circuit widths before normalizing.
+    """
+    bench = derive_benchmark_name(row)
+    baseline_avg = baseline_avg_by_series.get(series_label or "", {})
+    base = baseline_avg.get((bench, metric, selector_fp))
+    if base is None:
+        base = _fallback_baseline_average(
+            series_label, bench, metric, selector_fp, baseline_avg_by_series
+        )
+    return base
+
+
+def _metric_direction(row: dict[str, Any], metric: str) -> str:
+    dir_map = row.get("directions") if isinstance(row.get("directions"), dict) else {}
+    return str(dir_map.get(metric, "higher")).lower()
+
+
+def _benchmark_subscore(
+    items: list[dict[str, Any]],
+) -> tuple[float, float] | None:
+    """Benchmark subscore from width-aggregated raw values, with its present sub-weight.
+
+    Aggregates the raw measurements across circuit widths first and normalizes the
+    aggregate against the baseline, rather than normalizing each width separately
+    and averaging the ratios. A single width whose baseline value sits at the noise
+    floor otherwise produces an arbitrarily large ratio that dominates the composite.
+
+    Returns None when no width has both a device value and a baseline value.
+    """
+    usable = [
+        it
+        for it in items
+        if it["sub_weight"] > 0 and it["raw"] is not None and it["baseline"] is not None
+    ]
+    if not usable:
+        return None
+    device_total = sum(it["sub_weight"] * it["raw"] for it in usable)
+    baseline_total = sum(it["sub_weight"] * it["baseline"] for it in usable)
+    present_sub = sum(it["sub_weight"] for it in usable)
+    lower_is_better = any(it["direction"] == "lower" for it in usable)
+    if lower_is_better:
+        if device_total <= 0:
+            return None
+        return 100.0 * baseline_total / device_total, present_sub
+    if baseline_total <= 0:
+        return None
+    return 100.0 * device_total / baseline_total, present_sub
+
+
 def _get_raw_metric_value(row: dict[str, Any], metric: str) -> float | None:
     """Return the raw metric value from row.results when present, else None."""
     results = row.get("results") if isinstance(row.get("results"), dict) else {}
@@ -879,6 +939,12 @@ def compute_device_composite_scores(
         # Group label -> {"group_weight": float, "items": [(sub_weight, normalized_value | None)]}
         # for groups aggregated with a harmonic mean instead of the default arithmetic sum.
         harmonic_groups: dict[str, dict[str, Any]] = {}
+        # Group label -> {"group_weight": float, "items": [...], "labels": [...]} for groups
+        # aggregated over raw values across circuit widths before baseline normalization.
+        arithmetic_groups: dict[str, dict[str, Any]] = {}
+        # Components with no group (or no usable raw/baseline pair) fall back to the
+        # per-component normalized values.
+        ungrouped: list[tuple[float, float]] = []
 
         for comp in components_flat:
             if not isinstance(comp, dict):
@@ -938,7 +1004,8 @@ def compute_device_composite_scores(
                 normalized_val = _get_normalized_metric_value(
                     r, metric, series_label, selector_fp, baseline_avg_by_series
                 )
-                if normalized_val is not None and _is_baseline_row_for_series(scoring_cfg, series_label, r):
+                is_baseline_row = _is_baseline_row_for_series(scoring_cfg, series_label, r)
+                if normalized_val is not None and is_baseline_row:
                     # Keep baseline components anchored at 100 in platform composites.
                     normalized_val = 100.0
                 raw_val = _get_raw_metric_value(r, metric)
@@ -949,6 +1016,18 @@ def compute_device_composite_scores(
                     r_copy["_normalized_val"] = float(normalized_val)
                 if raw_val is not None:
                     r_copy["_raw_val"] = float(raw_val)
+                    # Anchor the baseline device against its own value so its
+                    # width-aggregated subscores come out at exactly 100.
+                    base_val = (
+                        raw_val
+                        if is_baseline_row
+                        else _get_baseline_metric_value(
+                            r, metric, series_label, selector_fp, baseline_avg_by_series
+                        )
+                    )
+                    if base_val is not None:
+                        r_copy["_baseline_val"] = float(base_val)
+                    r_copy["_direction"] = _metric_direction(r, metric)
                 matches.append(r_copy)
 
             picked_norm, _ = _pick_latest_metric_row(matches, "_normalized_val")
@@ -973,8 +1052,32 @@ def compute_device_composite_scores(
                     group_label, {"group_weight": group_weight, "items": []}
                 )
                 group["items"].append((sub_weight, normalized_value))
+            elif group_label is not None:
+                group = arithmetic_groups.setdefault(
+                    group_label, {"group_weight": group_weight, "items": []}
+                )
+                group["items"].append(
+                    {
+                        "label": label,
+                        "sub_weight": sub_weight,
+                        "weight": weight,
+                        "normalized": normalized_value,
+                        "raw": raw_value,
+                        "baseline": (
+                            float(picked_raw.get("_baseline_val"))
+                            if picked_raw is not None
+                            and picked_raw.get("_baseline_val") is not None
+                            else None
+                        ),
+                        "direction": (
+                            str(picked_raw.get("_direction", "higher"))
+                            if picked_raw is not None
+                            else "higher"
+                        ),
+                    }
+                )
             elif normalized_value is not None:
-                numerator += weight * normalized_value
+                ungrouped.append((weight, normalized_value))
 
             breakdown[label] = {
                 "metric": metric,
@@ -1000,6 +1103,31 @@ def compute_device_composite_scores(
             # simply missing a submission.
             if isinstance(selector, dict) and isinstance(selector.get("num_qubits"), int):
                 breakdown[label]["required_num_qubits"] = selector["num_qubits"]
+
+        for weight, normalized_value in ungrouped:
+            numerator += weight * normalized_value
+
+        # Fold arithmetic groups into the numerator. Following the Metriq Score
+        # definition (arXiv:2603.08680, Eqs. 3-5), the raw measurements are summed
+        # across circuit widths first and the aggregate is normalized against the
+        # baseline once, so a width whose baseline value sits at the noise floor
+        # cannot contribute an unbounded ratio. Missing widths still contribute 0
+        # through the present sub-weight share.
+        for group in arithmetic_groups.values():
+            items = group["items"]
+            total_sub = sum(it["sub_weight"] for it in items if it["sub_weight"] > 0)
+            subscore = _benchmark_subscore(items) if total_sub > 0 else None
+            if subscore is None:
+                # No width has both a device and a baseline raw value (for example
+                # derived metrics such as BSEQ that only carry normalized scores).
+                for it in items:
+                    if it["normalized"] is not None:
+                        numerator += it["weight"] * it["normalized"]
+                continue
+            value, present_sub = subscore
+            numerator += float(group["group_weight"]) * value * (present_sub / total_sub)
+            for it in items:
+                breakdown[it["label"]]["group_subscore"] = value
 
         # Fold harmonic groups into the numerator: the group's score is the
         # weighted harmonic mean of its available components, scaled by the
