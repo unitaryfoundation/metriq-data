@@ -13,10 +13,10 @@
         true
       ],
       "effective_approx_ratio": [
-        -0.00779446189285339
+        0.0
       ],
       "score": {
-        "value": -0.00779446189285339,
+        "value": 0.0,
         "uncertainty": null
       }
     },
