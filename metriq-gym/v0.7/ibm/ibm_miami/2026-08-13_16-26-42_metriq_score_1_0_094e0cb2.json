@@ -1,0 +1,202 @@
+[
+  {
+    "app_version": "0.7.2.dev15+g3b4c355",
+    "timestamp": "2026-08-13T16:26:42.329126",
+    "suite_id": "0fa4e0f5-ca67-42fc-a3b4-b0ca13558a12",
+    "job_type": "Quantum Fourier Transform",
+    "results": {
+      "accuracy_score": {
+        "value": 0.794,
+        "uncertainty": 0.005
+      },
+      "score": {
+        "value": 0.794,
+        "uncertainty": 0.005
+      }
+    },
+    "runtime_seconds": 12.973434,
+    "suite": {
+      "id": "0fa4e0f5-ca67-42fc-a3b4-b0ca13558a12",
+      "name": "metriq_score_1_0"
+    },
+    "platform": {
+      "device": "ibm_miami",
+      "device_metadata": {
+        "num_qubits": 120,
+        "simulator": false,
+        "version": "1.0.3"
+      },
+      "provider": "ibm"
+    },
+    "circuit_metadata": {
+      "input_two_qubit_gate_counts": [
+        12,
+        12,
+        12
+      ],
+      "transpiled_two_qubit_gate_counts": [
+        12,
+        12,
+        12
+      ]
+    },
+    "params": {
+      "benchmark_name": "Quantum Fourier Transform",
+      "max_circuits": 3,
+      "method": 1,
+      "num_qubits": 4,
+      "shots": 1000,
+      "use_midcircuit_measurement": false
+    }
+  },
+  {
+    "app_version": "0.7.2.dev15+g3b4c355",
+    "timestamp": "2026-08-13T16:26:44.502754",
+    "suite_id": "0fa4e0f5-ca67-42fc-a3b4-b0ca13558a12",
+    "job_type": "Quantum Fourier Transform",
+    "results": {
+      "accuracy_score": {
+        "value": 0.055,
+        "uncertainty": 0.007
+      },
+      "score": {
+        "value": 0.055,
+        "uncertainty": 0.007
+      }
+    },
+    "runtime_seconds": 13.029443,
+    "suite": {
+      "id": "0fa4e0f5-ca67-42fc-a3b4-b0ca13558a12",
+      "name": "metriq_score_1_0"
+    },
+    "platform": {
+      "device": "ibm_miami",
+      "device_metadata": {
+        "num_qubits": 120,
+        "simulator": false,
+        "version": "1.0.3"
+      },
+      "provider": "ibm"
+    },
+    "circuit_metadata": {
+      "input_two_qubit_gate_counts": [
+        56,
+        56,
+        56
+      ],
+      "transpiled_two_qubit_gate_counts": [
+        56,
+        56,
+        56
+      ]
+    },
+    "params": {
+      "benchmark_name": "Quantum Fourier Transform",
+      "max_circuits": 3,
+      "method": 1,
+      "num_qubits": 8,
+      "shots": 1000,
+      "use_midcircuit_measurement": false
+    }
+  },
+  {
+    "app_version": "0.7.2.dev15+g3b4c355",
+    "timestamp": "2026-08-13T16:26:46.539231",
+    "suite_id": "0fa4e0f5-ca67-42fc-a3b4-b0ca13558a12",
+    "job_type": "Quantum Fourier Transform",
+    "results": {
+      "accuracy_score": {
+        "value": 0.0,
+        "uncertainty": 0.0
+      },
+      "score": {
+        "value": 0.0,
+        "uncertainty": 0.0
+      }
+    },
+    "runtime_seconds": 13.184031,
+    "suite": {
+      "id": "0fa4e0f5-ca67-42fc-a3b4-b0ca13558a12",
+      "name": "metriq_score_1_0"
+    },
+    "platform": {
+      "device": "ibm_miami",
+      "device_metadata": {
+        "num_qubits": 120,
+        "simulator": false,
+        "version": "1.0.3"
+      },
+      "provider": "ibm"
+    },
+    "circuit_metadata": {
+      "input_two_qubit_gate_counts": [
+        132,
+        132,
+        132
+      ],
+      "transpiled_two_qubit_gate_counts": [
+        132,
+        132,
+        132
+      ]
+    },
+    "params": {
+      "benchmark_name": "Quantum Fourier Transform",
+      "max_circuits": 3,
+      "method": 1,
+      "num_qubits": 12,
+      "shots": 1000,
+      "use_midcircuit_measurement": false
+    }
+  },
+  {
+    "app_version": "0.7.2.dev15+g3b4c355",
+    "timestamp": "2026-08-13T16:26:49.265270",
+    "suite_id": "0fa4e0f5-ca67-42fc-a3b4-b0ca13558a12",
+    "job_type": "Quantum Fourier Transform",
+    "results": {
+      "accuracy_score": {
+        "value": 0.0,
+        "uncertainty": 0.0
+      },
+      "score": {
+        "value": 0.0,
+        "uncertainty": 0.0
+      }
+    },
+    "runtime_seconds": 13.812076,
+    "suite": {
+      "id": "0fa4e0f5-ca67-42fc-a3b4-b0ca13558a12",
+      "name": "metriq_score_1_0"
+    },
+    "platform": {
+      "device": "ibm_miami",
+      "device_metadata": {
+        "num_qubits": 120,
+        "simulator": false,
+        "version": "1.0.3"
+      },
+      "provider": "ibm"
+    },
+    "circuit_metadata": {
+      "input_two_qubit_gate_counts": [
+        380,
+        380,
+        380
+      ],
+      "transpiled_two_qubit_gate_counts": [
+        380,
+        380,
+        380
+      ]
+    },
+    "params": {
+      "benchmark_name": "Quantum Fourier Transform",
+      "max_circuits": 3,
+      "method": 1,
+      "num_qubits": 20,
+      "shots": 1000,
+      "use_midcircuit_measurement": false
+    }
+  }
+]
