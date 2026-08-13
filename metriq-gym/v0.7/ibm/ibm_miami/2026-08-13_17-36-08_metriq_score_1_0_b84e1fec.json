@@ -1,0 +1,174 @@
+[
+  {
+    "app_version": "0.7.2.dev15+g3b4c355",
+    "timestamp": "2026-08-13T17:36:08.942937",
+    "suite_id": "41940ea1-7cd3-4e10-bfe0-987aeb633be1",
+    "job_type": "QML Kernel",
+    "results": {
+      "accuracy_score": {
+        "value": 0.741,
+        "uncertainty": 0.013853483316480371
+      },
+      "score": {
+        "value": 0.741,
+        "uncertainty": 0.013853483316480371
+      }
+    },
+    "runtime_seconds": 4.980632,
+    "suite": {
+      "id": "41940ea1-7cd3-4e10-bfe0-987aeb633be1",
+      "name": "metriq_score_1_0"
+    },
+    "platform": {
+      "device": "ibm_miami",
+      "device_metadata": {
+        "num_qubits": 120,
+        "simulator": false,
+        "version": "1.0.3"
+      },
+      "provider": "ibm"
+    },
+    "circuit_metadata": {
+      "input_two_qubit_gate_counts": [
+        36
+      ],
+      "transpiled_two_qubit_gate_counts": [
+        36
+      ]
+    },
+    "params": {
+      "benchmark_name": "QML Kernel",
+      "num_qubits": 10,
+      "shots": 1000
+    }
+  },
+  {
+    "app_version": "0.7.2.dev15+g3b4c355",
+    "timestamp": "2026-08-13T17:36:10.377156",
+    "suite_id": "41940ea1-7cd3-4e10-bfe0-987aeb633be1",
+    "job_type": "QML Kernel",
+    "results": {
+      "accuracy_score": {
+        "value": 0.486,
+        "uncertainty": 0.015805189021330938
+      },
+      "score": {
+        "value": 0.486,
+        "uncertainty": 0.015805189021330938
+      }
+    },
+    "runtime_seconds": 4.866583,
+    "suite": {
+      "id": "41940ea1-7cd3-4e10-bfe0-987aeb633be1",
+      "name": "metriq_score_1_0"
+    },
+    "platform": {
+      "device": "ibm_miami",
+      "device_metadata": {
+        "num_qubits": 120,
+        "simulator": false,
+        "version": "1.0.3"
+      },
+      "provider": "ibm"
+    },
+    "circuit_metadata": {
+      "input_two_qubit_gate_counts": [
+        76
+      ],
+      "transpiled_two_qubit_gate_counts": [
+        76
+      ]
+    },
+    "params": {
+      "benchmark_name": "QML Kernel",
+      "num_qubits": 20,
+      "shots": 1000
+    }
+  },
+  {
+    "app_version": "0.7.2.dev15+g3b4c355",
+    "timestamp": "2026-08-13T17:36:11.308376",
+    "suite_id": "41940ea1-7cd3-4e10-bfe0-987aeb633be1",
+    "job_type": "QML Kernel",
+    "results": {
+      "accuracy_score": {
+        "value": 0.314,
+        "uncertainty": 0.01467664811869522
+      },
+      "score": {
+        "value": 0.314,
+        "uncertainty": 0.01467664811869522
+      }
+    },
+    "runtime_seconds": 5.003545,
+    "suite": {
+      "id": "41940ea1-7cd3-4e10-bfe0-987aeb633be1",
+      "name": "metriq_score_1_0"
+    },
+    "platform": {
+      "device": "ibm_miami",
+      "device_metadata": {
+        "num_qubits": 120,
+        "simulator": false,
+        "version": "1.0.3"
+      },
+      "provider": "ibm"
+    },
+    "circuit_metadata": {
+      "input_two_qubit_gate_counts": [
+        116
+      ],
+      "transpiled_two_qubit_gate_counts": [
+        116
+      ]
+    },
+    "params": {
+      "benchmark_name": "QML Kernel",
+      "num_qubits": 30,
+      "shots": 1000
+    }
+  },
+  {
+    "app_version": "0.7.2.dev15+g3b4c355",
+    "timestamp": "2026-08-13T17:36:12.178649",
+    "suite_id": "41940ea1-7cd3-4e10-bfe0-987aeb633be1",
+    "job_type": "QML Kernel",
+    "results": {
+      "accuracy_score": {
+        "value": 0.081,
+        "uncertainty": 0.008627803892068943
+      },
+      "score": {
+        "value": 0.081,
+        "uncertainty": 0.008627803892068943
+      }
+    },
+    "runtime_seconds": 4.947429,
+    "suite": {
+      "id": "41940ea1-7cd3-4e10-bfe0-987aeb633be1",
+      "name": "metriq_score_1_0"
+    },
+    "platform": {
+      "device": "ibm_miami",
+      "device_metadata": {
+        "num_qubits": 120,
+        "simulator": false,
+        "version": "1.0.3"
+      },
+      "provider": "ibm"
+    },
+    "circuit_metadata": {
+      "input_two_qubit_gate_counts": [
+        196
+      ],
+      "transpiled_two_qubit_gate_counts": [
+        196
+      ]
+    },
+    "params": {
+      "benchmark_name": "QML Kernel",
+      "num_qubits": 50,
+      "shots": 1000
+    }
+  }
+]
