@@ -94,10 +94,12 @@ Example `scripts/scoring.json`:
     "v0.4": {
       "baseline": { "provider": "origin", "device": "wukong_102" },
       "composite": {
+        "dispatch": { "suite": "metriq_score_1_0" },
         "components": [
           {
             "label": "BSEQ",
             "weight": "1/2",
+            "dispatch": { "component": "bseq" },
             "components": [
               { "benchmark": "BSEQ", "metric": "fraction_connected", "weight": "1/1" }
             ]
@@ -105,6 +107,7 @@ Example `scripts/scoring.json`:
           {
             "label": "QML Kernel",
             "weight": "1/2",
+            "dispatch": { "component": "qml-kernel" },
             "components": [
               { "benchmark": "QML Kernel", "metric": "accuracy_score", "selector": { "num_qubits": 10 }, "weight": "1/1" }
             ]
@@ -116,10 +119,12 @@ Example `scripts/scoring.json`:
   "default": {
     "baseline": { "provider": "ibm", "device": "ibm_torino" },
     "composite": {
+      "dispatch": { "suite": "metriq_score_1_0" },
       "components": [
         {
           "label": "BSEQ",
           "weight": "1/2",
+          "dispatch": { "component": "bseq" },
           "components": [
             { "benchmark": "BSEQ", "metric": "fraction_connected", "weight": "1/1" }
           ]
@@ -127,6 +132,7 @@ Example `scripts/scoring.json`:
         {
           "label": "QML Kernel",
           "weight": "1/2",
+          "dispatch": { "component": "qml-kernel" },
           "components": [
             { "benchmark": "QML Kernel", "metric": "accuracy_score", "selector": { "num_qubits": 10 }, "weight": "1/1" }
           ]
@@ -136,6 +142,12 @@ Example `scripts/scoring.json`:
   }
 }
 ```
+
+Optional `dispatch` metadata connects score components to the corresponding
+`metriq-gym` CLI selectors. The composite-level `suite` and group-level `component`
+are resolved into a complete `{ "suite": ..., "component": ... }` object on every
+generated leaf in `metriq_score.components`. Configurations that omit dispatch
+metadata retain the previous output shape.
 
 Baselines are computed per major series (e.g., all `v0.x.y` share one baseline reference),
 using the latest available baseline row per `(benchmark, metric, selector)` key.

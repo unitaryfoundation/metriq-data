@@ -138,6 +138,17 @@ def _derived_from_components(comp: dict[str, Any]) -> list[dict[str, Any]]:
     return [x for x in items if isinstance(x, dict)]
 
 
+def _dispatch_metadata(value: Any) -> dict[str, str]:
+    """Return normalized dispatch fields from a scoring config object."""
+    if not isinstance(value, dict):
+        return {}
+    return {
+        key: raw.strip()
+        for key in ("suite", "component")
+        if isinstance((raw := value.get(key)), str) and raw.strip()
+    }
+
+
 def _flatten_components(components: list[dict[str, Any]]) -> list[dict[str, Any]]:
     """Flatten grouped composite components.
 
@@ -147,6 +158,7 @@ def _flatten_components(components: list[dict[str, Any]]) -> list[dict[str, Any]
 
     Returns leaf component dicts augmented with:
       - _group_label, _group_weight, _sub_weight, _effective_weight
+      - _dispatch, inherited from the group and overridden by the leaf
     """
     flat: list[dict[str, Any]] = []
     for comp in components:
@@ -156,6 +168,7 @@ def _flatten_components(components: list[dict[str, Any]]) -> list[dict[str, Any]
         if isinstance(group_children, list):
             group_label = comp.get("label") or comp.get("benchmark") or "group"
             group_weight = _parse_weight(comp.get("weight", 0.0))
+            group_dispatch = _dispatch_metadata(comp.get("dispatch"))
             for child in group_children:
                 if not isinstance(child, dict):
                     continue
@@ -165,6 +178,12 @@ def _flatten_components(components: list[dict[str, Any]]) -> list[dict[str, Any]
                 merged["_group_weight"] = group_weight
                 merged["_sub_weight"] = sub_weight
                 merged["_effective_weight"] = group_weight * sub_weight
+                resolved_dispatch = {
+                    **group_dispatch,
+                    **_dispatch_metadata(child.get("dispatch")),
+                }
+                if resolved_dispatch:
+                    merged["_dispatch"] = resolved_dispatch
                 flat.append(merged)
             continue
 
@@ -174,6 +193,9 @@ def _flatten_components(components: list[dict[str, Any]]) -> list[dict[str, Any]
         merged["_group_weight"] = 1.0
         merged["_sub_weight"] = sub_weight
         merged["_effective_weight"] = sub_weight
+        resolved_dispatch = _dispatch_metadata(comp.get("dispatch"))
+        if resolved_dispatch:
+            merged["_dispatch"] = resolved_dispatch
         flat.append(merged)
 
     return flat
@@ -620,13 +642,19 @@ def load_scoring_config(root: str) -> dict[str, Any]:
         "series": {
           "vX.Y": {
             "baseline": { "provider": str, "device": str },
-            "composite": { "components": [ ... ] }
+            "composite": {
+              "dispatch": { "suite": str },
+              "components": [ ... ]
+            }
           },
           ...
         },
         "default": {
           "baseline": { "provider": str, "device": str },
-          "composite": { "components": [ ... ] }
+          "composite": {
+            "dispatch": { "suite": str },
+            "components": [ ... ]
+          }
         }
       }
     """
@@ -643,11 +671,38 @@ def load_scoring_config(root: str) -> dict[str, Any]:
     return {}
 
 
-def _validate_components_list(components: list[dict[str, Any]], ctx: str) -> None:
+def _validated_dispatch_metadata(value: Any, ctx: str) -> dict[str, str]:
+    if not isinstance(value, dict):
+        raise ValueError(f"Invalid dispatch metadata in {ctx}: expected object")
+
+    normalized: dict[str, str] = {}
+    for key in ("suite", "component"):
+        if key not in value:
+            continue
+        raw = value.get(key)
+        if not isinstance(raw, str) or not raw.strip():
+            raise ValueError(f"Invalid dispatch {key} in {ctx}: expected non-empty string")
+        normalized[key] = raw.strip()
+    return normalized
+
+
+def _validate_components_list(
+    components: list[dict[str, Any]],
+    ctx: str,
+    inherited_dispatch: dict[str, str] | None = None,
+) -> None:
     total = 0.0
+    inherited_dispatch = inherited_dispatch or {}
     for i, comp in enumerate(components):
         if not isinstance(comp, dict):
             raise ValueError(f"Invalid component at index {i} in {ctx}: expected object")
+        comp_ctx = f"{ctx}.components[{i}]"
+        local_dispatch = (
+            _validated_dispatch_metadata(comp.get("dispatch"), f"{comp_ctx}.dispatch")
+            if "dispatch" in comp
+            else {}
+        )
+        resolved_dispatch = {**inherited_dispatch, **local_dispatch}
         children = comp.get("components")
         w_raw = comp.get("weight")
         try:
@@ -658,13 +713,37 @@ def _validate_components_list(components: list[dict[str, Any]], ctx: str) -> Non
             raise ValueError(f"Negative weight for component {i} in {ctx}: {w_raw}")
 
         if isinstance(children, list):
-            _validate_components_list(children, ctx=f"{ctx}.components[{i}]")
+            _validate_components_list(
+                children,
+                ctx=comp_ctx,
+                inherited_dispatch=resolved_dispatch,
+            )
+        elif bool(resolved_dispatch.get("suite")) != bool(resolved_dispatch.get("component")):
+            raise ValueError(
+                f"Incomplete dispatch metadata in {comp_ctx}: "
+                "resolved leaf requires both suite and component"
+            )
         total += w
 
     if components:
         # Weight lists are expected to represent convex combinations.
         if abs(total - 1.0) > 1e-9:
             raise ValueError(f"Component weights must sum to 1.0 in {ctx}: got {total}")
+
+
+def _validate_composite_config(composite: dict[str, Any], ctx: str) -> None:
+    inherited_dispatch = (
+        _validated_dispatch_metadata(composite.get("dispatch"), f"{ctx}.dispatch")
+        if "dispatch" in composite
+        else {}
+    )
+    components = composite.get("components")
+    if isinstance(components, list):
+        _validate_components_list(
+            components,
+            ctx=ctx,
+            inherited_dispatch=inherited_dispatch,
+        )
 
 
 def validate_scoring_config(scoring_cfg: dict[str, Any]) -> None:
@@ -679,8 +758,8 @@ def validate_scoring_config(scoring_cfg: dict[str, Any]) -> None:
     default = scoring_cfg.get("default")
     if isinstance(default, dict):
         comp = default.get("composite")
-        if isinstance(comp, dict) and isinstance(comp.get("components"), list):
-            _validate_components_list(comp["components"], ctx="default.composite")
+        if isinstance(comp, dict):
+            _validate_composite_config(comp, ctx="default.composite")
 
     series_map = scoring_cfg.get("series")
     if isinstance(series_map, dict):
@@ -688,8 +767,8 @@ def validate_scoring_config(scoring_cfg: dict[str, Any]) -> None:
             if not isinstance(block, dict):
                 continue
             comp = block.get("composite")
-            if isinstance(comp, dict) and isinstance(comp.get("components"), list):
-                _validate_components_list(comp["components"], ctx=f"series.{label}.composite")
+            if isinstance(comp, dict):
+                _validate_composite_config(comp, ctx=f"series.{label}.composite")
 
 
 def _row_param_matches(selector: dict[str, Any] | None, row: dict[str, Any]) -> bool:
@@ -827,6 +906,7 @@ def compute_device_composite_scores(
         if not isinstance(components_cfg, list) or not components_cfg:
             # No components configured; skip this device
             continue
+        composite_dispatch = _dispatch_metadata(composite_cfg.get("dispatch"))
         components_flat = _flatten_components([c for c in components_cfg if isinstance(c, dict)])
         breakdown: dict[str, dict[str, Any]] = {}
         numerator = 0.0
@@ -922,7 +1002,7 @@ def compute_device_composite_scores(
             if normalized_value is not None:
                 numerator += weight * normalized_value
 
-            breakdown[label] = {
+            breakdown_entry = {
                 "metric": metric,
                 "weight": weight,
                 "group": group_label,
@@ -938,6 +1018,20 @@ def compute_device_composite_scores(
                 "raw_available": raw_value is not None,
                 "raw_timestamp": raw_ts,
             }
+            resolved_dispatch = {
+                **composite_dispatch,
+                **(
+                    comp.get("_dispatch")
+                    if isinstance(comp.get("_dispatch"), dict)
+                    else {}
+                ),
+            }
+            if resolved_dispatch.get("suite") and resolved_dispatch.get("component"):
+                breakdown_entry["dispatch"] = {
+                    "suite": resolved_dispatch["suite"],
+                    "component": resolved_dispatch["component"],
+                }
+            breakdown[label] = breakdown_entry
 
             # Surface a structural qubit requirement when the component selects a
             # fixed qubit count. This lets the UI tell a benchmark a device cannot

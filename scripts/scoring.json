@@ -6,10 +6,12 @@
         "device": "ibm_torino"
       },
       "composite": {
+        "dispatch": { "suite": "metriq_score_1_0" },
         "components": [
           {
             "label": "BSEQ",
             "weight": "1/7",
+            "dispatch": { "component": "bseq" },
             "components": [
               {
                 "benchmark": "BSEQ",
@@ -25,6 +27,7 @@
           {
             "label": "QML Kernel",
             "weight": "1/7",
+            "dispatch": { "component": "qml-kernel" },
             "components": [
               {
                 "benchmark": "QML Kernel",
@@ -59,6 +62,7 @@
           {
             "label": "Mirror Circuits",
             "weight": "1/7",
+            "dispatch": { "component": "mirror-circuits" },
             "components": [
               {
                 "benchmark": "Mirror Circuits",
@@ -107,6 +111,7 @@
           {
             "label": "WIT",
             "weight": "1/7",
+            "dispatch": { "component": "wit" },
             "components": [
               {
                 "benchmark": "WIT",
@@ -120,6 +125,7 @@
           {
             "label": "Quantum Fourier Transform",
             "weight": "1/7",
+            "dispatch": { "component": "qft" },
             "components": [
               {
                 "benchmark": "Quantum Fourier Transform",
@@ -132,6 +138,7 @@
           {
             "label": "Linear Ramp QAOA",
             "weight": "1/7",
+            "dispatch": { "component": "lr-qaoa" },
             "components": [
               {
                 "benchmark": "Linear Ramp QAOA",
@@ -166,6 +173,7 @@
           {
             "label": "EPLG",
             "weight": "1/7",
+            "dispatch": { "component": "eplg" },
             "components": [
               {
                 "benchmark": "EPLG",
@@ -196,6 +204,7 @@
           {
             "label": "CLOPS",
             "weight": "0/1",
+            "dispatch": { "component": "clops" },
             "components": [
               {
                 "benchmark": "CLOPS",
@@ -216,10 +225,12 @@
       "device": "ibm_torino"
     },
     "composite": {
+      "dispatch": { "suite": "metriq_score_1_0" },
       "components": [
         {
           "label": "BSEQ",
           "weight": "1/8",
+          "dispatch": { "component": "bseq" },
           "components": [
             {
               "benchmark": "BSEQ",
@@ -235,6 +246,7 @@
         {
           "label": "QML Kernel",
           "weight": "1/8",
+          "dispatch": { "component": "qml-kernel" },
           "components": [
             {
               "benchmark": "QML Kernel",
@@ -269,6 +281,7 @@
         {
           "label": "Mirror Circuits",
           "weight": "1/8",
+          "dispatch": { "component": "mirror-circuits" },
           "components": [
             {
               "benchmark": "Mirror Circuits",
@@ -317,6 +330,7 @@
         {
           "label": "WIT",
           "weight": "1/8",
+          "dispatch": { "component": "wit" },
           "components": [
             {
               "benchmark": "WIT",
@@ -330,6 +344,7 @@
         {
           "label": "Quantum Fourier Transform",
           "weight": "1/8",
+          "dispatch": { "component": "qft" },
           "components": [
             {
               "benchmark": "Quantum Fourier Transform",
@@ -342,6 +357,7 @@
         {
           "label": "Linear Ramp QAOA",
           "weight": "1/8",
+          "dispatch": { "component": "lr-qaoa" },
           "components": [
             {
               "benchmark": "Linear Ramp QAOA",
@@ -376,6 +392,7 @@
         {
           "label": "EPLG",
           "weight": "1/8",
+          "dispatch": { "component": "eplg" },
           "components": [
             {
               "benchmark": "EPLG",
@@ -406,6 +423,7 @@
         {
           "label": "CLOPS",
           "weight": "1/8",
+          "dispatch": { "component": "clops" },
           "components": [
             {
               "benchmark": "CLOPS",
