@@ -18,6 +18,7 @@ from etl import (  # noqa: E402
     write_platform_outputs,
 )
 from score import (  # noqa: E402
+    compute_device_composite_scores,
     _baseline_provider_device_for_series,
     baseline_metadata_for_latest_series,
 )
@@ -130,6 +131,65 @@ class ProviderAliasTests(unittest.TestCase):
 
 
 class PlatformCatalogTests(unittest.TestCase):
+    def test_component_required_num_qubits_sources(self):
+        """required_num_qubits comes from explicit config, num_qubits, or width selectors."""
+        scoring_cfg = {
+            "default": {
+                "composite": {
+                    "components": [
+                        {
+                            "label": "G",
+                            "weight": "1/1",
+                            "components": [
+                                {
+                                    "benchmark": "B",
+                                    "metric": "m",
+                                    "selector": {"num_qubits": 10},
+                                    "label": "by-num-qubits",
+                                    "weight": "1/4",
+                                },
+                                {
+                                    "benchmark": "B",
+                                    "metric": "m",
+                                    "selector": {"width": 128, "num_layers": 2},
+                                    "label": "by-width",
+                                    "weight": "1/4",
+                                },
+                                {
+                                    "benchmark": "B",
+                                    "metric": "m2",
+                                    "required_num_qubits": 100,
+                                    "label": "explicit",
+                                    "weight": "1/4",
+                                },
+                                {
+                                    "benchmark": "B",
+                                    "metric": "m3",
+                                    "label": "no-requirement",
+                                    "weight": "1/4",
+                                },
+                            ],
+                        }
+                    ]
+                }
+            }
+        }
+        row = {
+            "provider": "prov",
+            "device": "dev",
+            "timestamp": "2026-07-15T16:26:08",
+            "params": {"benchmark_name": "B", "num_qubits": 10},
+            "results": {"m": {"value": 0.5}},
+        }
+        records = compute_device_composite_scores(
+            [row], {id(row): "v0.7"}, {}, scoring_cfg
+        )
+        comps = records[0]["components"]
+        self.assertEqual(comps["by-num-qubits"]["required_num_qubits"], 10)
+        self.assertEqual(comps["by-width"]["required_num_qubits"], 128)
+        self.assertEqual(comps["explicit"]["required_num_qubits"], 100)
+        self.assertNotIn("required_num_qubits", comps["no-requirement"])
+
     def test_ankaa_3_is_retired(self):
         catalog = load_platform_catalog(str(REPO_ROOT))
         platform_key = ("aws", "rigetti_ankaa-3")

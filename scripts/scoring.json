@@ -170,24 +170,28 @@
               {
                 "benchmark": "EPLG",
                 "metric": "eplg_10",
+                "required_num_qubits": 10,
                 "label": "EPLG-10:score",
                 "weight": "1/4"
               },
               {
                 "benchmark": "EPLG",
                 "metric": "eplg_20",
+                "required_num_qubits": 20,
                 "label": "EPLG-20:score",
                 "weight": "1/4"
               },
               {
                 "benchmark": "EPLG",
                 "metric": "eplg_50",
+                "required_num_qubits": 50,
                 "label": "EPLG-50:score",
                 "weight": "1/4"
               },
               {
                 "benchmark": "EPLG",
                 "metric": "eplg_100",
+                "required_num_qubits": 100,
                 "label": "EPLG-100:score",
                 "weight": "1/4"
               }
@@ -591,24 +595,28 @@
             {
               "benchmark": "EPLG",
               "metric": "eplg_10",
+              "required_num_qubits": 10,
               "label": "EPLG-10",
               "weight": "10/180"
             },
             {
               "benchmark": "EPLG",
               "metric": "eplg_20",
+              "required_num_qubits": 20,
               "label": "EPLG-20",
               "weight": "20/180"
             },
             {
               "benchmark": "EPLG",
               "metric": "eplg_50",
+              "required_num_qubits": 50,
               "label": "EPLG-50",
               "weight": "50/180"
             },
             {
               "benchmark": "EPLG",
               "metric": "eplg_100",
+              "required_num_qubits": 100,
               "label": "EPLG-100",
               "weight": "100/180"
             }
