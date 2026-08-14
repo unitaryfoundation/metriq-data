@@ -183,7 +183,7 @@ def flatten_row(row: dict[str, Any]) -> dict[str, Any]:
 
     outcome, outcome_detail = _normalize_outcome(row)
     if outcome is not None:
-        out["outcome"] = outcome
+        out["outcome"], out["results"] = outcome, None
         if outcome_detail is not None:
             out["outcome_detail"] = outcome_detail
 
