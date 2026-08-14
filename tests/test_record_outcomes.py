@@ -80,6 +80,14 @@ class RecordOutcomeTests(unittest.TestCase):
         self.assertEqual(out["outcome"], "unsupported")
         self.assertNotIn("outcome_detail", out)
 
+    def test_non_completed_outcomes_drop_results_payloads(self):
+        out = flatten_row(
+            outcome_record(outcome="error", results={"score": {"value": 1.23, "uncertainty": 0.01}})
+        )
+        self.assertEqual(out["outcome"], "error")
+        self.assertIn("results", out)
+        self.assertIsNone(out["results"])
+
 
 if __name__ == "__main__":
     unittest.main()
