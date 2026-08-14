@@ -1,0 +1,352 @@
+[
+  {
+    "app_version": "0.7.2.dev15+g3b4c355",
+    "timestamp": "2026-08-14T09:48:26.101941",
+    "suite_id": "c80bb42a-1a47-4bb4-bd03-667b0b58b1b9",
+    "job_type": "Mirror Circuits",
+    "results": {
+      "success_probability": {
+        "value": 0.4384,
+        "uncertainty": 0.004961909309933022
+      },
+      "polarization": {
+        "value": 0.4361976470588235,
+        "uncertainty": 0.004981367777815113
+      },
+      "binary_success": true,
+      "score": {
+        "value": 0.4361976470588235,
+        "uncertainty": 0.004981367777815113
+      }
+    },
+    "runtime_seconds": 41.14749,
+    "suite": {
+      "id": "c80bb42a-1a47-4bb4-bd03-667b0b58b1b9",
+      "name": "metriq_score_1_0"
+    },
+    "platform": {
+      "device": "ibm_miami",
+      "device_metadata": {
+        "num_qubits": 120,
+        "simulator": false,
+        "version": "1.0.3"
+      },
+      "provider": "ibm"
+    },
+    "circuit_metadata": {
+      "input_two_qubit_gate_counts": [
+        210,
+        212,
+        220,
+        224,
+        194,
+        214,
+        212,
+        218,
+        212,
+        230
+      ],
+      "transpiled_two_qubit_gate_counts": [
+        210,
+        212,
+        220,
+        224,
+        194,
+        214,
+        212,
+        218,
+        212,
+        230
+      ]
+    },
+    "params": {
+      "benchmark_name": "Mirror Circuits",
+      "num_circuits": 10,
+      "num_layers": 64,
+      "shots": 1000,
+      "two_qubit_gate_name": "CNOT",
+      "two_qubit_gate_prob": 0.5,
+      "width": 8
+    }
+  },
+  {
+    "app_version": "0.7.2.dev15+g3b4c355",
+    "timestamp": "2026-08-14T09:48:30.217972",
+    "suite_id": "c80bb42a-1a47-4bb4-bd03-667b0b58b1b9",
+    "job_type": "Mirror Circuits",
+    "results": {
+      "success_probability": {
+        "value": 0.2082,
+        "uncertainty": 0.00406020639869453
+      },
+      "polarization": {
+        "value": 0.20818791790646218,
+        "uncertainty": 0.004060268353472873
+      },
+      "binary_success": false,
+      "score": {
+        "value": 0.20818791790646218,
+        "uncertainty": 0.004060268353472873
+      }
+    },
+    "runtime_seconds": 41.092758,
+    "suite": {
+      "id": "c80bb42a-1a47-4bb4-bd03-667b0b58b1b9",
+      "name": "metriq_score_1_0"
+    },
+    "platform": {
+      "device": "ibm_miami",
+      "device_metadata": {
+        "num_qubits": 120,
+        "simulator": false,
+        "version": "1.0.3"
+      },
+      "provider": "ibm"
+    },
+    "circuit_metadata": {
+      "input_two_qubit_gate_counts": [
+        210,
+        216,
+        218,
+        198,
+        224,
+        212,
+        204,
+        226,
+        214,
+        212
+      ],
+      "transpiled_two_qubit_gate_counts": [
+        210,
+        216,
+        218,
+        198,
+        224,
+        212,
+        204,
+        226,
+        214,
+        212
+      ]
+    },
+    "params": {
+      "benchmark_name": "Mirror Circuits",
+      "num_circuits": 10,
+      "num_layers": 32,
+      "shots": 1000,
+      "two_qubit_gate_name": "CNOT",
+      "two_qubit_gate_prob": 0.5,
+      "width": 16
+    }
+  },
+  {
+    "app_version": "0.7.2.dev15+g3b4c355",
+    "timestamp": "2026-08-14T09:48:34.254233",
+    "suite_id": "c80bb42a-1a47-4bb4-bd03-667b0b58b1b9",
+    "job_type": "Mirror Circuits",
+    "results": {
+      "success_probability": {
+        "value": 0.1215,
+        "uncertainty": 0.003267074379318598
+      },
+      "polarization": {
+        "value": 0.12149994763731645,
+        "uncertainty": 0.003267074574051417
+      },
+      "binary_success": false,
+      "score": {
+        "value": 0.12149994763731645,
+        "uncertainty": 0.003267074574051417
+      }
+    },
+    "runtime_seconds": 41.093165,
+    "suite": {
+      "id": "c80bb42a-1a47-4bb4-bd03-667b0b58b1b9",
+      "name": "metriq_score_1_0"
+    },
+    "platform": {
+      "device": "ibm_miami",
+      "device_metadata": {
+        "num_qubits": 120,
+        "simulator": false,
+        "version": "1.0.3"
+      },
+      "provider": "ibm"
+    },
+    "circuit_metadata": {
+      "input_two_qubit_gate_counts": [
+        192,
+        176,
+        118,
+        172,
+        164,
+        158,
+        160,
+        148,
+        148,
+        174
+      ],
+      "transpiled_two_qubit_gate_counts": [
+        192,
+        176,
+        118,
+        172,
+        164,
+        158,
+        160,
+        148,
+        148,
+        174
+      ]
+    },
+    "params": {
+      "benchmark_name": "Mirror Circuits",
+      "num_circuits": 10,
+      "num_layers": 16,
+      "shots": 1000,
+      "two_qubit_gate_name": "CNOT",
+      "two_qubit_gate_prob": 0.5,
+      "width": 24
+    }
+  },
+  {
+    "app_version": "0.7.2.dev15+g3b4c355",
+    "timestamp": "2026-08-14T09:48:40.449156",
+    "suite_id": "c80bb42a-1a47-4bb4-bd03-667b0b58b1b9",
+    "job_type": "Mirror Circuits",
+    "results": {
+      "success_probability": {
+        "value": 0.1241,
+        "uncertainty": 0.0032969560203314815
+      },
+      "polarization": {
+        "value": 0.12409999979606365,
+        "uncertainty": 0.003296956021099114
+      },
+      "binary_success": false,
+      "score": {
+        "value": 0.12409999979606365,
+        "uncertainty": 0.003296956021099114
+      }
+    },
+    "runtime_seconds": 40.976034,
+    "suite": {
+      "id": "c80bb42a-1a47-4bb4-bd03-667b0b58b1b9",
+      "name": "metriq_score_1_0"
+    },
+    "platform": {
+      "device": "ibm_miami",
+      "device_metadata": {
+        "num_qubits": 120,
+        "simulator": false,
+        "version": "1.0.3"
+      },
+      "provider": "ibm"
+    },
+    "circuit_metadata": {
+      "input_two_qubit_gate_counts": [
+        128,
+        104,
+        88,
+        100,
+        100,
+        140,
+        122,
+        100,
+        110,
+        104
+      ],
+      "transpiled_two_qubit_gate_counts": [
+        128,
+        104,
+        88,
+        100,
+        100,
+        140,
+        122,
+        100,
+        110,
+        104
+      ]
+    },
+    "params": {
+      "benchmark_name": "Mirror Circuits",
+      "num_circuits": 10,
+      "num_layers": 8,
+      "shots": 1000,
+      "two_qubit_gate_name": "CNOT",
+      "two_qubit_gate_prob": 0.5,
+      "width": 32
+    }
+  },
+  {
+    "app_version": "0.7.2.dev15+g3b4c355",
+    "timestamp": "2026-08-14T09:48:44.636437",
+    "suite_id": "c80bb42a-1a47-4bb4-bd03-667b0b58b1b9",
+    "job_type": "Mirror Circuits",
+    "results": {
+      "success_probability": {
+        "value": 0.0222,
+        "uncertainty": 0.0014733349924575877
+      },
+      "polarization": {
+        "value": 0.0222,
+        "uncertainty": 0.0014733349924575877
+      },
+      "binary_success": false,
+      "score": {
+        "value": 0.0222,
+        "uncertainty": 0.0014733349924575877
+      }
+    },
+    "runtime_seconds": 41.046593,
+    "suite": {
+      "id": "c80bb42a-1a47-4bb4-bd03-667b0b58b1b9",
+      "name": "metriq_score_1_0"
+    },
+    "platform": {
+      "device": "ibm_miami",
+      "device_metadata": {
+        "num_qubits": 120,
+        "simulator": false,
+        "version": "1.0.3"
+      },
+      "provider": "ibm"
+    },
+    "circuit_metadata": {
+      "input_two_qubit_gate_counts": [
+        106,
+        126,
+        100,
+        126,
+        122,
+        126,
+        90,
+        96,
+        142,
+        120
+      ],
+      "transpiled_two_qubit_gate_counts": [
+        106,
+        126,
+        100,
+        126,
+        122,
+        126,
+        90,
+        96,
+        142,
+        120
+      ]
+    },
+    "params": {
+      "benchmark_name": "Mirror Circuits",
+      "num_circuits": 10,
+      "num_layers": 4,
+      "shots": 1000,
+      "two_qubit_gate_name": "CNOT",
+      "two_qubit_gate_prob": 0.5,
+      "width": 64
+    }
+  }
+]
