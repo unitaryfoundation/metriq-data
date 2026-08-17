@@ -75,6 +75,21 @@ python -m http.server --directory dist 8000
 
 Then open `http://localhost:8000/`.
 
+### Pull request previews
+
+Pull requests that change benchmark data, aggregation, or scoring publish their
+generated JSON under `https://unitaryfoundation.github.io/metriq-data/pr-preview/pr-<PR_NUMBER>/`.
+That URL serves a snapshot of the currently deployed production Metriq UI with
+the pull request's data selected and an explicit staging banner. The preview is
+rebuilt from GitHub's merge revision on every update and removed when the pull
+request closes.
+
+Preview builds run with read-only permissions. A separate trusted workflow
+validates the pull request metadata, publishes only allowlisted JSON paths, and
+combines them with the trusted production website bundle; pull request code
+never receives deployment credentials and never supplies preview HTML or
+JavaScript.
+
 ### Metriq-score
 `metriq-score` is computed per metric relative to a baseline device, honoring directionality:
   - higher-is-better: `score = (value / baseline) * 100`
