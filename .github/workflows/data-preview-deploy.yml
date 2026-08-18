@@ -17,8 +17,6 @@ permissions:
 
 concurrency:
   group: metriq-data-pages
-  # Preserve every serialized Pages mutation; queue: max is supported on GitHub.com:
-  # https://docs.github.com/en/actions/reference/workflows-and-actions/workflow-syntax#example-queueing-multiple-pending-runs
   queue: max
 
 jobs:
