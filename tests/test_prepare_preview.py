@@ -103,9 +103,18 @@ class PreparePreviewTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, "unexpected preview data path"):
             validate_data_tree(self.data)
 
-    def test_rejects_non_json_files_and_symlinks(self):
+    def test_rejects_non_json_files(self):
         (self.data / "index.html").write_text("<script></script>", encoding="utf-8")
         with self.assertRaisesRegex(ValueError, "unexpected preview data path"):
+            validate_data_tree(self.data)
+
+    def test_rejects_symlinks(self):
+        symlink = self.data / "platforms" / "ibm" / "linked.json"
+        try:
+            symlink.symlink_to(self.data / "benchmark.latest.json")
+        except (NotImplementedError, OSError) as error:
+            self.skipTest(f"symlink creation is unavailable: {error}")
+        with self.assertRaisesRegex(ValueError, "must not contain symlinks"):
             validate_data_tree(self.data)
 
     def test_rejects_html_and_executable_urls_in_json_values(self):
