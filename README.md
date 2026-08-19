@@ -94,9 +94,53 @@ to completed runs with `results`, a record may declare a non-completed `outcome`
   among outcome records, the latest wins. Outcomes are point-in-time claims:
   if a device or compiler later supports the run, uploading the successful
   result retires the claim with no cleanup needed.
+- An outcome record is a claim about the **device**, not about `metriq-gym`.
+  If a benchmark cannot run because of a gap in our tooling (an unimplemented
+  mode, a missing resource estimator), leave the instance absent — do not file
+  it as `unsupported`, or tooling gaps will quietly read as device limitations.
 - Scoring is unchanged: non-completed records contribute no value, and
   component weights stay in the Metriq Score denominator either way. Outcomes
-  affect how coverage is displayed, not how scores are computed.
+  affect how coverage is displayed, not how scores are computed. Note the two
+  deliberately opposite treatments: an `unsupported` instance still *lowers* a
+  device's Metriq Score (score measures capability), while display-side
+  coverage may drop it from the runnable denominator and so *raise* the
+  coverage percentage (coverage measures data completeness). Both are intended;
+  read them side by side with the raw counts.
+
+### Reported outcomes in platform files
+
+The ETL stamps the winning outcome record for each Metriq Score component onto
+`metriq_score.components[<label>]` in `dist/platforms/<provider>/<device>.json`,
+next to the existing `required_num_qubits` hint:
+
+```json
+"Linear Ramp QAOA (100q):score": {
+  "normalized_available": false,
+  "raw_available": false,
+  "required_num_qubits": 100,
+  "reported_outcome": "unsupported",
+  "reported_outcome_reason": "Compiler rejects 100-qubit LR-QAOA circuits on this device",
+  "reported_outcome_timestamp": "2026-08-07T12:00:00",
+  "reported_outcome_detail": { "reason": "...", "error_message": "...", "source": "dispatch" }
+}
+```
+
+- The fields are present only when no completed record exists for that
+  component's benchmark instance (within the device's scored series) and at
+  least one outcome record does; among outcome records the latest timestamp
+  wins. `reported_outcome_reason` is `null` when the record carries no reason;
+  `reported_outcome_detail` is omitted when the record has no detail.
+- A reported outcome is authoritative evidence and should take precedence over
+  heuristics derived from device metadata (such as comparing
+  `required_num_qubits` to the device's qubit count) — the two can disagree in
+  both directions, e.g. a device with enough qubits but not enough connected
+  ones.
+- Outcomes are point-in-time claims, so consumers should surface
+  `reported_outcome_timestamp` ("as of <date>"), not just the label.
+- `aggregate.py` prints a warning for records that break the contract (an
+  outcome record that also carries `results` or lacks `params`, a completed
+  record without `results`, or an unknown `outcome` value). Check the
+  "Aggregate metriq-data (PR)" workflow log when reviewing data PRs.
 
 ## Aggregation and Scoring
 

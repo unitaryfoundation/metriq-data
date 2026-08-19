@@ -879,6 +879,45 @@ def _pick_latest_metric_row(
     return picked, picked_ts
 
 
+def _record_outcome(row: dict[str, Any]) -> str | None:
+    """Return the row's non-completed outcome, or None for a completed run.
+
+    `etl.flatten_row` only stamps `outcome` for error / unsupported /
+    not_applicable records, so an absent (or non-string) field means completed.
+    """
+    outcome = row.get("outcome")
+    if isinstance(outcome, str) and outcome and outcome != "completed":
+        return outcome
+    return None
+
+
+def _pick_latest_outcome_row(candidates: list[dict[str, Any]]) -> dict[str, Any] | None:
+    """Among outcome records for one benchmark instance, the latest claim wins."""
+    picked = None
+    picked_ts = None
+    for cand in candidates:
+        ts = parse_timestamp(cand.get("timestamp", ""))
+        if ts is None:
+            continue
+        if picked is None or picked_ts is None or ts > picked_ts:
+            picked = cand
+            picked_ts = ts
+    return picked
+
+
+def _reported_outcome_fields(row: dict[str, Any]) -> dict[str, Any]:
+    """Fields stamped onto a component breakdown for the winning outcome record."""
+    detail = row.get("outcome_detail") if isinstance(row.get("outcome_detail"), dict) else {}
+    fields: dict[str, Any] = {
+        "reported_outcome": _record_outcome(row),
+        "reported_outcome_reason": detail.get("reason"),
+        "reported_outcome_timestamp": row.get("timestamp"),
+    }
+    if detail:
+        fields["reported_outcome_detail"] = dict(detail)
+    return fields
+
+
 def compute_device_composite_scores(
     flat_rows: list[dict[str, Any]],
     row_series: dict[int, str],
@@ -988,6 +1027,11 @@ def compute_device_composite_scores(
             # Filter rows by benchmark, selector, and major-version group.
             # Keep candidates if either normalized or raw value is available.
             matches: list[dict[str, Any]] = []
+            # Non-completed outcome records (error / unsupported / not_applicable)
+            # for this benchmark instance, and whether any completed record
+            # exists for it (a completed record always supersedes outcomes).
+            outcome_rows: list[dict[str, Any]] = []
+            has_completed_record = False
             for r in rows:
                 # Match benchmark by any allowed name (if provided)
                 if allowed_names and derive_benchmark_name(r) not in allowed_names:
@@ -1000,6 +1044,10 @@ def compute_device_composite_scores(
                         continue
                 elif series_label != picked_series:
                     continue
+                if _record_outcome(r) is not None:
+                    outcome_rows.append(r)
+                    continue
+                has_completed_record = True
                 selector_fp = _selector_fingerprint(selector)
                 normalized_val = _get_normalized_metric_value(
                     r, metric, series_label, selector_fp, baseline_avg_by_series
@@ -1112,6 +1160,18 @@ def compute_device_composite_scores(
                         break
             if isinstance(required, int):
                 breakdown[label]["required_num_qubits"] = required
+
+            # Surface the winning reported outcome (see README "Record
+            # outcomes") so the UI can distinguish "the device cannot run
+            # this" / "the attempt errored" from a plain missing submission.
+            # A completed record for the instance supersedes every outcome
+            # record; among outcome records the latest wins. Scoring above is
+            # untouched: the component still contributes 0 to the numerator
+            # and its weight stays in the denominator.
+            if not has_completed_record:
+                reported = _pick_latest_outcome_row(outcome_rows)
+                if reported is not None:
+                    breakdown[label].update(_reported_outcome_fields(reported))
 
         for weight, normalized_value in ungrouped:
             numerator += weight * normalized_value

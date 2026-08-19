@@ -175,6 +175,45 @@ def _normalize_outcome(row: dict[str, Any]) -> tuple[str | None, dict[str, str] 
     return outcome, detail or None
 
 
+def validate_record_outcome(row: dict[str, Any]) -> list[str]:
+    """Return human-readable problems with a raw record's outcome/results pairing.
+
+    The contract (README "Record outcomes"): a non-completed outcome record
+    carries `results: null` and must still identify its benchmark instance via
+    `params`; a completed record (no outcome, or `outcome: "completed"`) must
+    carry results. `flatten_row` already coerces the first case (results are
+    dropped), so these are surfaced as review warnings rather than hard errors.
+    """
+    problems: list[str] = []
+    raw = row.get("outcome")
+    if raw is None:
+        outcome = None
+    elif isinstance(raw, str):
+        outcome = raw.strip().lower()
+        if outcome not in RECORD_OUTCOMES:
+            problems.append(
+                f"unknown outcome {raw!r} (expected one of {sorted(RECORD_OUTCOMES)}); "
+                "the field will be ignored"
+            )
+            outcome = None
+    else:
+        problems.append(f"outcome must be a string, got {type(raw).__name__}; the field will be ignored")
+        outcome = None
+
+    has_results = bool(row.get("results"))
+    if outcome is not None and outcome != "completed":
+        if has_results:
+            problems.append(f"outcome {outcome!r} record also carries results; results will be dropped")
+        params = row.get("params")
+        if not isinstance(params, dict) or not params:
+            problems.append(
+                f"outcome {outcome!r} record has no params; it cannot be matched to a benchmark instance"
+            )
+    elif not has_results:
+        problems.append("completed record (no non-completed outcome) has no results")
+    return problems
+
+
 def flatten_row(row: dict[str, Any]) -> dict[str, Any]:
     out: dict[str, Any] = {}
     for k in ("app_version", "timestamp", "provider", "suite_id", "device", "job_type", "results", "params"):
@@ -547,6 +586,8 @@ def collect_flat_rows_and_registry(root: str, files: list[str]) -> tuple[
         for row in data:
             if not isinstance(row, dict):
                 continue
+            for msg in validate_record_outcome(row):
+                print(f"Warning: {os.path.relpath(src, root)}: {msg}", file=sys.stderr)
             upsert_platform(registry, row, src, version)
             flat = flatten_row(row)
             if flat:
