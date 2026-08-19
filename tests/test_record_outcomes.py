@@ -6,7 +6,7 @@ from pathlib import Path
 SCRIPTS_DIR = Path(__file__).resolve().parents[1] / "scripts"
 sys.path.insert(0, str(SCRIPTS_DIR))
 
-from etl import flatten_row, validate_record_outcome  # noqa: E402
+from etl import InvalidRecordOutcome, flatten_row, validate_record_outcome  # noqa: E402
 from score import _selector_fingerprint, compute_device_composite_scores  # noqa: E402
 
 
@@ -61,7 +61,9 @@ class RecordOutcomeTests(unittest.TestCase):
         self.assertNotIn("outcome", out)
         self.assertEqual(out["results"]["score"], 88.4)
 
-    def test_unknown_outcome_values_are_dropped(self):
+    def test_unknown_outcome_values_are_dropped_by_flatten(self):
+        # validate_record_outcome rejects these before flatten_row runs in the
+        # ETL; flatten_row itself stays defensive.
         out = flatten_row(outcome_record(outcome="exploded"))
         self.assertNotIn("outcome", out)
         self.assertNotIn("outcome_detail", out)
@@ -69,7 +71,7 @@ class RecordOutcomeTests(unittest.TestCase):
     def test_outcome_detail_is_normalized(self):
         out = flatten_row(
             outcome_record(
-                outcome="  ERROR ",
+                outcome="error",
                 outcome_detail={"reason": "  queue died  ", "unknown_key": "x", "source": ""},
             )
         )
@@ -113,9 +115,22 @@ class RecordOutcomeValidationTests(unittest.TestCase):
         self.assertEqual(len(msgs), 1)
         self.assertIn("has no results", msgs[0])
 
-    def test_unknown_outcome_warns(self):
-        msgs = validate_record_outcome(outcome_record(outcome="exploded"))
-        self.assertTrue(any("unknown outcome" in m for m in msgs))
+    def test_invalid_outcome_is_an_error(self):
+        for bad in ("exploded", "Unsupported", " error ", "", 1, True, {"x": 1}):
+            with self.subTest(outcome=bad):
+                with self.assertRaises(InvalidRecordOutcome):
+                    validate_record_outcome(outcome_record(outcome=bad))
+
+    def test_all_allowed_outcomes_accepted(self):
+        for ok in ("completed", "error", "unsupported", "not_applicable"):
+            with self.subTest(outcome=ok):
+                rec = outcome_record(outcome=ok)
+                if ok == "completed":
+                    rec["results"] = {"score": 1}
+                self.assertEqual(validate_record_outcome(rec), [])
+
+    def test_absent_outcome_is_completed(self):
+        self.assertEqual(validate_record_outcome({"results": {"score": 1}}), [])
 
 
 LRQAOA = "Linear Ramp QAOA"
@@ -203,7 +218,7 @@ class ComponentOutcomeStampingTests(unittest.TestCase):
         self.assertEqual(comp["reported_outcome"], "unsupported")
         self.assertEqual(comp["reported_outcome_reason"], detail["reason"])
         self.assertEqual(comp["reported_outcome_timestamp"], "2026-08-07T12:00:00")
-        self.assertEqual(comp["reported_outcome_detail"], detail)
+        self.assertNotIn("reported_outcome_detail", comp)
         # Scoring is unchanged: no value, weight stays in the denominator.
         self.assertFalse(comp["normalized_available"])
         self.assertFalse(comp["raw_available"])
@@ -245,7 +260,6 @@ class ComponentOutcomeStampingTests(unittest.TestCase):
         comp = _composite(rows)["rigetti_cepheus-1-108q"]["components"]["WIT"]
         self.assertEqual(comp["reported_outcome"], "not_applicable")
         self.assertIsNone(comp["reported_outcome_reason"])
-        self.assertNotIn("reported_outcome_detail", comp)
         self.assertEqual(comp["reported_outcome_timestamp"], "2026-08-07T12:00:00")
 
 

@@ -906,16 +906,18 @@ def _pick_latest_outcome_row(candidates: list[dict[str, Any]]) -> dict[str, Any]
 
 
 def _reported_outcome_fields(row: dict[str, Any]) -> dict[str, Any]:
-    """Fields stamped onto a component breakdown for the winning outcome record."""
+    """Fields stamped onto a component breakdown for the winning outcome record.
+
+    Only the outcome, its human-readable reason and the claim's timestamp are
+    surfaced; the full record (error_message, source, ...) stays available in
+    benchmark.latest.json.
+    """
     detail = row.get("outcome_detail") if isinstance(row.get("outcome_detail"), dict) else {}
-    fields: dict[str, Any] = {
+    return {
         "reported_outcome": _record_outcome(row),
         "reported_outcome_reason": detail.get("reason"),
         "reported_outcome_timestamp": row.get("timestamp"),
     }
-    if detail:
-        fields["reported_outcome_detail"] = dict(detail)
-    return fields
 
 
 def compute_device_composite_scores(

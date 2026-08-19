@@ -79,7 +79,8 @@ to completed runs with `results`, a record may declare a non-completed `outcome`
 }
 ```
 
-- `outcome` is one of `completed`, `error`, `unsupported`, `not_applicable`.
+- `outcome` is exactly one of `completed`, `error`, `unsupported`,
+  `not_applicable` (lowercase; any other value fails aggregation).
   A record without the field is a completed run — all records predating the
   field are.
 - `error` means the attempt failed (possibly transiently); `unsupported` means
@@ -120,16 +121,16 @@ next to the existing `required_num_qubits` hint:
   "required_num_qubits": 100,
   "reported_outcome": "unsupported",
   "reported_outcome_reason": "Compiler rejects 100-qubit LR-QAOA circuits on this device",
-  "reported_outcome_timestamp": "2026-08-07T12:00:00",
-  "reported_outcome_detail": { "reason": "...", "error_message": "...", "source": "dispatch" }
+  "reported_outcome_timestamp": "2026-08-07T12:00:00"
 }
 ```
 
 - The fields are present only when no completed record exists for that
   component's benchmark instance (within the device's scored series) and at
   least one outcome record does; among outcome records the latest timestamp
-  wins. `reported_outcome_reason` is `null` when the record carries no reason;
-  `reported_outcome_detail` is omitted when the record has no detail.
+  wins. `reported_outcome_reason` is `null` when the record carries no reason.
+  The full record (`error_message`, `source`, ...) is not duplicated here; it
+  stays in `benchmark.latest.json`.
 - A reported outcome is authoritative evidence and should take precedence over
   heuristics derived from device metadata (such as comparing
   `required_num_qubits` to the device's qubit count) — the two can disagree in
@@ -137,10 +138,13 @@ next to the existing `required_num_qubits` hint:
   ones.
 - Outcomes are point-in-time claims, so consumers should surface
   `reported_outcome_timestamp` ("as of <date>"), not just the label.
-- `aggregate.py` prints a warning for records that break the contract (an
-  outcome record that also carries `results` or lacks `params`, a completed
-  record without `results`, or an unknown `outcome` value). Check the
-  "Aggregate metriq-data (PR)" workflow log when reviewing data PRs.
+- `aggregate.py` **fails** on any record whose `outcome` is not exactly one of
+  `completed`, `error`, `unsupported`, `not_applicable` (case-sensitive), so a
+  mistyped value breaks the "Aggregate metriq-data (PR)" workflow instead of
+  being silently treated as a completed run. It prints a warning for softer
+  contract violations (an outcome record that also carries `results` or lacks
+  `params`, a completed record without `results`); check the workflow log when
+  reviewing data PRs.
 
 ## Aggregation and Scoring
 
