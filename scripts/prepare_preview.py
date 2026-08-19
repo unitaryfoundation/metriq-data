@@ -61,17 +61,46 @@ def is_allowed_data_directory(relative_path: Path) -> bool:
     )
 
 
+def _allows_outcome_error_angle_brackets(
+    relative_path: Path, field_path: tuple[str | None, ...]
+) -> bool:
+    parts = relative_path.parts
+    is_benchmark_file = parts == ("benchmark.latest.json",) or (
+        len(parts) == 2
+        and VERSION_DIR_RE.fullmatch(parts[0]) is not None
+        and parts[1] == "benchmark.latest.json"
+    )
+    return is_benchmark_file and field_path == (
+        None,
+        "outcome_detail",
+        "error_message",
+    )
+
+
 def validate_json_content(value: object, relative_path: Path) -> None:
-    pending = [(value, None)]
+    pending: list[tuple[object, str | None, tuple[str | None, ...]]] = [
+        (value, None, ())
+    ]
     while pending:
-        item, field_name = pending.pop()
+        item, field_name, field_path = pending.pop()
         if isinstance(item, dict):
-            pending.extend((key, None) for key in item)
-            pending.extend((child, key.lower()) for key, child in item.items())
+            pending.extend((key, None, ()) for key in item)
+            pending.extend(
+                (child, key.lower(), (*field_path, key))
+                for key, child in item.items()
+            )
         elif isinstance(item, list):
-            pending.extend((child, field_name) for child in item)
+            pending.extend(
+                (child, field_name, (*field_path, None)) for child in item
+            )
         elif isinstance(item, str):
-            if "<" in item or ">" in item or CONTROL_CHARACTER_RE.search(item):
+            has_angle_brackets = "<" in item or ">" in item
+            if (
+                has_angle_brackets
+                and not _allows_outcome_error_angle_brackets(
+                    relative_path, field_path
+                )
+            ) or CONTROL_CHARACTER_RE.search(item):
                 raise ValueError(f"unsafe string in preview JSON: {relative_path}")
             if UNSAFE_URI_RE.match(item):
                 raise ValueError(f"unsafe URI in preview JSON: {relative_path}")

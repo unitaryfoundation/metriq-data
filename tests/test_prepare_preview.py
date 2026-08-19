@@ -121,6 +121,7 @@ class PreparePreviewTests(unittest.TestCase):
         detail = self.data / "platforms" / "ibm" / "ibm_fez.json"
         for payload in (
             {"first_seen": '<img src=x onerror="alert(1)">'},
+            [{"outcome_detail": {"error_message": "expected <T>"}}],
             {"lifecycle": {"source_url": "javascript:alert(1)"}},
             {"lifecycle": {"source_url": "http://example.com/source"}},
             {"label": "line\nbreak"},
@@ -128,6 +129,55 @@ class PreparePreviewTests(unittest.TestCase):
             detail.write_text(json.dumps(payload), encoding="utf-8")
             with self.subTest(payload=payload), self.assertRaisesRegex(
                 ValueError, "unsafe|non-HTTPS"
+            ):
+                validate_data_tree(self.data)
+
+    def test_allows_angle_brackets_in_outcome_error_messages(self):
+        payload = [
+            {
+                "outcome": "error",
+                "outcome_detail": {
+                    "error_message": "expected Foo<Bar>, got Baz<Qux>"
+                },
+            }
+        ]
+        for path in (
+            self.data / "benchmark.latest.json",
+            self.data / "v0.7" / "benchmark.latest.json",
+        ):
+            path.write_text(json.dumps(payload), encoding="utf-8")
+
+        validate_data_tree(self.data)
+
+    def test_rejects_angle_brackets_outside_outcome_error_messages(self):
+        benchmark = self.data / "benchmark.latest.json"
+        for payload in (
+            [{"error_message": "expected <T>"}],
+            [{"outcome_detail": {"reason": "expected <T>"}}],
+            [
+                {
+                    "wrapper": {
+                        "outcome_detail": {"error_message": "expected <T>"}
+                    }
+                }
+            ],
+            [{"outcome_detail": {"error_message": ["expected <T>"]}}],
+        ):
+            benchmark.write_text(json.dumps(payload), encoding="utf-8")
+            with self.subTest(payload=payload), self.assertRaisesRegex(
+                ValueError, "unsafe string"
+            ):
+                validate_data_tree(self.data)
+
+    def test_keeps_other_validation_for_outcome_error_messages(self):
+        benchmark = self.data / "benchmark.latest.json"
+        for error_message in ("line\nbreak", "javascript:alert(1)"):
+            payload = [
+                {"outcome_detail": {"error_message": error_message}}
+            ]
+            benchmark.write_text(json.dumps(payload), encoding="utf-8")
+            with self.subTest(error_message=error_message), self.assertRaisesRegex(
+                ValueError, "unsafe"
             ):
                 validate_data_tree(self.data)
 
