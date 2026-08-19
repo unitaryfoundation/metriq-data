@@ -92,6 +92,60 @@ class RecordOutcomeTests(unittest.TestCase):
         self.assertIsNone(out["results"])
 
 
+# Records exactly as produced by metriq-gym's upload path
+# (unitaryfoundation/metriq-gym#805): `mgym job upload --outcome unsupported
+# --reason ...` on a dispatch-failed job, and a plain failed-job upload whose
+# job has no captured error (outcome_detail is emitted as null).
+MGYM_UNSUPPORTED_RECORD = {
+    "app_version": "0.7.2.dev17",
+    "timestamp": "2026-08-19T12:46:48",
+    "job_type": "Linear Ramp QAOA",
+    "results": None,
+    "outcome": "unsupported",
+    "outcome_detail": {
+        "reason": "Compiler rejects 100-qubit LR-QAOA circuits",
+        "error_message": "RuntimeError: Error occurred during compilation: too many qubits in routing",
+        "source": "dispatch",
+    },
+    "platform": {"device": "rigetti_cepheus-1-108q", "provider": "aws"},
+    "params": {"benchmark_name": "Linear Ramp QAOA", "graph_type": "1D", "num_qubits": 100},
+}
+MGYM_ERROR_RECORD_NO_DETAIL = {
+    "app_version": "0.7.2.dev17",
+    "timestamp": "2026-08-19T13:00:00",
+    "job_type": "WIT",
+    "results": None,
+    "outcome": "error",
+    "outcome_detail": None,
+    "platform": {"device": "ibm_fez", "provider": "ibm"},
+    "params": {"benchmark_name": "WIT", "num_qubits": 4},
+}
+
+
+class MetriqGymUploadCompatibilityTests(unittest.TestCase):
+    def test_mgym_unsupported_record(self):
+        self.assertEqual(validate_record_outcome(MGYM_UNSUPPORTED_RECORD), [])
+        out = flatten_row(MGYM_UNSUPPORTED_RECORD)
+        self.assertEqual(out["outcome"], "unsupported")
+        self.assertIsNone(out["results"])
+        self.assertEqual(out["outcome_detail"], MGYM_UNSUPPORTED_RECORD["outcome_detail"])
+        self.assertEqual((out["provider"], out["device"]), ("aws", "rigetti_cepheus-1-108q"))
+
+    def test_mgym_error_record_with_null_detail(self):
+        self.assertEqual(validate_record_outcome(MGYM_ERROR_RECORD_NO_DETAIL), [])
+        out = flatten_row(MGYM_ERROR_RECORD_NO_DETAIL)
+        self.assertEqual(out["outcome"], "error")
+        self.assertIsNone(out["results"])
+        self.assertNotIn("outcome_detail", out)
+
+    def test_mgym_records_are_stamped_on_components(self):
+        rows = [flatten_row(MGYM_UNSUPPORTED_RECORD)]
+        comp = _composite(rows)["rigetti_cepheus-1-108q"]["components"]["LR-QAOA 100q"]
+        self.assertEqual(comp["reported_outcome"], "unsupported")
+        self.assertEqual(comp["reported_outcome_reason"], "Compiler rejects 100-qubit LR-QAOA circuits")
+        self.assertEqual(comp["reported_outcome_timestamp"], "2026-08-19T12:46:48")
+
+
 class RecordOutcomeValidationTests(unittest.TestCase):
     def test_valid_outcome_record(self):
         self.assertEqual(validate_record_outcome(outcome_record()), [])
