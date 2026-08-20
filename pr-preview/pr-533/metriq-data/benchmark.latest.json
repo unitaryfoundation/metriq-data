@@ -5512,7 +5512,11 @@
     "errors": {
       "accuracy_score": 0.002081665999466133,
       "score": 0.002081665999466133
-    }
+    },
+    "normalized_scores": {
+      "score": 0.5853658536585366
+    },
+    "metriq_score": 0.5853658536585366
   },
   {
     "app_version": "0.5.1a1.dev6+gea73bf450",
@@ -5700,7 +5704,11 @@
     "errors": {
       "accuracy_score": 0.0069282032302755096,
       "score": 0.0069282032302755096
-    }
+    },
+    "normalized_scores": {
+      "score": 1.4634146341463417
+    },
+    "metriq_score": 1.4634146341463417
   },
   {
     "app_version": "0.5.1a1.dev6+gea73bf450",
@@ -5918,7 +5926,11 @@
     "errors": {
       "accuracy_score": 0.005507570547286102,
       "score": 0.005507570547286102
-    }
+    },
+    "normalized_scores": {
+      "score": 283.0243902439024
+    },
+    "metriq_score": 283.0243902439024
   },
   {
     "app_version": "0.4.3.dev15+g86d0aa569",
@@ -6407,7 +6419,11 @@
     "errors": {
       "accuracy_score": 0.01616580753730952,
       "score": 0.01616580753730952
-    }
+    },
+    "normalized_scores": {
+      "score": 37.853658536585364
+    },
+    "metriq_score": 37.853658536585364
   },
   {
     "app_version": "0.5.1a1.dev7+gde76ba8ea",
@@ -10672,7 +10688,11 @@
     "errors": {
       "accuracy_score": 0.0,
       "score": 0.0
-    }
+    },
+    "normalized_scores": {
+      "score": 0.0975609756097561
+    },
+    "metriq_score": 0.0975609756097561
   },
   {
     "app_version": "0.6.2.dev20+g245253d47",
@@ -10868,7 +10888,11 @@
     "errors": {
       "accuracy_score": 0.0031622776601683794,
       "score": 0.0031622776601683794
-    }
+    },
+    "normalized_scores": {
+      "score": 1.6585365853658531
+    },
+    "metriq_score": 1.6585365853658531
   },
   {
     "app_version": "0.6.1",
