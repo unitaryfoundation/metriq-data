@@ -834,7 +834,11 @@
     "errors": {
       "accuracy_score": 0.011,
       "score": 0.011
-    }
+    },
+    "normalized_scores": {
+      "score": 6.188118811881188
+    },
+    "metriq_score": 6.188118811881188
   },
   {
     "app_version": "0.7.2.dev10+g5bc076b",
@@ -862,7 +866,11 @@
     "errors": {
       "accuracy_score": 0.0,
       "score": 0.0
-    }
+    },
+    "normalized_scores": {
+      "score": 0.46511627906976744
+    },
+    "metriq_score": 0.46511627906976744
   },
   {
     "app_version": "0.7.2.dev4+g9820978.d20260723",
@@ -1609,7 +1617,11 @@
     "errors": {
       "accuracy_score": 0.005,
       "score": 0.005
-    }
+    },
+    "normalized_scores": {
+      "score": 98.26732673267325
+    },
+    "metriq_score": 98.26732673267325
   },
   {
     "app_version": "0.7.2.dev15+g3b4c355",
@@ -1638,7 +1650,11 @@
     "errors": {
       "accuracy_score": 0.007,
       "score": 0.007
-    }
+    },
+    "normalized_scores": {
+      "score": 25.581395348837212
+    },
+    "metriq_score": 25.581395348837212
   },
   {
     "app_version": "0.7.2.dev15+g3b4c355",
@@ -1667,7 +1683,11 @@
     "errors": {
       "accuracy_score": 0.0,
       "score": 0.0
-    }
+    },
+    "normalized_scores": {
+      "score": 0.0
+    },
+    "metriq_score": 0.0
   },
   {
     "app_version": "0.7.2.dev15+g3b4c355",

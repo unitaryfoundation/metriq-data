@@ -6821,7 +6821,11 @@
     "errors": {
       "accuracy_score": 0.006,
       "score": 0.006
-    }
+    },
+    "normalized_scores": {
+      "score": 106.68316831683167
+    },
+    "metriq_score": 106.68316831683167
   },
   {
     "app_version": "0.6.2.dev15+g326cb359f",
@@ -6885,7 +6889,11 @@
     "errors": {
       "accuracy_score": 0.014,
       "score": 0.014
-    }
+    },
+    "normalized_scores": {
+      "score": 195.3488372093023
+    },
+    "metriq_score": 195.3488372093023
   },
   {
     "app_version": "0.6.2.dev15+g326cb359f",
@@ -6949,7 +6957,11 @@
     "errors": {
       "accuracy_score": 0.006,
       "score": 0.006
-    }
+    },
+    "normalized_scores": {
+      "score": 1900.0
+    },
+    "metriq_score": 1900.0
   },
   {
     "app_version": "0.6.2.dev15+g326cb359f",
@@ -7303,7 +7315,11 @@
     "errors": {
       "accuracy_score": 0.047,
       "score": 0.047
-    }
+    },
+    "normalized_scores": {
+      "score": 83.4158415841584
+    },
+    "metriq_score": 83.4158415841584
   },
   {
     "app_version": "0.6.2.dev15+g326cb359f",
@@ -7367,7 +7383,11 @@
     "errors": {
       "accuracy_score": 0.003,
       "score": 0.003
-    }
+    },
+    "normalized_scores": {
+      "score": 11.16279069767442
+    },
+    "metriq_score": 11.16279069767442
   },
   {
     "app_version": "0.6.2.dev15+g326cb359f",
@@ -7431,7 +7451,11 @@
     "errors": {
       "accuracy_score": 0.0,
       "score": 0.0
-    }
+    },
+    "normalized_scores": {
+      "score": 50.0
+    },
+    "metriq_score": 50.0
   },
   {
     "app_version": "0.6.2.dev15+g326cb359f",
@@ -7851,7 +7875,11 @@
     "errors": {
       "accuracy_score": 0.015,
       "score": 0.015
-    }
+    },
+    "normalized_scores": {
+      "score": 104.57920792079207
+    },
+    "metriq_score": 104.57920792079207
   },
   {
     "app_version": "0.6.2.dev15+g326cb359f",
@@ -7915,7 +7943,11 @@
     "errors": {
       "accuracy_score": 0.003,
       "score": 0.003
-    }
+    },
+    "normalized_scores": {
+      "score": 71.62790697674419
+    },
+    "metriq_score": 71.62790697674419
   },
   {
     "app_version": "0.6.2.dev15+g326cb359f",
@@ -7979,7 +8011,11 @@
     "errors": {
       "accuracy_score": 0.001,
       "score": 0.001
-    }
+    },
+    "normalized_scores": {
+      "score": 100.0
+    },
+    "metriq_score": 100.0
   },
   {
     "app_version": "0.6.2.dev15+g326cb359f",
@@ -8429,7 +8465,11 @@
     "errors": {
       "accuracy_score": 0.02,
       "score": 0.02
-    }
+    },
+    "normalized_scores": {
+      "score": 88.73762376237622
+    },
+    "metriq_score": 88.73762376237622
   },
   {
     "app_version": "0.6.2.dev15+g326cb359f",
@@ -8493,7 +8533,11 @@
     "errors": {
       "accuracy_score": 0.031,
       "score": 0.031
-    }
+    },
+    "normalized_scores": {
+      "score": 63.255813953488385
+    },
+    "metriq_score": 63.255813953488385
   },
   {
     "app_version": "0.6.2.dev15+g326cb359f",
@@ -8557,7 +8601,11 @@
     "errors": {
       "accuracy_score": 0.001,
       "score": 0.001
-    }
+    },
+    "normalized_scores": {
+      "score": 150.00000000000003
+    },
+    "metriq_score": 150.00000000000003
   },
   {
     "app_version": "0.6.2.dev15+g326cb359f",
@@ -9007,7 +9055,11 @@
     "errors": {
       "accuracy_score": 0.008,
       "score": 0.008
-    }
+    },
+    "normalized_scores": {
+      "score": 102.47524752475246
+    },
+    "metriq_score": 102.47524752475246
   },
   {
     "app_version": "0.6.2.dev15+g326cb359f",
@@ -9071,7 +9123,11 @@
     "errors": {
       "accuracy_score": 0.023,
       "score": 0.023
-    }
+    },
+    "normalized_scores": {
+      "score": 171.16279069767444
+    },
+    "metriq_score": 171.16279069767444
   },
   {
     "app_version": "0.6.2.dev15+g326cb359f",
@@ -9135,7 +9191,11 @@
     "errors": {
       "accuracy_score": 0.002,
       "score": 0.002
-    }
+    },
+    "normalized_scores": {
+      "score": 200.0
+    },
+    "metriq_score": 200.0
   },
   {
     "app_version": "0.6.2.dev15+g326cb359f",
@@ -9807,7 +9867,11 @@
     "errors": {
       "accuracy_score": 0.009,
       "score": 0.009
-    }
+    },
+    "normalized_scores": {
+      "score": 100.0
+    },
+    "metriq_score": 100.0
   },
   {
     "app_version": "0.6.2.dev13+gd0c1487e5.d20260209",
@@ -9869,7 +9933,11 @@
     "errors": {
       "accuracy_score": 0.003,
       "score": 0.003
-    }
+    },
+    "normalized_scores": {
+      "score": 100.0
+    },
+    "metriq_score": 100.0
   },
   {
     "app_version": "0.6.2.dev13+gd0c1487e5.d20260209",
@@ -9931,7 +9999,11 @@
     "errors": {
       "accuracy_score": 0.001,
       "score": 0.001
-    }
+    },
+    "normalized_scores": {
+      "score": 100.0
+    },
+    "metriq_score": 100.0
   },
   {
     "app_version": "0.6.2.dev13+gd0c1487e5.d20260209",
@@ -11743,7 +11815,11 @@
     "errors": {
       "accuracy_score": 0.011,
       "score": 0.011
-    }
+    },
+    "normalized_scores": {
+      "score": 6.188118811881188
+    },
+    "metriq_score": 6.188118811881188
   },
   {
     "app_version": "0.7.2.dev10+g5bc076b",
@@ -11771,7 +11847,11 @@
     "errors": {
       "accuracy_score": 0.0,
       "score": 0.0
-    }
+    },
+    "normalized_scores": {
+      "score": 0.46511627906976744
+    },
+    "metriq_score": 0.46511627906976744
   },
   {
     "app_version": "0.7.2.dev4+g9820978.d20260723",
@@ -12518,7 +12598,11 @@
     "errors": {
       "accuracy_score": 0.005,
       "score": 0.005
-    }
+    },
+    "normalized_scores": {
+      "score": 98.26732673267325
+    },
+    "metriq_score": 98.26732673267325
   },
   {
     "app_version": "0.7.2.dev15+g3b4c355",
@@ -12547,7 +12631,11 @@
     "errors": {
       "accuracy_score": 0.007,
       "score": 0.007
-    }
+    },
+    "normalized_scores": {
+      "score": 25.581395348837212
+    },
+    "metriq_score": 25.581395348837212
   },
   {
     "app_version": "0.7.2.dev15+g3b4c355",
@@ -12576,7 +12664,11 @@
     "errors": {
       "accuracy_score": 0.0,
       "score": 0.0
-    }
+    },
+    "normalized_scores": {
+      "score": 0.0
+    },
+    "metriq_score": 0.0
   },
   {
     "app_version": "0.7.2.dev15+g3b4c355",

@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-20T07:48:57.664142Z",
+  "generated_at": "2026-08-20T15:00:52.554849Z",
   "provider": "aws",
   "device": "iqm_garnet",
   "first_seen": "2026-01-09T11:09:29.390899Z",
@@ -228,12 +228,12 @@
         "raw_timestamp": null,
         "required_num_qubits": 7
       },
-      "Quantum Fourier Transform:score": {
+      "QFT-4:score": {
         "metric": "score",
-        "weight": 0.0293,
+        "weight": 0.0026636363636363637,
         "group": "Quantum Fourier Transform",
         "group_weight": 0.0293,
-        "sub_weight": 1.0,
+        "sub_weight": 0.09090909090909091,
         "aggregation": "arithmetic",
         "timestamp": null,
         "normalized": null,
@@ -241,7 +241,56 @@
         "normalized_timestamp": null,
         "raw": null,
         "raw_available": false,
-        "raw_timestamp": null
+        "raw_timestamp": null,
+        "required_num_qubits": 4
+      },
+      "QFT-8:score": {
+        "metric": "score",
+        "weight": 0.005327272727272727,
+        "group": "Quantum Fourier Transform",
+        "group_weight": 0.0293,
+        "sub_weight": 0.18181818181818182,
+        "aggregation": "arithmetic",
+        "timestamp": null,
+        "normalized": null,
+        "normalized_available": false,
+        "normalized_timestamp": null,
+        "raw": null,
+        "raw_available": false,
+        "raw_timestamp": null,
+        "required_num_qubits": 8
+      },
+      "QFT-12:score": {
+        "metric": "score",
+        "weight": 0.00799090909090909,
+        "group": "Quantum Fourier Transform",
+        "group_weight": 0.0293,
+        "sub_weight": 0.2727272727272727,
+        "aggregation": "arithmetic",
+        "timestamp": null,
+        "normalized": null,
+        "normalized_available": false,
+        "normalized_timestamp": null,
+        "raw": null,
+        "raw_available": false,
+        "raw_timestamp": null,
+        "required_num_qubits": 12
+      },
+      "QFT-20:score": {
+        "metric": "score",
+        "weight": 0.013318181818181818,
+        "group": "Quantum Fourier Transform",
+        "group_weight": 0.0293,
+        "sub_weight": 0.45454545454545453,
+        "aggregation": "arithmetic",
+        "timestamp": null,
+        "normalized": null,
+        "normalized_available": false,
+        "normalized_timestamp": null,
+        "raw": null,
+        "raw_available": false,
+        "raw_timestamp": null,
+        "required_num_qubits": 20
       },
       "Linear Ramp QAOA (10q):score": {
         "metric": "score",
