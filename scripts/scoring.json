@@ -374,68 +374,6 @@
                 "label": "QFT-20:score",
                 "weight": "5/11"
               }
-            ],
-            "aggregate_fallbacks": [
-              {
-                "benchmark": "Quantum Fourier Transform",
-                "metric": "score",
-                "selector": { "min_qubits": 4, "max_qubits": 12, "skip_qubits": 4 },
-                "label": "QFT (legacy 4–12 sweep):score",
-                "covers": ["QFT-4:score", "QFT-8:score", "QFT-12:score"],
-                "required_num_qubits": 12,
-                "baseline_components": [
-                  {
-                    "selector": { "num_qubits": 4 },
-                    "selector_alternatives": [{ "min_qubits": 4, "max_qubits": 4 }],
-                    "weight": "1/3"
-                  },
-                  {
-                    "selector": { "num_qubits": 8 },
-                    "selector_alternatives": [{ "min_qubits": 8, "max_qubits": 8 }],
-                    "weight": "1/3"
-                  },
-                  {
-                    "selector": { "num_qubits": 12 },
-                    "selector_alternatives": [{ "min_qubits": 12, "max_qubits": 12 }],
-                    "weight": "1/3"
-                  }
-                ]
-              },
-              {
-                "benchmark": "Quantum Fourier Transform",
-                "metric": "score",
-                "selector": { "min_qubits": 4, "max_qubits": 20, "skip_qubits": 4 },
-                "label": "QFT (legacy 4–20 sweep):score",
-                "covers": ["QFT-4:score", "QFT-8:score", "QFT-12:score", "QFT-20:score"],
-                "required_num_qubits": 20,
-                "baseline_components": [
-                  {
-                    "selector": { "num_qubits": 4 },
-                    "selector_alternatives": [{ "min_qubits": 4, "max_qubits": 4 }],
-                    "weight": "1/5"
-                  },
-                  {
-                    "selector": { "num_qubits": 8 },
-                    "selector_alternatives": [{ "min_qubits": 8, "max_qubits": 8 }],
-                    "weight": "1/5"
-                  },
-                  {
-                    "selector": { "num_qubits": 12 },
-                    "selector_alternatives": [{ "min_qubits": 12, "max_qubits": 12 }],
-                    "weight": "1/5"
-                  },
-                  {
-                    "selector": { "num_qubits": 16 },
-                    "selector_alternatives": [{ "min_qubits": 16, "max_qubits": 16 }],
-                    "weight": "1/5"
-                  },
-                  {
-                    "selector": { "num_qubits": 20 },
-                    "selector_alternatives": [{ "min_qubits": 20, "max_qubits": 20 }],
-                    "weight": "1/5"
-                  }
-                ]
-              }
             ]
           },
           {
@@ -680,68 +618,6 @@
               ],
               "label": "QFT-20:score",
               "weight": "5/11"
-            }
-          ],
-          "aggregate_fallbacks": [
-            {
-              "benchmark": "Quantum Fourier Transform",
-              "metric": "score",
-              "selector": { "min_qubits": 4, "max_qubits": 12, "skip_qubits": 4 },
-              "label": "QFT (legacy 4–12 sweep):score",
-              "covers": ["QFT-4:score", "QFT-8:score", "QFT-12:score"],
-              "required_num_qubits": 12,
-              "baseline_components": [
-                {
-                  "selector": { "num_qubits": 4 },
-                  "selector_alternatives": [{ "min_qubits": 4, "max_qubits": 4 }],
-                  "weight": "1/3"
-                },
-                {
-                  "selector": { "num_qubits": 8 },
-                  "selector_alternatives": [{ "min_qubits": 8, "max_qubits": 8 }],
-                  "weight": "1/3"
-                },
-                {
-                  "selector": { "num_qubits": 12 },
-                  "selector_alternatives": [{ "min_qubits": 12, "max_qubits": 12 }],
-                  "weight": "1/3"
-                }
-              ]
-            },
-            {
-              "benchmark": "Quantum Fourier Transform",
-              "metric": "score",
-              "selector": { "min_qubits": 4, "max_qubits": 20, "skip_qubits": 4 },
-              "label": "QFT (legacy 4–20 sweep):score",
-              "covers": ["QFT-4:score", "QFT-8:score", "QFT-12:score", "QFT-20:score"],
-              "required_num_qubits": 20,
-              "baseline_components": [
-                {
-                  "selector": { "num_qubits": 4 },
-                  "selector_alternatives": [{ "min_qubits": 4, "max_qubits": 4 }],
-                  "weight": "1/5"
-                },
-                {
-                  "selector": { "num_qubits": 8 },
-                  "selector_alternatives": [{ "min_qubits": 8, "max_qubits": 8 }],
-                  "weight": "1/5"
-                },
-                {
-                  "selector": { "num_qubits": 12 },
-                  "selector_alternatives": [{ "min_qubits": 12, "max_qubits": 12 }],
-                  "weight": "1/5"
-                },
-                {
-                  "selector": { "num_qubits": 16 },
-                  "selector_alternatives": [{ "min_qubits": 16, "max_qubits": 16 }],
-                  "weight": "1/5"
-                },
-                {
-                  "selector": { "num_qubits": 20 },
-                  "selector_alternatives": [{ "min_qubits": 20, "max_qubits": 20 }],
-                  "weight": "1/5"
-                }
-              ]
             }
           ]
         },
