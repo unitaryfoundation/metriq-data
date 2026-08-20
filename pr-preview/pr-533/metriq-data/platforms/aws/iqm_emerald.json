@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-20T14:02:36.049849Z",
+  "generated_at": "2026-08-20T14:41:08.129002Z",
   "provider": "aws",
   "device": "iqm_emerald",
   "first_seen": "2025-10-19T15:39:39.590379Z",
@@ -24,7 +24,7 @@
     }
   ],
   "metriq_score": {
-    "value": 13.26346669336478,
+    "value": 12.658496405116443,
     "series": "v0.7",
     "components": {
       "BSEQ:bseq_score": {
@@ -229,6 +229,54 @@
         "required_num_qubits": 7,
         "group_subscore": 86.00315955766193
       },
+      "QFT-4:score": {
+        "metric": "score",
+        "weight": 0.0026636363636363637,
+        "group": "Quantum Fourier Transform",
+        "group_weight": 0.0293,
+        "sub_weight": 0.09090909090909091,
+        "aggregation": "arithmetic",
+        "timestamp": null,
+        "normalized": null,
+        "normalized_available": false,
+        "normalized_timestamp": null,
+        "raw": null,
+        "raw_available": false,
+        "raw_timestamp": null,
+        "required_num_qubits": 4
+      },
+      "QFT-8:score": {
+        "metric": "score",
+        "weight": 0.005327272727272727,
+        "group": "Quantum Fourier Transform",
+        "group_weight": 0.0293,
+        "sub_weight": 0.18181818181818182,
+        "aggregation": "arithmetic",
+        "timestamp": null,
+        "normalized": null,
+        "normalized_available": false,
+        "normalized_timestamp": null,
+        "raw": null,
+        "raw_available": false,
+        "raw_timestamp": null,
+        "required_num_qubits": 8
+      },
+      "QFT-12:score": {
+        "metric": "score",
+        "weight": 0.00799090909090909,
+        "group": "Quantum Fourier Transform",
+        "group_weight": 0.0293,
+        "sub_weight": 0.2727272727272727,
+        "aggregation": "arithmetic",
+        "timestamp": null,
+        "normalized": null,
+        "normalized_available": false,
+        "normalized_timestamp": null,
+        "raw": null,
+        "raw_available": false,
+        "raw_timestamp": null,
+        "required_num_qubits": 12
+      },
       "QFT-20:score": {
         "metric": "score",
         "weight": 0.013318181818181818,
@@ -391,30 +439,6 @@
         "raw": null,
         "raw_available": false,
         "raw_timestamp": null
-      },
-      "QFT (legacy 4–12 sweep):score": {
-        "metric": "score",
-        "weight": 0.01598181818181818,
-        "group": "Quantum Fourier Transform",
-        "group_weight": 0.0293,
-        "sub_weight": 0.5454545454545454,
-        "aggregation": "arithmetic",
-        "timestamp": "2025-11-19T21:16:42.030136",
-        "normalized": 37.853658536585364,
-        "normalized_available": true,
-        "normalized_timestamp": "2025-11-19T21:16:42.030136",
-        "raw": 0.12933333333333333,
-        "raw_available": true,
-        "raw_timestamp": "2025-11-19T21:16:42.030136",
-        "group_subscore": 37.853658536585364,
-        "aggregate_fallback": true,
-        "coverage": 0.5454545454545454,
-        "covered_components": [
-          "QFT-4:score",
-          "QFT-8:score",
-          "QFT-12:score"
-        ],
-        "required_num_qubits": 12
       }
     }
   }

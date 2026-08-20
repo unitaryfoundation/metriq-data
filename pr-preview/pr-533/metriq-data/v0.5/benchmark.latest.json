@@ -201,11 +201,7 @@
     "errors": {
       "accuracy_score": 0.002081665999466133,
       "score": 0.002081665999466133
-    },
-    "normalized_scores": {
-      "score": 0.5853658536585366
-    },
-    "metriq_score": 0.5853658536585366
+    }
   },
   {
     "app_version": "0.5.1a1.dev6+gea73bf450",
@@ -393,11 +389,7 @@
     "errors": {
       "accuracy_score": 0.0069282032302755096,
       "score": 0.0069282032302755096
-    },
-    "normalized_scores": {
-      "score": 1.4634146341463417
-    },
-    "metriq_score": 1.4634146341463417
+    }
   },
   {
     "app_version": "0.5.1a1.dev6+gea73bf450",
@@ -615,11 +607,7 @@
     "errors": {
       "accuracy_score": 0.005507570547286102,
       "score": 0.005507570547286102
-    },
-    "normalized_scores": {
-      "score": 283.0243902439024
-    },
-    "metriq_score": 283.0243902439024
+    }
   },
   {
     "app_version": "0.4.3.dev15+g86d0aa569",
