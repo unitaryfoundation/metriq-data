@@ -337,8 +337,7 @@ def _matching_components_for_row(
     for comp in _components_for_series(scoring_cfg, series_label):
         if not _component_matches_benchmark(comp, bench):
             continue
-        selector = comp.get("selector") if isinstance(comp.get("selector"), dict) else None
-        if not _row_param_matches(selector, row):
+        if not _component_param_matches(comp, row):
             continue
         metric = comp.get("metric")
         if not isinstance(metric, str):
@@ -370,6 +369,7 @@ def _baseline_component_signature(comp: dict[str, Any]) -> str:
         "benchmark": comp.get("benchmark"),
         "aliases": comp.get("aliases"),
         "selector": selector,
+        "selector_alternatives": comp.get("selector_alternatives"),
         "metrics": _component_candidate_metrics(comp),
     }
     return canonical_json(sig_obj)
@@ -405,7 +405,7 @@ def _latest_baseline_values_for_components(
             bench = derive_benchmark_name(r)
             if not _component_matches_benchmark(comp, bench):
                 continue
-            if not _row_param_matches(selector, r):
+            if not _component_param_matches(comp, r):
                 continue
             results = r.get("results") if isinstance(r.get("results"), dict) else {}
             ts = parse_timestamp(r.get("timestamp", ""))
@@ -702,6 +702,24 @@ def _validate_components_list(components: list[dict[str, Any]], ctx: str) -> Non
                     f"'aggregation' is only valid on group components (index {i} in {ctx})"
                 )
 
+        selector_alternatives = comp.get("selector_alternatives")
+        if selector_alternatives is not None:
+            if not isinstance(comp.get("selector"), dict) or not comp["selector"]:
+                raise ValueError(
+                    f"Selector alternatives require a non-empty primary selector "
+                    f"(index {i} in {ctx})"
+                )
+            if not isinstance(selector_alternatives, list) or not selector_alternatives:
+                raise ValueError(
+                    f"Invalid selector alternatives for component {i} in {ctx}: "
+                    "expected a non-empty list"
+                )
+            if any(not isinstance(item, dict) or not item for item in selector_alternatives):
+                raise ValueError(
+                    f"Invalid selector alternative for component {i} in {ctx}: "
+                    "expected non-empty objects"
+                )
+
         if isinstance(children, list):
             _validate_components_list(children, ctx=f"{ctx}.components[{i}]")
         total += w
@@ -745,6 +763,22 @@ def _row_param_matches(selector: dict[str, Any] | None, row: dict[str, Any]) -> 
         if params.get(k) != v:
             return False
     return True
+
+
+def _component_param_matches(comp: dict[str, Any], row: dict[str, Any]) -> bool:
+    """Match a row against a component's primary or alternative selectors."""
+    selector = comp.get("selector") if isinstance(comp.get("selector"), dict) else None
+    if _row_param_matches(selector, row):
+        return True
+    alternatives = comp.get("selector_alternatives")
+    if not isinstance(alternatives, list):
+        return False
+    return any(
+        _row_param_matches(alternative, row)
+        for alternative in alternatives
+        if isinstance(alternative, dict) and alternative
+    )
+
 
 def _get_normalized_metric_value(
     row: dict[str, Any],
@@ -992,7 +1026,7 @@ def compute_device_composite_scores(
                 # Match benchmark by any allowed name (if provided)
                 if allowed_names and derive_benchmark_name(r) not in allowed_names:
                     continue
-                if not _row_param_matches(selector, r):
+                if not _component_param_matches(comp, r):
                     continue
                 series_label = row_series.get(id(r))
                 if picked_major is not None:
