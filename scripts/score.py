@@ -187,6 +187,7 @@ def _flatten_components(components: list[dict[str, Any]]) -> list[dict[str, Any]
                 merged["_sub_weight"] = sub_weight
                 merged["_effective_weight"] = group_weight * sub_weight
                 merged["_group_aggregation"] = group_aggregation
+                merged["_group_aggregate_fallbacks"] = comp.get("aggregate_fallbacks")
                 flat.append(merged)
             continue
 
@@ -252,19 +253,87 @@ def _selector_fingerprint(selector: dict[str, Any] | None) -> str:
     return canonical_json(selector)
 
 
-def _components_for_series(scoring_cfg: dict[str, Any], series_label: str | None) -> list[dict[str, Any]]:
+def _composite_for_series(
+    scoring_cfg: dict[str, Any], series_label: str | None
+) -> dict[str, Any]:
     if not isinstance(scoring_cfg, dict):
-        return []
+        return {}
     default_block = scoring_cfg.get("default") if isinstance(scoring_cfg.get("default"), dict) else {}
     series_map = scoring_cfg.get("series") if isinstance(scoring_cfg.get("series"), dict) else {}
     series_block = series_map.get(series_label) if isinstance(series_map, dict) else None
     composite = series_block.get("composite") if isinstance(series_block, dict) else None
     if not isinstance(composite, dict):
         composite = default_block.get("composite") if isinstance(default_block, dict) else None
+    return composite if isinstance(composite, dict) else {}
+
+
+def _components_for_series(scoring_cfg: dict[str, Any], series_label: str | None) -> list[dict[str, Any]]:
+    composite = _composite_for_series(scoring_cfg, series_label)
     components = composite.get("components") if isinstance(composite, dict) else None
     if not isinstance(components, list):
         return []
     return _flatten_components([c for c in components if isinstance(c, dict)])
+
+
+def _aggregate_fallbacks_for_series(
+    scoring_cfg: dict[str, Any], series_label: str | None
+) -> list[dict[str, Any]]:
+    """Return group fallbacks for rows that already aggregate several children.
+
+    Each config entry matches one aggregate row, names the canonical child labels
+    it covers, and declares the selector-specific baseline values to aggregate in
+    the same way. Benchmark-specific compatibility stays in scoring.json.
+    """
+    composite = _composite_for_series(scoring_cfg, series_label)
+    groups = composite.get("components")
+    if not isinstance(groups, list):
+        return []
+
+    out: list[dict[str, Any]] = []
+    for group in groups:
+        if not isinstance(group, dict) or not isinstance(group.get("components"), list):
+            continue
+        fallbacks = group.get("aggregate_fallbacks")
+        if not isinstance(fallbacks, list):
+            continue
+        for fallback in fallbacks:
+            if not isinstance(fallback, dict):
+                continue
+            configured = dict(fallback)
+            configured["_aggregate_fallback"] = True
+            configured["_group_label"] = group.get("label")
+            out.append(configured)
+    return out
+
+
+def _aggregate_fallback_baseline_components_for_series(
+    scoring_cfg: dict[str, Any], series_label: str | None
+) -> list[dict[str, Any]]:
+    """Return hidden components needed to build configured aggregate baselines."""
+    out: list[dict[str, Any]] = []
+    for fallback in _aggregate_fallbacks_for_series(scoring_cfg, series_label):
+        baseline_components = fallback.get("baseline_components")
+        if not isinstance(baseline_components, list):
+            continue
+        for baseline_component in baseline_components:
+            if not isinstance(baseline_component, dict):
+                continue
+            component = dict(baseline_component)
+            component.pop("weight", None)
+            for key in ("benchmark", "aliases", "metric"):
+                if key not in component and key in fallback:
+                    component[key] = fallback[key]
+            out.append(component)
+    return out
+
+
+def _baseline_components_for_series(
+    scoring_cfg: dict[str, Any], series_label: str | None
+) -> list[dict[str, Any]]:
+    return [
+        *_components_for_series(scoring_cfg, series_label),
+        *_aggregate_fallback_baseline_components_for_series(scoring_cfg, series_label),
+    ]
 
 
 def _baseline_provider_device_for_series(
@@ -493,9 +562,9 @@ def compute_baseline_averages_by_series(
         major_series_labels = [s for s in series_list if _series_major(s) == major]
         components: list[dict[str, Any]] = []
         for s in major_series_labels:
-            components.extend(_components_for_series(baselines_cfg, s))
+            components.extend(_baseline_components_for_series(baselines_cfg, s))
         if not components:
-            components = _components_for_series(baselines_cfg, ref_series)
+            components = _baseline_components_for_series(baselines_cfg, ref_series)
         components = _dedupe_baseline_components(components)
         baseline_by_major[major] = _latest_baseline_values_for_components(selected, components)
 
@@ -525,7 +594,7 @@ def compute_baseline_averages_by_series(
             r for r in flat_rows
             if r.get("provider") == base_provider and r.get("device") == base_device and row_series.get(id(r)) == series
         ]
-        components = _components_for_series(baselines_cfg, series)
+        components = _baseline_components_for_series(baselines_cfg, series)
         components = _dedupe_baseline_components(components)
         baseline_avg_by_series[series] = _latest_baseline_values_for_components(selected, components)
         summary.append(_baseline_summary_line(series, base_provider, base_device))
@@ -551,6 +620,25 @@ def compute_and_attach_metriq_scores(
 
         matching_components = _matching_components_for_row(scoring_cfg, series, r)
         if not matching_components:
+            fallback_matches = [
+                fallback
+                for fallback in _aggregate_fallbacks_for_series(scoring_cfg, series)
+                if _component_matches_benchmark(fallback, bench)
+                and _component_param_matches(fallback, r)
+            ]
+            fallback_metrics: set[str] = set()
+            for fallback in fallback_matches:
+                metric = fallback.get("metric")
+                if not isinstance(metric, str):
+                    continue
+                if metric in fallback_metrics:
+                    raise ValueError(
+                        f"Ambiguous aggregate fallbacks for {bench!r} metric "
+                        f"{metric!r} in series {series!r}"
+                    )
+                fallback_metrics.add(metric)
+            matching_components = fallback_matches
+        if not matching_components:
             continue
         # For a given row, only compute normalized scores for metrics explicitly configured
         # by matching components (benchmark + selector).
@@ -575,11 +663,16 @@ def compute_and_attach_metriq_scores(
                     continue
                 if not (v == v):  # NaN
                     continue
-                base = baseline_avg.get((bench, metric, selector_fp))
-                if base is None:
-                    base = _fallback_baseline_average(
-                        series, bench, metric, selector_fp, baseline_avg_by_series
+                if comp.get("_aggregate_fallback") is True:
+                    base = _aggregate_fallback_baseline(
+                        comp, series, baseline_avg_by_series
                     )
+                else:
+                    base = baseline_avg.get((bench, metric, selector_fp))
+                    if base is None:
+                        base = _fallback_baseline_average(
+                            series, bench, metric, selector_fp, baseline_avg_by_series
+                        )
                 if base is None:
                     continue
                 direction = str(dir_map.get(metric, "higher")).lower()
@@ -676,6 +769,140 @@ def load_scoring_config(root: str) -> dict[str, Any]:
     return {}
 
 
+def _validate_selector_alternatives(
+    comp: dict[str, Any], *, index: int, ctx: str
+) -> None:
+    selector_alternatives = comp.get("selector_alternatives")
+    if selector_alternatives is None:
+        return
+    if not isinstance(comp.get("selector"), dict) or not comp["selector"]:
+        raise ValueError(
+            f"Selector alternatives require a non-empty primary selector "
+            f"(index {index} in {ctx})"
+        )
+    if not isinstance(selector_alternatives, list) or not selector_alternatives:
+        raise ValueError(
+            f"Invalid selector alternatives for component {index} in {ctx}: "
+            "expected a non-empty list"
+        )
+    if any(not isinstance(item, dict) or not item for item in selector_alternatives):
+        raise ValueError(
+            f"Invalid selector alternative for component {index} in {ctx}: "
+            "expected non-empty objects"
+        )
+
+
+def _validate_aggregate_fallbacks(
+    group: dict[str, Any], *, index: int, ctx: str
+) -> None:
+    fallbacks = group.get("aggregate_fallbacks")
+    if fallbacks is None:
+        return
+    children = group.get("components")
+    if not isinstance(children, list):
+        raise ValueError(
+            f"Aggregate fallbacks are only valid on group components "
+            f"(index {index} in {ctx})"
+        )
+    aggregation = str(group.get("aggregation", "arithmetic")).lower()
+    if aggregation != "arithmetic":
+        raise ValueError(
+            f"Aggregate fallbacks require arithmetic group aggregation "
+            f"(index {index} in {ctx})"
+        )
+    if not isinstance(fallbacks, list) or not fallbacks:
+        raise ValueError(
+            f"Invalid aggregate fallbacks for component {index} in {ctx}: "
+            "expected a non-empty list"
+        )
+
+    child_labels = {
+        child.get("label")
+        for child in children
+        if isinstance(child, dict) and isinstance(child.get("label"), str)
+    }
+    for fallback_index, fallback in enumerate(fallbacks):
+        fallback_ctx = f"{ctx}.components[{index}].aggregate_fallbacks[{fallback_index}]"
+        if not isinstance(fallback, dict):
+            raise ValueError(f"Invalid aggregate fallback in {fallback_ctx}: expected object")
+        for key in ("benchmark", "metric", "label"):
+            if not isinstance(fallback.get(key), str) or not fallback[key].strip():
+                raise ValueError(
+                    f"Invalid aggregate fallback in {fallback_ctx}: "
+                    f"expected non-empty {key}"
+                )
+        if not isinstance(fallback.get("selector"), dict) or not fallback["selector"]:
+            raise ValueError(
+                f"Invalid aggregate fallback in {fallback_ctx}: "
+                "expected a non-empty selector"
+            )
+        _validate_selector_alternatives(fallback, index=fallback_index, ctx=fallback_ctx)
+
+        covers = fallback.get("covers")
+        if (
+            not isinstance(covers, list)
+            or not covers
+            or any(not isinstance(label, str) or not label for label in covers)
+            or len(set(covers)) != len(covers)
+            or any(label not in child_labels for label in covers)
+        ):
+            raise ValueError(
+                f"Invalid covered components in {fallback_ctx}: "
+                "expected unique child labels"
+            )
+
+        baseline_components = fallback.get("baseline_components")
+        if not isinstance(baseline_components, list) or not baseline_components:
+            raise ValueError(
+                f"Invalid baseline components in {fallback_ctx}: "
+                "expected a non-empty list"
+            )
+        baseline_weight = 0.0
+        for baseline_index, baseline_component in enumerate(baseline_components):
+            baseline_ctx = f"{fallback_ctx}.baseline_components[{baseline_index}]"
+            if not isinstance(baseline_component, dict):
+                raise ValueError(
+                    f"Invalid baseline component in {baseline_ctx}: expected object"
+                )
+            if (
+                not isinstance(baseline_component.get("selector"), dict)
+                or not baseline_component["selector"]
+            ):
+                raise ValueError(
+                    f"Invalid baseline component in {baseline_ctx}: "
+                    "expected a non-empty selector"
+                )
+            _validate_selector_alternatives(
+                baseline_component, index=baseline_index, ctx=baseline_ctx
+            )
+            try:
+                weight = _parse_weight(baseline_component.get("weight"))
+            except Exception:
+                raise ValueError(
+                    f"Invalid baseline component weight in {baseline_ctx}: "
+                    f"{baseline_component.get('weight')!r}"
+                )
+            if weight < 0:
+                raise ValueError(
+                    f"Negative baseline component weight in {baseline_ctx}: "
+                    f"{baseline_component.get('weight')!r}"
+                )
+            baseline_weight += weight
+        if abs(baseline_weight - 1.0) > 1e-9:
+            raise ValueError(
+                f"Baseline component weights must sum to 1.0 in {fallback_ctx}: "
+                f"got {baseline_weight}"
+            )
+
+        required = fallback.get("required_num_qubits")
+        if required is not None and (
+            isinstance(required, bool) or not isinstance(required, int) or required <= 0
+        ):
+            raise ValueError(
+                f"Invalid required_num_qubits in {fallback_ctx}: {required!r}"
+            )
+
+
 def _validate_components_list(components: list[dict[str, Any]], ctx: str) -> None:
     total = 0.0
     for i, comp in enumerate(components):
@@ -702,23 +929,8 @@ def _validate_components_list(components: list[dict[str, Any]], ctx: str) -> Non
                     f"'aggregation' is only valid on group components (index {i} in {ctx})"
                 )
 
-        selector_alternatives = comp.get("selector_alternatives")
-        if selector_alternatives is not None:
-            if not isinstance(comp.get("selector"), dict) or not comp["selector"]:
-                raise ValueError(
-                    f"Selector alternatives require a non-empty primary selector "
-                    f"(index {i} in {ctx})"
-                )
-            if not isinstance(selector_alternatives, list) or not selector_alternatives:
-                raise ValueError(
-                    f"Invalid selector alternatives for component {i} in {ctx}: "
-                    "expected a non-empty list"
-                )
-            if any(not isinstance(item, dict) or not item for item in selector_alternatives):
-                raise ValueError(
-                    f"Invalid selector alternative for component {i} in {ctx}: "
-                    "expected non-empty objects"
-                )
+        _validate_selector_alternatives(comp, index=i, ctx=ctx)
+        _validate_aggregate_fallbacks(comp, index=i, ctx=ctx)
 
         if isinstance(children, list):
             _validate_components_list(children, ctx=f"{ctx}.components[{i}]")
@@ -913,6 +1125,164 @@ def _pick_latest_metric_row(
     return picked, picked_ts
 
 
+def _aggregate_fallback_baseline(
+    fallback: dict[str, Any],
+    series_label: str | None,
+    baseline_avg_by_series: dict[str, dict[tuple[str, str, str], float]],
+) -> float | None:
+    """Build the like-for-like baseline declared for an aggregate fallback."""
+    fallback_benchmark = fallback.get("benchmark")
+    fallback_metric = fallback.get("metric")
+    baseline_components = fallback.get("baseline_components")
+    if (
+        not isinstance(fallback_benchmark, str)
+        or not isinstance(fallback_metric, str)
+        or not isinstance(baseline_components, list)
+    ):
+        return None
+
+    baseline_map = baseline_avg_by_series.get(series_label or "", {})
+    total = 0.0
+    total_weight = 0.0
+    for component in baseline_components:
+        if not isinstance(component, dict):
+            return None
+        benchmark = component.get("benchmark", fallback_benchmark)
+        metric = component.get("metric", fallback_metric)
+        selector = component.get("selector")
+        if (
+            not isinstance(benchmark, str)
+            or not isinstance(metric, str)
+            or not isinstance(selector, dict)
+            or not selector
+        ):
+            return None
+        try:
+            weight = _parse_weight(component.get("weight"))
+        except Exception:
+            return None
+        selector_fp = _selector_fingerprint(selector)
+        base = baseline_map.get((benchmark, metric, selector_fp))
+        if base is None:
+            base = _fallback_baseline_average(
+                series_label,
+                benchmark,
+                metric,
+                selector_fp,
+                baseline_avg_by_series,
+            )
+        if base is None:
+            return None
+        total += weight * base
+        total_weight += weight
+    if total_weight <= 0:
+        return None
+    return total / total_weight
+
+
+def _pick_group_aggregate_fallback(
+    group: dict[str, Any],
+    rows: list[dict[str, Any]],
+    row_series: dict[int, str],
+    row_major_by_id: dict[int, int | None],
+    picked_series: str | None,
+    picked_major: int | None,
+    scoring_cfg: dict[str, Any],
+    baseline_avg_by_series: dict[str, dict[tuple[str, str, str], float]],
+) -> dict[str, Any] | None:
+    """Pick the widest configured aggregate representation, then its latest row."""
+    items = group.get("items")
+    fallbacks = group.get("aggregate_fallbacks")
+    if not isinstance(items, list) or not isinstance(fallbacks, list):
+        return None
+
+    total_sub = sum(
+        float(item.get("sub_weight", 0.0))
+        for item in items
+        if isinstance(item, dict) and float(item.get("sub_weight", 0.0)) > 0
+    )
+    item_weights = {
+        item.get("label"): float(item.get("sub_weight", 0.0))
+        for item in items
+        if isinstance(item, dict) and isinstance(item.get("label"), str)
+    }
+    if total_sub <= 0:
+        return None
+
+    best: dict[str, Any] | None = None
+    best_coverage = -1.0
+    best_timestamp: datetime | None = None
+    for fallback in fallbacks:
+        if not isinstance(fallback, dict):
+            continue
+        covers = fallback.get("covers")
+        if not isinstance(covers, list) or any(label not in item_weights for label in covers):
+            continue
+        covered_sub = sum(item_weights[label] for label in covers)
+        if covered_sub <= 0:
+            continue
+        baseline = _aggregate_fallback_baseline(
+            fallback, picked_series, baseline_avg_by_series
+        )
+        if baseline is None:
+            continue
+        metric = fallback.get("metric")
+        if not isinstance(metric, str):
+            continue
+
+        matches: list[dict[str, Any]] = []
+        for row in rows:
+            if not _component_matches_benchmark(fallback, derive_benchmark_name(row)):
+                continue
+            if not _component_param_matches(fallback, row):
+                continue
+            series_label = row_series.get(id(row))
+            if picked_major is not None:
+                if row_major_by_id.get(id(row)) != picked_major:
+                    continue
+            elif series_label != picked_series:
+                continue
+            raw = _get_raw_metric_value(row, metric)
+            if raw is None:
+                continue
+            direction = _metric_direction(row, metric)
+            normalized: float | None = None
+            if _is_baseline_row_for_series(scoring_cfg, series_label, row):
+                normalized = 100.0
+            elif direction == "lower":
+                if raw > 0:
+                    normalized = 100.0 * baseline / raw
+            elif baseline > 0:
+                normalized = 100.0 * raw / baseline
+            if normalized is None:
+                continue
+            candidate = dict(row)
+            candidate["_raw_val"] = raw
+            candidate["_normalized_val"] = normalized
+            matches.append(candidate)
+
+        picked, timestamp = _pick_latest_metric_row(matches, "_raw_val")
+        if picked is None or timestamp is None:
+            continue
+        coverage = covered_sub / total_sub
+        if (
+            best is None
+            or coverage > best_coverage
+            or (coverage == best_coverage and (best_timestamp is None or timestamp > best_timestamp))
+        ):
+            best = {
+                "config": fallback,
+                "timestamp": picked.get("timestamp"),
+                "raw": float(picked["_raw_val"]),
+                "normalized": float(picked["_normalized_val"]),
+                "coverage": coverage,
+                "covered_components": list(covers),
+            }
+            best_coverage = coverage
+            best_timestamp = timestamp
+    return best
+
+
 def compute_device_composite_scores(
     flat_rows: list[dict[str, Any]],
     row_series: dict[int, str],
@@ -1088,7 +1458,13 @@ def compute_device_composite_scores(
                 group["items"].append((sub_weight, normalized_value))
             elif group_label is not None:
                 group = arithmetic_groups.setdefault(
-                    group_label, {"group_weight": group_weight, "items": []}
+                    group_label,
+                    {
+                        "group_label": group_label,
+                        "group_weight": group_weight,
+                        "items": [],
+                        "aggregate_fallbacks": comp.get("_group_aggregate_fallbacks"),
+                    },
                 )
                 group["items"].append(
                     {
@@ -1159,6 +1535,59 @@ def compute_device_composite_scores(
         for group in arithmetic_groups.values():
             items = group["items"]
             total_sub = sum(it["sub_weight"] for it in items if it["sub_weight"] > 0)
+            canonical_available = any(
+                it["raw"] is not None or it["normalized"] is not None for it in items
+            )
+            if not canonical_available:
+                fallback = _pick_group_aggregate_fallback(
+                    group,
+                    rows,
+                    row_series,
+                    row_major_by_id,
+                    picked_series,
+                    picked_major,
+                    scoring_cfg,
+                    baseline_avg_by_series,
+                )
+                if fallback is not None:
+                    fallback_cfg = fallback["config"]
+                    coverage = float(fallback["coverage"])
+                    value = float(fallback["normalized"])
+                    group_weight = float(group["group_weight"])
+                    numerator += group_weight * coverage * value
+                    for covered_label in fallback["covered_components"]:
+                        breakdown.pop(covered_label, None)
+
+                    label = str(fallback_cfg["label"])
+                    selector = fallback_cfg.get("selector")
+                    required = fallback_cfg.get("required_num_qubits")
+                    if not isinstance(required, int) and isinstance(selector, dict):
+                        for key in ("num_qubits", "width"):
+                            if isinstance(selector.get(key), int):
+                                required = selector[key]
+                                break
+                    breakdown[label] = {
+                        "metric": fallback_cfg["metric"],
+                        "weight": group_weight * coverage,
+                        "group": group.get("group_label"),
+                        "group_weight": group_weight,
+                        "sub_weight": coverage,
+                        "aggregation": "arithmetic",
+                        "timestamp": fallback["timestamp"],
+                        "normalized": value,
+                        "normalized_available": True,
+                        "normalized_timestamp": fallback["timestamp"],
+                        "raw": fallback["raw"],
+                        "raw_available": True,
+                        "raw_timestamp": fallback["timestamp"],
+                        "group_subscore": value,
+                        "aggregate_fallback": True,
+                        "coverage": coverage,
+                        "covered_components": fallback["covered_components"],
+                    }
+                    if isinstance(required, int):
+                        breakdown[label]["required_num_qubits"] = required
+                    continue
             subscore = _benchmark_subscore(items) if total_sub > 0 else None
             if subscore is None:
                 # No width has both a device and a baseline raw value (for example
