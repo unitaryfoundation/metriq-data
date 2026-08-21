@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-21T13:26:05.858679Z",
+  "generated_at": "2026-08-21T15:04:01.564455Z",
   "platforms": [
     {
       "provider": "aws",
@@ -81,8 +81,8 @@
       "provider": "ibm",
       "device": "ibm_kingston",
       "first_seen": "2025-10-19T14:07:54.145729Z",
-      "last_seen": "2026-02-20T10:56:57.582109Z",
-      "runs": 41,
+      "last_seen": "2026-08-20T19:09:51.502860Z",
+      "runs": 42,
       "metadata_variants": 1
     },
     {

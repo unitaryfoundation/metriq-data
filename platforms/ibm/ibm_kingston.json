@@ -1,17 +1,17 @@
 {
-  "generated_at": "2026-08-21T13:26:05.858679Z",
+  "generated_at": "2026-08-21T15:04:01.564455Z",
   "provider": "ibm",
   "device": "ibm_kingston",
   "first_seen": "2025-10-19T14:07:54.145729Z",
-  "last_seen": "2026-02-20T10:56:57.582109Z",
-  "runs": 41,
+  "last_seen": "2026-08-20T19:09:51.502860Z",
+  "runs": 42,
   "current": {
     "device_metadata": {
       "num_qubits": 156,
       "simulator": false,
       "version": "1.0.0"
     },
-    "as_of": "2026-02-20T10:56:57.582109Z"
+    "as_of": "2026-08-20T19:09:51.502860Z"
   },
   "history": [
     {
@@ -21,13 +21,13 @@
         "version": "1.0.0"
       },
       "first_seen": "2025-10-19T14:07:54.145729Z",
-      "last_seen": "2026-02-20T10:56:57.582109Z",
-      "runs": 41
+      "last_seen": "2026-08-20T19:09:51.502860Z",
+      "runs": 42
     }
   ],
   "metriq_score": {
-    "value": 143.0633547608483,
-    "series": "v0.6",
+    "value": 245.39016590855158,
+    "series": "v0.7",
     "components": {
       "BSEQ:bseq_score": {
         "metric": "bseq_score",
@@ -374,13 +374,13 @@
         "group_weight": 0.1494,
         "sub_weight": 0.05555555555555555,
         "aggregation": "harmonic",
-        "timestamp": null,
-        "normalized": null,
-        "normalized_available": false,
-        "normalized_timestamp": null,
-        "raw": null,
-        "raw_available": false,
-        "raw_timestamp": null,
+        "timestamp": "2026-08-20T19:09:51.502860",
+        "normalized": 189.78485762788205,
+        "normalized_available": true,
+        "normalized_timestamp": "2026-08-20T19:09:51.502860",
+        "raw": 0.002901827720505623,
+        "raw_available": true,
+        "raw_timestamp": "2026-08-20T19:09:51.502860",
         "required_num_qubits": 10
       },
       "EPLG-20": {
@@ -390,13 +390,13 @@
         "group_weight": 0.1494,
         "sub_weight": 0.1111111111111111,
         "aggregation": "harmonic",
-        "timestamp": null,
-        "normalized": null,
-        "normalized_available": false,
-        "normalized_timestamp": null,
-        "raw": null,
-        "raw_available": false,
-        "raw_timestamp": null,
+        "timestamp": "2026-08-20T19:09:51.502860",
+        "normalized": 284.38767621451615,
+        "normalized_available": true,
+        "normalized_timestamp": "2026-08-20T19:09:51.502860",
+        "raw": 0.0033710523873504705,
+        "raw_available": true,
+        "raw_timestamp": "2026-08-20T19:09:51.502860",
         "required_num_qubits": 20
       },
       "EPLG-50": {
@@ -406,13 +406,13 @@
         "group_weight": 0.1494,
         "sub_weight": 0.2777777777777778,
         "aggregation": "harmonic",
-        "timestamp": null,
-        "normalized": null,
-        "normalized_available": false,
-        "normalized_timestamp": null,
-        "raw": null,
-        "raw_available": false,
-        "raw_timestamp": null,
+        "timestamp": "2026-08-20T19:09:51.502860",
+        "normalized": 834.5759314836158,
+        "normalized_available": true,
+        "normalized_timestamp": "2026-08-20T19:09:51.502860",
+        "raw": 0.004592598448144081,
+        "raw_available": true,
+        "raw_timestamp": "2026-08-20T19:09:51.502860",
         "required_num_qubits": 50
       },
       "EPLG-100": {
@@ -422,13 +422,13 @@
         "group_weight": 0.1494,
         "sub_weight": 0.5555555555555556,
         "aggregation": "harmonic",
-        "timestamp": null,
-        "normalized": null,
-        "normalized_available": false,
-        "normalized_timestamp": null,
-        "raw": null,
-        "raw_available": false,
-        "raw_timestamp": null,
+        "timestamp": "2026-08-20T19:09:51.502860",
+        "normalized": 1251.9314317480544,
+        "normalized_available": true,
+        "normalized_timestamp": "2026-08-20T19:09:51.502860",
+        "raw": 0.005493310532213469,
+        "raw_available": true,
+        "raw_timestamp": "2026-08-20T19:09:51.502860",
         "required_num_qubits": 100
       },
       "CLOPS (twirled, session=true):score": {
