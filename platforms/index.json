@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-20T15:00:52.554849Z",
+  "generated_at": "2026-08-21T13:26:05.858679Z",
   "platforms": [
     {
       "provider": "aws",
@@ -97,8 +97,8 @@
       "provider": "ibm",
       "device": "ibm_miami",
       "first_seen": "2026-04-16T17:50:27.852812Z",
-      "last_seen": "2026-08-14T10:21:53.084158Z",
-      "runs": 20,
+      "last_seen": "2026-08-20T19:33:46.819022Z",
+      "runs": 21,
       "metadata_variants": 1
     },
     {

@@ -13168,6 +13168,42 @@
     "metriq_score": 174.74529467005482
   },
   {
+    "app_version": "0.7.2.dev15+g3b4c355",
+    "timestamp": "2026-08-20T19:33:46.819022",
+    "suite_id": "a362875d-a6a8-4ee5-bd0f-333807e5e11e",
+    "job_type": "CLOPS",
+    "results": {
+      "clops_score": 24573.02688675184,
+      "steady_state_clops": null,
+      "score": 24573.02688675184
+    },
+    "params": {
+      "benchmark_name": "CLOPS",
+      "mode": "twirled",
+      "num_circuits": 1000,
+      "num_layers": 100,
+      "num_qubits": 100,
+      "seed": 12345,
+      "shots": 100,
+      "two_qubit_gate": "cz",
+      "use_session": true
+    },
+    "provider": "ibm",
+    "device": "ibm_miami",
+    "device_metadata": {
+      "num_qubits": 120,
+      "simulator": false,
+      "version": "1.0.3"
+    },
+    "errors": {
+      "score": null
+    },
+    "normalized_scores": {
+      "score": 7.108814004899318
+    },
+    "metriq_score": 7.108814004899318
+  },
+  {
     "app_version": "0.7.1.dev8+g18e1d24f8",
     "timestamp": "2026-04-17T12:42:24.365241",
     "suite_id": null,

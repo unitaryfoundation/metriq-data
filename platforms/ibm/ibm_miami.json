@@ -1,17 +1,17 @@
 {
-  "generated_at": "2026-08-20T15:00:52.554849Z",
+  "generated_at": "2026-08-21T13:26:05.858679Z",
   "provider": "ibm",
   "device": "ibm_miami",
   "first_seen": "2026-04-16T17:50:27.852812Z",
-  "last_seen": "2026-08-14T10:21:53.084158Z",
-  "runs": 20,
+  "last_seen": "2026-08-20T19:33:46.819022Z",
+  "runs": 21,
   "current": {
     "device_metadata": {
       "num_qubits": 120,
       "simulator": false,
       "version": "1.0.3"
     },
-    "as_of": "2026-08-14T10:21:53.084158Z"
+    "as_of": "2026-08-20T19:33:46.819022Z"
   },
   "history": [
     {
@@ -21,12 +21,12 @@
         "version": "1.0.3"
       },
       "first_seen": "2026-04-16T17:50:27.852812Z",
-      "last_seen": "2026-08-14T10:21:53.084158Z",
-      "runs": 20
+      "last_seen": "2026-08-20T19:33:46.819022Z",
+      "runs": 21
     }
   ],
   "metriq_score": {
-    "value": 83.88617189594316,
+    "value": 85.35698551355684,
     "series": "v0.7",
     "components": {
       "BSEQ:bseq_score": {
@@ -438,13 +438,14 @@
         "group_weight": 0.2069,
         "sub_weight": 1.0,
         "aggregation": "arithmetic",
-        "timestamp": null,
-        "normalized": null,
-        "normalized_available": false,
-        "normalized_timestamp": null,
-        "raw": null,
-        "raw_available": false,
-        "raw_timestamp": null
+        "timestamp": "2026-08-20T19:33:46.819022",
+        "normalized": 7.108814004899318,
+        "normalized_available": true,
+        "normalized_timestamp": "2026-08-20T19:33:46.819022",
+        "raw": 24573.02688675184,
+        "raw_available": true,
+        "raw_timestamp": "2026-08-20T19:33:46.819022",
+        "group_subscore": 7.108814004899317
       }
     }
   }
