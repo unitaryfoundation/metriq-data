@@ -1,0 +1,244 @@
+name: Deploy metriq-data preview
+
+on:
+  workflow_run:
+    workflows:
+      - Aggregate metriq-data (PR)
+      - Cleanup metriq-data preview
+    types: [completed]
+
+permissions:
+  actions: read
+  contents: write
+  pages: write
+  id-token: write
+  issues: write
+  pull-requests: write
+
+concurrency:
+  group: metriq-data-pages
+  queue: max
+
+jobs:
+  deploy:
+    if: ${{ github.event.workflow_run.conclusion == 'success' && github.event.workflow_run.event == 'pull_request' }}
+    environment:
+      name: github-pages
+      url: ${{ steps.pages-deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout trusted deployment workflow
+        uses: actions/checkout@v5
+
+      - name: Download preview metadata
+        env:
+          GH_TOKEN: ${{ github.token }}
+          RUN_ID: ${{ github.event.workflow_run.id }}
+        run: |
+          gh run download "$RUN_ID" \
+            --repo "$GITHUB_REPOSITORY" \
+            --name data-preview-metadata \
+            --dir preview-metadata
+
+      - name: Read and validate preview metadata
+        id: metadata
+        env:
+          GH_TOKEN: ${{ github.token }}
+          RUN_HEAD_SHA: ${{ github.event.workflow_run.head_sha }}
+        run: |
+          pr_number="$(cat preview-metadata/pr-number.txt)"
+          pr_action="$(cat preview-metadata/pr-action.txt)"
+          preview_sha="$(cat preview-metadata/preview-sha.txt)"
+
+          case "$pr_number" in
+            ''|*[!0-9]*)
+              echo "Invalid PR number in preview metadata: $pr_number" >&2
+              exit 1
+              ;;
+          esac
+
+          case "$pr_action" in
+            opened|reopened|synchronize|closed)
+              ;;
+            *)
+              echo "Invalid PR action in preview metadata: $pr_action" >&2
+              exit 1
+              ;;
+          esac
+
+          case "$preview_sha" in
+            *[!0-9a-f]*|'')
+              echo "Invalid preview SHA in metadata: $preview_sha" >&2
+              exit 1
+              ;;
+          esac
+          if [ "${#preview_sha}" -ne 40 ]; then
+            echo "Invalid preview SHA length in metadata: $preview_sha" >&2
+            exit 1
+          fi
+
+          pr_json="$(gh api "repos/$GITHUB_REPOSITORY/pulls/$pr_number")"
+          pr_head_sha="$(jq -r '.head.sha' <<< "$pr_json")"
+          pr_merge_sha="$(jq -r '.merge_commit_sha // empty' <<< "$pr_json")"
+          pr_state="$(jq -r '.state' <<< "$pr_json")"
+
+          if [ "$pr_head_sha" != "$RUN_HEAD_SHA" ] && [ "$pr_merge_sha" != "$RUN_HEAD_SHA" ]; then
+            echo "Preview metadata does not match the workflow run head SHA." >&2
+            echo "PR head SHA: $pr_head_sha" >&2
+            echo "PR merge SHA: $pr_merge_sha" >&2
+            echo "Run head SHA: $RUN_HEAD_SHA" >&2
+            exit 1
+          fi
+          if [ "$pr_state" = "open" ] && [ "$pr_action" != "closed" ] && [ "$pr_merge_sha" != "$preview_sha" ]; then
+            echo "Preview artifact is not the pull request's current merge revision." >&2
+            echo "PR merge SHA: $pr_merge_sha" >&2
+            echo "Preview SHA: $preview_sha" >&2
+            exit 1
+          fi
+
+          if [ "$pr_state" = "closed" ]; then
+            operation="remove"
+          elif [ "$pr_state" = "open" ] && [ "$pr_action" = "closed" ]; then
+            operation="none"
+          elif [ "$pr_state" = "open" ]; then
+            operation="deploy"
+          else
+            echo "Unexpected PR state: $pr_state" >&2
+            exit 1
+          fi
+
+          {
+            echo "pr_number=$pr_number"
+            echo "pr_action=$pr_action"
+            echo "operation=$operation"
+            echo "preview_sha=$preview_sha"
+          } >> "$GITHUB_OUTPUT"
+
+      - name: Download generated data
+        if: ${{ steps.metadata.outputs.operation == 'deploy' }}
+        env:
+          GH_TOKEN: ${{ github.token }}
+          RUN_ID: ${{ github.event.workflow_run.id }}
+        run: |
+          gh run download "$RUN_ID" \
+            --repo "$GITHUB_REPOSITORY" \
+            --name aggregated-dist \
+            --dir preview-data
+
+      - name: Validate deployable preview files
+        if: ${{ steps.metadata.outputs.operation == 'deploy' }}
+        run: |
+          set -euo pipefail
+
+          find preview-data -type l -delete
+          find preview-data -type f ! -name '*.json' -delete
+          test -s preview-data/benchmark.latest.json
+          test -s preview-data/platforms/index.json
+
+          json_count="$(find preview-data -type f -name '*.json' | wc -l)"
+          entry_count="$(find preview-data -mindepth 1 | wc -l)"
+          total_bytes="$(du -sb preview-data | cut -f1)"
+          if [ "$json_count" -gt 1000 ] || [ "$entry_count" -gt 2000 ] || [ "$total_bytes" -gt 20971520 ]; then
+            echo "Preview artifact is unexpectedly large: $json_count JSON files, $entry_count entries, $total_bytes bytes" >&2
+            exit 1
+          fi
+
+          while IFS= read -r -d '' json_file; do
+            jq empty "$json_file"
+          done < <(find preview-data -type f -name '*.json' -print0)
+
+      - name: Checkout deployed production website
+        if: ${{ steps.metadata.outputs.operation == 'deploy' }}
+        uses: actions/checkout@v5
+        with:
+          repository: unitaryfoundation/metriq-web
+          ref: gh-pages
+          path: production-web
+          persist-credentials: false
+
+      - name: Set up trusted preview assembler
+        if: ${{ steps.metadata.outputs.operation == 'deploy' }}
+        uses: actions/setup-python@v6
+        with:
+          python-version: '3.14'
+
+      - name: Assemble isolated production-UI preview
+        if: ${{ steps.metadata.outputs.operation == 'deploy' }}
+        env:
+          PR_NUMBER: ${{ steps.metadata.outputs.pr_number }}
+          PREVIEW_SHA: ${{ steps.metadata.outputs.preview_sha }}
+        run: |
+          python scripts/prepare_preview.py \
+            --web-dir production-web \
+            --data-dir preview-data \
+            --output-dir preview-site \
+            --pr-number "$PR_NUMBER" \
+            --workflow-sha "$PREVIEW_SHA"
+
+      - name: Deploy preview files
+        if: ${{ steps.metadata.outputs.operation == 'deploy' }}
+        uses: rossjrw/pr-preview-action@ffa7509e91a3ec8dfc2e5536c4d5c1acdf7a6de9 # v1.8.1
+        with:
+          source-dir: preview-site
+          preview-branch: gh-pages
+          umbrella-dir: pr-preview
+          action: deploy
+          pr-number: ${{ steps.metadata.outputs.pr_number }}
+          comment: false
+          wait-for-pages-deployment: false
+          deploy-commit-message: Deploy data preview for PR ${{ steps.metadata.outputs.pr_number }}
+
+      - name: Remove preview files
+        if: ${{ steps.metadata.outputs.operation == 'remove' }}
+        uses: rossjrw/pr-preview-action@ffa7509e91a3ec8dfc2e5536c4d5c1acdf7a6de9 # v1.8.1
+        with:
+          preview-branch: gh-pages
+          umbrella-dir: pr-preview
+          action: remove
+          pr-number: ${{ steps.metadata.outputs.pr_number }}
+          comment: false
+          wait-for-pages-deployment: false
+          remove-commit-message: Remove data preview for PR ${{ steps.metadata.outputs.pr_number }}
+
+      - name: Checkout assembled Pages site
+        if: ${{ steps.metadata.outputs.operation != 'none' }}
+        uses: actions/checkout@v5
+        with:
+          ref: gh-pages
+          path: pages-site
+
+      - name: Setup Pages
+        if: ${{ steps.metadata.outputs.operation != 'none' }}
+        uses: actions/configure-pages@v5
+
+      - name: Upload assembled Pages site
+        if: ${{ steps.metadata.outputs.operation != 'none' }}
+        uses: actions/upload-pages-artifact@v4
+        with:
+          path: pages-site
+
+      - name: Publish assembled Pages site
+        if: ${{ steps.metadata.outputs.operation != 'none' }}
+        id: pages-deployment
+        uses: actions/deploy-pages@v4
+
+      - name: Post preview link
+        if: ${{ steps.metadata.outputs.operation == 'deploy' }}
+        uses: marocchino/sticky-pull-request-comment@67d0dec7b07ed060a405f9b2a64b8ab319fdd7db # v2.9.2
+        with:
+          number: ${{ steps.metadata.outputs.pr_number }}
+          header: metriq-data-preview
+          message: |
+            ## Metriq data preview
+
+            [Open this PR's data in the production Metriq UI](https://unitaryfoundation.github.io/metriq-data/pr-preview/pr-${{ steps.metadata.outputs.pr_number }}/)
+
+            Built from merge revision `${{ steps.metadata.outputs.preview_sha }}`. The preview is isolated from `metriq.info` and does not change production data.
+
+      - name: Remove preview link
+        if: ${{ steps.metadata.outputs.operation == 'remove' }}
+        uses: marocchino/sticky-pull-request-comment@67d0dec7b07ed060a405f9b2a64b8ab319fdd7db # v2.9.2
+        with:
+          number: ${{ steps.metadata.outputs.pr_number }}
+          header: metriq-data-preview
+          delete: true

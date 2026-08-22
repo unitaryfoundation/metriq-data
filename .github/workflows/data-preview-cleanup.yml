@@ -1,0 +1,34 @@
+name: Cleanup metriq-data preview
+
+on:
+  pull_request:
+    types: [closed]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: data-preview-cleanup-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
+
+jobs:
+  cleanup:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Write preview metadata
+        env:
+          PR_ACTION: ${{ github.event.action }}
+          PR_NUMBER: ${{ github.event.pull_request.number }}
+          PREVIEW_SHA: ${{ github.event.pull_request.head.sha }}
+        run: |
+          mkdir -p preview-metadata
+          printf '%s\n' "$PR_NUMBER" > preview-metadata/pr-number.txt
+          printf '%s\n' "$PR_ACTION" > preview-metadata/pr-action.txt
+          printf '%s\n' "$PREVIEW_SHA" > preview-metadata/preview-sha.txt
+
+      - name: Upload preview metadata
+        uses: actions/upload-artifact@v4
+        with:
+          name: data-preview-metadata
+          path: preview-metadata/
+          retention-days: 3

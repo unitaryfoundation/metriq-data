@@ -24,7 +24,6 @@ from etl import (
     write_benchmark_latest,
 )
 from score import (
-    apply_custom_metric_derivations,
     load_scoring_config,
     validate_scoring_config,
     compute_baseline_averages_by_series,
@@ -45,8 +44,6 @@ def main(argv: list[str] | None = None) -> int:
     total_files = len(files)
     flat_rows, row_series, registry = collect_flat_rows_and_registry(root, files)
     platform_catalog = load_platform_catalog(root)
-    apply_custom_metric_derivations(flat_rows)
-
     # Scoring configured only via scripts/scoring.json
     scoring_cfg = load_scoring_config(root)
     # Validate composite weight sums per series/default

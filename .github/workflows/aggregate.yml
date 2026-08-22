@@ -2,17 +2,48 @@ name: Aggregate metriq-data (PR)
 
 on:
   pull_request:
+    types: [opened, reopened, synchronize]
     paths:
       - '*/v*/**/*.json'
       - '*/v*/**/*.json.gz'
       - 'scripts/**'
       - 'pages/**'
+      - 'tests/**'
+      - '.github/workflows/aggregate.yml'
+      - '.github/workflows/data-preview-deploy.yml'
   workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: data-preview-build-${{ github.event.pull_request.number || github.run_id }}
+  cancel-in-progress: true
 
 jobs:
   aggregate:
     runs-on: ubuntu-latest
     steps:
+      - name: Write preview metadata
+        if: github.event_name == 'pull_request'
+        env:
+          PR_ACTION: ${{ github.event.action }}
+          PR_NUMBER: ${{ github.event.pull_request.number }}
+          PREVIEW_SHA: ${{ github.sha }}
+        run: |
+          mkdir -p preview-metadata
+          printf '%s\n' "$PR_NUMBER" > preview-metadata/pr-number.txt
+          printf '%s\n' "$PR_ACTION" > preview-metadata/pr-action.txt
+          printf '%s\n' "$PREVIEW_SHA" > preview-metadata/preview-sha.txt
+
+      - name: Upload preview metadata
+        if: github.event_name == 'pull_request'
+        uses: actions/upload-artifact@v4
+        with:
+          name: data-preview-metadata
+          path: preview-metadata/
+          retention-days: 3
+
       - name: Checkout
         uses: actions/checkout@v5
 
@@ -21,17 +52,19 @@ jobs:
         with:
           python-version: '3.14'
 
+      - name: Run unit tests
+        run: python -m unittest discover -s tests
+
       - name: Run ETL
-        run: |
-          python scripts/aggregate.py
+        run: python scripts/aggregate.py
 
       - name: Add static index.html
-        run: |
-          cp pages/index.html dist/index.html
+        run: cp pages/index.html dist/index.html
 
       - name: Upload dist artifact
         uses: actions/upload-artifact@v4
         with:
           name: aggregated-dist
           path: dist
-          if-no-files-found: warn
+          if-no-files-found: error
+          retention-days: 3
