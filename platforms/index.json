@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-21T15:04:01.564455Z",
+  "generated_at": "2026-08-27T13:11:33.247091Z",
   "platforms": [
     {
       "provider": "aws",
@@ -73,9 +73,9 @@
       "provider": "ibm",
       "device": "ibm_fez",
       "first_seen": "2025-10-09T12:50:43.039401Z",
-      "last_seen": "2026-02-17T11:59:32.278169Z",
-      "runs": 43,
-      "metadata_variants": 7
+      "last_seen": "2026-08-20T19:39:52.204817Z",
+      "runs": 44,
+      "metadata_variants": 8
     },
     {
       "provider": "ibm",
