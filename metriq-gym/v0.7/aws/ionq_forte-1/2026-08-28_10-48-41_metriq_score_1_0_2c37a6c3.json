@@ -1,0 +1,130 @@
+[
+  {
+    "app_version": "0.7.2.dev15+g3b4c355",
+    "timestamp": "2026-08-28T10:48:41.880932",
+    "suite_id": "6cf60042-4ca9-44e0-8f8b-931d9910f281",
+    "job_type": "Quantum Fourier Transform",
+    "results": null,
+    "outcome": "error",
+    "outcome_detail": {
+      "error_message": "DeviceOfflineException: An error occurred (DeviceOfflineException) when calling the CreateQuantumTask operation: Device is not available. Status = OFFLINE",
+      "source": "dispatch"
+    },
+    "suite": {
+      "id": "6cf60042-4ca9-44e0-8f8b-931d9910f281",
+      "name": "metriq_score_1_0"
+    },
+    "platform": {
+      "device": "ionq_forte-1",
+      "device_metadata": {
+        "num_qubits": 36,
+        "simulator": false
+      },
+      "provider": "aws"
+    },
+    "params": {
+      "benchmark_name": "Quantum Fourier Transform",
+      "max_circuits": 3,
+      "method": 1,
+      "num_qubits": 4,
+      "shots": 1000,
+      "use_midcircuit_measurement": false
+    }
+  },
+  {
+    "app_version": "0.7.2.dev15+g3b4c355",
+    "timestamp": "2026-08-28T10:48:42.891654",
+    "suite_id": "6cf60042-4ca9-44e0-8f8b-931d9910f281",
+    "job_type": "Quantum Fourier Transform",
+    "results": null,
+    "outcome": "error",
+    "outcome_detail": {
+      "error_message": "DeviceOfflineException: An error occurred (DeviceOfflineException) when calling the CreateQuantumTask operation: Device is not available. Status = OFFLINE",
+      "source": "dispatch"
+    },
+    "suite": {
+      "id": "6cf60042-4ca9-44e0-8f8b-931d9910f281",
+      "name": "metriq_score_1_0"
+    },
+    "platform": {
+      "device": "ionq_forte-1",
+      "device_metadata": {
+        "num_qubits": 36,
+        "simulator": false
+      },
+      "provider": "aws"
+    },
+    "params": {
+      "benchmark_name": "Quantum Fourier Transform",
+      "max_circuits": 3,
+      "method": 1,
+      "num_qubits": 8,
+      "shots": 1000,
+      "use_midcircuit_measurement": false
+    }
+  },
+  {
+    "app_version": "0.7.2.dev15+g3b4c355",
+    "timestamp": "2026-08-28T10:48:45.158657",
+    "suite_id": "6cf60042-4ca9-44e0-8f8b-931d9910f281",
+    "job_type": "Quantum Fourier Transform",
+    "results": null,
+    "outcome": "error",
+    "outcome_detail": {
+      "error_message": "DeviceOfflineException: An error occurred (DeviceOfflineException) when calling the CreateQuantumTask operation: Device is not available. Status = OFFLINE",
+      "source": "dispatch"
+    },
+    "suite": {
+      "id": "6cf60042-4ca9-44e0-8f8b-931d9910f281",
+      "name": "metriq_score_1_0"
+    },
+    "platform": {
+      "device": "ionq_forte-1",
+      "device_metadata": {
+        "num_qubits": 36,
+        "simulator": false
+      },
+      "provider": "aws"
+    },
+    "params": {
+      "benchmark_name": "Quantum Fourier Transform",
+      "max_circuits": 3,
+      "method": 1,
+      "num_qubits": 12,
+      "shots": 1000,
+      "use_midcircuit_measurement": false
+    }
+  },
+  {
+    "app_version": "0.7.2.dev15+g3b4c355",
+    "timestamp": "2026-08-28T10:48:50.220698",
+    "suite_id": "6cf60042-4ca9-44e0-8f8b-931d9910f281",
+    "job_type": "Quantum Fourier Transform",
+    "results": null,
+    "outcome": "error",
+    "outcome_detail": {
+      "error_message": "DeviceOfflineException: An error occurred (DeviceOfflineException) when calling the CreateQuantumTask operation: Device is not available. Status = OFFLINE",
+      "source": "dispatch"
+    },
+    "suite": {
+      "id": "6cf60042-4ca9-44e0-8f8b-931d9910f281",
+      "name": "metriq_score_1_0"
+    },
+    "platform": {
+      "device": "ionq_forte-1",
+      "device_metadata": {
+        "num_qubits": 36,
+        "simulator": false
+      },
+      "provider": "aws"
+    },
+    "params": {
+      "benchmark_name": "Quantum Fourier Transform",
+      "max_circuits": 3,
+      "method": 1,
+      "num_qubits": 20,
+      "shots": 1000,
+      "use_midcircuit_measurement": false
+    }
+  }
+]
