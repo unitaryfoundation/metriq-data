@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-27T13:11:33.247091Z",
+  "generated_at": "2026-09-04T11:44:17.296493Z",
   "platforms": [
     {
       "provider": "aws",
@@ -153,8 +153,8 @@
       "provider": "origin",
       "device": "WK_C180",
       "first_seen": "2026-04-17T12:42:24.365241Z",
-      "last_seen": "2026-04-17T12:42:24.365241Z",
-      "runs": 1,
+      "last_seen": "2026-09-04T11:50:40.641913Z",
+      "runs": 5,
       "metadata_variants": 1
     },
     {
@@ -193,6 +193,6 @@
   "baseline": {
     "provider": "ibm",
     "device": "ibm_torino",
-    "series": "v0.7"
+    "series": "v0.8"
   }
 }
