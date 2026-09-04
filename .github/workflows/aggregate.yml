@@ -3,14 +3,6 @@ name: Aggregate metriq-data (PR)
 on:
   pull_request:
     types: [opened, reopened, synchronize]
-    paths:
-      - '*/v*/**/*.json'
-      - '*/v*/**/*.json.gz'
-      - 'scripts/**'
-      - 'pages/**'
-      - 'tests/**'
-      - '.github/workflows/aggregate.yml'
-      - '.github/workflows/data-preview-deploy.yml'
   workflow_dispatch:
 
 permissions:
