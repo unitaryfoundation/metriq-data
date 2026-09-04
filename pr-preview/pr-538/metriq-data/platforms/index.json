@@ -1,0 +1,198 @@
+{
+  "generated_at": "2026-09-04T09:48:32.613864Z",
+  "platforms": [
+    {
+      "provider": "aws",
+      "device": "ionq_forte-1",
+      "first_seen": "2026-07-10T15:14:15.584725Z",
+      "last_seen": "2026-07-10T15:14:26.659089Z",
+      "runs": 2,
+      "metadata_variants": 1
+    },
+    {
+      "provider": "aws",
+      "device": "iqm_emerald",
+      "first_seen": "2025-10-19T15:39:39.590379Z",
+      "last_seen": "2026-08-07T10:17:24.325491Z",
+      "runs": 13,
+      "metadata_variants": 1
+    },
+    {
+      "provider": "aws",
+      "device": "iqm_garnet",
+      "first_seen": "2026-01-09T11:09:29.390899Z",
+      "last_seen": "2026-08-07T10:37:26.760661Z",
+      "runs": 8,
+      "metadata_variants": 1
+    },
+    {
+      "provider": "aws",
+      "device": "rigetti_ankaa-3",
+      "first_seen": "2025-10-19T15:41:02.749589Z",
+      "last_seen": "2025-10-19T15:41:02.749589Z",
+      "runs": 1,
+      "metadata_variants": 1,
+      "lifecycle": {
+        "status": "retired",
+        "effective_at": "2026-04-17",
+        "source_url": "https://rigetti.statuspage.io/incidents/dbsh9sb7wt1k",
+        "source_label": "Rigetti retirement announcement"
+      }
+    },
+    {
+      "provider": "aws",
+      "device": "rigetti_cepheus-1-108q",
+      "first_seen": "2026-07-15T16:26:08.016526Z",
+      "last_seen": "2026-08-05T07:07:09.977310Z",
+      "runs": 17,
+      "metadata_variants": 1
+    },
+    {
+      "provider": "ibm",
+      "device": "ibm_boston",
+      "first_seen": "2025-11-26T17:36:24.168223Z",
+      "last_seen": "2026-02-18T20:46:15.410019Z",
+      "runs": 44,
+      "metadata_variants": 1
+    },
+    {
+      "provider": "ibm",
+      "device": "ibm_brisbane",
+      "first_seen": "2025-10-20T14:40:51.656701Z",
+      "last_seen": "2025-10-22T10:17:33.891024Z",
+      "runs": 3,
+      "metadata_variants": 2,
+      "lifecycle": {
+        "status": "retired",
+        "effective_at": "2025-11-03",
+        "source_url": "https://quantum.cloud.ibm.com/announcements/en/product-updates/2025-11-03-brisbane-retirement",
+        "source_label": "IBM retirement announcement"
+      }
+    },
+    {
+      "provider": "ibm",
+      "device": "ibm_fez",
+      "first_seen": "2025-10-09T12:50:43.039401Z",
+      "last_seen": "2026-08-20T19:39:52.204817Z",
+      "runs": 44,
+      "metadata_variants": 8
+    },
+    {
+      "provider": "ibm",
+      "device": "ibm_kingston",
+      "first_seen": "2025-10-19T14:07:54.145729Z",
+      "last_seen": "2026-08-20T19:09:51.502860Z",
+      "runs": 42,
+      "metadata_variants": 1
+    },
+    {
+      "provider": "ibm",
+      "device": "ibm_marrakesh",
+      "first_seen": "2025-10-19T14:09:40.351936Z",
+      "last_seen": "2026-08-14T11:22:25.304183Z",
+      "runs": 42,
+      "metadata_variants": 4
+    },
+    {
+      "provider": "ibm",
+      "device": "ibm_miami",
+      "first_seen": "2026-04-16T17:50:27.852812Z",
+      "last_seen": "2026-08-20T19:33:46.819022Z",
+      "runs": 21,
+      "metadata_variants": 1
+    },
+    {
+      "provider": "ibm",
+      "device": "ibm_pittsburgh",
+      "first_seen": "2025-10-19T14:06:47.295695Z",
+      "last_seen": "2026-02-19T10:49:11.515257Z",
+      "runs": 42,
+      "metadata_variants": 2
+    },
+    {
+      "provider": "ibm",
+      "device": "ibm_torino",
+      "first_seen": "2025-10-19T14:10:17.439739Z",
+      "last_seen": "2026-02-19T13:41:42.470983Z",
+      "runs": 44,
+      "metadata_variants": 6
+    },
+    {
+      "provider": "local",
+      "device": "ibm_fez",
+      "first_seen": "2025-09-23T17:37:22.988194Z",
+      "last_seen": "2025-10-09T12:48:59.222906Z",
+      "runs": 3,
+      "metadata_variants": 2
+    },
+    {
+      "provider": "origin",
+      "device": "72",
+      "first_seen": "2025-11-18T21:25:22.860294Z",
+      "last_seen": "2025-11-18T21:30:27.406957Z",
+      "runs": 12,
+      "metadata_variants": 1,
+      "lifecycle": {
+        "status": "retired",
+        "effective_at": "2026-04-09"
+      }
+    },
+    {
+      "provider": "origin",
+      "device": "WK_C102-2",
+      "first_seen": "2026-01-07T07:33:15.182395Z",
+      "last_seen": "2026-01-07T07:33:15.182395Z",
+      "runs": 1,
+      "metadata_variants": 1,
+      "lifecycle": {
+        "status": "retired",
+        "effective_at": "2026-04-09"
+      }
+    },
+    {
+      "provider": "origin",
+      "device": "WK_C180",
+      "first_seen": "2026-04-17T12:42:24.365241Z",
+      "last_seen": "2026-09-04T11:26:40.462322Z",
+      "runs": 5,
+      "metadata_variants": 1
+    },
+    {
+      "provider": "origin",
+      "device": "wukong_102",
+      "first_seen": "2025-10-19T18:03:21.613568Z",
+      "last_seen": "2026-01-16T09:11:43.791982Z",
+      "runs": 6,
+      "metadata_variants": 1,
+      "lifecycle": {
+        "status": "retired",
+        "effective_at": "2026-04-09"
+      }
+    },
+    {
+      "provider": "origin",
+      "device": "wukong_72",
+      "first_seen": "2025-11-10T17:58:46.904168Z",
+      "last_seen": "2026-03-02T10:12:45.251530Z",
+      "runs": 15,
+      "metadata_variants": 1,
+      "lifecycle": {
+        "status": "retired",
+        "effective_at": "2026-04-09"
+      }
+    },
+    {
+      "provider": "quantinuum",
+      "device": "H2-2",
+      "first_seen": "2025-12-04T07:20:31.261700Z",
+      "last_seen": "2026-01-23T17:05:44.697182Z",
+      "runs": 18,
+      "metadata_variants": 2
+    }
+  ],
+  "baseline": {
+    "provider": "ibm",
+    "device": "ibm_torino",
+    "series": "v0.8"
+  }
+}
