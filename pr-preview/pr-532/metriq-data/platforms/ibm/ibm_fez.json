@@ -1,17 +1,17 @@
 {
-  "generated_at": "2026-08-22T12:47:14.407168Z",
+  "generated_at": "2026-09-04T13:35:57.277740Z",
   "provider": "ibm",
   "device": "ibm_fez",
   "first_seen": "2025-10-09T12:50:43.039401Z",
-  "last_seen": "2026-02-17T11:59:32.278169Z",
-  "runs": 43,
+  "last_seen": "2026-08-20T19:39:52.204817Z",
+  "runs": 44,
   "current": {
     "device_metadata": {
       "num_qubits": 156,
       "simulator": false,
-      "version": "1.3.35"
+      "version": "1.3.37"
     },
-    "as_of": "2026-02-17T11:59:32.278169Z"
+    "as_of": "2026-08-20T19:39:52.204817Z"
   },
   "history": [
     {
@@ -83,11 +83,21 @@
       "first_seen": "2026-02-16T11:43:40.757318Z",
       "last_seen": "2026-02-17T11:59:32.278169Z",
       "runs": 5
+    },
+    {
+      "device_metadata": {
+        "num_qubits": 156,
+        "simulator": false,
+        "version": "1.3.37"
+      },
+      "first_seen": "2026-08-20T19:39:52.204817Z",
+      "last_seen": "2026-08-20T19:39:52.204817Z",
+      "runs": 1
     }
   ],
   "metriq_score": {
-    "value": 101.77912510997706,
-    "series": "v0.6",
+    "value": 126.8950326209464,
+    "series": "v0.7",
     "components": {
       "BSEQ:bseq_score": {
         "metric": "bseq_score",
@@ -434,13 +444,13 @@
         "group_weight": 0.1494,
         "sub_weight": 0.05555555555555555,
         "aggregation": "harmonic",
-        "timestamp": null,
-        "normalized": null,
-        "normalized_available": false,
-        "normalized_timestamp": null,
-        "raw": null,
-        "raw_available": false,
-        "raw_timestamp": null,
+        "timestamp": "2026-08-20T19:39:52.204817",
+        "normalized": 143.88370301870995,
+        "normalized_available": true,
+        "normalized_timestamp": "2026-08-20T19:39:52.204817",
+        "raw": 0.003827556208538696,
+        "raw_available": true,
+        "raw_timestamp": "2026-08-20T19:39:52.204817",
         "required_num_qubits": 10
       },
       "EPLG-20": {
@@ -450,13 +460,13 @@
         "group_weight": 0.1494,
         "sub_weight": 0.1111111111111111,
         "aggregation": "harmonic",
-        "timestamp": null,
-        "normalized": null,
-        "normalized_available": false,
-        "normalized_timestamp": null,
-        "raw": null,
-        "raw_available": false,
-        "raw_timestamp": null,
+        "timestamp": "2026-08-20T19:39:52.204817",
+        "normalized": 220.3710602878684,
+        "normalized_available": true,
+        "normalized_timestamp": "2026-08-20T19:39:52.204817",
+        "raw": 0.004350325099782504,
+        "raw_available": true,
+        "raw_timestamp": "2026-08-20T19:39:52.204817",
         "required_num_qubits": 20
       },
       "EPLG-50": {
@@ -466,13 +476,13 @@
         "group_weight": 0.1494,
         "sub_weight": 0.2777777777777778,
         "aggregation": "harmonic",
-        "timestamp": null,
-        "normalized": null,
-        "normalized_available": false,
-        "normalized_timestamp": null,
-        "raw": null,
-        "raw_available": false,
-        "raw_timestamp": null,
+        "timestamp": "2026-08-20T19:39:52.204817",
+        "normalized": 181.2687034742646,
+        "normalized_available": true,
+        "normalized_timestamp": "2026-08-20T19:39:52.204817",
+        "raw": 0.021144698750130475,
+        "raw_available": true,
+        "raw_timestamp": "2026-08-20T19:39:52.204817",
         "required_num_qubits": 50
       },
       "EPLG-100": {
@@ -482,13 +492,13 @@
         "group_weight": 0.1494,
         "sub_weight": 0.5555555555555556,
         "aggregation": "harmonic",
-        "timestamp": null,
-        "normalized": null,
-        "normalized_available": false,
-        "normalized_timestamp": null,
-        "raw": null,
-        "raw_available": false,
-        "raw_timestamp": null,
+        "timestamp": "2026-08-20T19:39:52.204817",
+        "normalized": 157.57321077561653,
+        "normalized_available": true,
+        "normalized_timestamp": "2026-08-20T19:39:52.204817",
+        "raw": 0.04364478000910854,
+        "raw_available": true,
+        "raw_timestamp": "2026-08-20T19:39:52.204817",
         "required_num_qubits": 100
       },
       "CLOPS (twirled, session=true):score": {

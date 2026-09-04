@@ -27,6 +27,23 @@ function objectRecord(value) {
         ? value
         : null;
 }
+export function resolveMetriqGymSuiteMetadata(suiteDefinition) {
+    const definition = objectRecord(suiteDefinition);
+    if (!definition)
+        return null;
+    const name = commandArgument(definition.name);
+    const version = commandArgument(definition.version);
+    if (!name || !version)
+        return null;
+    let description = null;
+    if (definition.description !== undefined && definition.description !== null) {
+        description = commandArgument(definition.description);
+    }
+    return { name, version, description };
+}
+export function isSameMetriqGymSuiteRelease(left, right) {
+    return left.name === right.name && left.version === right.version;
+}
 function suiteLookupKey(value) {
     const normalized = commandArgument(value);
     return normalized?.toLocaleLowerCase('en-US') ?? null;
