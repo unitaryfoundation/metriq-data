@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-04T11:44:17.296493Z",
+  "generated_at": "2026-09-04T11:44:51.229408Z",
   "platforms": [
     {
       "provider": "aws",
@@ -154,7 +154,7 @@
       "device": "WK_C180",
       "first_seen": "2026-04-17T12:42:24.365241Z",
       "last_seen": "2026-09-04T11:50:40.641913Z",
-      "runs": 5,
+      "runs": 9,
       "metadata_variants": 1
     },
     {

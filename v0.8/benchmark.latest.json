@@ -1,6 +1,128 @@
 [
   {
     "app_version": "0.8.1.dev7+ga06a383.d20260904",
+    "timestamp": "2026-09-04T11:26:31.303107",
+    "suite_id": "3b1c1a24-fe62-4ffb-a777-aa9961a25780",
+    "job_type": "Quantum Fourier Transform",
+    "results": {
+      "accuracy_score": 0.641,
+      "score": 0.641
+    },
+    "params": {
+      "benchmark_name": "Quantum Fourier Transform",
+      "max_circuits": 3,
+      "method": 1,
+      "num_qubits": 4,
+      "shots": 1000,
+      "use_midcircuit_measurement": false
+    },
+    "provider": "origin",
+    "device": "WK_C180",
+    "device_metadata": {
+      "num_qubits": 180,
+      "simulator": false
+    },
+    "errors": {
+      "accuracy_score": 0.051,
+      "score": 0.051
+    },
+    "normalized_scores": {
+      "score": 79.33168316831681
+    },
+    "metriq_score": 79.33168316831681
+  },
+  {
+    "app_version": "0.8.1.dev7+ga06a383.d20260904",
+    "timestamp": "2026-09-04T11:26:33.463030",
+    "suite_id": "3b1c1a24-fe62-4ffb-a777-aa9961a25780",
+    "job_type": "Quantum Fourier Transform",
+    "results": {
+      "accuracy_score": 0.004,
+      "score": 0.004
+    },
+    "params": {
+      "benchmark_name": "Quantum Fourier Transform",
+      "max_circuits": 3,
+      "method": 1,
+      "num_qubits": 8,
+      "shots": 1000,
+      "use_midcircuit_measurement": false
+    },
+    "provider": "origin",
+    "device": "WK_C180",
+    "device_metadata": {
+      "num_qubits": 180,
+      "simulator": false
+    },
+    "errors": {
+      "accuracy_score": 0.003,
+      "score": 0.003
+    },
+    "normalized_scores": {
+      "score": 1.8604651162790697
+    },
+    "metriq_score": 1.8604651162790697
+  },
+  {
+    "app_version": "0.8.1.dev7+ga06a383.d20260904",
+    "timestamp": "2026-09-04T11:26:36.019111",
+    "suite_id": "3b1c1a24-fe62-4ffb-a777-aa9961a25780",
+    "job_type": "Quantum Fourier Transform",
+    "results": {
+      "accuracy_score": 0.0,
+      "score": 0.0
+    },
+    "params": {
+      "benchmark_name": "Quantum Fourier Transform",
+      "max_circuits": 3,
+      "method": 1,
+      "num_qubits": 12,
+      "shots": 1000,
+      "use_midcircuit_measurement": false
+    },
+    "provider": "origin",
+    "device": "WK_C180",
+    "device_metadata": {
+      "num_qubits": 180,
+      "simulator": false
+    },
+    "errors": {
+      "accuracy_score": 0.0,
+      "score": 0.0
+    },
+    "normalized_scores": {
+      "score": 0.0
+    },
+    "metriq_score": 0.0
+  },
+  {
+    "app_version": "0.8.1.dev7+ga06a383.d20260904",
+    "timestamp": "2026-09-04T11:26:40.462322",
+    "suite_id": "3b1c1a24-fe62-4ffb-a777-aa9961a25780",
+    "job_type": "Quantum Fourier Transform",
+    "results": null,
+    "params": {
+      "benchmark_name": "Quantum Fourier Transform",
+      "max_circuits": 3,
+      "method": 1,
+      "num_qubits": 20,
+      "shots": 1000,
+      "use_midcircuit_measurement": false
+    },
+    "outcome": "error",
+    "outcome_detail": {
+      "error_message": "C70F1AFFD172913B2097D2DF2C506669: FAILED - query qcloud task C70F1AFFD172913B2097D2DF2C506669 failed: Error: Compilation failed, exceeding the maximum clock cycle!",
+      "source": "poll"
+    },
+    "provider": "origin",
+    "device": "WK_C180",
+    "device_metadata": {
+      "num_qubits": 180,
+      "simulator": false
+    }
+  },
+  {
+    "app_version": "0.8.1.dev7+ga06a383.d20260904",
     "timestamp": "2026-09-04T11:50:18.056344",
     "suite_id": "35466428-46c8-4f18-ba63-c73bed60132c",
     "job_type": "Linear Ramp QAOA",
