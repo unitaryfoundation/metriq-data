@@ -158,11 +158,8 @@ RECORD_OUTCOMES = frozenset({"completed", "error", "unsupported", "not_applicabl
 
 
 def _normalize_outcome(row: dict[str, Any]) -> tuple[str | None, dict[str, str] | None]:
-    raw = row.get("outcome")
-    if not isinstance(raw, str):
-        return None, None
-    outcome = raw.strip().lower()
-    if outcome not in RECORD_OUTCOMES or outcome == "completed":
+    outcome = row.get("outcome")
+    if not isinstance(outcome, str) or outcome not in RECORD_OUTCOMES or outcome == "completed":
         return None, None
 
     detail_raw = row.get("outcome_detail")
@@ -173,6 +170,44 @@ def _normalize_outcome(row: dict[str, Any]) -> tuple[str | None, dict[str, str] 
             if isinstance(value, str) and value.strip():
                 detail[key] = value.strip()
     return outcome, detail or None
+
+
+class InvalidRecordOutcome(ValueError):
+    """Raised for a record whose `outcome` is not one of RECORD_OUTCOMES."""
+
+
+def validate_record_outcome(row: dict[str, Any]) -> list[str]:
+    """Check a raw record's outcome/results pairing.
+
+    Raises InvalidRecordOutcome when `outcome` is present but is not exactly one
+    of RECORD_OUTCOMES (case-sensitive, no surrounding whitespace) — a mistyped
+    outcome must fail aggregation rather than be silently treated as completed.
+
+    Returns human-readable warnings for softer contract violations (README
+    "Record outcomes"): a non-completed outcome record that also carries
+    `results` (flatten_row drops them) or lacks `params` (it cannot be matched
+    to a benchmark instance), and a completed record without `results`.
+    """
+    raw = row.get("outcome")
+    if raw is not None and (not isinstance(raw, str) or raw not in RECORD_OUTCOMES):
+        raise InvalidRecordOutcome(
+            f"invalid outcome {raw!r}; expected one of {sorted(RECORD_OUTCOMES)}"
+        )
+    outcome = raw
+
+    problems: list[str] = []
+    has_results = bool(row.get("results"))
+    if outcome is not None and outcome != "completed":
+        if has_results:
+            problems.append(f"outcome {outcome!r} record also carries results; results will be dropped")
+        params = row.get("params")
+        if not isinstance(params, dict) or not params:
+            problems.append(
+                f"outcome {outcome!r} record has no params; it cannot be matched to a benchmark instance"
+            )
+    elif not has_results:
+        problems.append("completed record (no non-completed outcome) has no results")
+    return problems
 
 
 def flatten_row(row: dict[str, Any]) -> dict[str, Any]:
@@ -547,6 +582,12 @@ def collect_flat_rows_and_registry(root: str, files: list[str]) -> tuple[
         for row in data:
             if not isinstance(row, dict):
                 continue
+            try:
+                warnings = validate_record_outcome(row)
+            except InvalidRecordOutcome as e:
+                raise InvalidRecordOutcome(f"{os.path.relpath(src, root)}: {e}") from None
+            for msg in warnings:
+                print(f"Warning: {os.path.relpath(src, root)}: {msg}", file=sys.stderr)
             upsert_platform(registry, row, src, version)
             flat = flatten_row(row)
             if flat:
