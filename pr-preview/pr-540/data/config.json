@@ -1,0 +1,15 @@
+{
+  "benchmarksUrl": "./metriq-data/benchmark.latest.json",
+  "platformsIndexUrl": "./metriq-data/platforms/index.json",
+  "metriqGymSuite": {
+    "name": "metriq_score_1_0",
+    "version": "1.0",
+    "description": "Version 1.0 of the canonical Metriq benchmark suite."
+  },
+  "metriqGymSuiteUrl": "https://raw.githubusercontent.com/unitaryfoundation/metriq-gym/3b4c355d09001ac34c4b499564207e57079ebf2a/metriq_gym/suites/metriq_score_1_0.json",
+  "hiddenProviders": [
+    "local"
+  ],
+  "gymDocsUrl": "https://unitaryfoundation.github.io/metriq-gym/benchmarks/overview/#available-benchmarks",
+  "benchmarkPages": []
+}
