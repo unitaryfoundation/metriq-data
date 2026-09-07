@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-04T11:44:51.229408Z",
+  "generated_at": "2026-09-07T16:44:58.766253Z",
   "provider": "origin",
   "device": "WK_C180",
   "first_seen": "2026-04-17T12:42:24.365241Z",
@@ -284,6 +284,9 @@
         "raw_available": false,
         "raw_timestamp": null,
         "required_num_qubits": 20,
+        "reported_outcome": "error",
+        "reported_outcome_reason": null,
+        "reported_outcome_timestamp": "2026-09-04T11:26:40.462322",
         "group_subscore": 52.170418006430864
       },
       "Linear Ramp QAOA (10q):score": {
@@ -352,6 +355,9 @@
         "raw_available": false,
         "raw_timestamp": null,
         "required_num_qubits": 100,
+        "reported_outcome": "error",
+        "reported_outcome_reason": null,
+        "reported_outcome_timestamp": "2026-09-04T11:50:40.641913",
         "group_subscore": 0.7912636759301293
       },
       "EPLG-10": {
