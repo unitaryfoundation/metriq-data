@@ -1,6 +1,35 @@
 [
   {
     "app_version": "0.8.1.dev7+ga06a383.d20260904",
+    "timestamp": "2026-09-09T15:14:23.575108+00:00",
+    "suite_id": "56d0d860-3473-4789-8d1e-b04b3506506f",
+    "job_type": "WIT",
+    "results": {
+      "expectation_value": 0.759521484375,
+      "score": 0.759521484375
+    },
+    "params": {
+      "benchmark_name": "WIT",
+      "num_qubits": 7,
+      "shots": 8192
+    },
+    "provider": "aws",
+    "device": "iqm_garnet",
+    "device_metadata": {
+      "num_qubits": 20,
+      "simulator": false
+    },
+    "errors": {
+      "expectation_value": 0.004721861028837969,
+      "score": 0.004721861028837969
+    },
+    "normalized_scores": {
+      "expectation_value": 98.29383886255924
+    },
+    "metriq_score": 98.29383886255924
+  },
+  {
+    "app_version": "0.8.1.dev7+ga06a383.d20260904",
     "timestamp": "2026-09-04T11:26:31.303107",
     "suite_id": "3b1c1a24-fe62-4ffb-a777-aa9961a25780",
     "job_type": "Quantum Fourier Transform",

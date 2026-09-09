@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-07T16:44:58.766253Z",
+  "generated_at": "2026-09-09T18:35:54.126262Z",
   "platforms": [
     {
       "provider": "aws",
@@ -21,8 +21,8 @@
       "provider": "aws",
       "device": "iqm_garnet",
       "first_seen": "2026-01-09T11:09:29.390899Z",
-      "last_seen": "2026-08-07T10:37:26.760661Z",
-      "runs": 8,
+      "last_seen": "2026-09-09T15:14:23.575108Z",
+      "runs": 9,
       "metadata_variants": 1
     },
     {

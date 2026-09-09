@@ -1,16 +1,16 @@
 {
-  "generated_at": "2026-09-07T16:44:58.766253Z",
+  "generated_at": "2026-09-09T18:35:54.126262Z",
   "provider": "aws",
   "device": "iqm_garnet",
   "first_seen": "2026-01-09T11:09:29.390899Z",
-  "last_seen": "2026-08-07T10:37:26.760661Z",
-  "runs": 8,
+  "last_seen": "2026-09-09T15:14:23.575108Z",
+  "runs": 9,
   "current": {
     "device_metadata": {
       "num_qubits": 20,
       "simulator": false
     },
-    "as_of": "2026-08-07T10:37:26.760661Z"
+    "as_of": "2026-09-09T15:14:23.575108Z"
   },
   "history": [
     {
@@ -19,13 +19,13 @@
         "simulator": false
       },
       "first_seen": "2026-01-09T11:09:29.390899Z",
-      "last_seen": "2026-08-07T10:37:26.760661Z",
-      "runs": 8
+      "last_seen": "2026-09-09T15:14:23.575108Z",
+      "runs": 9
     }
   ],
   "metriq_score": {
-    "value": 49.95489692927173,
-    "series": "v0.7",
+    "value": 51.38015759277884,
+    "series": "v0.8",
     "components": {
       "BSEQ:bseq_score": {
         "metric": "bseq_score",
@@ -219,14 +219,15 @@
         "group_weight": 0.0145,
         "sub_weight": 1.0,
         "aggregation": "arithmetic",
-        "timestamp": null,
-        "normalized": null,
-        "normalized_available": false,
-        "normalized_timestamp": null,
-        "raw": null,
-        "raw_available": false,
-        "raw_timestamp": null,
-        "required_num_qubits": 7
+        "timestamp": "2026-09-09T15:14:23.575108+00:00",
+        "normalized": 98.29383886255924,
+        "normalized_available": true,
+        "normalized_timestamp": "2026-09-09T15:14:23.575108+00:00",
+        "raw": 0.759521484375,
+        "raw_available": true,
+        "raw_timestamp": "2026-09-09T15:14:23.575108+00:00",
+        "required_num_qubits": 7,
+        "group_subscore": 98.29383886255924
       },
       "QFT-4:score": {
         "metric": "score",
