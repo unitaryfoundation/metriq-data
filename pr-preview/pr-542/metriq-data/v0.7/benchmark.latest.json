@@ -1,0 +1,2579 @@
+[
+  {
+    "app_version": "0.7.2.dev1+g22e9742d3.d20260723",
+    "timestamp": "2026-07-24T09:50:26.324169",
+    "suite_id": null,
+    "job_type": "QML Kernel",
+    "results": {
+      "accuracy_score": 0.417,
+      "score": 0.417
+    },
+    "params": {
+      "benchmark_name": "QML Kernel",
+      "num_qubits": 10,
+      "shots": 1000
+    },
+    "provider": "aws",
+    "device": "iqm_emerald",
+    "device_metadata": {
+      "num_qubits": 54,
+      "simulator": false
+    },
+    "errors": {
+      "accuracy_score": 0.015592017188292218,
+      "score": 0.015592017188292218
+    },
+    "normalized_scores": {
+      "accuracy_score": 55.013192612137196
+    },
+    "metriq_score": 55.013192612137196
+  },
+  {
+    "app_version": "0.7.2.dev1+g22e9742d3.d20260723",
+    "timestamp": "2026-07-24T09:52:24.241850",
+    "suite_id": null,
+    "job_type": "QML Kernel",
+    "results": {
+      "accuracy_score": 0.001,
+      "score": 0.001
+    },
+    "params": {
+      "benchmark_name": "QML Kernel",
+      "num_qubits": 20,
+      "shots": 1000
+    },
+    "provider": "aws",
+    "device": "iqm_emerald",
+    "device_metadata": {
+      "num_qubits": 54,
+      "simulator": false
+    },
+    "errors": {
+      "accuracy_score": 0.0009994998749374609,
+      "score": 0.0009994998749374609
+    },
+    "normalized_scores": {
+      "accuracy_score": 0.20491803278688525
+    },
+    "metriq_score": 0.20491803278688525
+  },
+  {
+    "app_version": "0.7.2.dev1+g22e9742d3.d20260723",
+    "timestamp": "2026-07-24T09:53:30.115623",
+    "suite_id": null,
+    "job_type": "QML Kernel",
+    "results": {
+      "accuracy_score": 0.0,
+      "score": 0.0
+    },
+    "params": {
+      "benchmark_name": "QML Kernel",
+      "num_qubits": 30,
+      "shots": 1000
+    },
+    "provider": "aws",
+    "device": "iqm_emerald",
+    "device_metadata": {
+      "num_qubits": 54,
+      "simulator": false
+    },
+    "errors": {
+      "accuracy_score": 0.0,
+      "score": 0.0
+    },
+    "normalized_scores": {
+      "accuracy_score": 0.0
+    },
+    "metriq_score": 0.0
+  },
+  {
+    "app_version": "0.7.2.dev1+g22e9742d3.d20260723",
+    "timestamp": "2026-07-24T09:54:00.166999",
+    "suite_id": null,
+    "job_type": "QML Kernel",
+    "results": {
+      "accuracy_score": 0.0,
+      "score": 0.0
+    },
+    "params": {
+      "benchmark_name": "QML Kernel",
+      "num_qubits": 50,
+      "shots": 1000
+    },
+    "provider": "aws",
+    "device": "iqm_emerald",
+    "device_metadata": {
+      "num_qubits": 54,
+      "simulator": false
+    },
+    "errors": {
+      "accuracy_score": 0.0,
+      "score": 0.0
+    },
+    "normalized_scores": {
+      "accuracy_score": 0.0
+    },
+    "metriq_score": 0.0
+  },
+  {
+    "app_version": "0.7.2.dev1+g22e9742d3.d20260723",
+    "timestamp": "2026-07-23T12:56:54.120630",
+    "suite_id": null,
+    "job_type": "QML Kernel",
+    "results": {
+      "accuracy_score": 0.205,
+      "score": 0.205
+    },
+    "params": {
+      "benchmark_name": "QML Kernel",
+      "num_qubits": 10,
+      "shots": 1000
+    },
+    "provider": "aws",
+    "device": "iqm_garnet",
+    "device_metadata": {
+      "num_qubits": 20,
+      "simulator": false
+    },
+    "errors": {
+      "accuracy_score": 0.0127661662216971,
+      "score": 0.0127661662216971
+    },
+    "normalized_scores": {
+      "accuracy_score": 27.044854881266488
+    },
+    "metriq_score": 27.044854881266488
+  },
+  {
+    "app_version": "0.7.2.dev1+g22e9742d3.d20260723",
+    "timestamp": "2026-07-23T12:57:06.033072",
+    "suite_id": null,
+    "job_type": "QML Kernel",
+    "results": {
+      "accuracy_score": 0.0,
+      "score": 0.0
+    },
+    "params": {
+      "benchmark_name": "QML Kernel",
+      "num_qubits": 20,
+      "shots": 1000
+    },
+    "provider": "aws",
+    "device": "iqm_garnet",
+    "device_metadata": {
+      "num_qubits": 20,
+      "simulator": false
+    },
+    "errors": {
+      "accuracy_score": 0.0,
+      "score": 0.0
+    },
+    "normalized_scores": {
+      "accuracy_score": 0.0
+    },
+    "metriq_score": 0.0
+  },
+  {
+    "app_version": "0.7.1",
+    "timestamp": "2026-07-10T15:14:15.584725",
+    "suite_id": "262f234b-5065-42cb-bfb6-714e7ea4e723",
+    "job_type": "Linear Ramp QAOA",
+    "results": {
+      "approx_ratio": [
+        0.6607666666666667
+      ],
+      "random_approx_ratio": 0.49990133333333336,
+      "confidence_pass": [
+        true
+      ],
+      "effective_approx_ratio": [
+        0.3216671910076412
+      ],
+      "score": 0.3216671910076412
+    },
+    "params": {
+      "benchmark_name": "Linear Ramp QAOA",
+      "confidence_level": 0.999,
+      "delta_beta": 0.3,
+      "delta_gamma": 0.6,
+      "graph_type": "1D",
+      "num_qubits": 10,
+      "num_random_trials": 25,
+      "qaoa_layers": [
+        10
+      ],
+      "seed": 123,
+      "shots": 1000,
+      "trials": 10
+    },
+    "provider": "aws",
+    "device": "ionq_forte-1",
+    "device_metadata": {
+      "num_qubits": 36,
+      "simulator": false
+    },
+    "errors": {
+      "score": null
+    },
+    "normalized_scores": {
+      "score": 55.75303028202533
+    },
+    "metriq_score": 55.75303028202533
+  },
+  {
+    "app_version": "0.7.1",
+    "timestamp": "2026-07-10T15:14:26.659089",
+    "suite_id": "262f234b-5065-42cb-bfb6-714e7ea4e723",
+    "job_type": "Linear Ramp QAOA",
+    "results": {
+      "approx_ratio": [
+        0.7189144927536236
+      ],
+      "random_approx_ratio": 0.5007686956521739,
+      "confidence_pass": [
+        true
+      ],
+      "effective_approx_ratio": [
+        0.436963377900402
+      ],
+      "score": 0.436963377900402
+    },
+    "params": {
+      "benchmark_name": "Linear Ramp QAOA",
+      "confidence_level": 0.999,
+      "delta_beta": 0.3,
+      "delta_gamma": 0.6,
+      "graph_type": "1D",
+      "num_qubits": 20,
+      "num_random_trials": 25,
+      "qaoa_layers": [
+        10
+      ],
+      "seed": 123,
+      "shots": 1000,
+      "trials": 10
+    },
+    "provider": "aws",
+    "device": "ionq_forte-1",
+    "device_metadata": {
+      "num_qubits": 36,
+      "simulator": false
+    },
+    "errors": {
+      "score": null
+    },
+    "normalized_scores": {
+      "score": 84.44372385688406
+    },
+    "metriq_score": 84.44372385688406
+  },
+  {
+    "app_version": "0.7.0",
+    "timestamp": "2026-07-15T16:26:08.016526",
+    "suite_id": null,
+    "job_type": "WIT",
+    "results": {
+      "expectation_value": 0.5362548828125,
+      "score": 0.5362548828125
+    },
+    "params": {
+      "benchmark_name": "WIT",
+      "num_qubits": 7,
+      "shots": 8192
+    },
+    "provider": "aws",
+    "device": "rigetti_cepheus-1-108q",
+    "device_metadata": {
+      "num_qubits": 107,
+      "simulator": false
+    },
+    "errors": {
+      "expectation_value": 0.005509730201080868,
+      "score": 0.005509730201080868
+    },
+    "normalized_scores": {
+      "expectation_value": 69.39968404423381
+    },
+    "metriq_score": 69.39968404423381
+  },
+  {
+    "app_version": "0.7.2.dev1+g22e9742d3.d20260723",
+    "timestamp": "2026-07-24T10:11:51.611267",
+    "suite_id": null,
+    "job_type": "QML Kernel",
+    "results": {
+      "accuracy_score": 0.001,
+      "score": 0.001
+    },
+    "params": {
+      "benchmark_name": "QML Kernel",
+      "num_qubits": 10,
+      "shots": 1000
+    },
+    "provider": "aws",
+    "device": "rigetti_cepheus-1-108q",
+    "device_metadata": {
+      "num_qubits": 107,
+      "simulator": false
+    },
+    "errors": {
+      "accuracy_score": 0.0009994998749374609,
+      "score": 0.0009994998749374609
+    },
+    "normalized_scores": {
+      "accuracy_score": 0.13192612137203166
+    },
+    "metriq_score": 0.13192612137203166
+  },
+  {
+    "app_version": "0.7.2.dev1+g22e9742d3.d20260723",
+    "timestamp": "2026-07-24T10:12:31.841951",
+    "suite_id": null,
+    "job_type": "QML Kernel",
+    "results": {
+      "accuracy_score": 0.0,
+      "score": 0.0
+    },
+    "params": {
+      "benchmark_name": "QML Kernel",
+      "num_qubits": 20,
+      "shots": 1000
+    },
+    "provider": "aws",
+    "device": "rigetti_cepheus-1-108q",
+    "device_metadata": {
+      "num_qubits": 107,
+      "simulator": false
+    },
+    "errors": {
+      "accuracy_score": 0.0,
+      "score": 0.0
+    },
+    "normalized_scores": {
+      "accuracy_score": 0.0
+    },
+    "metriq_score": 0.0
+  },
+  {
+    "app_version": "0.7.2.dev1+g22e9742d3.d20260723",
+    "timestamp": "2026-07-24T10:12:56.414175",
+    "suite_id": null,
+    "job_type": "QML Kernel",
+    "results": {
+      "accuracy_score": 0.0,
+      "score": 0.0
+    },
+    "params": {
+      "benchmark_name": "QML Kernel",
+      "num_qubits": 30,
+      "shots": 1000
+    },
+    "provider": "aws",
+    "device": "rigetti_cepheus-1-108q",
+    "device_metadata": {
+      "num_qubits": 107,
+      "simulator": false
+    },
+    "errors": {
+      "accuracy_score": 0.0,
+      "score": 0.0
+    },
+    "normalized_scores": {
+      "accuracy_score": 0.0
+    },
+    "metriq_score": 0.0
+  },
+  {
+    "app_version": "0.7.2.dev1+g22e9742d3.d20260723",
+    "timestamp": "2026-07-24T10:13:21.384518",
+    "suite_id": null,
+    "job_type": "QML Kernel",
+    "results": {
+      "accuracy_score": 0.0,
+      "score": 0.0
+    },
+    "params": {
+      "benchmark_name": "QML Kernel",
+      "num_qubits": 50,
+      "shots": 1000
+    },
+    "provider": "aws",
+    "device": "rigetti_cepheus-1-108q",
+    "device_metadata": {
+      "num_qubits": 107,
+      "simulator": false
+    },
+    "errors": {
+      "accuracy_score": 0.0,
+      "score": 0.0
+    },
+    "normalized_scores": {
+      "accuracy_score": 0.0
+    },
+    "metriq_score": 0.0
+  },
+  {
+    "app_version": "0.7.2.dev10+g5bc076b.d20260804",
+    "timestamp": "2026-08-07T10:00:04.216878",
+    "suite_id": null,
+    "job_type": "Mirror Circuits",
+    "results": {
+      "success_probability": 0.0038,
+      "polarization": 0.0,
+      "binary_success": false,
+      "score": 0.0
+    },
+    "params": {
+      "benchmark_name": "Mirror Circuits",
+      "num_circuits": 10,
+      "num_layers": 64,
+      "shots": 1000,
+      "two_qubit_gate_name": "CNOT",
+      "two_qubit_gate_prob": 0.5,
+      "width": 8
+    },
+    "provider": "aws",
+    "device": "iqm_emerald",
+    "device_metadata": {
+      "num_qubits": 54,
+      "simulator": false
+    },
+    "errors": {
+      "success_probability": 0.0006152690468404858,
+      "polarization": 0.0,
+      "score": 0.0
+    },
+    "normalized_scores": {
+      "score": 0.0
+    },
+    "metriq_score": 0.0
+  },
+  {
+    "app_version": "0.7.2.dev10+g5bc076b.d20260804",
+    "timestamp": "2026-08-07T10:01:16.269911",
+    "suite_id": null,
+    "job_type": "Mirror Circuits",
+    "results": {
+      "success_probability": 0.0,
+      "polarization": 0.0,
+      "binary_success": false,
+      "score": 0.0
+    },
+    "params": {
+      "benchmark_name": "Mirror Circuits",
+      "num_circuits": 10,
+      "num_layers": 8,
+      "shots": 1000,
+      "two_qubit_gate_name": "CNOT",
+      "two_qubit_gate_prob": 0.5,
+      "width": 32
+    },
+    "provider": "aws",
+    "device": "iqm_emerald",
+    "device_metadata": {
+      "num_qubits": 54,
+      "simulator": false
+    },
+    "errors": {
+      "success_probability": 0.0,
+      "polarization": 0.0,
+      "score": 0.0
+    },
+    "normalized_scores": {
+      "score": 0.0
+    },
+    "metriq_score": 0.0
+  },
+  {
+    "app_version": "0.7.2.dev10+g5bc076b.d20260804",
+    "timestamp": "2026-08-07T10:14:20.013534",
+    "suite_id": null,
+    "job_type": "Mirror Circuits",
+    "results": {
+      "success_probability": 0.0,
+      "polarization": 0.0,
+      "binary_success": false,
+      "score": 0.0
+    },
+    "params": {
+      "benchmark_name": "Mirror Circuits",
+      "num_circuits": 10,
+      "num_layers": 16,
+      "shots": 1000,
+      "two_qubit_gate_name": "CNOT",
+      "two_qubit_gate_prob": 0.5,
+      "width": 24
+    },
+    "provider": "aws",
+    "device": "iqm_emerald",
+    "device_metadata": {
+      "num_qubits": 54,
+      "simulator": false
+    },
+    "errors": {
+      "success_probability": 0.0,
+      "polarization": 0.0,
+      "score": 0.0
+    },
+    "normalized_scores": {
+      "score": 0.0
+    },
+    "metriq_score": 0.0
+  },
+  {
+    "app_version": "0.7.2.dev10+g5bc076b.d20260804",
+    "timestamp": "2026-08-07T10:17:24.325491",
+    "suite_id": null,
+    "job_type": "Mirror Circuits",
+    "results": {
+      "success_probability": 0.0,
+      "polarization": 0.0,
+      "binary_success": false,
+      "score": 0.0
+    },
+    "params": {
+      "benchmark_name": "Mirror Circuits",
+      "num_circuits": 10,
+      "num_layers": 32,
+      "shots": 1000,
+      "two_qubit_gate_name": "CNOT",
+      "two_qubit_gate_prob": 0.5,
+      "width": 16
+    },
+    "provider": "aws",
+    "device": "iqm_emerald",
+    "device_metadata": {
+      "num_qubits": 54,
+      "simulator": false
+    },
+    "errors": {
+      "success_probability": 0.0,
+      "polarization": 0.0,
+      "score": 0.0
+    },
+    "normalized_scores": {
+      "score": 0.0
+    },
+    "metriq_score": 0.0
+  },
+  {
+    "app_version": "0.7.2.dev10+g5bc076b.d20260804",
+    "timestamp": "2026-08-07T10:37:06.163005",
+    "suite_id": null,
+    "job_type": "Mirror Circuits",
+    "results": {
+      "success_probability": 0.0036,
+      "polarization": 0.0,
+      "binary_success": false,
+      "score": 0.0
+    },
+    "params": {
+      "benchmark_name": "Mirror Circuits",
+      "num_circuits": 10,
+      "num_layers": 64,
+      "shots": 1000,
+      "two_qubit_gate_name": "CNOT",
+      "two_qubit_gate_prob": 0.5,
+      "width": 8
+    },
+    "provider": "aws",
+    "device": "iqm_garnet",
+    "device_metadata": {
+      "num_qubits": 20,
+      "simulator": false
+    },
+    "errors": {
+      "success_probability": 0.0005989190262464534,
+      "polarization": 0.0,
+      "score": 0.0
+    },
+    "normalized_scores": {
+      "score": 0.0
+    },
+    "metriq_score": 0.0
+  },
+  {
+    "app_version": "0.7.2.dev10+g5bc076b.d20260804",
+    "timestamp": "2026-08-07T10:37:26.760661",
+    "suite_id": null,
+    "job_type": "Mirror Circuits",
+    "results": {
+      "success_probability": 0.0004,
+      "polarization": 0.00038474708171206225,
+      "binary_success": false,
+      "score": 0.00038474708171206225
+    },
+    "params": {
+      "benchmark_name": "Mirror Circuits",
+      "num_circuits": 10,
+      "num_layers": 32,
+      "shots": 1000,
+      "two_qubit_gate_name": "CNOT",
+      "two_qubit_gate_prob": 0.5,
+      "width": 16
+    },
+    "provider": "aws",
+    "device": "iqm_garnet",
+    "device_metadata": {
+      "num_qubits": 20,
+      "simulator": false
+    },
+    "errors": {
+      "success_probability": 0.0001999599959991998,
+      "polarization": 0.0001999630471931572,
+      "score": 0.0001999630471931572
+    },
+    "normalized_scores": {
+      "score": 0.13955839893333777
+    },
+    "metriq_score": 0.13955839893333777
+  },
+  {
+    "app_version": "0.7.2.dev10+g5bc076b.d20260804",
+    "timestamp": "2026-08-04T11:00:50.198900",
+    "suite_id": null,
+    "job_type": "Mirror Circuits",
+    "results": {
+      "success_probability": 0.0033,
+      "polarization": 0.0,
+      "binary_success": false,
+      "score": 0.0
+    },
+    "params": {
+      "benchmark_name": "Mirror Circuits",
+      "num_circuits": 10,
+      "num_layers": 64,
+      "shots": 1000,
+      "two_qubit_gate_name": "CNOT",
+      "two_qubit_gate_prob": 0.5,
+      "width": 8
+    },
+    "provider": "aws",
+    "device": "rigetti_cepheus-1-108q",
+    "device_metadata": {
+      "num_qubits": 107,
+      "simulator": false
+    },
+    "errors": {
+      "success_probability": 0.0005735076285456019,
+      "polarization": 0.0,
+      "score": 0.0
+    },
+    "normalized_scores": {
+      "score": 0.0
+    },
+    "metriq_score": 0.0
+  },
+  {
+    "app_version": "0.7.2.dev10+g5bc076b.d20260804",
+    "timestamp": "2026-08-04T11:04:21.405713",
+    "suite_id": null,
+    "job_type": "Mirror Circuits",
+    "results": {
+      "success_probability": 0.0,
+      "polarization": 0.0,
+      "binary_success": false,
+      "score": 0.0
+    },
+    "params": {
+      "benchmark_name": "Mirror Circuits",
+      "num_circuits": 10,
+      "num_layers": 32,
+      "shots": 1000,
+      "two_qubit_gate_name": "CNOT",
+      "two_qubit_gate_prob": 0.5,
+      "width": 16
+    },
+    "provider": "aws",
+    "device": "rigetti_cepheus-1-108q",
+    "device_metadata": {
+      "num_qubits": 107,
+      "simulator": false
+    },
+    "errors": {
+      "success_probability": 0.0,
+      "polarization": 0.0,
+      "score": 0.0
+    },
+    "normalized_scores": {
+      "score": 0.0
+    },
+    "metriq_score": 0.0
+  },
+  {
+    "app_version": "0.7.2.dev10+g5bc076b.d20260804",
+    "timestamp": "2026-08-04T11:05:14.553762",
+    "suite_id": null,
+    "job_type": "Mirror Circuits",
+    "results": {
+      "success_probability": 0.0,
+      "polarization": 0.0,
+      "binary_success": false,
+      "score": 0.0
+    },
+    "params": {
+      "benchmark_name": "Mirror Circuits",
+      "num_circuits": 10,
+      "num_layers": 16,
+      "shots": 1000,
+      "two_qubit_gate_name": "CNOT",
+      "two_qubit_gate_prob": 0.5,
+      "width": 24
+    },
+    "provider": "aws",
+    "device": "rigetti_cepheus-1-108q",
+    "device_metadata": {
+      "num_qubits": 107,
+      "simulator": false
+    },
+    "errors": {
+      "success_probability": 0.0,
+      "polarization": 0.0,
+      "score": 0.0
+    },
+    "normalized_scores": {
+      "score": 0.0
+    },
+    "metriq_score": 0.0
+  },
+  {
+    "app_version": "0.7.2.dev10+g5bc076b.d20260804",
+    "timestamp": "2026-08-04T12:41:01.646281",
+    "suite_id": null,
+    "job_type": "Mirror Circuits",
+    "results": {
+      "success_probability": 0.0,
+      "polarization": 0.0,
+      "binary_success": false,
+      "score": 0.0
+    },
+    "params": {
+      "benchmark_name": "Mirror Circuits",
+      "num_circuits": 10,
+      "num_layers": 8,
+      "shots": 1000,
+      "two_qubit_gate_name": "CNOT",
+      "two_qubit_gate_prob": 0.5,
+      "width": 32
+    },
+    "provider": "aws",
+    "device": "rigetti_cepheus-1-108q",
+    "device_metadata": {
+      "num_qubits": 107,
+      "simulator": false
+    },
+    "errors": {
+      "success_probability": 0.0,
+      "polarization": 0.0,
+      "score": 0.0
+    },
+    "normalized_scores": {
+      "score": 0.0
+    },
+    "metriq_score": 0.0
+  },
+  {
+    "app_version": "0.7.2.dev10+g5bc076b.d20260804",
+    "timestamp": "2026-08-04T12:41:47.027639",
+    "suite_id": null,
+    "job_type": "Mirror Circuits",
+    "results": {
+      "success_probability": 0.0,
+      "polarization": 0.0,
+      "binary_success": false,
+      "score": 0.0
+    },
+    "params": {
+      "benchmark_name": "Mirror Circuits",
+      "num_circuits": 10,
+      "num_layers": 4,
+      "shots": 1000,
+      "two_qubit_gate_name": "CNOT",
+      "two_qubit_gate_prob": 0.5,
+      "width": 64
+    },
+    "provider": "aws",
+    "device": "rigetti_cepheus-1-108q",
+    "device_metadata": {
+      "num_qubits": 107,
+      "simulator": false
+    },
+    "errors": {
+      "success_probability": 0.0,
+      "polarization": 0.0,
+      "score": 0.0
+    },
+    "normalized_scores": {
+      "score": 0.0
+    },
+    "metriq_score": 0.0
+  },
+  {
+    "app_version": "0.7.2.dev10+g5bc076b",
+    "timestamp": "2026-08-05T07:07:05.578566",
+    "suite_id": "70b86718-c3e9-49f9-adb3-2db2068422d8",
+    "job_type": "Quantum Fourier Transform",
+    "results": {
+      "accuracy_score": 0.05000000000000001,
+      "score": 0.05000000000000001
+    },
+    "params": {
+      "benchmark_name": "Quantum Fourier Transform",
+      "max_circuits": 3,
+      "method": 1,
+      "num_qubits": 4,
+      "shots": 1000,
+      "use_midcircuit_measurement": false
+    },
+    "provider": "aws",
+    "device": "rigetti_cepheus-1-108q",
+    "device_metadata": {
+      "num_qubits": 107,
+      "simulator": false
+    },
+    "errors": {
+      "accuracy_score": 0.011,
+      "score": 0.011
+    },
+    "normalized_scores": {
+      "score": 6.188118811881188
+    },
+    "metriq_score": 6.188118811881188
+  },
+  {
+    "app_version": "0.7.2.dev10+g5bc076b",
+    "timestamp": "2026-08-05T07:07:09.977310",
+    "suite_id": "70b86718-c3e9-49f9-adb3-2db2068422d8",
+    "job_type": "Quantum Fourier Transform",
+    "results": {
+      "accuracy_score": 0.001,
+      "score": 0.001
+    },
+    "params": {
+      "benchmark_name": "Quantum Fourier Transform",
+      "max_circuits": 3,
+      "method": 1,
+      "num_qubits": 8,
+      "shots": 1000,
+      "use_midcircuit_measurement": false
+    },
+    "provider": "aws",
+    "device": "rigetti_cepheus-1-108q",
+    "device_metadata": {
+      "num_qubits": 107,
+      "simulator": false
+    },
+    "errors": {
+      "accuracy_score": 0.0,
+      "score": 0.0
+    },
+    "normalized_scores": {
+      "score": 0.46511627906976744
+    },
+    "metriq_score": 0.46511627906976744
+  },
+  {
+    "app_version": "0.7.2.dev4+g9820978.d20260723",
+    "timestamp": "2026-07-23T13:12:00.608456",
+    "suite_id": null,
+    "job_type": "Linear Ramp QAOA",
+    "results": {
+      "approx_ratio": [
+        0.49600333333333324
+      ],
+      "random_approx_ratio": 0.49990133333333336,
+      "confidence_pass": [
+        true
+      ],
+      "effective_approx_ratio": [
+        0.0
+      ],
+      "score": 0.0
+    },
+    "params": {
+      "benchmark_name": "Linear Ramp QAOA",
+      "confidence_level": 0.999,
+      "delta_beta": 0.3,
+      "delta_gamma": 0.6,
+      "graph_type": "1D",
+      "num_qubits": 10,
+      "num_random_trials": 25,
+      "qaoa_layers": [
+        10
+      ],
+      "seed": 123,
+      "shots": 1000,
+      "trials": 10
+    },
+    "provider": "aws",
+    "device": "rigetti_cepheus-1-108q",
+    "device_metadata": {
+      "num_qubits": 107,
+      "simulator": false
+    },
+    "errors": {
+      "score": null
+    },
+    "normalized_scores": {
+      "score": 0.0
+    },
+    "metriq_score": 0.0
+  },
+  {
+    "app_version": "0.7.2.dev4+g9820978.d20260723",
+    "timestamp": "2026-07-24T10:07:20.935640",
+    "suite_id": null,
+    "job_type": "Linear Ramp QAOA",
+    "results": {
+      "approx_ratio": [
+        0.499750724637681
+      ],
+      "random_approx_ratio": 0.5007686956521739,
+      "confidence_pass": [
+        true
+      ],
+      "effective_approx_ratio": [
+        0.0
+      ],
+      "score": 0.0
+    },
+    "params": {
+      "benchmark_name": "Linear Ramp QAOA",
+      "confidence_level": 0.999,
+      "delta_beta": 0.3,
+      "delta_gamma": 0.6,
+      "graph_type": "1D",
+      "num_qubits": 20,
+      "num_random_trials": 25,
+      "qaoa_layers": [
+        10
+      ],
+      "seed": 123,
+      "shots": 1000,
+      "trials": 10
+    },
+    "provider": "aws",
+    "device": "rigetti_cepheus-1-108q",
+    "device_metadata": {
+      "num_qubits": 107,
+      "simulator": false
+    },
+    "errors": {
+      "score": null
+    },
+    "normalized_scores": {
+      "score": 0.0
+    },
+    "metriq_score": 0.0
+  },
+  {
+    "app_version": "0.7.2.dev4+g9820978.d20260723",
+    "timestamp": "2026-07-24T10:11:44.930061",
+    "suite_id": null,
+    "job_type": "Linear Ramp QAOA",
+    "results": {
+      "approx_ratio": [
+        0.4998060773480665
+      ],
+      "random_approx_ratio": 0.5139772375690609,
+      "confidence_pass": [
+        false
+      ],
+      "effective_approx_ratio": [
+        0.0
+      ],
+      "score": 0.0
+    },
+    "params": {
+      "benchmark_name": "Linear Ramp QAOA",
+      "confidence_level": 0.999,
+      "delta_beta": 0.3,
+      "delta_gamma": 0.6,
+      "graph_type": "1D",
+      "num_qubits": 50,
+      "num_random_trials": 25,
+      "qaoa_layers": [
+        10
+      ],
+      "seed": 123,
+      "shots": 1000,
+      "trials": 10
+    },
+    "provider": "aws",
+    "device": "rigetti_cepheus-1-108q",
+    "device_metadata": {
+      "num_qubits": 107,
+      "simulator": false
+    },
+    "errors": {
+      "score": null
+    },
+    "normalized_scores": {
+      "score": 0.0
+    },
+    "metriq_score": 0.0
+  },
+  {
+    "app_version": "0.7.2.dev4+g9820978.d20260723",
+    "timestamp": "2026-07-24T10:25:20.793010",
+    "suite_id": null,
+    "job_type": "BSEQ",
+    "results": {
+      "largest_connected_size": 5,
+      "fraction_connected": 0.04672897196261682,
+      "score": 5.0
+    },
+    "params": {
+      "benchmark_name": "BSEQ",
+      "shots": 1000
+    },
+    "provider": "aws",
+    "device": "rigetti_cepheus-1-108q",
+    "device_metadata": {
+      "num_qubits": 107,
+      "simulator": false
+    },
+    "errors": {
+      "score": null
+    },
+    "normalized_scores": {
+      "bseq_score": 3.8716814159292032
+    },
+    "metriq_score": 3.8716814159292032
+  },
+  {
+    "app_version": "0.7.2.dev4+g9820978.d20260723",
+    "timestamp": "2026-07-24T10:41:43.366507",
+    "suite_id": null,
+    "job_type": "EPLG",
+    "results": {
+      "chain_lengths": [
+        4,
+        6,
+        8,
+        10,
+        12,
+        14,
+        16,
+        18,
+        20,
+        22,
+        24,
+        26,
+        28,
+        30,
+        32,
+        34,
+        36,
+        38,
+        40,
+        42,
+        44,
+        46,
+        48,
+        50,
+        52,
+        54,
+        56,
+        58,
+        60,
+        62,
+        64,
+        66,
+        68,
+        70,
+        72,
+        74,
+        76,
+        78,
+        80
+      ],
+      "chain_eplgs": [
+        2.220446049250313e-16,
+        3.9785094758992834e-05,
+        3.220409526250023e-05,
+        0.0020494243795807776,
+        0.002671803633757408,
+        0.005747148367490795,
+        0.010811586141935337,
+        0.028652435628198525,
+        0.027334743048140986,
+        0.025107392647108373,
+        0.02856846362990073,
+        0.028480900556983824,
+        0.028631985785904868,
+        0.030295023266151855,
+        0.031156700647187008,
+        0.033632443846633886,
+        0.03403213903297364,
+        0.03479359166149054,
+        0.03914589208721009,
+        0.03865415088235191,
+        0.03820631556426679,
+        0.04007905080106977,
+        0.04195618837472892,
+        0.04094722702677722,
+        0.03937499923129195,
+        0.0965097584383684,
+        0.09949085913217692,
+        0.09900043871670994,
+        0.09596299583064372,
+        0.09347858809419751,
+        0.10365625968075509,
+        0.10414269427211065,
+        0.10468936805318163,
+        0.10462622557499146,
+        0.10192263689141867,
+        0.1006734773785749,
+        0.09940569590289139,
+        0.09735358167833874,
+        0.0950108756740039
+      ],
+      "eplg_10": 0.0020494243795807776,
+      "eplg_20": 0.027334743048140986,
+      "eplg_50": 0.04094722702677722,
+      "eplg_100": null
+    },
+    "params": {
+      "benchmark_name": "EPLG",
+      "constrain_rb_offset_b": false,
+      "decompose_clifford_ops": false,
+      "lengths": [
+        2,
+        4,
+        8,
+        16,
+        50,
+        100
+      ],
+      "num_qubits_in_chain": 80,
+      "num_samples": 5,
+      "one_qubit_basis_gates": [
+        "rz",
+        "rx",
+        "x"
+      ],
+      "seed": 12345,
+      "shots": 500,
+      "two_qubit_gate": "cz"
+    },
+    "provider": "aws",
+    "device": "rigetti_cepheus-1-108q",
+    "device_metadata": {
+      "num_qubits": 107,
+      "simulator": false
+    },
+    "directions": {
+      "eplg_10": "lower",
+      "eplg_20": "lower",
+      "eplg_50": "lower",
+      "eplg_100": "lower"
+    },
+    "normalized_scores": {
+      "eplg_10": 268.7208009643444,
+      "eplg_20": 35.072060240244205,
+      "eplg_50": 93.60516953403385
+    },
+    "metriq_score": 70.07546592373123
+  },
+  {
+    "app_version": "0.7.2.dev15+g3b4c355",
+    "timestamp": "2026-08-20T19:39:52.204817",
+    "suite_id": "4a7bb54b-901f-499e-b274-56e9928cb667",
+    "job_type": "EPLG",
+    "results": {
+      "chain_lengths": [
+        4,
+        6,
+        8,
+        10,
+        12,
+        14,
+        16,
+        18,
+        20,
+        22,
+        24,
+        26,
+        28,
+        30,
+        32,
+        34,
+        36,
+        38,
+        40,
+        42,
+        44,
+        46,
+        48,
+        50,
+        52,
+        54,
+        56,
+        58,
+        60,
+        62,
+        64,
+        66,
+        68,
+        70,
+        72,
+        74,
+        76,
+        78,
+        80,
+        82,
+        84,
+        86,
+        88,
+        90,
+        92,
+        94,
+        96,
+        98,
+        100
+      ],
+      "chain_eplgs": [
+        0.0036448474495757166,
+        0.003647386489428639,
+        0.003815861201983739,
+        0.003827556208538696,
+        0.0039983857781745735,
+        0.004448736663287822,
+        0.004381250721941066,
+        0.004284931459520358,
+        0.004350325099782504,
+        0.00472290683891885,
+        0.0050239833146279445,
+        0.005088652593641774,
+        0.0054410356863658915,
+        0.0054981761738487345,
+        0.010585508626948847,
+        0.01037855625006534,
+        0.01020307215022187,
+        0.010049561301137655,
+        0.011373944708328865,
+        0.011784488559546058,
+        0.021825929390820065,
+        0.021145811243162838,
+        0.020821033695518243,
+        0.021144698750130475,
+        0.020744775582347108,
+        0.020715760040814768,
+        0.020235056857972333,
+        0.019928001504497694,
+        0.019507147702366945,
+        0.019069201866419805,
+        0.018675671769752156,
+        0.018289977965696536,
+        0.04183516803955556,
+        0.05781474222607441,
+        0.056363589120165924,
+        0.054996470780099616,
+        0.05382484503828466,
+        0.05275136267009284,
+        0.05155416402219626,
+        0.05061283077279155,
+        0.050105683797383116,
+        0.049186980441593864,
+        0.04855520952914072,
+        0.047620370035238,
+        0.046839739975900185,
+        0.0460415060809215,
+        0.0452145048998529,
+        0.04442398613398635,
+        0.04364478000910854
+      ],
+      "eplg_10": 0.003827556208538696,
+      "eplg_20": 0.004350325099782504,
+      "eplg_50": 0.021144698750130475,
+      "eplg_100": 0.04364478000910854
+    },
+    "params": {
+      "benchmark_name": "EPLG",
+      "constrain_rb_offset_b": false,
+      "decompose_clifford_ops": false,
+      "lengths": [
+        2,
+        4,
+        8,
+        16,
+        30,
+        50,
+        70,
+        100,
+        150,
+        200,
+        300,
+        500
+      ],
+      "num_qubits_in_chain": 100,
+      "num_samples": 10,
+      "one_qubit_basis_gates": [
+        "rz",
+        "rx",
+        "x"
+      ],
+      "seed": 12345,
+      "shots": 1000,
+      "two_qubit_gate": "cz"
+    },
+    "provider": "ibm",
+    "device": "ibm_fez",
+    "device_metadata": {
+      "num_qubits": 156,
+      "simulator": false,
+      "version": "1.3.37"
+    },
+    "directions": {
+      "eplg_10": "lower",
+      "eplg_20": "lower",
+      "eplg_50": "lower",
+      "eplg_100": "lower"
+    },
+    "normalized_scores": {
+      "eplg_10": 143.88370301870995,
+      "eplg_20": 220.3710602878684,
+      "eplg_50": 181.2687034742646,
+      "eplg_100": 157.57321077561653
+    },
+    "metriq_score": 168.11183072937973
+  },
+  {
+    "app_version": "0.7.2.dev15+g3b4c355",
+    "timestamp": "2026-08-20T19:09:51.502860",
+    "suite_id": "09a6abae-7142-4efe-98c2-8e9c70a34c8e",
+    "job_type": "EPLG",
+    "results": {
+      "chain_lengths": [
+        4,
+        6,
+        8,
+        10,
+        12,
+        14,
+        16,
+        18,
+        20,
+        22,
+        24,
+        26,
+        28,
+        30,
+        32,
+        34,
+        36,
+        38,
+        40,
+        42,
+        44,
+        46,
+        48,
+        50,
+        52,
+        54,
+        56,
+        58,
+        60,
+        62,
+        64,
+        66,
+        68,
+        70,
+        72,
+        74,
+        76,
+        78,
+        80,
+        82,
+        84,
+        86,
+        88,
+        90,
+        92,
+        94,
+        96,
+        98,
+        100
+      ],
+      "chain_eplgs": [
+        0.002894118260742151,
+        0.002625636839600598,
+        0.0027511402123482354,
+        0.002901827720505623,
+        0.002943820461893454,
+        0.002889722643574455,
+        0.002902778096159908,
+        0.002931796032450862,
+        0.0033710523873504705,
+        0.003421409588419966,
+        0.003395269016783442,
+        0.0033712354825484736,
+        0.004013469637077827,
+        0.0041493238893819395,
+        0.004185834418368839,
+        0.004185782711392583,
+        0.004317326986942538,
+        0.004803560144609809,
+        0.004780481893415289,
+        0.004729297582188097,
+        0.004659909588872524,
+        0.004609215362967767,
+        0.00458505571817569,
+        0.004592598448144081,
+        0.004743329030729493,
+        0.004774385471829956,
+        0.004727255904144578,
+        0.0047207417704927535,
+        0.004650534704362053,
+        0.004774410257777029,
+        0.004849569681547927,
+        0.0048907085706519915,
+        0.004870832888152821,
+        0.004815642117090069,
+        0.0057377804552500855,
+        0.005735461005136333,
+        0.00580572261996426,
+        0.005746777561546401,
+        0.005699833710146818,
+        0.005680771553590591,
+        0.005660543259402351,
+        0.00561019904604021,
+        0.005576907259665642,
+        0.005556257223357286,
+        0.005598616398224121,
+        0.005621221092378392,
+        0.005573159235628844,
+        0.005556638459350061,
+        0.005493310532213469
+      ],
+      "eplg_10": 0.002901827720505623,
+      "eplg_20": 0.0033710523873504705,
+      "eplg_50": 0.004592598448144081,
+      "eplg_100": 0.005493310532213469
+    },
+    "params": {
+      "benchmark_name": "EPLG",
+      "constrain_rb_offset_b": false,
+      "decompose_clifford_ops": false,
+      "lengths": [
+        2,
+        4,
+        8,
+        16,
+        30,
+        50,
+        70,
+        100,
+        150,
+        200,
+        300,
+        500
+      ],
+      "num_qubits_in_chain": 100,
+      "num_samples": 10,
+      "one_qubit_basis_gates": [
+        "rz",
+        "rx",
+        "x"
+      ],
+      "seed": 12345,
+      "shots": 1000,
+      "two_qubit_gate": "cz"
+    },
+    "provider": "ibm",
+    "device": "ibm_kingston",
+    "device_metadata": {
+      "num_qubits": 156,
+      "simulator": false,
+      "version": "1.0.0"
+    },
+    "directions": {
+      "eplg_10": "lower",
+      "eplg_20": "lower",
+      "eplg_50": "lower",
+      "eplg_100": "lower"
+    },
+    "normalized_scores": {
+      "eplg_10": 189.78485762788205,
+      "eplg_20": 284.38767621451615,
+      "eplg_50": 834.5759314836158,
+      "eplg_100": 1251.9314317480544
+    },
+    "metriq_score": 684.9184146432614
+  },
+  {
+    "app_version": "0.7.2.dev15+g3b4c355",
+    "timestamp": "2026-08-14T11:22:25.304183",
+    "suite_id": "a555f44f-66ee-453a-ab53-f6e5e1109fde",
+    "job_type": "EPLG",
+    "results": {
+      "chain_lengths": [
+        4,
+        6,
+        8,
+        10,
+        12,
+        14,
+        16,
+        18,
+        20,
+        22,
+        24,
+        26,
+        28,
+        30,
+        32,
+        34,
+        36,
+        38,
+        40,
+        42,
+        44,
+        46,
+        48,
+        50,
+        52,
+        54,
+        56,
+        58,
+        60,
+        62,
+        64,
+        66,
+        68,
+        70,
+        72,
+        74,
+        76,
+        78,
+        80,
+        82,
+        84,
+        86,
+        88,
+        90,
+        92,
+        94,
+        96,
+        98,
+        100
+      ],
+      "chain_eplgs": [
+        0.0037780956363687723,
+        0.004015956856914804,
+        0.003975829942539977,
+        0.004269598417392828,
+        0.00461466910698205,
+        0.005172137601198057,
+        0.005129934654380164,
+        0.0050131965954941515,
+        0.005041248376506657,
+        0.005229350384204912,
+        0.005372757243101045,
+        0.005620182668677698,
+        0.005542499563411685,
+        0.011758322210851269,
+        0.01145039447838514,
+        0.0111577726976827,
+        0.010895311459821144,
+        0.010583431047064162,
+        0.01035642719482499,
+        0.010207220051312804,
+        0.010006001043773582,
+        0.039825043432683116,
+        0.11595775604444103,
+        0.11165688496598236,
+        0.11099982669669417,
+        0.10725730839397185,
+        0.10372442727816567,
+        0.10049618366405011,
+        0.09739072505558521,
+        0.0944898581341469,
+        0.09184251680510758,
+        0.08935273381182718,
+        0.08695786961056162,
+        0.08464372440843648,
+        0.08248566324098949,
+        0.08049645527218674,
+        0.0786059684889987,
+        0.0932134429924304,
+        0.137663818851532,
+        0.13480354106614312,
+        0.1319038929254681,
+        0.1291505469449341,
+        0.1265436207097962,
+        0.12399012433857726,
+        0.12158050179700985,
+        0.1192370345373368,
+        0.11701144764535565,
+        0.11488784685945808,
+        0.11277338711263896
+      ],
+      "eplg_10": 0.004269598417392828,
+      "eplg_20": 0.005041248376506657,
+      "eplg_50": 0.11165688496598236,
+      "eplg_100": 0.11277338711263896
+    },
+    "params": {
+      "benchmark_name": "EPLG",
+      "constrain_rb_offset_b": false,
+      "decompose_clifford_ops": false,
+      "lengths": [
+        2,
+        4,
+        8,
+        16,
+        30,
+        50,
+        70,
+        100,
+        150,
+        200,
+        300,
+        500
+      ],
+      "num_qubits_in_chain": 100,
+      "num_samples": 10,
+      "one_qubit_basis_gates": [
+        "rz",
+        "rx",
+        "x"
+      ],
+      "seed": 12345,
+      "shots": 1000,
+      "two_qubit_gate": "cz"
+    },
+    "provider": "ibm",
+    "device": "ibm_marrakesh",
+    "device_metadata": {
+      "num_qubits": 156,
+      "simulator": false,
+      "version": "1.0.21"
+    },
+    "directions": {
+      "eplg_10": "lower",
+      "eplg_20": "lower",
+      "eplg_50": "lower",
+      "eplg_100": "lower"
+    },
+    "normalized_scores": {
+      "eplg_10": 128.9870631751575,
+      "eplg_20": 190.16832404126066,
+      "eplg_50": 34.32723498383271,
+      "eplg_100": 60.98289938530998
+    },
+    "metriq_score": 54.893604749187496
+  },
+  {
+    "app_version": "0.7.1.dev7+g3ed0f67db",
+    "timestamp": "2026-04-16T17:50:27.852812",
+    "suite_id": null,
+    "job_type": "WIT",
+    "results": {
+      "expectation_value": 0.883544921875,
+      "score": 0.883544921875
+    },
+    "params": {
+      "benchmark_name": "WIT",
+      "num_qubits": 7,
+      "shots": 8192
+    },
+    "provider": "ibm",
+    "device": "ibm_miami",
+    "device_metadata": {
+      "num_qubits": 120,
+      "simulator": false,
+      "version": "1.0.3"
+    },
+    "errors": {
+      "expectation_value": 0.0035440395622697448,
+      "score": 0.0035440395622697448
+    },
+    "normalized_scores": {
+      "expectation_value": 114.34439178515008
+    },
+    "metriq_score": 114.34439178515008
+  },
+  {
+    "app_version": "0.7.1.dev7+g3ed0f67db",
+    "timestamp": "2026-04-16T18:30:51.253084",
+    "suite_id": "c529c29f-e985-4802-a5d7-4f9e32e445f1",
+    "job_type": "Linear Ramp QAOA",
+    "results": {
+      "approx_ratio": [
+        0.8308566666666671
+      ],
+      "random_approx_ratio": 0.49990133333333336,
+      "confidence_pass": [
+        true
+      ],
+      "effective_approx_ratio": [
+        0.6617800753984555
+      ],
+      "score": 0.6617800753984555
+    },
+    "params": {
+      "benchmark_name": "Linear Ramp QAOA",
+      "confidence_level": 0.999,
+      "delta_beta": 0.3,
+      "delta_gamma": 0.6,
+      "graph_type": "1D",
+      "num_qubits": 10,
+      "num_random_trials": 25,
+      "qaoa_layers": [
+        10
+      ],
+      "seed": 123,
+      "shots": 1000,
+      "trials": 10
+    },
+    "provider": "ibm",
+    "device": "ibm_miami",
+    "device_metadata": {
+      "num_qubits": 120,
+      "simulator": false,
+      "version": "1.0.3"
+    },
+    "errors": {
+      "score": null
+    },
+    "normalized_scores": {
+      "score": 114.70316406268064
+    },
+    "metriq_score": 114.70316406268064
+  },
+  {
+    "app_version": "0.7.1.dev7+g3ed0f67db",
+    "timestamp": "2026-04-16T18:30:55.748440",
+    "suite_id": "c529c29f-e985-4802-a5d7-4f9e32e445f1",
+    "job_type": "Linear Ramp QAOA",
+    "results": {
+      "approx_ratio": [
+        0.8031927536231885
+      ],
+      "random_approx_ratio": 0.5007686956521739,
+      "confidence_pass": [
+        true
+      ],
+      "effective_approx_ratio": [
+        0.6057794359792565
+      ],
+      "score": 0.6057794359792565
+    },
+    "params": {
+      "benchmark_name": "Linear Ramp QAOA",
+      "confidence_level": 0.999,
+      "delta_beta": 0.3,
+      "delta_gamma": 0.6,
+      "graph_type": "1D",
+      "num_qubits": 20,
+      "num_random_trials": 25,
+      "qaoa_layers": [
+        10
+      ],
+      "seed": 123,
+      "shots": 1000,
+      "trials": 10
+    },
+    "provider": "ibm",
+    "device": "ibm_miami",
+    "device_metadata": {
+      "num_qubits": 120,
+      "simulator": false,
+      "version": "1.0.3"
+    },
+    "errors": {
+      "score": null
+    },
+    "normalized_scores": {
+      "score": 117.06763998348397
+    },
+    "metriq_score": 117.06763998348397
+  },
+  {
+    "app_version": "0.7.1.dev7+g3ed0f67db",
+    "timestamp": "2026-04-16T18:31:01.482779",
+    "suite_id": "c529c29f-e985-4802-a5d7-4f9e32e445f1",
+    "job_type": "Linear Ramp QAOA",
+    "results": {
+      "approx_ratio": [
+        0.7775414364640885
+      ],
+      "random_approx_ratio": 0.5139772375690609,
+      "confidence_pass": [
+        true
+      ],
+      "effective_approx_ratio": [
+        0.542287767710218
+      ],
+      "score": 0.542287767710218
+    },
+    "params": {
+      "benchmark_name": "Linear Ramp QAOA",
+      "confidence_level": 0.999,
+      "delta_beta": 0.3,
+      "delta_gamma": 0.6,
+      "graph_type": "1D",
+      "num_qubits": 50,
+      "num_random_trials": 25,
+      "qaoa_layers": [
+        10
+      ],
+      "seed": 123,
+      "shots": 1000,
+      "trials": 10
+    },
+    "provider": "ibm",
+    "device": "ibm_miami",
+    "device_metadata": {
+      "num_qubits": 120,
+      "simulator": false,
+      "version": "1.0.3"
+    },
+    "errors": {
+      "score": null
+    },
+    "normalized_scores": {
+      "score": 103.93630107528742
+    },
+    "metriq_score": 103.93630107528742
+  },
+  {
+    "app_version": "0.7.1.dev7+g3ed0f67db",
+    "timestamp": "2026-04-16T18:31:09.122430",
+    "suite_id": "c529c29f-e985-4802-a5d7-4f9e32e445f1",
+    "job_type": "Linear Ramp QAOA",
+    "results": {
+      "approx_ratio": [
+        0.7167907142857142
+      ],
+      "random_approx_ratio": 0.5119786666666667,
+      "confidence_pass": [
+        true
+      ],
+      "effective_approx_ratio": [
+        0.41967847229160915
+      ],
+      "score": 0.41967847229160915
+    },
+    "params": {
+      "benchmark_name": "Linear Ramp QAOA",
+      "confidence_level": 0.999,
+      "delta_beta": 0.3,
+      "delta_gamma": 0.6,
+      "graph_type": "1D",
+      "num_qubits": 100,
+      "num_random_trials": 25,
+      "qaoa_layers": [
+        10
+      ],
+      "seed": 123,
+      "shots": 1000,
+      "trials": 10
+    },
+    "provider": "ibm",
+    "device": "ibm_miami",
+    "device_metadata": {
+      "num_qubits": 120,
+      "simulator": false,
+      "version": "1.0.3"
+    },
+    "errors": {
+      "score": null
+    },
+    "normalized_scores": {
+      "score": 92.04074566423027
+    },
+    "metriq_score": 92.04074566423027
+  },
+  {
+    "app_version": "0.7.1.dev7+g3ed0f67db",
+    "timestamp": "2026-04-16T19:20:20.954537",
+    "suite_id": null,
+    "job_type": "BSEQ",
+    "results": {
+      "largest_connected_size": 120,
+      "fraction_connected": 1.0,
+      "score": 120.0
+    },
+    "params": {
+      "benchmark_name": "BSEQ",
+      "shots": 1000
+    },
+    "provider": "ibm",
+    "device": "ibm_miami",
+    "device_metadata": {
+      "num_qubits": 120,
+      "simulator": false,
+      "version": "1.0.3"
+    },
+    "errors": {
+      "score": null
+    },
+    "normalized_scores": {
+      "bseq_score": 92.9203539823009
+    },
+    "metriq_score": 92.9203539823009
+  },
+  {
+    "app_version": "0.7.2.dev15+g3b4c355",
+    "timestamp": "2026-08-13T16:26:42.329126",
+    "suite_id": "0fa4e0f5-ca67-42fc-a3b4-b0ca13558a12",
+    "job_type": "Quantum Fourier Transform",
+    "results": {
+      "accuracy_score": 0.794,
+      "score": 0.794
+    },
+    "params": {
+      "benchmark_name": "Quantum Fourier Transform",
+      "max_circuits": 3,
+      "method": 1,
+      "num_qubits": 4,
+      "shots": 1000,
+      "use_midcircuit_measurement": false
+    },
+    "provider": "ibm",
+    "device": "ibm_miami",
+    "device_metadata": {
+      "num_qubits": 120,
+      "simulator": false,
+      "version": "1.0.3"
+    },
+    "errors": {
+      "accuracy_score": 0.005,
+      "score": 0.005
+    },
+    "normalized_scores": {
+      "score": 98.26732673267325
+    },
+    "metriq_score": 98.26732673267325
+  },
+  {
+    "app_version": "0.7.2.dev15+g3b4c355",
+    "timestamp": "2026-08-13T16:26:44.502754",
+    "suite_id": "0fa4e0f5-ca67-42fc-a3b4-b0ca13558a12",
+    "job_type": "Quantum Fourier Transform",
+    "results": {
+      "accuracy_score": 0.055,
+      "score": 0.055
+    },
+    "params": {
+      "benchmark_name": "Quantum Fourier Transform",
+      "max_circuits": 3,
+      "method": 1,
+      "num_qubits": 8,
+      "shots": 1000,
+      "use_midcircuit_measurement": false
+    },
+    "provider": "ibm",
+    "device": "ibm_miami",
+    "device_metadata": {
+      "num_qubits": 120,
+      "simulator": false,
+      "version": "1.0.3"
+    },
+    "errors": {
+      "accuracy_score": 0.007,
+      "score": 0.007
+    },
+    "normalized_scores": {
+      "score": 25.581395348837212
+    },
+    "metriq_score": 25.581395348837212
+  },
+  {
+    "app_version": "0.7.2.dev15+g3b4c355",
+    "timestamp": "2026-08-13T16:26:46.539231",
+    "suite_id": "0fa4e0f5-ca67-42fc-a3b4-b0ca13558a12",
+    "job_type": "Quantum Fourier Transform",
+    "results": {
+      "accuracy_score": 0.0,
+      "score": 0.0
+    },
+    "params": {
+      "benchmark_name": "Quantum Fourier Transform",
+      "max_circuits": 3,
+      "method": 1,
+      "num_qubits": 12,
+      "shots": 1000,
+      "use_midcircuit_measurement": false
+    },
+    "provider": "ibm",
+    "device": "ibm_miami",
+    "device_metadata": {
+      "num_qubits": 120,
+      "simulator": false,
+      "version": "1.0.3"
+    },
+    "errors": {
+      "accuracy_score": 0.0,
+      "score": 0.0
+    },
+    "normalized_scores": {
+      "score": 0.0
+    },
+    "metriq_score": 0.0
+  },
+  {
+    "app_version": "0.7.2.dev15+g3b4c355",
+    "timestamp": "2026-08-13T16:26:49.265270",
+    "suite_id": "0fa4e0f5-ca67-42fc-a3b4-b0ca13558a12",
+    "job_type": "Quantum Fourier Transform",
+    "results": {
+      "accuracy_score": 0.0,
+      "score": 0.0
+    },
+    "params": {
+      "benchmark_name": "Quantum Fourier Transform",
+      "max_circuits": 3,
+      "method": 1,
+      "num_qubits": 20,
+      "shots": 1000,
+      "use_midcircuit_measurement": false
+    },
+    "provider": "ibm",
+    "device": "ibm_miami",
+    "device_metadata": {
+      "num_qubits": 120,
+      "simulator": false,
+      "version": "1.0.3"
+    },
+    "errors": {
+      "accuracy_score": 0.0,
+      "score": 0.0
+    }
+  },
+  {
+    "app_version": "0.7.2.dev15+g3b4c355",
+    "timestamp": "2026-08-13T17:36:08.942937",
+    "suite_id": "41940ea1-7cd3-4e10-bfe0-987aeb633be1",
+    "job_type": "QML Kernel",
+    "results": {
+      "accuracy_score": 0.741,
+      "score": 0.741
+    },
+    "params": {
+      "benchmark_name": "QML Kernel",
+      "num_qubits": 10,
+      "shots": 1000
+    },
+    "provider": "ibm",
+    "device": "ibm_miami",
+    "device_metadata": {
+      "num_qubits": 120,
+      "simulator": false,
+      "version": "1.0.3"
+    },
+    "errors": {
+      "accuracy_score": 0.013853483316480371,
+      "score": 0.013853483316480371
+    },
+    "normalized_scores": {
+      "accuracy_score": 97.75725593667546
+    },
+    "metriq_score": 97.75725593667546
+  },
+  {
+    "app_version": "0.7.2.dev15+g3b4c355",
+    "timestamp": "2026-08-13T17:36:10.377156",
+    "suite_id": "41940ea1-7cd3-4e10-bfe0-987aeb633be1",
+    "job_type": "QML Kernel",
+    "results": {
+      "accuracy_score": 0.486,
+      "score": 0.486
+    },
+    "params": {
+      "benchmark_name": "QML Kernel",
+      "num_qubits": 20,
+      "shots": 1000
+    },
+    "provider": "ibm",
+    "device": "ibm_miami",
+    "device_metadata": {
+      "num_qubits": 120,
+      "simulator": false,
+      "version": "1.0.3"
+    },
+    "errors": {
+      "accuracy_score": 0.015805189021330938,
+      "score": 0.015805189021330938
+    },
+    "normalized_scores": {
+      "accuracy_score": 99.59016393442623
+    },
+    "metriq_score": 99.59016393442623
+  },
+  {
+    "app_version": "0.7.2.dev15+g3b4c355",
+    "timestamp": "2026-08-13T17:36:11.308376",
+    "suite_id": "41940ea1-7cd3-4e10-bfe0-987aeb633be1",
+    "job_type": "QML Kernel",
+    "results": {
+      "accuracy_score": 0.314,
+      "score": 0.314
+    },
+    "params": {
+      "benchmark_name": "QML Kernel",
+      "num_qubits": 30,
+      "shots": 1000
+    },
+    "provider": "ibm",
+    "device": "ibm_miami",
+    "device_metadata": {
+      "num_qubits": 120,
+      "simulator": false,
+      "version": "1.0.3"
+    },
+    "errors": {
+      "accuracy_score": 0.01467664811869522,
+      "score": 0.01467664811869522
+    },
+    "normalized_scores": {
+      "accuracy_score": 112.54480286738351
+    },
+    "metriq_score": 112.54480286738351
+  },
+  {
+    "app_version": "0.7.2.dev15+g3b4c355",
+    "timestamp": "2026-08-13T17:36:12.178649",
+    "suite_id": "41940ea1-7cd3-4e10-bfe0-987aeb633be1",
+    "job_type": "QML Kernel",
+    "results": {
+      "accuracy_score": 0.081,
+      "score": 0.081
+    },
+    "params": {
+      "benchmark_name": "QML Kernel",
+      "num_qubits": 50,
+      "shots": 1000
+    },
+    "provider": "ibm",
+    "device": "ibm_miami",
+    "device_metadata": {
+      "num_qubits": 120,
+      "simulator": false,
+      "version": "1.0.3"
+    },
+    "errors": {
+      "accuracy_score": 0.008627803892068943,
+      "score": 0.008627803892068943
+    },
+    "normalized_scores": {
+      "accuracy_score": 126.5625
+    },
+    "metriq_score": 126.5625
+  },
+  {
+    "app_version": "0.7.2.dev15+g3b4c355",
+    "timestamp": "2026-08-14T09:48:26.101941",
+    "suite_id": "c80bb42a-1a47-4bb4-bd03-667b0b58b1b9",
+    "job_type": "Mirror Circuits",
+    "results": {
+      "success_probability": 0.4384,
+      "polarization": 0.4361976470588235,
+      "binary_success": true,
+      "score": 0.4361976470588235
+    },
+    "params": {
+      "benchmark_name": "Mirror Circuits",
+      "num_circuits": 10,
+      "num_layers": 64,
+      "shots": 1000,
+      "two_qubit_gate_name": "CNOT",
+      "two_qubit_gate_prob": 0.5,
+      "width": 8
+    },
+    "provider": "ibm",
+    "device": "ibm_miami",
+    "device_metadata": {
+      "num_qubits": 120,
+      "simulator": false,
+      "version": "1.0.3"
+    },
+    "errors": {
+      "success_probability": 0.004961909309933022,
+      "polarization": 0.004981367777815113,
+      "score": 0.004981367777815113
+    },
+    "normalized_scores": {
+      "score": 137.50074170770782
+    },
+    "metriq_score": 137.50074170770782
+  },
+  {
+    "app_version": "0.7.2.dev15+g3b4c355",
+    "timestamp": "2026-08-14T09:48:30.217972",
+    "suite_id": "c80bb42a-1a47-4bb4-bd03-667b0b58b1b9",
+    "job_type": "Mirror Circuits",
+    "results": {
+      "success_probability": 0.2082,
+      "polarization": 0.20818791790646218,
+      "binary_success": false,
+      "score": 0.20818791790646218
+    },
+    "params": {
+      "benchmark_name": "Mirror Circuits",
+      "num_circuits": 10,
+      "num_layers": 32,
+      "shots": 1000,
+      "two_qubit_gate_name": "CNOT",
+      "two_qubit_gate_prob": 0.5,
+      "width": 16
+    },
+    "provider": "ibm",
+    "device": "ibm_miami",
+    "device_metadata": {
+      "num_qubits": 120,
+      "simulator": false,
+      "version": "1.0.3"
+    },
+    "errors": {
+      "success_probability": 0.00406020639869453,
+      "polarization": 0.004060268353472873,
+      "score": 0.004060268353472873
+    },
+    "normalized_scores": {
+      "score": 75.51551104950235
+    },
+    "metriq_score": 75.51551104950235
+  },
+  {
+    "app_version": "0.7.2.dev15+g3b4c355",
+    "timestamp": "2026-08-14T09:48:34.254233",
+    "suite_id": "c80bb42a-1a47-4bb4-bd03-667b0b58b1b9",
+    "job_type": "Mirror Circuits",
+    "results": {
+      "success_probability": 0.1215,
+      "polarization": 0.12149994763731645,
+      "binary_success": false,
+      "score": 0.12149994763731645
+    },
+    "params": {
+      "benchmark_name": "Mirror Circuits",
+      "num_circuits": 10,
+      "num_layers": 16,
+      "shots": 1000,
+      "two_qubit_gate_name": "CNOT",
+      "two_qubit_gate_prob": 0.5,
+      "width": 24
+    },
+    "provider": "ibm",
+    "device": "ibm_miami",
+    "device_metadata": {
+      "num_qubits": 120,
+      "simulator": false,
+      "version": "1.0.3"
+    },
+    "errors": {
+      "success_probability": 0.003267074379318598,
+      "polarization": 0.003267074574051417,
+      "score": 0.003267074574051417
+    },
+    "normalized_scores": {
+      "score": 95.82018730965102
+    },
+    "metriq_score": 95.82018730965102
+  },
+  {
+    "app_version": "0.7.2.dev15+g3b4c355",
+    "timestamp": "2026-08-14T09:48:40.449156",
+    "suite_id": "c80bb42a-1a47-4bb4-bd03-667b0b58b1b9",
+    "job_type": "Mirror Circuits",
+    "results": {
+      "success_probability": 0.1241,
+      "polarization": 0.12409999979606365,
+      "binary_success": false,
+      "score": 0.12409999979606365
+    },
+    "params": {
+      "benchmark_name": "Mirror Circuits",
+      "num_circuits": 10,
+      "num_layers": 8,
+      "shots": 1000,
+      "two_qubit_gate_name": "CNOT",
+      "two_qubit_gate_prob": 0.5,
+      "width": 32
+    },
+    "provider": "ibm",
+    "device": "ibm_miami",
+    "device_metadata": {
+      "num_qubits": 120,
+      "simulator": false,
+      "version": "1.0.3"
+    },
+    "errors": {
+      "success_probability": 0.0032969560203314815,
+      "polarization": 0.003296956021099114,
+      "score": 0.003296956021099114
+    },
+    "normalized_scores": {
+      "score": 369.3452399616615
+    },
+    "metriq_score": 369.3452399616615
+  },
+  {
+    "app_version": "0.7.2.dev15+g3b4c355",
+    "timestamp": "2026-08-14T09:48:44.636437",
+    "suite_id": "c80bb42a-1a47-4bb4-bd03-667b0b58b1b9",
+    "job_type": "Mirror Circuits",
+    "results": {
+      "success_probability": 0.0222,
+      "polarization": 0.0222,
+      "binary_success": false,
+      "score": 0.0222
+    },
+    "params": {
+      "benchmark_name": "Mirror Circuits",
+      "num_circuits": 10,
+      "num_layers": 4,
+      "shots": 1000,
+      "two_qubit_gate_name": "CNOT",
+      "two_qubit_gate_prob": 0.5,
+      "width": 64
+    },
+    "provider": "ibm",
+    "device": "ibm_miami",
+    "device_metadata": {
+      "num_qubits": 120,
+      "simulator": false,
+      "version": "1.0.3"
+    },
+    "errors": {
+      "success_probability": 0.0014733349924575877,
+      "polarization": 0.0014733349924575877,
+      "score": 0.0014733349924575877
+    },
+    "normalized_scores": {
+      "score": 600.0
+    },
+    "metriq_score": 600.0
+  },
+  {
+    "app_version": "0.7.2.dev15+g3b4c355",
+    "timestamp": "2026-08-14T10:21:53.084158",
+    "suite_id": "2d1bf675-a377-42bc-a3de-166541ce29b9",
+    "job_type": "EPLG",
+    "results": {
+      "chain_lengths": [
+        4,
+        6,
+        8,
+        10,
+        12,
+        14,
+        16,
+        18,
+        20,
+        22,
+        24,
+        26,
+        28,
+        30,
+        32,
+        34,
+        36,
+        38,
+        40,
+        42,
+        44,
+        46,
+        48,
+        50,
+        52,
+        54,
+        56,
+        58,
+        60,
+        62,
+        64,
+        66,
+        68,
+        70,
+        72,
+        74,
+        76,
+        78,
+        80,
+        82,
+        84,
+        86,
+        88,
+        90,
+        92,
+        94,
+        96,
+        98,
+        100
+      ],
+      "chain_eplgs": [
+        0.007046274844015765,
+        0.006812389258605278,
+        0.006943001094684043,
+        0.0069543414389972025,
+        0.007187852969998909,
+        0.007230780904432743,
+        0.007199217595304952,
+        0.007638846723714843,
+        0.008025668484124004,
+        0.00832038758942788,
+        0.008369291129324608,
+        0.008566440242102291,
+        0.008747905118631438,
+        0.009453614545040012,
+        0.010047562178754355,
+        0.010374688726461412,
+        0.010441317797052818,
+        0.010584781722374426,
+        0.011080421993981182,
+        0.011172424613017262,
+        0.011263735710137723,
+        0.011313852948549141,
+        0.011130414166235947,
+        0.011086395772481494,
+        0.011001704227631692,
+        0.01100348840049814,
+        0.010957872428587812,
+        0.010976059079739975,
+        0.011202955608500376,
+        0.011195450301171528,
+        0.011062345533975115,
+        0.011778994124412967,
+        0.01211952306388453,
+        0.033284289424494684,
+        0.05122693540506007,
+        0.050127164357472775,
+        0.0490918087615656,
+        0.04813532722855274,
+        0.047368737078672285,
+        0.046537066442454256,
+        0.04563859974009077,
+        0.04478647015951975,
+        0.04482022067429314,
+        0.044305746238868626,
+        0.043590256471010225,
+        0.04285100589328872,
+        0.04208896296838127,
+        0.041378192668377056,
+        0.040695487666492225
+      ],
+      "eplg_10": 0.0069543414389972025,
+      "eplg_20": 0.008025668484124004,
+      "eplg_50": 0.011086395772481494,
+      "eplg_100": 0.040695487666492225
+    },
+    "params": {
+      "benchmark_name": "EPLG",
+      "constrain_rb_offset_b": false,
+      "decompose_clifford_ops": false,
+      "lengths": [
+        2,
+        4,
+        8,
+        16,
+        30,
+        50,
+        70,
+        100,
+        150,
+        200,
+        300,
+        500
+      ],
+      "num_qubits_in_chain": 100,
+      "num_samples": 10,
+      "one_qubit_basis_gates": [
+        "rz",
+        "rx",
+        "x"
+      ],
+      "seed": 12345,
+      "shots": 1000,
+      "two_qubit_gate": "cz"
+    },
+    "provider": "ibm",
+    "device": "ibm_miami",
+    "device_metadata": {
+      "num_qubits": 120,
+      "simulator": false,
+      "version": "1.0.3"
+    },
+    "directions": {
+      "eplg_10": "lower",
+      "eplg_20": "lower",
+      "eplg_50": "lower",
+      "eplg_100": "lower"
+    },
+    "normalized_scores": {
+      "eplg_10": 79.19124558776538,
+      "eplg_20": 119.45244894334022,
+      "eplg_50": 345.72752104917265,
+      "eplg_100": 168.99289120187274
+    },
+    "metriq_score": 174.74529467005482
+  },
+  {
+    "app_version": "0.7.2.dev15+g3b4c355",
+    "timestamp": "2026-08-20T19:33:46.819022",
+    "suite_id": "a362875d-a6a8-4ee5-bd0f-333807e5e11e",
+    "job_type": "CLOPS",
+    "results": {
+      "clops_score": 24573.02688675184,
+      "steady_state_clops": null,
+      "score": 24573.02688675184
+    },
+    "params": {
+      "benchmark_name": "CLOPS",
+      "mode": "twirled",
+      "num_circuits": 1000,
+      "num_layers": 100,
+      "num_qubits": 100,
+      "seed": 12345,
+      "shots": 100,
+      "two_qubit_gate": "cz",
+      "use_session": true
+    },
+    "provider": "ibm",
+    "device": "ibm_miami",
+    "device_metadata": {
+      "num_qubits": 120,
+      "simulator": false,
+      "version": "1.0.3"
+    },
+    "errors": {
+      "score": null
+    },
+    "normalized_scores": {
+      "score": 7.108814004899318
+    },
+    "metriq_score": 7.108814004899318
+  },
+  {
+    "app_version": "0.7.1.dev8+g18e1d24f8",
+    "timestamp": "2026-04-17T12:42:24.365241",
+    "suite_id": null,
+    "job_type": "BSEQ",
+    "results": {
+      "largest_connected_size": 1,
+      "fraction_connected": 0.005917159763313609,
+      "score": 1.0
+    },
+    "params": {
+      "benchmark_name": "BSEQ",
+      "shots": 1000
+    },
+    "provider": "origin",
+    "device": "WK_C180",
+    "device_metadata": {
+      "num_qubits": 180,
+      "simulator": false
+    },
+    "errors": {
+      "score": null
+    },
+    "normalized_scores": {
+      "bseq_score": 0.7743362831858407
+    },
+    "metriq_score": 0.7743362831858407
+  }
+]
