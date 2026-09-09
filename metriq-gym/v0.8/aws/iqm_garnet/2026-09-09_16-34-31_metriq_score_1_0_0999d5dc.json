@@ -1,0 +1,194 @@
+[
+  {
+    "app_version": "0.8.1.dev7+ga06a383.d20260904",
+    "timestamp": "2026-09-09T16:34:31.771374",
+    "suite_id": "b5bf684e-db91-413a-9055-05c3e672cf94",
+    "job_type": "Quantum Fourier Transform",
+    "results": {
+      "accuracy_score": {
+        "value": 0.573,
+        "uncertainty": 0.007
+      },
+      "score": {
+        "value": 0.573,
+        "uncertainty": 0.007
+      }
+    },
+    "suite": {
+      "id": "b5bf684e-db91-413a-9055-05c3e672cf94",
+      "name": "metriq_score_1_0"
+    },
+    "platform": {
+      "device": "iqm_garnet",
+      "device_metadata": {
+        "num_qubits": 20,
+        "simulator": false
+      },
+      "provider": "aws"
+    },
+    "circuit_metadata": {
+      "input_two_qubit_gate_counts": [
+        12,
+        12,
+        12
+      ],
+      "transpiled_two_qubit_gate_counts": [
+        12,
+        12,
+        12
+      ]
+    },
+    "params": {
+      "benchmark_name": "Quantum Fourier Transform",
+      "max_circuits": 3,
+      "method": 1,
+      "num_qubits": 4,
+      "shots": 1000,
+      "use_midcircuit_measurement": false
+    }
+  },
+  {
+    "app_version": "0.8.1.dev7+ga06a383.d20260904",
+    "timestamp": "2026-09-09T16:34:36.529289",
+    "suite_id": "b5bf684e-db91-413a-9055-05c3e672cf94",
+    "job_type": "Quantum Fourier Transform",
+    "results": {
+      "accuracy_score": {
+        "value": 0.026,
+        "uncertainty": 0.004
+      },
+      "score": {
+        "value": 0.026,
+        "uncertainty": 0.004
+      }
+    },
+    "suite": {
+      "id": "b5bf684e-db91-413a-9055-05c3e672cf94",
+      "name": "metriq_score_1_0"
+    },
+    "platform": {
+      "device": "iqm_garnet",
+      "device_metadata": {
+        "num_qubits": 20,
+        "simulator": false
+      },
+      "provider": "aws"
+    },
+    "circuit_metadata": {
+      "input_two_qubit_gate_counts": [
+        56,
+        56,
+        56
+      ],
+      "transpiled_two_qubit_gate_counts": [
+        56,
+        56,
+        56
+      ]
+    },
+    "params": {
+      "benchmark_name": "Quantum Fourier Transform",
+      "max_circuits": 3,
+      "method": 1,
+      "num_qubits": 8,
+      "shots": 1000,
+      "use_midcircuit_measurement": false
+    }
+  },
+  {
+    "app_version": "0.8.1.dev7+ga06a383.d20260904",
+    "timestamp": "2026-09-09T16:34:40.040297",
+    "suite_id": "b5bf684e-db91-413a-9055-05c3e672cf94",
+    "job_type": "Quantum Fourier Transform",
+    "results": {
+      "accuracy_score": {
+        "value": 0.0,
+        "uncertainty": 0.0
+      },
+      "score": {
+        "value": 0.0,
+        "uncertainty": 0.0
+      }
+    },
+    "suite": {
+      "id": "b5bf684e-db91-413a-9055-05c3e672cf94",
+      "name": "metriq_score_1_0"
+    },
+    "platform": {
+      "device": "iqm_garnet",
+      "device_metadata": {
+        "num_qubits": 20,
+        "simulator": false
+      },
+      "provider": "aws"
+    },
+    "circuit_metadata": {
+      "input_two_qubit_gate_counts": [
+        132,
+        132,
+        132
+      ],
+      "transpiled_two_qubit_gate_counts": [
+        132,
+        132,
+        132
+      ]
+    },
+    "params": {
+      "benchmark_name": "Quantum Fourier Transform",
+      "max_circuits": 3,
+      "method": 1,
+      "num_qubits": 12,
+      "shots": 1000,
+      "use_midcircuit_measurement": false
+    }
+  },
+  {
+    "app_version": "0.8.1.dev7+ga06a383.d20260904",
+    "timestamp": "2026-09-09T16:34:46.653613",
+    "suite_id": "b5bf684e-db91-413a-9055-05c3e672cf94",
+    "job_type": "Quantum Fourier Transform",
+    "results": {
+      "accuracy_score": {
+        "value": 0.0,
+        "uncertainty": 0.0
+      },
+      "score": {
+        "value": 0.0,
+        "uncertainty": 0.0
+      }
+    },
+    "suite": {
+      "id": "b5bf684e-db91-413a-9055-05c3e672cf94",
+      "name": "metriq_score_1_0"
+    },
+    "platform": {
+      "device": "iqm_garnet",
+      "device_metadata": {
+        "num_qubits": 20,
+        "simulator": false
+      },
+      "provider": "aws"
+    },
+    "circuit_metadata": {
+      "input_two_qubit_gate_counts": [
+        380,
+        380,
+        380
+      ],
+      "transpiled_two_qubit_gate_counts": [
+        380,
+        380,
+        380
+      ]
+    },
+    "params": {
+      "benchmark_name": "Quantum Fourier Transform",
+      "max_circuits": 3,
+      "method": 1,
+      "num_qubits": 20,
+      "shots": 1000,
+      "use_midcircuit_measurement": false
+    }
+  }
+]
