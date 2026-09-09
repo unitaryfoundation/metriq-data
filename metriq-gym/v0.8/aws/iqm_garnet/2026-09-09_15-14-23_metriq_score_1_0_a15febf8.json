@@ -1,0 +1,43 @@
+[
+  {
+    "app_version": "0.8.1.dev7+ga06a383.d20260904",
+    "timestamp": "2026-09-09T15:14:23.575108+00:00",
+    "suite_id": "56d0d860-3473-4789-8d1e-b04b3506506f",
+    "job_type": "WIT",
+    "results": {
+      "expectation_value": {
+        "value": 0.759521484375,
+        "uncertainty": 0.004721861028837969
+      },
+      "score": {
+        "value": 0.759521484375,
+        "uncertainty": 0.004721861028837969
+      }
+    },
+    "suite": {
+      "id": "56d0d860-3473-4789-8d1e-b04b3506506f",
+      "name": "metriq_score_1_0"
+    },
+    "platform": {
+      "device": "iqm_garnet",
+      "device_metadata": {
+        "num_qubits": 20,
+        "simulator": false
+      },
+      "provider": "aws"
+    },
+    "circuit_metadata": {
+      "input_two_qubit_gate_counts": [
+        24
+      ],
+      "transpiled_two_qubit_gate_counts": [
+        24
+      ]
+    },
+    "params": {
+      "benchmark_name": "WIT",
+      "num_qubits": 7,
+      "shots": 8192
+    }
+  }
+]
