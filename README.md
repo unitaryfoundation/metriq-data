@@ -243,6 +243,23 @@ Example `scripts/scoring.json`:
 
 Baselines are computed per major series (e.g., all `v0.x.y` share one baseline reference),
 using the latest available baseline row per `(benchmark, metric, selector)` key.
+Benchmark rows expose `normalization_baselines`, a per-metric map containing the
+raw reference used to calculate each configured normalized score. A missing
+reference, or a derived metric without its own raw measurement, has a `null`
+baseline; a measured zero remains `0` even when it cannot yield an individual
+normalized score.
+
+Platform component breakdowns expose `baseline`, `direction` (`higher` or
+`lower`), and `baseline_is_self` alongside `raw`. These fields come from the
+same selected raw record and provide the inputs needed to reproduce the
+composite aggregation. For the baseline device, the composite uses the selected
+raw value itself as the reference and sets `baseline_is_self` to `true`;
+benchmark-row normalization continues to use the latest reference. Components
+without raw measurements have a `null` baseline; their `baseline_is_self` flag
+comes from the selected normalized record, or is `false` if no normalized
+record exists. This preserves the baseline's existing anchor for derived
+metrics such as BSEQ without making unavailable normalized scores available.
+
 The canonical baseline for the latest observed series is also published in
 `dist/platforms/index.json` so downstream clients can identify it without duplicating
 the scoring configuration:

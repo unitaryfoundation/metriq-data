@@ -473,6 +473,7 @@ def compute_and_attach_metriq_scores(
             continue
         series = row_series.get(id(r))
         scores: dict[str, float] = {}
+        normalization_baselines: dict[str, float | None] = {}
 
         if series not in component_cache:
             component_cache[series] = _components_for_series(scoring_cfg, series)
@@ -487,12 +488,18 @@ def compute_and_attach_metriq_scores(
             selector = comp.get("selector") if isinstance(comp.get("selector"), dict) else None
             selector_fp = _selector_fingerprint(selector)
 
+            baseline = (
+                _get_baseline_metric_value(
+                    r, metric, series, selector_fp, baseline_avg_by_series
+                )
+                if metric in results
+                else None
+            )
+            normalization_baselines[metric] = baseline
             if metric in results:
                 score = _normalized_ratio(
                     results[metric],
-                    _get_baseline_metric_value(
-                        r, metric, series, selector_fp, baseline_avg_by_series
-                    ),
+                    baseline,
                     _metric_direction(r, metric),
                 )
             else:
@@ -505,6 +512,9 @@ def compute_and_attach_metriq_scores(
                 )
             if score is not None and (score == score) and score not in (float("inf"), float("-inf")):
                 scores[metric] = score
+        # Preserve the exact normalization inputs even when a zero or absent
+        # baseline prevents an individual ratio from being computed.
+        r["normalization_baselines"] = normalization_baselines
         if not scores:
             continue
 
@@ -767,6 +777,7 @@ class _RawValue(NamedTuple):
     raw: float
     baseline: float | None
     direction: str
+    baseline_is_self: bool
 
 
 def _latest_timestamped_value(
@@ -901,6 +912,7 @@ def compute_device_composite_scores(
 
             selector_fp = _selector_fingerprint(selector)
             latest_normalized = None
+            latest_normalized_is_baseline = False
             latest_raw = None
             # Non-completed outcome records (error / unsupported / not_applicable)
             # for this benchmark instance, and whether any completed record
@@ -929,9 +941,12 @@ def compute_device_composite_scores(
                 if normalized_val is not None and is_baseline_row:
                     # Keep baseline components anchored at 100 in platform composites.
                     normalized_val = 100.0
-                latest_normalized = _latest_timestamped_value(
+                selected_normalized = _latest_timestamped_value(
                     latest_normalized, r, normalized_val
                 )
+                if selected_normalized is not latest_normalized:
+                    latest_normalized_is_baseline = is_baseline_row
+                latest_normalized = selected_normalized
                 raw_val = _get_raw_metric_value(r, metric)
                 if raw_val is not None:
                     # Anchor the baseline device against its own value so its
@@ -946,7 +961,9 @@ def compute_device_composite_scores(
                     latest_raw = _latest_timestamped_value(
                         latest_raw,
                         r,
-                        _RawValue(raw_val, base_val, _metric_direction(r, metric)),
+                        _RawValue(
+                            raw_val, base_val, _metric_direction(r, metric), is_baseline_row
+                        ),
                     )
 
             normalized_ts = (
@@ -954,8 +971,10 @@ def compute_device_composite_scores(
             )
             normalized_value = latest_normalized.value if latest_normalized else None
             raw_ts = latest_raw.source_timestamp if latest_raw else None
-            raw_value, baseline_value, direction = (
-                latest_raw.value if latest_raw else (None, None, "higher")
+            raw_value, baseline_value, direction, baseline_is_self = (
+                latest_raw.value
+                if latest_raw
+                else (None, None, "higher", latest_normalized_is_baseline)
             )
 
             aggregation = comp.get("_group_aggregation", "arithmetic")
@@ -997,6 +1016,11 @@ def compute_device_composite_scores(
                 "raw": raw_value,
                 "raw_available": raw_value is not None,
                 "raw_timestamp": raw_ts,
+                # Inputs used for width aggregation, selected together with raw.
+                "baseline": baseline_value,
+                "direction": direction,
+                # For normalized-only metrics, retain that selected row's anchor.
+                "baseline_is_self": baseline_is_self,
             }
 
             # Surface a structural qubit requirement so the UI can tell a
