@@ -1,16 +1,16 @@
 {
-  "generated_at": "2026-09-09T18:35:54.126262Z",
+  "generated_at": "2026-09-10T08:28:18.535923Z",
   "provider": "aws",
   "device": "iqm_garnet",
   "first_seen": "2026-01-09T11:09:29.390899Z",
-  "last_seen": "2026-09-09T15:14:23.575108Z",
-  "runs": 9,
+  "last_seen": "2026-09-09T16:34:46.653613Z",
+  "runs": 13,
   "current": {
     "device_metadata": {
       "num_qubits": 20,
       "simulator": false
     },
-    "as_of": "2026-09-09T15:14:23.575108Z"
+    "as_of": "2026-09-09T16:34:46.653613Z"
   },
   "history": [
     {
@@ -19,12 +19,12 @@
         "simulator": false
       },
       "first_seen": "2026-01-09T11:09:29.390899Z",
-      "last_seen": "2026-09-09T15:14:23.575108Z",
-      "runs": 9
+      "last_seen": "2026-09-09T16:34:46.653613Z",
+      "runs": 13
     }
   ],
   "metriq_score": {
-    "value": 51.38015759277884,
+    "value": 52.852223509177556,
     "series": "v0.8",
     "components": {
       "BSEQ:bseq_score": {
@@ -236,14 +236,15 @@
         "group_weight": 0.0293,
         "sub_weight": 0.09090909090909091,
         "aggregation": "arithmetic",
-        "timestamp": null,
-        "normalized": null,
-        "normalized_available": false,
-        "normalized_timestamp": null,
-        "raw": null,
-        "raw_available": false,
-        "raw_timestamp": null,
-        "required_num_qubits": 4
+        "timestamp": "2026-09-09T16:34:31.771374",
+        "normalized": 70.9158415841584,
+        "normalized_available": true,
+        "normalized_timestamp": "2026-09-09T16:34:31.771374",
+        "raw": 0.573,
+        "raw_available": true,
+        "raw_timestamp": "2026-09-09T16:34:31.771374",
+        "required_num_qubits": 4,
+        "group_subscore": 50.24115755627009
       },
       "QFT-8:score": {
         "metric": "score",
@@ -252,14 +253,15 @@
         "group_weight": 0.0293,
         "sub_weight": 0.18181818181818182,
         "aggregation": "arithmetic",
-        "timestamp": null,
-        "normalized": null,
-        "normalized_available": false,
-        "normalized_timestamp": null,
-        "raw": null,
-        "raw_available": false,
-        "raw_timestamp": null,
-        "required_num_qubits": 8
+        "timestamp": "2026-09-09T16:34:36.529289",
+        "normalized": 12.093023255813954,
+        "normalized_available": true,
+        "normalized_timestamp": "2026-09-09T16:34:36.529289",
+        "raw": 0.026,
+        "raw_available": true,
+        "raw_timestamp": "2026-09-09T16:34:36.529289",
+        "required_num_qubits": 8,
+        "group_subscore": 50.24115755627009
       },
       "QFT-12:score": {
         "metric": "score",
@@ -268,14 +270,15 @@
         "group_weight": 0.0293,
         "sub_weight": 0.2727272727272727,
         "aggregation": "arithmetic",
-        "timestamp": null,
-        "normalized": null,
-        "normalized_available": false,
-        "normalized_timestamp": null,
-        "raw": null,
-        "raw_available": false,
-        "raw_timestamp": null,
-        "required_num_qubits": 12
+        "timestamp": "2026-09-09T16:34:40.040297",
+        "normalized": 0.0,
+        "normalized_available": true,
+        "normalized_timestamp": "2026-09-09T16:34:40.040297",
+        "raw": 0.0,
+        "raw_available": true,
+        "raw_timestamp": "2026-09-09T16:34:40.040297",
+        "required_num_qubits": 12,
+        "group_subscore": 50.24115755627009
       },
       "QFT-20:score": {
         "metric": "score",
@@ -288,10 +291,11 @@
         "normalized": null,
         "normalized_available": false,
         "normalized_timestamp": null,
-        "raw": null,
-        "raw_available": false,
-        "raw_timestamp": null,
-        "required_num_qubits": 20
+        "raw": 0.0,
+        "raw_available": true,
+        "raw_timestamp": "2026-09-09T16:34:46.653613",
+        "required_num_qubits": 20,
+        "group_subscore": 50.24115755627009
       },
       "Linear Ramp QAOA (10q):score": {
         "metric": "score",
