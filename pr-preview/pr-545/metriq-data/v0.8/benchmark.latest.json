@@ -1,0 +1,1433 @@
+[
+  {
+    "app_version": "0.8.1.dev7+ga06a383.d20260904",
+    "timestamp": "2026-09-09T15:14:23.575108+00:00",
+    "suite_id": "56d0d860-3473-4789-8d1e-b04b3506506f",
+    "job_type": "WIT",
+    "results": {
+      "expectation_value": 0.759521484375,
+      "score": 0.759521484375
+    },
+    "params": {
+      "benchmark_name": "WIT",
+      "num_qubits": 7,
+      "shots": 8192
+    },
+    "provider": "aws",
+    "device": "iqm_garnet",
+    "device_metadata": {
+      "num_qubits": 20,
+      "simulator": false
+    },
+    "errors": {
+      "expectation_value": 0.004721861028837969,
+      "score": 0.004721861028837969
+    },
+    "normalization_baselines": {
+      "expectation_value": 0.772705078125
+    },
+    "normalized_scores": {
+      "expectation_value": 98.29383886255924
+    },
+    "metriq_score": 98.29383886255924
+  },
+  {
+    "app_version": "0.8.1.dev7+ga06a383.d20260904",
+    "timestamp": "2026-09-09T16:34:31.771374",
+    "suite_id": "b5bf684e-db91-413a-9055-05c3e672cf94",
+    "job_type": "Quantum Fourier Transform",
+    "results": {
+      "accuracy_score": 0.573,
+      "score": 0.573
+    },
+    "params": {
+      "benchmark_name": "Quantum Fourier Transform",
+      "max_circuits": 3,
+      "method": 1,
+      "num_qubits": 4,
+      "shots": 1000,
+      "use_midcircuit_measurement": false
+    },
+    "provider": "aws",
+    "device": "iqm_garnet",
+    "device_metadata": {
+      "num_qubits": 20,
+      "simulator": false
+    },
+    "errors": {
+      "accuracy_score": 0.007,
+      "score": 0.007
+    },
+    "normalization_baselines": {
+      "score": 0.8080000000000002
+    },
+    "normalized_scores": {
+      "score": 70.9158415841584
+    },
+    "metriq_score": 70.9158415841584
+  },
+  {
+    "app_version": "0.8.1.dev7+ga06a383.d20260904",
+    "timestamp": "2026-09-09T16:34:36.529289",
+    "suite_id": "b5bf684e-db91-413a-9055-05c3e672cf94",
+    "job_type": "Quantum Fourier Transform",
+    "results": {
+      "accuracy_score": 0.026,
+      "score": 0.026
+    },
+    "params": {
+      "benchmark_name": "Quantum Fourier Transform",
+      "max_circuits": 3,
+      "method": 1,
+      "num_qubits": 8,
+      "shots": 1000,
+      "use_midcircuit_measurement": false
+    },
+    "provider": "aws",
+    "device": "iqm_garnet",
+    "device_metadata": {
+      "num_qubits": 20,
+      "simulator": false
+    },
+    "errors": {
+      "accuracy_score": 0.004,
+      "score": 0.004
+    },
+    "normalization_baselines": {
+      "score": 0.215
+    },
+    "normalized_scores": {
+      "score": 12.093023255813954
+    },
+    "metriq_score": 12.093023255813954
+  },
+  {
+    "app_version": "0.8.1.dev7+ga06a383.d20260904",
+    "timestamp": "2026-09-09T16:34:40.040297",
+    "suite_id": "b5bf684e-db91-413a-9055-05c3e672cf94",
+    "job_type": "Quantum Fourier Transform",
+    "results": {
+      "accuracy_score": 0.0,
+      "score": 0.0
+    },
+    "params": {
+      "benchmark_name": "Quantum Fourier Transform",
+      "max_circuits": 3,
+      "method": 1,
+      "num_qubits": 12,
+      "shots": 1000,
+      "use_midcircuit_measurement": false
+    },
+    "provider": "aws",
+    "device": "iqm_garnet",
+    "device_metadata": {
+      "num_qubits": 20,
+      "simulator": false
+    },
+    "errors": {
+      "accuracy_score": 0.0,
+      "score": 0.0
+    },
+    "normalization_baselines": {
+      "score": 0.002
+    },
+    "normalized_scores": {
+      "score": 0.0
+    },
+    "metriq_score": 0.0
+  },
+  {
+    "app_version": "0.8.1.dev7+ga06a383.d20260904",
+    "timestamp": "2026-09-09T16:34:46.653613",
+    "suite_id": "b5bf684e-db91-413a-9055-05c3e672cf94",
+    "job_type": "Quantum Fourier Transform",
+    "results": {
+      "accuracy_score": 0.0,
+      "score": 0.0
+    },
+    "params": {
+      "benchmark_name": "Quantum Fourier Transform",
+      "max_circuits": 3,
+      "method": 1,
+      "num_qubits": 20,
+      "shots": 1000,
+      "use_midcircuit_measurement": false
+    },
+    "provider": "aws",
+    "device": "iqm_garnet",
+    "device_metadata": {
+      "num_qubits": 20,
+      "simulator": false
+    },
+    "errors": {
+      "accuracy_score": 0.0,
+      "score": 0.0
+    },
+    "normalization_baselines": {
+      "score": 0.0
+    }
+  },
+  {
+    "app_version": "0.8.1.dev8+g79dd698.d20260910",
+    "timestamp": "2026-09-11T15:29:00.272599+00:00",
+    "suite_id": "5339a278-30c4-4dc2-bcd1-38839c8019f5",
+    "job_type": "BSEQ",
+    "results": {
+      "largest_connected_size": 120,
+      "fraction_connected": 1.0,
+      "score": 120.0
+    },
+    "params": {
+      "benchmark_name": "BSEQ",
+      "shots": 1000
+    },
+    "provider": "ibm",
+    "device": "ibm_phoenix",
+    "device_metadata": {
+      "num_qubits": 120,
+      "simulator": false,
+      "version": "1.0.0"
+    },
+    "errors": {
+      "score": null
+    },
+    "normalization_baselines": {
+      "bseq_score": null
+    },
+    "normalized_scores": {
+      "bseq_score": 92.9203539823009
+    },
+    "metriq_score": 92.9203539823009
+  },
+  {
+    "app_version": "0.8.1.dev8+g79dd698.d20260910",
+    "timestamp": "2026-09-11T15:32:56.621385+00:00",
+    "suite_id": "5339a278-30c4-4dc2-bcd1-38839c8019f5",
+    "job_type": "EPLG",
+    "results": {
+      "chain_lengths": [
+        4,
+        6,
+        8,
+        10,
+        12,
+        14,
+        16,
+        18,
+        20,
+        22,
+        24,
+        26,
+        28,
+        30,
+        32,
+        34,
+        36,
+        38,
+        40,
+        42,
+        44,
+        46,
+        48,
+        50,
+        52,
+        54,
+        56,
+        58,
+        60,
+        62,
+        64,
+        66,
+        68,
+        70,
+        72,
+        74,
+        76,
+        78,
+        80,
+        82,
+        84,
+        86,
+        88,
+        90,
+        92,
+        94,
+        96,
+        98,
+        100
+      ],
+      "chain_eplgs": [
+        0.005256243021248053,
+        0.005184844293797397,
+        0.005469009666956848,
+        0.005241101653898572,
+        0.006023766468555958,
+        0.005955804236869033,
+        0.005781464889707433,
+        0.005748527735451869,
+        0.005825850197855087,
+        0.005768181269403594,
+        0.005939610868375911,
+        0.006726106394448261,
+        0.007943328776776615,
+        0.007815035121799041,
+        0.007715077405387238,
+        0.007506698224758912,
+        0.007367243863125594,
+        0.007387279518461742,
+        0.007844203334009703,
+        0.008853972455039938,
+        0.009046217622758923,
+        0.009008737762216001,
+        0.009040449695154607,
+        0.009160980036724164,
+        0.009780258147457865,
+        0.009639573378031896,
+        0.0095969674199472,
+        0.012163204414599837,
+        0.03305549748492076,
+        0.032208751727261675,
+        0.03228104188736847,
+        0.03429854137619126,
+        0.033574378476233124,
+        0.03284775464001144,
+        0.03224593848650026,
+        0.031665647535516706,
+        0.03111394355310826,
+        0.030546768851851924,
+        0.02999488429837649,
+        0.029499814664654567,
+        0.02899169099575405,
+        0.028577973641473076,
+        0.028173760390904135,
+        0.027950987349682266,
+        0.02751388058438764,
+        0.027077817576644736,
+        0.026627220923146733,
+        0.02628117529048568,
+        0.025993107822357198
+      ],
+      "eplg_10": 0.005241101653898572,
+      "eplg_20": 0.005825850197855087,
+      "eplg_50": 0.009160980036724164,
+      "eplg_100": 0.025993107822357198
+    },
+    "params": {
+      "benchmark_name": "EPLG",
+      "constrain_rb_offset_b": false,
+      "decompose_clifford_ops": false,
+      "lengths": [
+        2,
+        4,
+        8,
+        16,
+        30,
+        50,
+        70,
+        100,
+        150,
+        200,
+        300,
+        500
+      ],
+      "num_qubits_in_chain": 100,
+      "num_samples": 10,
+      "one_qubit_basis_gates": [
+        "rz",
+        "rx",
+        "x"
+      ],
+      "seed": 12345,
+      "shots": 1000,
+      "two_qubit_gate": "cz"
+    },
+    "provider": "ibm",
+    "device": "ibm_phoenix",
+    "device_metadata": {
+      "num_qubits": 120,
+      "simulator": false,
+      "version": "1.0.0"
+    },
+    "directions": {
+      "eplg_10": "lower",
+      "eplg_20": "lower",
+      "eplg_50": "lower",
+      "eplg_100": "lower"
+    },
+    "normalization_baselines": {
+      "eplg_10": 0.005507229607968012,
+      "eplg_20": 0.009586857548359973,
+      "eplg_50": 0.038328721277900546,
+      "eplg_100": 0.06877248119630675
+    },
+    "normalized_scores": {
+      "eplg_10": 105.07771021520793,
+      "eplg_20": 164.55722723336729,
+      "eplg_50": 418.3910577716568,
+      "eplg_100": 264.5796788376115
+    },
+    "metriq_score": 252.04106843516618
+  },
+  {
+    "app_version": "0.8.1.dev8+g79dd698.d20260910",
+    "timestamp": "2026-09-11T15:33:01.817892+00:00",
+    "suite_id": "5339a278-30c4-4dc2-bcd1-38839c8019f5",
+    "job_type": "Mirror Circuits",
+    "results": {
+      "success_probability": 0.6426,
+      "polarization": 0.641198431372549,
+      "binary_success": true,
+      "score": 0.641198431372549
+    },
+    "params": {
+      "benchmark_name": "Mirror Circuits",
+      "num_circuits": 10,
+      "num_layers": 64,
+      "shots": 1000,
+      "two_qubit_gate_name": "CNOT",
+      "two_qubit_gate_prob": 0.5,
+      "width": 8
+    },
+    "provider": "ibm",
+    "device": "ibm_phoenix",
+    "device_metadata": {
+      "num_qubits": 120,
+      "simulator": false,
+      "version": "1.0.0"
+    },
+    "errors": {
+      "success_probability": 0.0047923401381788425,
+      "polarization": 0.004811133628916798,
+      "score": 0.004811133628916798
+    },
+    "normalization_baselines": {
+      "score": 0.3172329411764706
+    },
+    "normalized_scores": {
+      "score": 202.12227298799422
+    },
+    "metriq_score": 202.12227298799422
+  },
+  {
+    "app_version": "0.8.1.dev8+g79dd698.d20260910",
+    "timestamp": "2026-09-11T15:33:06.230128+00:00",
+    "suite_id": "5339a278-30c4-4dc2-bcd1-38839c8019f5",
+    "job_type": "Mirror Circuits",
+    "results": {
+      "success_probability": 0.4056,
+      "polarization": 0.4055909300373846,
+      "binary_success": true,
+      "score": 0.4055909300373846
+    },
+    "params": {
+      "benchmark_name": "Mirror Circuits",
+      "num_circuits": 10,
+      "num_layers": 32,
+      "shots": 1000,
+      "two_qubit_gate_name": "CNOT",
+      "two_qubit_gate_prob": 0.5,
+      "width": 16
+    },
+    "provider": "ibm",
+    "device": "ibm_phoenix",
+    "device_metadata": {
+      "num_qubits": 120,
+      "simulator": false,
+      "version": "1.0.0"
+    },
+    "errors": {
+      "success_probability": 0.004910077799790956,
+      "polarization": 0.004910152722775618,
+      "score": 0.004910152722775618
+    },
+    "normalization_baselines": {
+      "score": 0.27568894789044024
+    },
+    "normalized_scores": {
+      "score": 147.11903873584654
+    },
+    "metriq_score": 147.11903873584654
+  },
+  {
+    "app_version": "0.8.1.dev8+g79dd698.d20260910",
+    "timestamp": "2026-09-11T15:33:10.720548+00:00",
+    "suite_id": "5339a278-30c4-4dc2-bcd1-38839c8019f5",
+    "job_type": "Mirror Circuits",
+    "results": {
+      "success_probability": 0.3352,
+      "polarization": 0.3351999603748298,
+      "binary_success": false,
+      "score": 0.3351999603748298
+    },
+    "params": {
+      "benchmark_name": "Mirror Circuits",
+      "num_circuits": 10,
+      "num_layers": 16,
+      "shots": 1000,
+      "two_qubit_gate_name": "CNOT",
+      "two_qubit_gate_prob": 0.5,
+      "width": 24
+    },
+    "provider": "ibm",
+    "device": "ibm_phoenix",
+    "device_metadata": {
+      "num_qubits": 120,
+      "simulator": false,
+      "version": "1.0.0"
+    },
+    "errors": {
+      "success_probability": 0.0047206033512677175,
+      "polarization": 0.0047206036326376205,
+      "score": 0.0047206036326376205
+    },
+    "normalization_baselines": {
+      "score": 0.12679994795322108
+    },
+    "normalized_scores": {
+      "score": 264.3533895601372
+    },
+    "metriq_score": 264.3533895601372
+  },
+  {
+    "app_version": "0.8.1.dev8+g79dd698.d20260910",
+    "timestamp": "2026-09-11T15:33:15.496941+00:00",
+    "suite_id": "5339a278-30c4-4dc2-bcd1-38839c8019f5",
+    "job_type": "Mirror Circuits",
+    "results": {
+      "success_probability": 0.3505,
+      "polarization": 0.3504999998487765,
+      "binary_success": false,
+      "score": 0.3504999998487765
+    },
+    "params": {
+      "benchmark_name": "Mirror Circuits",
+      "num_circuits": 10,
+      "num_layers": 8,
+      "shots": 1000,
+      "two_qubit_gate_name": "CNOT",
+      "two_qubit_gate_prob": 0.5,
+      "width": 32
+    },
+    "provider": "ibm",
+    "device": "ibm_phoenix",
+    "device_metadata": {
+      "num_qubits": 120,
+      "simulator": false,
+      "version": "1.0.0"
+    },
+    "errors": {
+      "success_probability": 0.004771265555384651,
+      "polarization": 0.004771265556495548,
+      "score": 0.004771265556495548
+    },
+    "normalization_baselines": {
+      "score": 0.033599999774992464
+    },
+    "normalized_scores": {
+      "score": 1043.1547684403374
+    },
+    "metriq_score": 1043.1547684403374
+  },
+  {
+    "app_version": "0.8.1.dev8+g79dd698.d20260910",
+    "timestamp": "2026-09-11T15:33:19.900922+00:00",
+    "suite_id": "5339a278-30c4-4dc2-bcd1-38839c8019f5",
+    "job_type": "Mirror Circuits",
+    "results": {
+      "success_probability": 0.0431,
+      "polarization": 0.0431,
+      "binary_success": false,
+      "score": 0.0431
+    },
+    "params": {
+      "benchmark_name": "Mirror Circuits",
+      "num_circuits": 10,
+      "num_layers": 4,
+      "shots": 1000,
+      "two_qubit_gate_name": "CNOT",
+      "two_qubit_gate_prob": 0.5,
+      "width": 64
+    },
+    "provider": "ibm",
+    "device": "ibm_phoenix",
+    "device_metadata": {
+      "num_qubits": 120,
+      "simulator": false,
+      "version": "1.0.0"
+    },
+    "errors": {
+      "success_probability": 0.0020308222472683324,
+      "polarization": 0.0020308222472683324,
+      "score": 0.0020308222472683324
+    },
+    "normalization_baselines": {
+      "score": 0.0037
+    },
+    "normalized_scores": {
+      "score": 1164.8648648648648
+    },
+    "metriq_score": 1164.8648648648648
+  },
+  {
+    "app_version": "0.8.1.dev8+g79dd698.d20260910",
+    "timestamp": "2026-09-11T15:33:22.634469+00:00",
+    "suite_id": "5339a278-30c4-4dc2-bcd1-38839c8019f5",
+    "job_type": "CLOPS",
+    "results": {
+      "clops_score": 2551867.992889475,
+      "steady_state_clops": null,
+      "score": 2551867.992889475
+    },
+    "params": {
+      "benchmark_name": "CLOPS",
+      "mode": "twirled",
+      "num_circuits": 1000,
+      "num_layers": 100,
+      "num_qubits": 100,
+      "seed": 12345,
+      "shots": 100,
+      "two_qubit_gate": "cz",
+      "use_session": true
+    },
+    "provider": "ibm",
+    "device": "ibm_phoenix",
+    "device_metadata": {
+      "num_qubits": 120,
+      "simulator": false,
+      "version": "1.0.0"
+    },
+    "errors": {
+      "score": null
+    },
+    "normalization_baselines": {
+      "score": 345669.8525213401
+    },
+    "normalized_scores": {
+      "score": 738.2385169768122
+    },
+    "metriq_score": 738.2385169768122
+  },
+  {
+    "app_version": "0.8.1.dev8+g79dd698.d20260910",
+    "timestamp": "2026-09-11T15:33:23.757668+00:00",
+    "suite_id": "5339a278-30c4-4dc2-bcd1-38839c8019f5",
+    "job_type": "QML Kernel",
+    "results": {
+      "accuracy_score": 0.848,
+      "score": 0.848
+    },
+    "params": {
+      "benchmark_name": "QML Kernel",
+      "num_qubits": 10,
+      "shots": 1000
+    },
+    "provider": "ibm",
+    "device": "ibm_phoenix",
+    "device_metadata": {
+      "num_qubits": 120,
+      "simulator": false,
+      "version": "1.0.0"
+    },
+    "errors": {
+      "accuracy_score": 0.011353237423748348,
+      "score": 0.011353237423748348
+    },
+    "normalization_baselines": {
+      "accuracy_score": 0.758
+    },
+    "normalized_scores": {
+      "accuracy_score": 111.87335092348285
+    },
+    "metriq_score": 111.87335092348285
+  },
+  {
+    "app_version": "0.8.1.dev8+g79dd698.d20260910",
+    "timestamp": "2026-09-11T15:33:24.930770+00:00",
+    "suite_id": "5339a278-30c4-4dc2-bcd1-38839c8019f5",
+    "job_type": "QML Kernel",
+    "results": {
+      "accuracy_score": 0.584,
+      "score": 0.584
+    },
+    "params": {
+      "benchmark_name": "QML Kernel",
+      "num_qubits": 20,
+      "shots": 1000
+    },
+    "provider": "ibm",
+    "device": "ibm_phoenix",
+    "device_metadata": {
+      "num_qubits": 120,
+      "simulator": false,
+      "version": "1.0.0"
+    },
+    "errors": {
+      "accuracy_score": 0.015586660963785668,
+      "score": 0.015586660963785668
+    },
+    "normalization_baselines": {
+      "accuracy_score": 0.488
+    },
+    "normalized_scores": {
+      "accuracy_score": 119.67213114754098
+    },
+    "metriq_score": 119.67213114754098
+  },
+  {
+    "app_version": "0.8.1.dev8+g79dd698.d20260910",
+    "timestamp": "2026-09-11T15:33:25.843124+00:00",
+    "suite_id": "5339a278-30c4-4dc2-bcd1-38839c8019f5",
+    "job_type": "QML Kernel",
+    "results": {
+      "accuracy_score": 0.45,
+      "score": 0.45
+    },
+    "params": {
+      "benchmark_name": "QML Kernel",
+      "num_qubits": 30,
+      "shots": 1000
+    },
+    "provider": "ibm",
+    "device": "ibm_phoenix",
+    "device_metadata": {
+      "num_qubits": 120,
+      "simulator": false,
+      "version": "1.0.0"
+    },
+    "errors": {
+      "accuracy_score": 0.015732132722552274,
+      "score": 0.015732132722552274
+    },
+    "normalization_baselines": {
+      "accuracy_score": 0.279
+    },
+    "normalized_scores": {
+      "accuracy_score": 161.29032258064515
+    },
+    "metriq_score": 161.29032258064515
+  },
+  {
+    "app_version": "0.8.1.dev8+g79dd698.d20260910",
+    "timestamp": "2026-09-11T15:33:26.820600+00:00",
+    "suite_id": "5339a278-30c4-4dc2-bcd1-38839c8019f5",
+    "job_type": "QML Kernel",
+    "results": {
+      "accuracy_score": 0.119,
+      "score": 0.119
+    },
+    "params": {
+      "benchmark_name": "QML Kernel",
+      "num_qubits": 50,
+      "shots": 1000
+    },
+    "provider": "ibm",
+    "device": "ibm_phoenix",
+    "device_metadata": {
+      "num_qubits": 120,
+      "simulator": false,
+      "version": "1.0.0"
+    },
+    "errors": {
+      "accuracy_score": 0.010239091756596383,
+      "score": 0.010239091756596383
+    },
+    "normalization_baselines": {
+      "accuracy_score": 0.064
+    },
+    "normalized_scores": {
+      "accuracy_score": 185.93749999999997
+    },
+    "metriq_score": 185.93749999999997
+  },
+  {
+    "app_version": "0.8.1.dev8+g79dd698.d20260910",
+    "timestamp": "2026-09-11T15:33:27.776966+00:00",
+    "suite_id": "5339a278-30c4-4dc2-bcd1-38839c8019f5",
+    "job_type": "WIT",
+    "results": {
+      "expectation_value": 0.9168701171875,
+      "score": 0.9168701171875
+    },
+    "params": {
+      "benchmark_name": "WIT",
+      "num_qubits": 7,
+      "shots": 8192
+    },
+    "provider": "ibm",
+    "device": "ibm_phoenix",
+    "device_metadata": {
+      "num_qubits": 120,
+      "simulator": false,
+      "version": "1.0.0"
+    },
+    "errors": {
+      "expectation_value": 0.0030502646488841626,
+      "score": 0.0030502646488841626
+    },
+    "normalization_baselines": {
+      "expectation_value": 0.772705078125
+    },
+    "normalized_scores": {
+      "expectation_value": 118.65718799368088
+    },
+    "metriq_score": 118.65718799368088
+  },
+  {
+    "app_version": "0.8.1.dev8+g79dd698.d20260910",
+    "timestamp": "2026-09-11T15:33:32.228538+00:00",
+    "suite_id": "5339a278-30c4-4dc2-bcd1-38839c8019f5",
+    "job_type": "Linear Ramp QAOA",
+    "results": {
+      "approx_ratio": [
+        0.83736
+      ],
+      "random_approx_ratio": 0.49990133333333336,
+      "confidence_pass": [
+        true
+      ],
+      "effective_approx_ratio": [
+        0.6747841759226179
+      ],
+      "score": 0.6747841759226179
+    },
+    "params": {
+      "benchmark_name": "Linear Ramp QAOA",
+      "confidence_level": 0.999,
+      "delta_beta": 0.3,
+      "delta_gamma": 0.6,
+      "graph_type": "1D",
+      "num_qubits": 10,
+      "num_random_trials": 25,
+      "qaoa_layers": [
+        10
+      ],
+      "seed": 123,
+      "shots": 1000,
+      "trials": 10
+    },
+    "provider": "ibm",
+    "device": "ibm_phoenix",
+    "device_metadata": {
+      "num_qubits": 120,
+      "simulator": false,
+      "version": "1.0.0"
+    },
+    "errors": {
+      "score": null
+    },
+    "normalization_baselines": {
+      "score": 0.5769501485040286
+    },
+    "normalized_scores": {
+      "score": 116.9571023895674
+    },
+    "metriq_score": 116.9571023895674
+  },
+  {
+    "app_version": "0.8.1.dev8+g79dd698.d20260910",
+    "timestamp": "2026-09-11T15:33:36.802303+00:00",
+    "suite_id": "5339a278-30c4-4dc2-bcd1-38839c8019f5",
+    "job_type": "Linear Ramp QAOA",
+    "results": {
+      "approx_ratio": [
+        0.8127768115942027
+      ],
+      "random_approx_ratio": 0.5007686956521739,
+      "confidence_pass": [
+        true
+      ],
+      "effective_approx_ratio": [
+        0.6249770661910364
+      ],
+      "score": 0.6249770661910364
+    },
+    "params": {
+      "benchmark_name": "Linear Ramp QAOA",
+      "confidence_level": 0.999,
+      "delta_beta": 0.3,
+      "delta_gamma": 0.6,
+      "graph_type": "1D",
+      "num_qubits": 20,
+      "num_random_trials": 25,
+      "qaoa_layers": [
+        10
+      ],
+      "seed": 123,
+      "shots": 1000,
+      "trials": 10
+    },
+    "provider": "ibm",
+    "device": "ibm_phoenix",
+    "device_metadata": {
+      "num_qubits": 120,
+      "simulator": false,
+      "version": "1.0.0"
+    },
+    "errors": {
+      "score": null
+    },
+    "normalization_baselines": {
+      "score": 0.5174610473609279
+    },
+    "normalized_scores": {
+      "score": 120.77760623305744
+    },
+    "metriq_score": 120.77760623305744
+  },
+  {
+    "app_version": "0.8.1.dev8+g79dd698.d20260910",
+    "timestamp": "2026-09-11T15:33:42.243705+00:00",
+    "suite_id": "5339a278-30c4-4dc2-bcd1-38839c8019f5",
+    "job_type": "Linear Ramp QAOA",
+    "results": {
+      "approx_ratio": [
+        0.8072779005524865
+      ],
+      "random_approx_ratio": 0.5139772375690609,
+      "confidence_pass": [
+        true
+      ],
+      "effective_approx_ratio": [
+        0.6034710422129701
+      ],
+      "score": 0.6034710422129701
+    },
+    "params": {
+      "benchmark_name": "Linear Ramp QAOA",
+      "confidence_level": 0.999,
+      "delta_beta": 0.3,
+      "delta_gamma": 0.6,
+      "graph_type": "1D",
+      "num_qubits": 50,
+      "num_random_trials": 25,
+      "qaoa_layers": [
+        10
+      ],
+      "seed": 123,
+      "shots": 1000,
+      "trials": 10
+    },
+    "provider": "ibm",
+    "device": "ibm_phoenix",
+    "device_metadata": {
+      "num_qubits": 120,
+      "simulator": false,
+      "version": "1.0.0"
+    },
+    "errors": {
+      "score": null
+    },
+    "normalization_baselines": {
+      "score": 0.5217501124245376
+    },
+    "normalized_scores": {
+      "score": 115.66284852506898
+    },
+    "metriq_score": 115.66284852506898
+  },
+  {
+    "app_version": "0.8.1.dev8+g79dd698.d20260910",
+    "timestamp": "2026-09-11T15:33:49.241297+00:00",
+    "suite_id": "5339a278-30c4-4dc2-bcd1-38839c8019f5",
+    "job_type": "Linear Ramp QAOA",
+    "results": {
+      "approx_ratio": [
+        0.8078573809523807
+      ],
+      "random_approx_ratio": 0.5119786666666667,
+      "confidence_pass": [
+        true
+      ],
+      "effective_approx_ratio": [
+        0.6062823366035515
+      ],
+      "score": 0.6062823366035515
+    },
+    "params": {
+      "benchmark_name": "Linear Ramp QAOA",
+      "confidence_level": 0.999,
+      "delta_beta": 0.3,
+      "delta_gamma": 0.6,
+      "graph_type": "1D",
+      "num_qubits": 100,
+      "num_random_trials": 25,
+      "qaoa_layers": [
+        10
+      ],
+      "seed": 123,
+      "shots": 1000,
+      "trials": 10
+    },
+    "provider": "ibm",
+    "device": "ibm_phoenix",
+    "device_metadata": {
+      "num_qubits": 120,
+      "simulator": false,
+      "version": "1.0.0"
+    },
+    "errors": {
+      "score": null
+    },
+    "normalization_baselines": {
+      "score": 0.4559703088701817
+    },
+    "normalized_scores": {
+      "score": 132.96531041808794
+    },
+    "metriq_score": 132.96531041808794
+  },
+  {
+    "app_version": "0.8.1.dev8+g79dd698.d20260910",
+    "timestamp": "2026-09-11T15:33:50.834624+00:00",
+    "suite_id": "5339a278-30c4-4dc2-bcd1-38839c8019f5",
+    "job_type": "Quantum Fourier Transform",
+    "results": {
+      "accuracy_score": 0.8569999999999999,
+      "score": 0.8569999999999999
+    },
+    "params": {
+      "benchmark_name": "Quantum Fourier Transform",
+      "max_circuits": 3,
+      "method": 1,
+      "num_qubits": 4,
+      "shots": 1000,
+      "use_midcircuit_measurement": false
+    },
+    "provider": "ibm",
+    "device": "ibm_phoenix",
+    "device_metadata": {
+      "num_qubits": 120,
+      "simulator": false,
+      "version": "1.0.0"
+    },
+    "errors": {
+      "accuracy_score": 0.012,
+      "score": 0.012
+    },
+    "normalization_baselines": {
+      "score": 0.8080000000000002
+    },
+    "normalized_scores": {
+      "score": 106.06435643564353
+    },
+    "metriq_score": 106.06435643564353
+  },
+  {
+    "app_version": "0.8.1.dev8+g79dd698.d20260910",
+    "timestamp": "2026-09-11T15:33:52.728461+00:00",
+    "suite_id": "5339a278-30c4-4dc2-bcd1-38839c8019f5",
+    "job_type": "Quantum Fourier Transform",
+    "results": {
+      "accuracy_score": 0.052,
+      "score": 0.052
+    },
+    "params": {
+      "benchmark_name": "Quantum Fourier Transform",
+      "max_circuits": 3,
+      "method": 1,
+      "num_qubits": 8,
+      "shots": 1000,
+      "use_midcircuit_measurement": false
+    },
+    "provider": "ibm",
+    "device": "ibm_phoenix",
+    "device_metadata": {
+      "num_qubits": 120,
+      "simulator": false,
+      "version": "1.0.0"
+    },
+    "errors": {
+      "accuracy_score": 0.028,
+      "score": 0.028
+    },
+    "normalization_baselines": {
+      "score": 0.215
+    },
+    "normalized_scores": {
+      "score": 24.186046511627907
+    },
+    "metriq_score": 24.186046511627907
+  },
+  {
+    "app_version": "0.8.1.dev8+g79dd698.d20260910",
+    "timestamp": "2026-09-11T15:33:54.602022+00:00",
+    "suite_id": "5339a278-30c4-4dc2-bcd1-38839c8019f5",
+    "job_type": "Quantum Fourier Transform",
+    "results": {
+      "accuracy_score": 0.001,
+      "score": 0.001
+    },
+    "params": {
+      "benchmark_name": "Quantum Fourier Transform",
+      "max_circuits": 3,
+      "method": 1,
+      "num_qubits": 12,
+      "shots": 1000,
+      "use_midcircuit_measurement": false
+    },
+    "provider": "ibm",
+    "device": "ibm_phoenix",
+    "device_metadata": {
+      "num_qubits": 120,
+      "simulator": false,
+      "version": "1.0.0"
+    },
+    "errors": {
+      "accuracy_score": 0.0,
+      "score": 0.0
+    },
+    "normalization_baselines": {
+      "score": 0.002
+    },
+    "normalized_scores": {
+      "score": 50.0
+    },
+    "metriq_score": 50.0
+  },
+  {
+    "app_version": "0.8.1.dev8+g79dd698.d20260910",
+    "timestamp": "2026-09-11T15:33:56.601609+00:00",
+    "suite_id": "5339a278-30c4-4dc2-bcd1-38839c8019f5",
+    "job_type": "Quantum Fourier Transform",
+    "results": {
+      "accuracy_score": 0.0,
+      "score": 0.0
+    },
+    "params": {
+      "benchmark_name": "Quantum Fourier Transform",
+      "max_circuits": 3,
+      "method": 1,
+      "num_qubits": 20,
+      "shots": 1000,
+      "use_midcircuit_measurement": false
+    },
+    "provider": "ibm",
+    "device": "ibm_phoenix",
+    "device_metadata": {
+      "num_qubits": 120,
+      "simulator": false,
+      "version": "1.0.0"
+    },
+    "errors": {
+      "accuracy_score": 0.0,
+      "score": 0.0
+    },
+    "normalization_baselines": {
+      "score": 0.0
+    }
+  },
+  {
+    "app_version": "0.8.1.dev7+ga06a383.d20260904",
+    "timestamp": "2026-09-04T11:26:31.303107",
+    "suite_id": "3b1c1a24-fe62-4ffb-a777-aa9961a25780",
+    "job_type": "Quantum Fourier Transform",
+    "results": {
+      "accuracy_score": 0.641,
+      "score": 0.641
+    },
+    "params": {
+      "benchmark_name": "Quantum Fourier Transform",
+      "max_circuits": 3,
+      "method": 1,
+      "num_qubits": 4,
+      "shots": 1000,
+      "use_midcircuit_measurement": false
+    },
+    "provider": "origin",
+    "device": "WK_C180",
+    "device_metadata": {
+      "num_qubits": 180,
+      "simulator": false
+    },
+    "errors": {
+      "accuracy_score": 0.051,
+      "score": 0.051
+    },
+    "normalization_baselines": {
+      "score": 0.8080000000000002
+    },
+    "normalized_scores": {
+      "score": 79.33168316831681
+    },
+    "metriq_score": 79.33168316831681
+  },
+  {
+    "app_version": "0.8.1.dev7+ga06a383.d20260904",
+    "timestamp": "2026-09-04T11:26:33.463030",
+    "suite_id": "3b1c1a24-fe62-4ffb-a777-aa9961a25780",
+    "job_type": "Quantum Fourier Transform",
+    "results": {
+      "accuracy_score": 0.004,
+      "score": 0.004
+    },
+    "params": {
+      "benchmark_name": "Quantum Fourier Transform",
+      "max_circuits": 3,
+      "method": 1,
+      "num_qubits": 8,
+      "shots": 1000,
+      "use_midcircuit_measurement": false
+    },
+    "provider": "origin",
+    "device": "WK_C180",
+    "device_metadata": {
+      "num_qubits": 180,
+      "simulator": false
+    },
+    "errors": {
+      "accuracy_score": 0.003,
+      "score": 0.003
+    },
+    "normalization_baselines": {
+      "score": 0.215
+    },
+    "normalized_scores": {
+      "score": 1.8604651162790697
+    },
+    "metriq_score": 1.8604651162790697
+  },
+  {
+    "app_version": "0.8.1.dev7+ga06a383.d20260904",
+    "timestamp": "2026-09-04T11:26:36.019111",
+    "suite_id": "3b1c1a24-fe62-4ffb-a777-aa9961a25780",
+    "job_type": "Quantum Fourier Transform",
+    "results": {
+      "accuracy_score": 0.0,
+      "score": 0.0
+    },
+    "params": {
+      "benchmark_name": "Quantum Fourier Transform",
+      "max_circuits": 3,
+      "method": 1,
+      "num_qubits": 12,
+      "shots": 1000,
+      "use_midcircuit_measurement": false
+    },
+    "provider": "origin",
+    "device": "WK_C180",
+    "device_metadata": {
+      "num_qubits": 180,
+      "simulator": false
+    },
+    "errors": {
+      "accuracy_score": 0.0,
+      "score": 0.0
+    },
+    "normalization_baselines": {
+      "score": 0.002
+    },
+    "normalized_scores": {
+      "score": 0.0
+    },
+    "metriq_score": 0.0
+  },
+  {
+    "app_version": "0.8.1.dev7+ga06a383.d20260904",
+    "timestamp": "2026-09-04T11:26:40.462322",
+    "suite_id": "3b1c1a24-fe62-4ffb-a777-aa9961a25780",
+    "job_type": "Quantum Fourier Transform",
+    "results": null,
+    "params": {
+      "benchmark_name": "Quantum Fourier Transform",
+      "max_circuits": 3,
+      "method": 1,
+      "num_qubits": 20,
+      "shots": 1000,
+      "use_midcircuit_measurement": false
+    },
+    "outcome": "error",
+    "outcome_detail": {
+      "error_message": "C70F1AFFD172913B2097D2DF2C506669: FAILED - query qcloud task C70F1AFFD172913B2097D2DF2C506669 failed: Error: Compilation failed, exceeding the maximum clock cycle!",
+      "source": "poll"
+    },
+    "provider": "origin",
+    "device": "WK_C180",
+    "device_metadata": {
+      "num_qubits": 180,
+      "simulator": false
+    }
+  },
+  {
+    "app_version": "0.8.1.dev7+ga06a383.d20260904",
+    "timestamp": "2026-09-04T11:50:18.056344",
+    "suite_id": "35466428-46c8-4f18-ba63-c73bed60132c",
+    "job_type": "Linear Ramp QAOA",
+    "results": {
+      "approx_ratio": [
+        0.5166027560088821
+      ],
+      "random_approx_ratio": 0.49990133333333336,
+      "confidence_pass": [
+        true
+      ],
+      "effective_approx_ratio": [
+        0.033396255156746456
+      ],
+      "score": 0.033396255156746456
+    },
+    "params": {
+      "benchmark_name": "Linear Ramp QAOA",
+      "confidence_level": 0.999,
+      "delta_beta": 0.3,
+      "delta_gamma": 0.6,
+      "graph_type": "1D",
+      "num_qubits": 10,
+      "num_random_trials": 25,
+      "qaoa_layers": [
+        10
+      ],
+      "seed": 123,
+      "shots": 1000,
+      "trials": 10
+    },
+    "provider": "origin",
+    "device": "WK_C180",
+    "device_metadata": {
+      "num_qubits": 180,
+      "simulator": false
+    },
+    "errors": {
+      "score": null
+    },
+    "normalization_baselines": {
+      "score": 0.5769501485040286
+    },
+    "normalized_scores": {
+      "score": 5.788412611269701
+    },
+    "metriq_score": 5.788412611269701
+  },
+  {
+    "app_version": "0.8.1.dev7+ga06a383.d20260904",
+    "timestamp": "2026-09-04T11:50:24.609485",
+    "suite_id": "35466428-46c8-4f18-ba63-c73bed60132c",
+    "job_type": "Linear Ramp QAOA",
+    "results": {
+      "approx_ratio": [
+        0.5001665255404263
+      ],
+      "random_approx_ratio": 0.5007686956521739,
+      "confidence_pass": [
+        true
+      ],
+      "effective_approx_ratio": [
+        0.0
+      ],
+      "score": 0.0
+    },
+    "params": {
+      "benchmark_name": "Linear Ramp QAOA",
+      "confidence_level": 0.999,
+      "delta_beta": 0.3,
+      "delta_gamma": 0.6,
+      "graph_type": "1D",
+      "num_qubits": 20,
+      "num_random_trials": 25,
+      "qaoa_layers": [
+        10
+      ],
+      "seed": 123,
+      "shots": 1000,
+      "trials": 10
+    },
+    "provider": "origin",
+    "device": "WK_C180",
+    "device_metadata": {
+      "num_qubits": 180,
+      "simulator": false
+    },
+    "errors": {
+      "score": null
+    },
+    "normalization_baselines": {
+      "score": 0.5174610473609279
+    },
+    "normalized_scores": {
+      "score": 0.0
+    },
+    "metriq_score": 0.0
+  },
+  {
+    "app_version": "0.8.1.dev7+ga06a383.d20260904",
+    "timestamp": "2026-09-04T11:50:32.367341",
+    "suite_id": "35466428-46c8-4f18-ba63-c73bed60132c",
+    "job_type": "Linear Ramp QAOA",
+    "results": {
+      "approx_ratio": [
+        0.472009380640609
+      ],
+      "random_approx_ratio": 0.5139772375690609,
+      "confidence_pass": [
+        false
+      ],
+      "effective_approx_ratio": [
+        0.0
+      ],
+      "score": 0.0
+    },
+    "params": {
+      "benchmark_name": "Linear Ramp QAOA",
+      "confidence_level": 0.999,
+      "delta_beta": 0.3,
+      "delta_gamma": 0.6,
+      "graph_type": "1D",
+      "num_qubits": 50,
+      "num_random_trials": 25,
+      "qaoa_layers": [
+        10
+      ],
+      "seed": 123,
+      "shots": 1000,
+      "trials": 10
+    },
+    "provider": "origin",
+    "device": "WK_C180",
+    "device_metadata": {
+      "num_qubits": 180,
+      "simulator": false
+    },
+    "errors": {
+      "score": null
+    },
+    "normalization_baselines": {
+      "score": 0.5217501124245376
+    },
+    "normalized_scores": {
+      "score": 0.0
+    },
+    "metriq_score": 0.0
+  },
+  {
+    "app_version": "0.8.1.dev7+ga06a383.d20260904",
+    "timestamp": "2026-09-04T11:50:40.641913",
+    "suite_id": "35466428-46c8-4f18-ba63-c73bed60132c",
+    "job_type": "Linear Ramp QAOA",
+    "results": null,
+    "params": {
+      "benchmark_name": "Linear Ramp QAOA",
+      "confidence_level": 0.999,
+      "delta_beta": 0.3,
+      "delta_gamma": 0.6,
+      "graph_type": "1D",
+      "num_qubits": 100,
+      "num_random_trials": 25,
+      "qaoa_layers": [
+        10
+      ],
+      "seed": 123,
+      "shots": 1000,
+      "trials": 10
+    },
+    "outcome": "error",
+    "outcome_detail": {
+      "error_message": "8F2CD838AB4C615648AE2F976EA1F592: FAILED - query qcloud task 8F2CD838AB4C615648AE2F976EA1F592 failed: Error: No available aio for task needed logic qubit-block.",
+      "source": "poll"
+    },
+    "provider": "origin",
+    "device": "WK_C180",
+    "device_metadata": {
+      "num_qubits": 180,
+      "simulator": false
+    }
+  }
+]
