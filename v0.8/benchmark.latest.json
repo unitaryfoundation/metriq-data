@@ -23,6 +23,9 @@
       "expectation_value": 0.004721861028837969,
       "score": 0.004721861028837969
     },
+    "normalization_baselines": {
+      "expectation_value": 0.772705078125
+    },
     "normalized_scores": {
       "expectation_value": 98.29383886255924
     },
@@ -54,6 +57,9 @@
     "errors": {
       "accuracy_score": 0.007,
       "score": 0.007
+    },
+    "normalization_baselines": {
+      "score": 0.8080000000000002
     },
     "normalized_scores": {
       "score": 70.9158415841584
@@ -87,6 +93,9 @@
       "accuracy_score": 0.004,
       "score": 0.004
     },
+    "normalization_baselines": {
+      "score": 0.215
+    },
     "normalized_scores": {
       "score": 12.093023255813954
     },
@@ -119,6 +128,9 @@
       "accuracy_score": 0.0,
       "score": 0.0
     },
+    "normalization_baselines": {
+      "score": 0.002
+    },
     "normalized_scores": {
       "score": 0.0
     },
@@ -150,6 +162,9 @@
     "errors": {
       "accuracy_score": 0.0,
       "score": 0.0
+    },
+    "normalization_baselines": {
+      "score": 0.0
     }
   },
   {
@@ -178,6 +193,9 @@
     "errors": {
       "accuracy_score": 0.051,
       "score": 0.051
+    },
+    "normalization_baselines": {
+      "score": 0.8080000000000002
     },
     "normalized_scores": {
       "score": 79.33168316831681
@@ -211,6 +229,9 @@
       "accuracy_score": 0.003,
       "score": 0.003
     },
+    "normalization_baselines": {
+      "score": 0.215
+    },
     "normalized_scores": {
       "score": 1.8604651162790697
     },
@@ -242,6 +263,9 @@
     "errors": {
       "accuracy_score": 0.0,
       "score": 0.0
+    },
+    "normalization_baselines": {
+      "score": 0.002
     },
     "normalized_scores": {
       "score": 0.0
@@ -316,6 +340,9 @@
     "errors": {
       "score": null
     },
+    "normalization_baselines": {
+      "score": 0.5769501485040286
+    },
     "normalized_scores": {
       "score": 5.788412611269701
     },
@@ -363,6 +390,9 @@
     "errors": {
       "score": null
     },
+    "normalization_baselines": {
+      "score": 0.5174610473609279
+    },
     "normalized_scores": {
       "score": 0.0
     },
@@ -409,6 +439,9 @@
     },
     "errors": {
       "score": null
+    },
+    "normalization_baselines": {
+      "score": 0.5217501124245376
     },
     "normalized_scores": {
       "score": 0.0

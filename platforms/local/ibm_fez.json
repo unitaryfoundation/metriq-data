@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-10T08:28:18.535923Z",
+  "generated_at": "2026-09-11T11:08:45.660645Z",
   "provider": "local",
   "device": "ibm_fez",
   "first_seen": "2025-09-23T17:37:22.988194Z",
@@ -48,7 +48,10 @@
         "normalized_timestamp": null,
         "raw": null,
         "raw_available": false,
-        "raw_timestamp": null
+        "raw_timestamp": null,
+        "baseline": null,
+        "direction": "higher",
+        "baseline_is_self": false
       },
       "QMLK-10:accuracy_score": {
         "metric": "accuracy_score",
@@ -64,6 +67,9 @@
         "raw": null,
         "raw_available": false,
         "raw_timestamp": null,
+        "baseline": null,
+        "direction": "higher",
+        "baseline_is_self": false,
         "required_num_qubits": 10
       },
       "QMLK-20:accuracy_score": {
@@ -80,6 +86,9 @@
         "raw": null,
         "raw_available": false,
         "raw_timestamp": null,
+        "baseline": null,
+        "direction": "higher",
+        "baseline_is_self": false,
         "required_num_qubits": 20
       },
       "QMLK-30:accuracy_score": {
@@ -96,6 +105,9 @@
         "raw": null,
         "raw_available": false,
         "raw_timestamp": null,
+        "baseline": null,
+        "direction": "higher",
+        "baseline_is_self": false,
         "required_num_qubits": 30
       },
       "QMLK-50:accuracy_score": {
@@ -112,6 +124,9 @@
         "raw": null,
         "raw_available": false,
         "raw_timestamp": null,
+        "baseline": null,
+        "direction": "higher",
+        "baseline_is_self": false,
         "required_num_qubits": 50
       },
       "Mirror Circuits (w=8,d=64):score": {
@@ -128,6 +143,9 @@
         "raw": null,
         "raw_available": false,
         "raw_timestamp": null,
+        "baseline": null,
+        "direction": "higher",
+        "baseline_is_self": false,
         "required_num_qubits": 8
       },
       "Mirror Circuits (w=16,d=32):score": {
@@ -144,6 +162,9 @@
         "raw": null,
         "raw_available": false,
         "raw_timestamp": null,
+        "baseline": null,
+        "direction": "higher",
+        "baseline_is_self": false,
         "required_num_qubits": 16
       },
       "Mirror Circuits (w=24,d=16):score": {
@@ -160,6 +181,9 @@
         "raw": null,
         "raw_available": false,
         "raw_timestamp": null,
+        "baseline": null,
+        "direction": "higher",
+        "baseline_is_self": false,
         "required_num_qubits": 24
       },
       "Mirror Circuits (w=32,d=8):score": {
@@ -176,6 +200,9 @@
         "raw": null,
         "raw_available": false,
         "raw_timestamp": null,
+        "baseline": null,
+        "direction": "higher",
+        "baseline_is_self": false,
         "required_num_qubits": 32
       },
       "Mirror Circuits (w=64,d=4):score": {
@@ -192,6 +219,9 @@
         "raw": null,
         "raw_available": false,
         "raw_timestamp": null,
+        "baseline": null,
+        "direction": "higher",
+        "baseline_is_self": false,
         "required_num_qubits": 64
       },
       "Mirror Circuits (w=128,d=2):score": {
@@ -208,6 +238,9 @@
         "raw": null,
         "raw_available": false,
         "raw_timestamp": null,
+        "baseline": null,
+        "direction": "higher",
+        "baseline_is_self": false,
         "required_num_qubits": 128
       },
       "WIT (7q):expectation_value": {
@@ -224,6 +257,9 @@
         "raw": 0.9234619140625,
         "raw_available": true,
         "raw_timestamp": "2025-10-09T12:48:59.222906",
+        "baseline": 0.772705078125,
+        "direction": "higher",
+        "baseline_is_self": false,
         "required_num_qubits": 7,
         "group_subscore": 119.51026856240127
       },
@@ -240,7 +276,10 @@
         "normalized_timestamp": null,
         "raw": null,
         "raw_available": false,
-        "raw_timestamp": null
+        "raw_timestamp": null,
+        "baseline": null,
+        "direction": "higher",
+        "baseline_is_self": false
       },
       "Linear Ramp QAOA (10q):score": {
         "metric": "score",
@@ -256,6 +295,9 @@
         "raw": null,
         "raw_available": false,
         "raw_timestamp": null,
+        "baseline": null,
+        "direction": "higher",
+        "baseline_is_self": false,
         "required_num_qubits": 10
       },
       "Linear Ramp QAOA (20q):score": {
@@ -272,6 +314,9 @@
         "raw": null,
         "raw_available": false,
         "raw_timestamp": null,
+        "baseline": null,
+        "direction": "higher",
+        "baseline_is_self": false,
         "required_num_qubits": 20
       },
       "Linear Ramp QAOA (50q):score": {
@@ -288,6 +333,9 @@
         "raw": null,
         "raw_available": false,
         "raw_timestamp": null,
+        "baseline": null,
+        "direction": "higher",
+        "baseline_is_self": false,
         "required_num_qubits": 50
       },
       "Linear Ramp QAOA (100q):score": {
@@ -304,6 +352,9 @@
         "raw": null,
         "raw_available": false,
         "raw_timestamp": null,
+        "baseline": null,
+        "direction": "higher",
+        "baseline_is_self": false,
         "required_num_qubits": 100
       },
       "EPLG-10:score": {
@@ -320,6 +371,9 @@
         "raw": null,
         "raw_available": false,
         "raw_timestamp": null,
+        "baseline": null,
+        "direction": "higher",
+        "baseline_is_self": false,
         "required_num_qubits": 10
       },
       "EPLG-20:score": {
@@ -336,6 +390,9 @@
         "raw": null,
         "raw_available": false,
         "raw_timestamp": null,
+        "baseline": null,
+        "direction": "higher",
+        "baseline_is_self": false,
         "required_num_qubits": 20
       },
       "EPLG-50:score": {
@@ -352,6 +409,9 @@
         "raw": null,
         "raw_available": false,
         "raw_timestamp": null,
+        "baseline": null,
+        "direction": "higher",
+        "baseline_is_self": false,
         "required_num_qubits": 50
       },
       "EPLG-100:score": {
@@ -368,6 +428,9 @@
         "raw": null,
         "raw_available": false,
         "raw_timestamp": null,
+        "baseline": null,
+        "direction": "higher",
+        "baseline_is_self": false,
         "required_num_qubits": 100
       },
       "CLOPS (twirled, session=true):score": {
@@ -383,7 +446,10 @@
         "normalized_timestamp": null,
         "raw": null,
         "raw_available": false,
-        "raw_timestamp": null
+        "raw_timestamp": null,
+        "baseline": null,
+        "direction": "higher",
+        "baseline_is_self": false
       }
     }
   }

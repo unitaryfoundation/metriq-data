@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-10T08:28:18.535923Z",
+  "generated_at": "2026-09-11T11:08:45.660645Z",
   "provider": "ibm",
   "device": "ibm_marrakesh",
   "first_seen": "2025-10-19T14:09:40.351936Z",
@@ -72,7 +72,10 @@
         "normalized_timestamp": "2025-10-19T14:09:40.351936",
         "raw": null,
         "raw_available": false,
-        "raw_timestamp": null
+        "raw_timestamp": null,
+        "baseline": null,
+        "direction": "higher",
+        "baseline_is_self": false
       },
       "QMLK-10:accuracy_score": {
         "metric": "accuracy_score",
@@ -88,6 +91,9 @@
         "raw": 0.794,
         "raw_available": true,
         "raw_timestamp": "2025-11-11T16:26:39.977602",
+        "baseline": 0.758,
+        "direction": "higher",
+        "baseline_is_self": false,
         "required_num_qubits": 10,
         "group_subscore": 116.11898996886889
       },
@@ -105,6 +111,9 @@
         "raw": 0.443,
         "raw_available": true,
         "raw_timestamp": "2025-11-11T16:26:43.743827",
+        "baseline": 0.488,
+        "direction": "higher",
+        "baseline_is_self": false,
         "required_num_qubits": 20,
         "group_subscore": 116.11898996886889
       },
@@ -122,6 +131,9 @@
         "raw": 0.379,
         "raw_available": true,
         "raw_timestamp": "2025-11-11T16:26:47.146506",
+        "baseline": 0.279,
+        "direction": "higher",
+        "baseline_is_self": false,
         "required_num_qubits": 30,
         "group_subscore": 116.11898996886889
       },
@@ -139,6 +151,9 @@
         "raw": 0.108,
         "raw_available": true,
         "raw_timestamp": "2025-11-11T16:26:47.911357",
+        "baseline": 0.064,
+        "direction": "higher",
+        "baseline_is_self": false,
         "required_num_qubits": 50,
         "group_subscore": 116.11898996886889
       },
@@ -156,6 +171,9 @@
         "raw": 0.49492705882352944,
         "raw_available": true,
         "raw_timestamp": "2025-12-16T11:57:16.115345",
+        "baseline": 0.3172329411764706,
+        "direction": "higher",
+        "baseline_is_self": false,
         "required_num_qubits": 8,
         "group_subscore": 249.2770417121704
       },
@@ -173,6 +191,9 @@
         "raw": 0.48459213550011443,
         "raw_available": true,
         "raw_timestamp": "2025-12-16T11:57:20.028944",
+        "baseline": 0.27568894789044024,
+        "direction": "higher",
+        "baseline_is_self": false,
         "required_num_qubits": 16,
         "group_subscore": 249.2770417121704
       },
@@ -190,6 +211,9 @@
         "raw": 0.4013999643206575,
         "raw_available": true,
         "raw_timestamp": "2025-12-16T11:57:23.809088",
+        "baseline": 0.12679994795322108,
+        "direction": "higher",
+        "baseline_is_self": false,
         "required_num_qubits": 24,
         "group_subscore": 249.2770417121704
       },
@@ -207,6 +231,9 @@
         "raw": 0.1284999997970881,
         "raw_available": true,
         "raw_timestamp": "2025-12-16T11:57:27.456029",
+        "baseline": 0.033599999774992464,
+        "direction": "higher",
+        "baseline_is_self": false,
         "required_num_qubits": 32,
         "group_subscore": 249.2770417121704
       },
@@ -224,6 +251,9 @@
         "raw": 0.0371,
         "raw_available": true,
         "raw_timestamp": "2025-12-16T11:57:31.206154",
+        "baseline": 0.0037,
+        "direction": "higher",
+        "baseline_is_self": false,
         "required_num_qubits": 64,
         "group_subscore": 249.2770417121704
       },
@@ -241,6 +271,9 @@
         "raw": 0.0027,
         "raw_available": true,
         "raw_timestamp": "2025-12-16T11:57:35.192050",
+        "baseline": 0.0,
+        "direction": "higher",
+        "baseline_is_self": false,
         "required_num_qubits": 128,
         "group_subscore": 249.2770417121704
       },
@@ -258,6 +291,9 @@
         "raw": 0.758056640625,
         "raw_available": true,
         "raw_timestamp": "2026-02-10T12:01:33.103097",
+        "baseline": 0.772705078125,
+        "direction": "higher",
+        "baseline_is_self": false,
         "required_num_qubits": 7,
         "group_subscore": 98.10426540284361
       },
@@ -275,6 +311,9 @@
         "raw": 0.717,
         "raw_available": true,
         "raw_timestamp": "2026-02-09T14:34:16.134727",
+        "baseline": 0.8080000000000002,
+        "direction": "higher",
+        "baseline_is_self": false,
         "required_num_qubits": 4,
         "group_subscore": 80.22508038585208
       },
@@ -292,6 +331,9 @@
         "raw": 0.136,
         "raw_available": true,
         "raw_timestamp": "2026-02-09T14:34:36.831865",
+        "baseline": 0.215,
+        "direction": "higher",
+        "baseline_is_self": false,
         "required_num_qubits": 8,
         "group_subscore": 80.22508038585208
       },
@@ -309,6 +351,9 @@
         "raw": 0.0030000000000000005,
         "raw_available": true,
         "raw_timestamp": "2026-02-09T14:34:58.141381",
+        "baseline": 0.002,
+        "direction": "higher",
+        "baseline_is_self": false,
         "required_num_qubits": 12,
         "group_subscore": 80.22508038585208
       },
@@ -326,6 +371,9 @@
         "raw": 0.0,
         "raw_available": true,
         "raw_timestamp": "2026-02-09T14:35:43.223365",
+        "baseline": 0.0,
+        "direction": "higher",
+        "baseline_is_self": false,
         "required_num_qubits": 20,
         "group_subscore": 80.22508038585208
       },
@@ -343,6 +391,9 @@
         "raw": 0.6057711278307742,
         "raw_available": true,
         "raw_timestamp": "2026-02-17T11:50:35.339449",
+        "baseline": 0.5769501485040286,
+        "direction": "higher",
+        "baseline_is_self": false,
         "required_num_qubits": 10,
         "group_subscore": 119.54674577069908
       },
@@ -360,6 +411,9 @@
         "raw": 0.5739507927550075,
         "raw_available": true,
         "raw_timestamp": "2026-02-17T11:51:06.267103",
+        "baseline": 0.5174610473609279,
+        "direction": "higher",
+        "baseline_is_self": false,
         "required_num_qubits": 20,
         "group_subscore": 119.54674577069908
       },
@@ -377,6 +431,9 @@
         "raw": 0.6023183781038385,
         "raw_available": true,
         "raw_timestamp": "2026-02-17T11:51:33.402060",
+        "baseline": 0.5217501124245376,
+        "direction": "higher",
+        "baseline_is_self": false,
         "required_num_qubits": 50,
         "group_subscore": 119.54674577069908
       },
@@ -394,6 +451,9 @@
         "raw": 0.5731329270539297,
         "raw_available": true,
         "raw_timestamp": "2026-02-17T11:52:06.580795",
+        "baseline": 0.4559703088701817,
+        "direction": "higher",
+        "baseline_is_self": false,
         "required_num_qubits": 100,
         "group_subscore": 119.54674577069908
       },
@@ -411,6 +471,9 @@
         "raw": 0.004269598417392828,
         "raw_available": true,
         "raw_timestamp": "2026-08-14T11:22:25.304183",
+        "baseline": 0.005507229607968012,
+        "direction": "lower",
+        "baseline_is_self": false,
         "required_num_qubits": 10
       },
       "EPLG-20": {
@@ -427,6 +490,9 @@
         "raw": 0.005041248376506657,
         "raw_available": true,
         "raw_timestamp": "2026-08-14T11:22:25.304183",
+        "baseline": 0.009586857548359973,
+        "direction": "lower",
+        "baseline_is_self": false,
         "required_num_qubits": 20
       },
       "EPLG-50": {
@@ -443,6 +509,9 @@
         "raw": 0.11165688496598236,
         "raw_available": true,
         "raw_timestamp": "2026-08-14T11:22:25.304183",
+        "baseline": 0.038328721277900546,
+        "direction": "lower",
+        "baseline_is_self": false,
         "required_num_qubits": 50
       },
       "EPLG-100": {
@@ -459,6 +528,9 @@
         "raw": 0.11277338711263896,
         "raw_available": true,
         "raw_timestamp": "2026-08-14T11:22:25.304183",
+        "baseline": 0.06877248119630675,
+        "direction": "lower",
+        "baseline_is_self": false,
         "required_num_qubits": 100
       },
       "CLOPS (twirled, session=true):score": {
@@ -475,6 +547,9 @@
         "raw": 353641.503140478,
         "raw_available": true,
         "raw_timestamp": "2026-02-17T11:59:22.425836",
+        "baseline": 345669.8525213401,
+        "direction": "higher",
+        "baseline_is_self": false,
         "group_subscore": 102.3061457517895
       }
     }

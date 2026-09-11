@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-10T08:28:18.535923Z",
+  "generated_at": "2026-09-11T11:08:45.660645Z",
   "provider": "aws",
   "device": "rigetti_cepheus-1-108q",
   "first_seen": "2026-07-15T16:26:08.016526Z",
@@ -40,7 +40,10 @@
         "normalized_timestamp": "2026-07-24T10:25:20.793010",
         "raw": null,
         "raw_available": false,
-        "raw_timestamp": null
+        "raw_timestamp": null,
+        "baseline": null,
+        "direction": "higher",
+        "baseline_is_self": false
       },
       "QMLK-10:accuracy_score": {
         "metric": "accuracy_score",
@@ -56,6 +59,9 @@
         "raw": 0.001,
         "raw_available": true,
         "raw_timestamp": "2026-07-24T10:11:51.611267",
+        "baseline": 0.758,
+        "direction": "higher",
+        "baseline_is_self": false,
         "required_num_qubits": 10,
         "group_subscore": 0.034590107229332416
       },
@@ -73,6 +79,9 @@
         "raw": 0.0,
         "raw_available": true,
         "raw_timestamp": "2026-07-24T10:12:31.841951",
+        "baseline": 0.488,
+        "direction": "higher",
+        "baseline_is_self": false,
         "required_num_qubits": 20,
         "group_subscore": 0.034590107229332416
       },
@@ -90,6 +99,9 @@
         "raw": 0.0,
         "raw_available": true,
         "raw_timestamp": "2026-07-24T10:12:56.414175",
+        "baseline": 0.279,
+        "direction": "higher",
+        "baseline_is_self": false,
         "required_num_qubits": 30,
         "group_subscore": 0.034590107229332416
       },
@@ -107,6 +119,9 @@
         "raw": 0.0,
         "raw_available": true,
         "raw_timestamp": "2026-07-24T10:13:21.384518",
+        "baseline": 0.064,
+        "direction": "higher",
+        "baseline_is_self": false,
         "required_num_qubits": 50,
         "group_subscore": 0.034590107229332416
       },
@@ -124,6 +139,9 @@
         "raw": 0.0,
         "raw_available": true,
         "raw_timestamp": "2026-08-04T11:00:50.198900",
+        "baseline": 0.3172329411764706,
+        "direction": "higher",
+        "baseline_is_self": false,
         "required_num_qubits": 8,
         "group_subscore": 0.0
       },
@@ -141,6 +159,9 @@
         "raw": 0.0,
         "raw_available": true,
         "raw_timestamp": "2026-08-04T11:04:21.405713",
+        "baseline": 0.27568894789044024,
+        "direction": "higher",
+        "baseline_is_self": false,
         "required_num_qubits": 16,
         "group_subscore": 0.0
       },
@@ -158,6 +179,9 @@
         "raw": 0.0,
         "raw_available": true,
         "raw_timestamp": "2026-08-04T11:05:14.553762",
+        "baseline": 0.12679994795322108,
+        "direction": "higher",
+        "baseline_is_self": false,
         "required_num_qubits": 24,
         "group_subscore": 0.0
       },
@@ -175,6 +199,9 @@
         "raw": 0.0,
         "raw_available": true,
         "raw_timestamp": "2026-08-04T12:41:01.646281",
+        "baseline": 0.033599999774992464,
+        "direction": "higher",
+        "baseline_is_self": false,
         "required_num_qubits": 32,
         "group_subscore": 0.0
       },
@@ -192,6 +219,9 @@
         "raw": 0.0,
         "raw_available": true,
         "raw_timestamp": "2026-08-04T12:41:47.027639",
+        "baseline": 0.0037,
+        "direction": "higher",
+        "baseline_is_self": false,
         "required_num_qubits": 64,
         "group_subscore": 0.0
       },
@@ -209,6 +239,9 @@
         "raw": null,
         "raw_available": false,
         "raw_timestamp": null,
+        "baseline": null,
+        "direction": "higher",
+        "baseline_is_self": false,
         "required_num_qubits": 128,
         "group_subscore": 0.0
       },
@@ -226,6 +259,9 @@
         "raw": 0.5362548828125,
         "raw_available": true,
         "raw_timestamp": "2026-07-15T16:26:08.016526",
+        "baseline": 0.772705078125,
+        "direction": "higher",
+        "baseline_is_self": false,
         "required_num_qubits": 7,
         "group_subscore": 69.39968404423381
       },
@@ -243,6 +279,9 @@
         "raw": 0.05000000000000001,
         "raw_available": true,
         "raw_timestamp": "2026-08-05T07:07:05.578566",
+        "baseline": 0.8080000000000002,
+        "direction": "higher",
+        "baseline_is_self": false,
         "required_num_qubits": 4,
         "group_subscore": 4.20032310177706
       },
@@ -260,6 +299,9 @@
         "raw": 0.001,
         "raw_available": true,
         "raw_timestamp": "2026-08-05T07:07:09.977310",
+        "baseline": 0.215,
+        "direction": "higher",
+        "baseline_is_self": false,
         "required_num_qubits": 8,
         "group_subscore": 4.20032310177706
       },
@@ -277,6 +319,9 @@
         "raw": null,
         "raw_available": false,
         "raw_timestamp": null,
+        "baseline": null,
+        "direction": "higher",
+        "baseline_is_self": false,
         "required_num_qubits": 12,
         "group_subscore": 4.20032310177706
       },
@@ -294,6 +339,9 @@
         "raw": null,
         "raw_available": false,
         "raw_timestamp": null,
+        "baseline": null,
+        "direction": "higher",
+        "baseline_is_self": false,
         "required_num_qubits": 20,
         "group_subscore": 4.20032310177706
       },
@@ -311,6 +359,9 @@
         "raw": 0.0,
         "raw_available": true,
         "raw_timestamp": "2026-07-23T13:12:00.608456",
+        "baseline": 0.5769501485040286,
+        "direction": "higher",
+        "baseline_is_self": false,
         "required_num_qubits": 10,
         "group_subscore": 0.0
       },
@@ -328,6 +379,9 @@
         "raw": 0.0,
         "raw_available": true,
         "raw_timestamp": "2026-07-24T10:07:20.935640",
+        "baseline": 0.5174610473609279,
+        "direction": "higher",
+        "baseline_is_self": false,
         "required_num_qubits": 20,
         "group_subscore": 0.0
       },
@@ -345,6 +399,9 @@
         "raw": 0.0,
         "raw_available": true,
         "raw_timestamp": "2026-07-24T10:11:44.930061",
+        "baseline": 0.5217501124245376,
+        "direction": "higher",
+        "baseline_is_self": false,
         "required_num_qubits": 50,
         "group_subscore": 0.0
       },
@@ -362,6 +419,9 @@
         "raw": null,
         "raw_available": false,
         "raw_timestamp": null,
+        "baseline": null,
+        "direction": "higher",
+        "baseline_is_self": false,
         "required_num_qubits": 100,
         "group_subscore": 0.0
       },
@@ -379,6 +439,9 @@
         "raw": 0.0020494243795807776,
         "raw_available": true,
         "raw_timestamp": "2026-07-24T10:41:43.366507",
+        "baseline": 0.005507229607968012,
+        "direction": "lower",
+        "baseline_is_self": false,
         "required_num_qubits": 10
       },
       "EPLG-20": {
@@ -395,6 +458,9 @@
         "raw": 0.027334743048140986,
         "raw_available": true,
         "raw_timestamp": "2026-07-24T10:41:43.366507",
+        "baseline": 0.009586857548359973,
+        "direction": "lower",
+        "baseline_is_self": false,
         "required_num_qubits": 20
       },
       "EPLG-50": {
@@ -411,6 +477,9 @@
         "raw": 0.04094722702677722,
         "raw_available": true,
         "raw_timestamp": "2026-07-24T10:41:43.366507",
+        "baseline": 0.038328721277900546,
+        "direction": "lower",
+        "baseline_is_self": false,
         "required_num_qubits": 50
       },
       "EPLG-100": {
@@ -427,6 +496,9 @@
         "raw": null,
         "raw_available": false,
         "raw_timestamp": null,
+        "baseline": null,
+        "direction": "higher",
+        "baseline_is_self": false,
         "required_num_qubits": 100
       },
       "CLOPS (twirled, session=true):score": {
@@ -442,7 +514,10 @@
         "normalized_timestamp": null,
         "raw": null,
         "raw_available": false,
-        "raw_timestamp": null
+        "raw_timestamp": null,
+        "baseline": null,
+        "direction": "higher",
+        "baseline_is_self": false
       }
     }
   }

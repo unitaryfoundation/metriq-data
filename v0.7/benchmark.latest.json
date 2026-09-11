@@ -23,6 +23,9 @@
       "accuracy_score": 0.015592017188292218,
       "score": 0.015592017188292218
     },
+    "normalization_baselines": {
+      "accuracy_score": 0.758
+    },
     "normalized_scores": {
       "accuracy_score": 55.013192612137196
     },
@@ -51,6 +54,9 @@
     "errors": {
       "accuracy_score": 0.0009994998749374609,
       "score": 0.0009994998749374609
+    },
+    "normalization_baselines": {
+      "accuracy_score": 0.488
     },
     "normalized_scores": {
       "accuracy_score": 0.20491803278688525
@@ -81,6 +87,9 @@
       "accuracy_score": 0.0,
       "score": 0.0
     },
+    "normalization_baselines": {
+      "accuracy_score": 0.279
+    },
     "normalized_scores": {
       "accuracy_score": 0.0
     },
@@ -109,6 +118,9 @@
     "errors": {
       "accuracy_score": 0.0,
       "score": 0.0
+    },
+    "normalization_baselines": {
+      "accuracy_score": 0.064
     },
     "normalized_scores": {
       "accuracy_score": 0.0
@@ -139,6 +151,9 @@
       "accuracy_score": 0.0127661662216971,
       "score": 0.0127661662216971
     },
+    "normalization_baselines": {
+      "accuracy_score": 0.758
+    },
     "normalized_scores": {
       "accuracy_score": 27.044854881266488
     },
@@ -167,6 +182,9 @@
     "errors": {
       "accuracy_score": 0.0,
       "score": 0.0
+    },
+    "normalization_baselines": {
+      "accuracy_score": 0.488
     },
     "normalized_scores": {
       "accuracy_score": 0.0
@@ -215,6 +233,9 @@
     "errors": {
       "score": null
     },
+    "normalization_baselines": {
+      "score": 0.5769501485040286
+    },
     "normalized_scores": {
       "score": 55.75303028202533
     },
@@ -262,6 +283,9 @@
     "errors": {
       "score": null
     },
+    "normalization_baselines": {
+      "score": 0.5174610473609279
+    },
     "normalized_scores": {
       "score": 84.44372385688406
     },
@@ -290,6 +314,9 @@
     "errors": {
       "expectation_value": 0.005509730201080868,
       "score": 0.005509730201080868
+    },
+    "normalization_baselines": {
+      "expectation_value": 0.772705078125
     },
     "normalized_scores": {
       "expectation_value": 69.39968404423381
@@ -320,6 +347,9 @@
       "accuracy_score": 0.0009994998749374609,
       "score": 0.0009994998749374609
     },
+    "normalization_baselines": {
+      "accuracy_score": 0.758
+    },
     "normalized_scores": {
       "accuracy_score": 0.13192612137203166
     },
@@ -348,6 +378,9 @@
     "errors": {
       "accuracy_score": 0.0,
       "score": 0.0
+    },
+    "normalization_baselines": {
+      "accuracy_score": 0.488
     },
     "normalized_scores": {
       "accuracy_score": 0.0
@@ -378,6 +411,9 @@
       "accuracy_score": 0.0,
       "score": 0.0
     },
+    "normalization_baselines": {
+      "accuracy_score": 0.279
+    },
     "normalized_scores": {
       "accuracy_score": 0.0
     },
@@ -406,6 +442,9 @@
     "errors": {
       "accuracy_score": 0.0,
       "score": 0.0
+    },
+    "normalization_baselines": {
+      "accuracy_score": 0.064
     },
     "normalized_scores": {
       "accuracy_score": 0.0
@@ -443,6 +482,9 @@
       "polarization": 0.0,
       "score": 0.0
     },
+    "normalization_baselines": {
+      "score": 0.3172329411764706
+    },
     "normalized_scores": {
       "score": 0.0
     },
@@ -478,6 +520,9 @@
       "success_probability": 0.0,
       "polarization": 0.0,
       "score": 0.0
+    },
+    "normalization_baselines": {
+      "score": 0.033599999774992464
     },
     "normalized_scores": {
       "score": 0.0
@@ -515,6 +560,9 @@
       "polarization": 0.0,
       "score": 0.0
     },
+    "normalization_baselines": {
+      "score": 0.12679994795322108
+    },
     "normalized_scores": {
       "score": 0.0
     },
@@ -550,6 +598,9 @@
       "success_probability": 0.0,
       "polarization": 0.0,
       "score": 0.0
+    },
+    "normalization_baselines": {
+      "score": 0.27568894789044024
     },
     "normalized_scores": {
       "score": 0.0
@@ -587,6 +638,9 @@
       "polarization": 0.0,
       "score": 0.0
     },
+    "normalization_baselines": {
+      "score": 0.3172329411764706
+    },
     "normalized_scores": {
       "score": 0.0
     },
@@ -622,6 +676,9 @@
       "success_probability": 0.0001999599959991998,
       "polarization": 0.0001999630471931572,
       "score": 0.0001999630471931572
+    },
+    "normalization_baselines": {
+      "score": 0.27568894789044024
     },
     "normalized_scores": {
       "score": 0.13955839893333777
@@ -659,6 +716,9 @@
       "polarization": 0.0,
       "score": 0.0
     },
+    "normalization_baselines": {
+      "score": 0.3172329411764706
+    },
     "normalized_scores": {
       "score": 0.0
     },
@@ -694,6 +754,9 @@
       "success_probability": 0.0,
       "polarization": 0.0,
       "score": 0.0
+    },
+    "normalization_baselines": {
+      "score": 0.27568894789044024
     },
     "normalized_scores": {
       "score": 0.0
@@ -731,6 +794,9 @@
       "polarization": 0.0,
       "score": 0.0
     },
+    "normalization_baselines": {
+      "score": 0.12679994795322108
+    },
     "normalized_scores": {
       "score": 0.0
     },
@@ -766,6 +832,9 @@
       "success_probability": 0.0,
       "polarization": 0.0,
       "score": 0.0
+    },
+    "normalization_baselines": {
+      "score": 0.033599999774992464
     },
     "normalized_scores": {
       "score": 0.0
@@ -803,6 +872,9 @@
       "polarization": 0.0,
       "score": 0.0
     },
+    "normalization_baselines": {
+      "score": 0.0037
+    },
     "normalized_scores": {
       "score": 0.0
     },
@@ -835,6 +907,9 @@
       "accuracy_score": 0.011,
       "score": 0.011
     },
+    "normalization_baselines": {
+      "score": 0.8080000000000002
+    },
     "normalized_scores": {
       "score": 6.188118811881188
     },
@@ -866,6 +941,9 @@
     "errors": {
       "accuracy_score": 0.0,
       "score": 0.0
+    },
+    "normalization_baselines": {
+      "score": 0.215
     },
     "normalized_scores": {
       "score": 0.46511627906976744
@@ -914,6 +992,9 @@
     "errors": {
       "score": null
     },
+    "normalization_baselines": {
+      "score": 0.5769501485040286
+    },
     "normalized_scores": {
       "score": 0.0
     },
@@ -960,6 +1041,9 @@
     },
     "errors": {
       "score": null
+    },
+    "normalization_baselines": {
+      "score": 0.5174610473609279
     },
     "normalized_scores": {
       "score": 0.0
@@ -1008,6 +1092,9 @@
     "errors": {
       "score": null
     },
+    "normalization_baselines": {
+      "score": 0.5217501124245376
+    },
     "normalized_scores": {
       "score": 0.0
     },
@@ -1035,6 +1122,9 @@
     },
     "errors": {
       "score": null
+    },
+    "normalization_baselines": {
+      "bseq_score": null
     },
     "normalized_scores": {
       "bseq_score": 3.8716814159292032
@@ -1168,6 +1258,12 @@
       "eplg_20": "lower",
       "eplg_50": "lower",
       "eplg_100": "lower"
+    },
+    "normalization_baselines": {
+      "eplg_10": 0.005507229607968012,
+      "eplg_20": 0.009586857548359973,
+      "eplg_50": 0.038328721277900546,
+      "eplg_100": 0.06877248119630675
     },
     "normalized_scores": {
       "eplg_10": 268.7208009643444,
@@ -1330,6 +1426,12 @@
       "eplg_20": "lower",
       "eplg_50": "lower",
       "eplg_100": "lower"
+    },
+    "normalization_baselines": {
+      "eplg_10": 0.005507229607968012,
+      "eplg_20": 0.009586857548359973,
+      "eplg_50": 0.038328721277900546,
+      "eplg_100": 0.06877248119630675
     },
     "normalized_scores": {
       "eplg_10": 143.88370301870995,
@@ -1494,6 +1596,12 @@
       "eplg_50": "lower",
       "eplg_100": "lower"
     },
+    "normalization_baselines": {
+      "eplg_10": 0.005507229607968012,
+      "eplg_20": 0.009586857548359973,
+      "eplg_50": 0.038328721277900546,
+      "eplg_100": 0.06877248119630675
+    },
     "normalized_scores": {
       "eplg_10": 189.78485762788205,
       "eplg_20": 284.38767621451615,
@@ -1657,6 +1765,12 @@
       "eplg_50": "lower",
       "eplg_100": "lower"
     },
+    "normalization_baselines": {
+      "eplg_10": 0.005507229607968012,
+      "eplg_20": 0.009586857548359973,
+      "eplg_50": 0.038328721277900546,
+      "eplg_100": 0.06877248119630675
+    },
     "normalized_scores": {
       "eplg_10": 128.9870631751575,
       "eplg_20": 190.16832404126066,
@@ -1689,6 +1803,9 @@
     "errors": {
       "expectation_value": 0.0035440395622697448,
       "score": 0.0035440395622697448
+    },
+    "normalization_baselines": {
+      "expectation_value": 0.772705078125
     },
     "normalized_scores": {
       "expectation_value": 114.34439178515008
@@ -1738,6 +1855,9 @@
     "errors": {
       "score": null
     },
+    "normalization_baselines": {
+      "score": 0.5769501485040286
+    },
     "normalized_scores": {
       "score": 114.70316406268064
     },
@@ -1785,6 +1905,9 @@
     },
     "errors": {
       "score": null
+    },
+    "normalization_baselines": {
+      "score": 0.5174610473609279
     },
     "normalized_scores": {
       "score": 117.06763998348397
@@ -1834,6 +1957,9 @@
     "errors": {
       "score": null
     },
+    "normalization_baselines": {
+      "score": 0.5217501124245376
+    },
     "normalized_scores": {
       "score": 103.93630107528742
     },
@@ -1882,6 +2008,9 @@
     "errors": {
       "score": null
     },
+    "normalization_baselines": {
+      "score": 0.4559703088701817
+    },
     "normalized_scores": {
       "score": 92.04074566423027
     },
@@ -1910,6 +2039,9 @@
     },
     "errors": {
       "score": null
+    },
+    "normalization_baselines": {
+      "bseq_score": null
     },
     "normalized_scores": {
       "bseq_score": 92.9203539823009
@@ -1944,6 +2076,9 @@
       "accuracy_score": 0.005,
       "score": 0.005
     },
+    "normalization_baselines": {
+      "score": 0.8080000000000002
+    },
     "normalized_scores": {
       "score": 98.26732673267325
     },
@@ -1976,6 +2111,9 @@
     "errors": {
       "accuracy_score": 0.007,
       "score": 0.007
+    },
+    "normalization_baselines": {
+      "score": 0.215
     },
     "normalized_scores": {
       "score": 25.581395348837212
@@ -2010,6 +2148,9 @@
       "accuracy_score": 0.0,
       "score": 0.0
     },
+    "normalization_baselines": {
+      "score": 0.002
+    },
     "normalized_scores": {
       "score": 0.0
     },
@@ -2042,6 +2183,9 @@
     "errors": {
       "accuracy_score": 0.0,
       "score": 0.0
+    },
+    "normalization_baselines": {
+      "score": 0.0
     }
   },
   {
@@ -2068,6 +2212,9 @@
     "errors": {
       "accuracy_score": 0.013853483316480371,
       "score": 0.013853483316480371
+    },
+    "normalization_baselines": {
+      "accuracy_score": 0.758
     },
     "normalized_scores": {
       "accuracy_score": 97.75725593667546
@@ -2099,6 +2246,9 @@
       "accuracy_score": 0.015805189021330938,
       "score": 0.015805189021330938
     },
+    "normalization_baselines": {
+      "accuracy_score": 0.488
+    },
     "normalized_scores": {
       "accuracy_score": 99.59016393442623
     },
@@ -2129,6 +2279,9 @@
       "accuracy_score": 0.01467664811869522,
       "score": 0.01467664811869522
     },
+    "normalization_baselines": {
+      "accuracy_score": 0.279
+    },
     "normalized_scores": {
       "accuracy_score": 112.54480286738351
     },
@@ -2158,6 +2311,9 @@
     "errors": {
       "accuracy_score": 0.008627803892068943,
       "score": 0.008627803892068943
+    },
+    "normalization_baselines": {
+      "accuracy_score": 0.064
     },
     "normalized_scores": {
       "accuracy_score": 126.5625
@@ -2196,6 +2352,9 @@
       "polarization": 0.004981367777815113,
       "score": 0.004981367777815113
     },
+    "normalization_baselines": {
+      "score": 0.3172329411764706
+    },
     "normalized_scores": {
       "score": 137.50074170770782
     },
@@ -2232,6 +2391,9 @@
       "success_probability": 0.00406020639869453,
       "polarization": 0.004060268353472873,
       "score": 0.004060268353472873
+    },
+    "normalization_baselines": {
+      "score": 0.27568894789044024
     },
     "normalized_scores": {
       "score": 75.51551104950235
@@ -2270,6 +2432,9 @@
       "polarization": 0.003267074574051417,
       "score": 0.003267074574051417
     },
+    "normalization_baselines": {
+      "score": 0.12679994795322108
+    },
     "normalized_scores": {
       "score": 95.82018730965102
     },
@@ -2307,6 +2472,9 @@
       "polarization": 0.003296956021099114,
       "score": 0.003296956021099114
     },
+    "normalization_baselines": {
+      "score": 0.033599999774992464
+    },
     "normalized_scores": {
       "score": 369.3452399616615
     },
@@ -2343,6 +2511,9 @@
       "success_probability": 0.0014733349924575877,
       "polarization": 0.0014733349924575877,
       "score": 0.0014733349924575877
+    },
+    "normalization_baselines": {
+      "score": 0.0037
     },
     "normalized_scores": {
       "score": 600.0
@@ -2504,6 +2675,12 @@
       "eplg_50": "lower",
       "eplg_100": "lower"
     },
+    "normalization_baselines": {
+      "eplg_10": 0.005507229607968012,
+      "eplg_20": 0.009586857548359973,
+      "eplg_50": 0.038328721277900546,
+      "eplg_100": 0.06877248119630675
+    },
     "normalized_scores": {
       "eplg_10": 79.19124558776538,
       "eplg_20": 119.45244894334022,
@@ -2543,6 +2720,9 @@
     "errors": {
       "score": null
     },
+    "normalization_baselines": {
+      "score": 345669.8525213401
+    },
     "normalized_scores": {
       "score": 7.108814004899318
     },
@@ -2570,6 +2750,9 @@
     },
     "errors": {
       "score": null
+    },
+    "normalization_baselines": {
+      "bseq_score": null
     },
     "normalized_scores": {
       "bseq_score": 0.7743362831858407
