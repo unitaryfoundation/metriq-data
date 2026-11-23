@@ -102,6 +102,7 @@
     "platform": {
       "device": "ionq_forte-1",
       "device_metadata": {
+        "hardware_manufacturer": "ionq",
         "num_qubits": 36,
         "simulator": false
       },
