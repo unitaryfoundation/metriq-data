@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-20T07:36:58.076871Z",
+  "generated_at": "2026-11-25T17:26:28.069645Z",
   "platforms": [
     {
       "provider": "aws",
@@ -7,7 +7,7 @@
       "first_seen": "2026-07-10T15:14:15.584725Z",
       "last_seen": "2026-07-10T15:14:26.659089Z",
       "runs": 2,
-      "metadata_variants": 1
+      "metadata_variants": 2
     },
     {
       "provider": "aws",
@@ -15,7 +15,7 @@
       "first_seen": "2025-10-19T15:39:39.590379Z",
       "last_seen": "2026-08-07T10:17:24.325491Z",
       "runs": 13,
-      "metadata_variants": 1
+      "metadata_variants": 2
     },
     {
       "provider": "aws",
@@ -23,7 +23,7 @@
       "first_seen": "2026-01-09T11:09:29.390899Z",
       "last_seen": "2026-09-09T16:34:46.653613Z",
       "runs": 13,
-      "metadata_variants": 1
+      "metadata_variants": 2
     },
     {
       "provider": "aws",
@@ -45,7 +45,7 @@
       "first_seen": "2026-07-15T16:26:08.016526Z",
       "last_seen": "2026-08-05T07:07:09.977310Z",
       "runs": 17,
-      "metadata_variants": 1
+      "metadata_variants": 2
     },
     {
       "provider": "ibm",

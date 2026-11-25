@@ -156,6 +156,7 @@
     "provider": "aws",
     "device": "iqm_garnet",
     "device_metadata": {
+      "hardware_manufacturer": "iqm",
       "num_qubits": 20,
       "simulator": false
     },

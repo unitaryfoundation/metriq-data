@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-20T07:36:58.076871Z",
+  "generated_at": "2026-11-25T17:26:28.069645Z",
   "provider": "aws",
   "device": "ionq_forte-1",
   "first_seen": "2026-07-10T15:14:15.584725Z",
@@ -7,6 +7,7 @@
   "runs": 2,
   "current": {
     "device_metadata": {
+      "hardware_manufacturer": "ionq",
       "num_qubits": 36,
       "simulator": false
     },
@@ -19,8 +20,18 @@
         "simulator": false
       },
       "first_seen": "2026-07-10T15:14:15.584725Z",
+      "last_seen": "2026-07-10T15:14:15.584725Z",
+      "runs": 1
+    },
+    {
+      "device_metadata": {
+        "hardware_manufacturer": "ionq",
+        "num_qubits": 36,
+        "simulator": false
+      },
+      "first_seen": "2026-07-10T15:14:26.659089Z",
       "last_seen": "2026-07-10T15:14:26.659089Z",
-      "runs": 2
+      "runs": 1
     }
   ],
   "metriq_score": {

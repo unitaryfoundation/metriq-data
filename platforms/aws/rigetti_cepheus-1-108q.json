@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-20T07:36:58.076871Z",
+  "generated_at": "2026-11-25T17:26:28.069645Z",
   "provider": "aws",
   "device": "rigetti_cepheus-1-108q",
   "first_seen": "2026-07-15T16:26:08.016526Z",
@@ -7,6 +7,7 @@
   "runs": 17,
   "current": {
     "device_metadata": {
+      "hardware_manufacturer": "rigetti",
       "num_qubits": 107,
       "simulator": false
     },
@@ -19,8 +20,18 @@
         "simulator": false
       },
       "first_seen": "2026-07-15T16:26:08.016526Z",
+      "last_seen": "2026-08-05T07:07:05.578566Z",
+      "runs": 16
+    },
+    {
+      "device_metadata": {
+        "hardware_manufacturer": "rigetti",
+        "num_qubits": 107,
+        "simulator": false
+      },
+      "first_seen": "2026-08-05T07:07:09.977310Z",
       "last_seen": "2026-08-05T07:07:09.977310Z",
-      "runs": 17
+      "runs": 1
     }
   ],
   "metriq_score": {

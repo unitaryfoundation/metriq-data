@@ -133,6 +133,7 @@
     "provider": "aws",
     "device": "rigetti_ankaa-3",
     "device_metadata": {
+      "hardware_manufacturer": "rigetti",
       "num_qubits": 82,
       "simulator": false
     },

@@ -277,6 +277,7 @@
     "provider": "aws",
     "device": "ionq_forte-1",
     "device_metadata": {
+      "hardware_manufacturer": "ionq",
       "num_qubits": 36,
       "simulator": false
     },
@@ -591,6 +592,7 @@
     "provider": "aws",
     "device": "iqm_emerald",
     "device_metadata": {
+      "hardware_manufacturer": "iqm",
       "num_qubits": 54,
       "simulator": false
     },
@@ -935,6 +937,7 @@
     "provider": "aws",
     "device": "rigetti_cepheus-1-108q",
     "device_metadata": {
+      "hardware_manufacturer": "rigetti",
       "num_qubits": 107,
       "simulator": false
     },

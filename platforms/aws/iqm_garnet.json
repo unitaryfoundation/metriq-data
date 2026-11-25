@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-20T07:36:58.076871Z",
+  "generated_at": "2026-11-25T17:26:28.069645Z",
   "provider": "aws",
   "device": "iqm_garnet",
   "first_seen": "2026-01-09T11:09:29.390899Z",
@@ -7,6 +7,7 @@
   "runs": 13,
   "current": {
     "device_metadata": {
+      "hardware_manufacturer": "iqm",
       "num_qubits": 20,
       "simulator": false
     },
@@ -19,8 +20,18 @@
         "simulator": false
       },
       "first_seen": "2026-01-09T11:09:29.390899Z",
+      "last_seen": "2026-09-09T16:34:40.040297Z",
+      "runs": 12
+    },
+    {
+      "device_metadata": {
+        "hardware_manufacturer": "iqm",
+        "num_qubits": 20,
+        "simulator": false
+      },
+      "first_seen": "2026-09-09T16:34:46.653613Z",
       "last_seen": "2026-09-09T16:34:46.653613Z",
-      "runs": 13
+      "runs": 1
     }
   ],
   "metriq_score": {
